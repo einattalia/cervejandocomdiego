@@ -1,0 +1,14 @@
+CERVEJANDO COM DIEGO — CATÁLOGO v17.1
+
+FONTE PRINCIPAL
+O catálogo publicado é carregado do Supabase.
+
+NOVOS CAMPOS
+- price: preço em reais (ex.: 18.90). Enquanto estiver vazio, o site mostra “Preço sob consulta”.
+- stock_status: in_stock, low_stock ou sold_out.
+  • in_stock = Em estoque
+  • low_stock = Últimas unidades
+  • sold_out = Esgotado (compra desabilitada e lata dessaturada)
+
+O arquivo data/cervejas.js continua apenas como fallback de segurança caso a API fique indisponível.
+Volume, estilo, intensidade e amargor também aparecem diretamente nos cards.

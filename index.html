@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Cervejando com Diego | Curadoria de Cervejas</title>
+<meta content="Descubra cervejas artesanais selecionadas pelo Diegão. Curadoria especializada para quem quer beber menos e beber melhor." name="description"/>
+<link href="https://cervejandocomdiego.netlify.app/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="pt_BR" property="og:locale"/>
+<meta content="Cervejando com Diego" property="og:site_name"/>
+<meta content="Cervejando com Diego | Curadoria de Cervejas" property="og:title"/>
+<meta content="Cervejas escolhidas. Experiências de verdade. A curadoria do Diegão na sua casa!" property="og:description"/>
+<meta content="https://cervejandocomdiego.netlify.app/" property="og:url"/>
+<meta content="https://cervejandocomdiego.netlify.app/assets/compartilhamento-de-link.jpg" property="og:image"/>
+<meta content="https://cervejandocomdiego.netlify.app/assets/compartilhamento-de-link.jpg" property="og:image:secure_url"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Diegão sentado sobre um copo de cerveja em um céu com nuvens" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Cervejando com Diego | Curadoria de Cervejas" name="twitter:title"/>
+<meta content="Cervejas escolhidas. Experiências de verdade. A curadoria do Diegão na sua casa!" name="twitter:description"/>
+<meta content="https://cervejandocomdiego.netlify.app/assets/compartilhamento-de-link.jpg" name="twitter:image"/>
+<meta content="Diegão sentado sobre um copo de cerveja em um céu com nuvens" name="twitter:image:alt"/>
+<link href="assets/favicon.png" rel="icon" type="image/png"/>
+<link href="assets/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="assets/favicon.png" rel="icon" type="image/png">
+<link href="assets/favicon.png" rel="apple-touch-icon">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Oswald:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#070809; --panel:#0c0e0f; --panel2:#111315; --gold:#c99732; --gold2:#e0b55a;
+  --text:#f2f0ea; --muted:#aaa9a2; --line:rgba(255,255,255,.11); --glass:rgba(255,255,255,.045);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Poppins,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{max-width:100%}
+.shell{width:min(1440px,94vw);margin:auto}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(5,6,7,.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
+.header-inner{height:92px;display:flex;align-items:center;gap:42px}
+.brand{display:flex;align-items:center;min-width:220px}
+.brand img{height:70px;width:auto;object-fit:contain}
+nav{display:flex;align-items:center;gap:34px;margin:auto}
+nav a{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em;font-size:.9rem;color:#ddd}
+nav a:hover,nav a.active{color:var(--gold2)}
+.header-actions{display:flex;gap:13px}
+.circle-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:#e7e7e4;background:#0a0b0c}
+
+.hero{
+  min-height:calc(100vh - 92px);display:grid;grid-template-columns:42% 58%;border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(circle at 82% 35%,rgba(196,148,47,.12),transparent 28%),
+    linear-gradient(90deg,#070809 0 42%,#0a0b0c 42% 100%);
+}
+.hero-copy{padding:85px 4vw 75px max(5vw,calc((100vw - 1440px)/2));display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:.72rem;color:var(--gold2);letter-spacing:.19em;text-transform:uppercase;font-weight:700;margin-bottom:20px}
+.hero h1{font-family:Oswald,sans-serif;font-size:clamp(4rem,6.3vw,7.7rem);line-height:.9;margin:0;text-transform:uppercase;letter-spacing:-.025em}
+.hero h1 span{color:var(--gold2)}
+.hero-intro{font-size:1.04rem;line-height:1.7;color:#d4d2cd;max-width:560px;margin:28px 0 26px}
+.feature-list{display:grid;gap:18px;margin:5px 0 34px}
+.feature{display:grid;grid-template-columns:46px 1fr;gap:15px;align-items:center}
+.feature-icon{width:42px;height:42px;border:1px solid rgba(201,151,50,.5);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:1.15rem}
+.feature b{display:block;color:var(--gold2);font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em;font-size:1.05rem}
+.feature span{font-size:.82rem;color:#bbb}
+.hero-cta{display:inline-flex;width:max-content;align-items:center;gap:10px;color:var(--gold2);font-family:Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:1rem;border-bottom:1px solid rgba(201,151,50,.5);padding:0 0 12px}
+.hero-visual{position:relative;min-height:690px;overflow:hidden}
+.hero-visual:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#070809 0%,transparent 16%,transparent 85%,rgba(0,0,0,.22));z-index:2;pointer-events:none}
+.hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.social-rail{position:absolute;left:22px;bottom:60px;z-index:3;display:grid;gap:12px}
+.social-rail a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;background:rgba(0,0,0,.35)}
+
+.catalog{padding:70px 0 90px;background:linear-gradient(#090a0b,#070809)}
+.catalog-top{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-bottom:34px}
+.catalog h2{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:clamp(2.5rem,4vw,4.5rem);line-height:.95;margin:0}
+.catalog h2 span{color:var(--gold2)}
+.catalog p{color:#bbb;margin:.7rem 0 0}
+.filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.filter-btn{border:1px solid rgba(255,255,255,.22);background:transparent;color:#eee;border-radius:999px;padding:10px 20px;text-transform:uppercase;font-family:Oswald,sans-serif;letter-spacing:.06em;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--gold);color:#0a0a0a;border-color:var(--gold)}
+
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.beer-card{background:linear-gradient(180deg,#0f1112,#0b0c0d);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;transition:.28s ease}
+.beer-card:hover{transform:translateY(-6px);border-color:rgba(201,151,50,.5);box-shadow:0 20px 45px rgba(0,0,0,.3)}
+.beer-art{height:330px;padding:24px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.05),transparent 53%)}
+.beer-art img{max-height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 18px 16px rgba(0,0,0,.52))}
+.beer-card .meta{padding:18px 18px 20px;border-top:1px solid var(--line)}
+.beer-card .meta h3{margin:0 0 5px;font-size:1rem}
+.beer-card .meta p{margin:0;color:#999;font-size:.78rem}
+
+.about{display:grid;grid-template-columns:1fr 1fr;min-height:620px;border-top:1px solid var(--line)}
+.about-photo{background:#111;display:grid;place-items:end center;overflow:hidden;position:relative}
+.about-photo:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(201,151,50,.16),transparent 45%)}
+.about-photo img{position:relative;max-height:590px;object-fit:contain;z-index:1}
+.about-copy{padding:80px 7vw;display:flex;flex-direction:column;justify-content:center;background:#0b0c0d}
+.about-copy h2{font-family:Oswald,sans-serif;font-size:3.6rem;text-transform:uppercase;margin:0 0 20px}
+.about-copy h2 span{color:var(--gold2)}
+.about-copy p{color:#c8c6c0;line-height:1.8;font-size:1.04rem;max-width:560px}
+.about-copy .tagline{color:var(--gold2);font-weight:700}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:#aaa}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.footer-links{display:flex;gap:18px}
+.footer-links a:hover{color:var(--gold2)}
+
+/* Existing modal styling, upgraded */
+.beer-modal{border:0;padding:0;background:transparent;color:var(--text);width:min(980px,94vw);max-height:92vh}
+.beer-modal::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(7px)}
+.modal-wrap{position:relative;display:grid;grid-template-columns:45% 55%;background:#0d0f10;border:1px solid rgba(201,151,50,.35);border-radius:24px;overflow:hidden;min-height:600px}
+.modal-visual{display:grid;place-items:center;padding:42px;background:radial-gradient(circle at 50% 35%,rgba(201,151,50,.12),transparent 55%)}
+.modal-can{max-height:520px;max-width:100%;object-fit:contain;filter:drop-shadow(0 25px 24px rgba(0,0,0,.6))}
+.modal-info{padding:48px 42px;overflow-y:auto}
+.modal-info h2{font-family:Oswald,sans-serif;font-size:2.6rem;margin:0 0 6px;text-transform:uppercase}
+.modal-info h3{color:var(--gold2);margin:0 0 22px}
+.close{position:absolute;right:16px;top:14px;z-index:5;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#080909;color:#fff;font-size:1.25rem;cursor:pointer}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:22px 0}
+.specs div{border-bottom:1px solid var(--line);padding:9px 0}
+.specs b{display:block;color:#888;font-size:.67rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.metric{background:#111315;border:1px solid var(--line);border-radius:12px;padding:13px}
+.metric b{display:block;color:var(--gold2);font-size:.72rem;text-transform:uppercase;margin-bottom:4px}
+.good-for{background:rgba(201,151,50,.07);border:1px solid rgba(201,151,50,.22);padding:16px;border-radius:14px;margin-top:20px}
+.hop-rain{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+
+@media(max-width:1120px){
+  nav{gap:20px} .hero{grid-template-columns:46% 54%} .grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:860px){
+  .header-inner{height:78px} .brand{min-width:auto} .brand img{height:58px} nav{display:none}
+  .hero{grid-template-columns:1fr} .hero-copy{padding:72px 7vw 50px} .hero-visual{min-height:68vh}
+  .catalog-top{grid-template-columns:1fr} .filters{justify-content:flex-start}
+  .grid{grid-template-columns:repeat(2,1fr)} .about{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .shell{width:min(94vw,520px)} .header-actions{margin-left:auto} .circle-btn:nth-child(-n+2){display:none}
+  .hero h1{font-size:3.8rem} .hero-visual{min-height:54vh} .social-rail{left:14px;bottom:20px}
+  .grid{gap:12px} .beer-art{height:250px;padding:15px}
+  .modal-wrap{display:block;max-height:92vh;overflow-y:auto} .modal-visual{min-height:360px;padding:35px 25px} .modal-can{max-height:330px}
+  .modal-info{padding:30px 22px} .specs,.metrics{grid-template-columns:1fr}
+  .footer-inner{display:block;text-align:center} .footer-links{justify-content:center;margin-top:14px}
+}
+
+.hero-visual{position:relative;min-height:760px;overflow:visible;display:grid;place-items:center;padding:34px 3vw 38px 1vw}
+.premium-fridge{position:relative;width:min(455px,92%);height:710px;padding:16px;background:linear-gradient(145deg,#17191b,#050606 42%,#111315 72%,#030404);border:1px solid rgba(255,255,255,.13);border-radius:7px;box-shadow:0 38px 90px rgba(0,0,0,.72),0 0 0 2px rgba(0,0,0,.8),0 0 0 3px rgba(255,255,255,.035);z-index:2}
+.fridge-top{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;margin-bottom:8px;background:linear-gradient(180deg,#111315,#060707);border:1px solid rgba(255,255,255,.08);color:#8d928f;font-size:.57rem;letter-spacing:.16em}
+.fridge-top strong{color:#d9efff;font-size:.85rem;text-shadow:0 0 10px rgba(175,224,255,.65)}
+.fridge-door{position:relative;height:570px;padding:22px 19px 20px;overflow:hidden;background:linear-gradient(180deg,rgba(20,29,34,.7),rgba(5,9,11,.88)),radial-gradient(circle at 50% 30%,rgba(121,185,213,.09),transparent 55%);border:6px solid #0b0d0e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),inset 0 0 45px rgba(0,0,0,.7)}
+.fridge-shelves{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:8px 7px;align-items:center;justify-items:center}
+.fridge-can{appearance:none;border:0;background:transparent;padding:0;margin:0;width:100%;height:100%;display:grid;place-items:center;cursor:pointer;position:relative;z-index:3}
+.fridge-can img{display:block;width:auto;height:92%;max-width:92%;max-height:92%;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(0,0,0,.75));transition:transform .25s ease,filter .25s ease}
+.fridge-can:hover img{transform:translateY(-4px) scale(1.035);filter:drop-shadow(0 12px 9px rgba(0,0,0,.82)) drop-shadow(0 0 11px rgba(197,235,255,.23))}
+.shelf-line{position:absolute;left:-12px;right:-12px;height:7px;z-index:1;background:linear-gradient(180deg,rgba(220,239,246,.72),rgba(106,125,133,.2) 35%,rgba(232,248,255,.46) 53%,rgba(12,17,19,.9) 100%);box-shadow:0 3px 7px rgba(0,0,0,.75)}
+.s1{top:33.15%}.s2{top:66.45%}
+.fridge-led{position:absolute;z-index:4;pointer-events:none}.fridge-led-top{top:7px;left:17px;right:17px;height:4px;background:#eaf8ff;box-shadow:0 0 7px #d6f2ff,0 0 18px rgba(186,229,255,.65)}
+.fridge-led-left,.fridge-led-right{top:16px;bottom:15px;width:2px;background:rgba(223,247,255,.82);box-shadow:0 0 8px rgba(193,235,255,.8)}.fridge-led-left{left:7px}.fridge-led-right{right:7px}
+.fridge-glass-reflection{position:absolute;z-index:5;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,.10),rgba(255,255,255,.018) 19%,transparent 31% 66%,rgba(255,255,255,.045) 78%,transparent 90%);mix-blend-mode:screen}
+.fridge-condensation{position:absolute;z-index:6;inset:0;pointer-events:none;opacity:.26;background:radial-gradient(circle at 12% 17%,rgba(255,255,255,.8) 0 1px,transparent 2px),radial-gradient(circle at 71% 9%,rgba(255,255,255,.7) 0 1px,transparent 2px),radial-gradient(circle at 88% 44%,rgba(255,255,255,.52) 0 1px,transparent 2px),radial-gradient(circle at 33% 79%,rgba(255,255,255,.55) 0 1px,transparent 2px)}
+.fridge-base{height:52px;margin-top:8px;border:1px solid rgba(255,255,255,.055);background:#060707;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:0 22px}.fridge-base span{height:4px;border-radius:5px;background:#020303}
+.modal-whatsapp{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;padding:14px 18px;border-radius:12px;background:#25D366;color:#06160b;font-weight:800;text-decoration:none;box-shadow:0 12px 30px rgba(37,211,102,.16);transition:.2s ease}
+.modal-whatsapp:hover{transform:translateY(-2px);filter:brightness(1.05)}
+@media(max-width:860px){.hero-visual{min-height:auto;padding:12px 6vw 62px}.premium-fridge{width:min(430px,86vw);height:680px}.fridge-door{height:545px}}
+@media(max-width:560px){.premium-fridge{width:min(365px,91vw);height:600px;padding:12px}.fridge-top{height:44px}.fridge-door{height:480px;padding:20px 13px 17px}.fridge-shelves{gap:6px 4px}.fridge-can img{height:88%;max-width:90%;max-height:88%}.fridge-base{height:42px}}
+
+
+/* NOMES DAS CERVEJAS EM AMARELO */
+.beer-card .meta h3,
+.beer-card h3,
+.modal-info h2{
+  color:var(--gold2)!important;
+}
+
+/* MODAL COMPLETO E LEGÍVEL */
+.beer-modal{width:min(1040px,95vw);max-height:94vh}
+.modal-wrap{height:min(88vh,880px)}
+.modal-info{overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold) #111}
+.modal-info h4{margin:24px 0 9px;color:var(--gold2);font-size:.9rem;text-transform:uppercase;letter-spacing:.08em}
+.modal-info p{color:#d2d0ca;line-height:1.7}
+.profile-box{background:#111315;border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.profile-box b{display:block;color:var(--gold2);font-size:.72rem;text-transform:uppercase;margin-bottom:5px}
+.profile-box span{line-height:1.55}
+.good-for b{color:var(--gold2);display:block;margin-bottom:5px}
+
+/* CHUVA DE LÚPULOS EM TODA A PÁGINA */
+#global-hop-rain{
+  position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9998;
+}
+.global-hop{
+  position:absolute;top:-12vh;opacity:.30; /* 70% transparente */
+  will-change:transform;
+  animation:globalHopFall linear infinite;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+@keyframes globalHopFall{
+  from{transform:translate3d(0,-12vh,0) rotate(0deg)}
+  to{transform:translate3d(var(--drift),112vh,0) rotate(540deg)}
+}
+@media(max-width:720px){
+  .modal-wrap{height:92vh;display:block;overflow-y:auto}
+  .modal-info{overflow:visible}
+}
+@media(prefers-reduced-motion:reduce){
+  .global-hop{animation:none!important}
+}
+
+
+/* COMPRA + PÁGINA FINAL */
+.beer-meta strong,.beer-card strong,.modal-info h2{color:#e0b55a!important;font-weight:800!important}
+.beer-card,.fridge-can{touch-action:manipulation}
+.beer-modal{z-index:10020;width:min(1040px,95vw);max-height:94vh}
+.beer-modal::backdrop{background:rgba(0,0,0,.84);backdrop-filter:blur(8px)}
+.modal-wrap{height:min(90vh,900px);max-height:90vh}
+.modal-info{overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold) #111}
+.modal-whatsapp{border:0;cursor:pointer}
+.fridge-shelves{grid-template-columns:repeat(2,1fr)!important;grid-template-rows:repeat(5,1fr)!important;gap:5px 8px!important}
+.fridge-can img{height:86%!important;max-height:86%!important;max-width:82%!important}
+.shelf-line.s1{top:19.9%!important}.shelf-line.s2{top:39.9%!important}.shelf-line.s3{top:59.9%}.shelf-line.s4{top:79.9%}
+
+.how-section,.tips-section{padding:90px 0;border-top:1px solid var(--line);background:#090a0b}
+.how-section h2,.tips-section h2{font-family:Oswald,sans-serif;font-size:clamp(2.7rem,4vw,4.7rem);margin:0;text-transform:uppercase}
+.how-section h2 span,.tips-section h2 span{color:var(--gold2)}
+.how-lead{max-width:790px;color:#cbc8c1;font-size:1.05rem;line-height:1.8}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.how-steps article{border:1px solid var(--line);background:#0f1112;border-radius:18px;padding:28px}
+.how-steps article b{display:block;color:var(--gold2);font-family:Oswald,sans-serif;font-size:2rem;margin-bottom:14px}
+.how-steps article strong{display:block;color:#fff;font-size:1.05rem;margin-bottom:8px}
+.how-steps article p{color:#aaa;line-height:1.65;font-size:.88rem}
+.tips-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:65px;align-items:start}
+.tips-grid>div>p{color:#bbb;line-height:1.8;max-width:520px}
+.tips-form{display:grid;gap:16px;padding:30px;border:1px solid var(--line);background:#0e1011;border-radius:20px}
+.tips-form label{display:grid;gap:8px;color:#d4d0c6;font-size:.8rem;font-weight:600}
+.tips-form input,.tips-form textarea{width:100%;background:#080909;border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#fff;padding:13px 14px;outline:none;font:inherit}
+.tips-form button{border:0;border-radius:11px;padding:14px;background:var(--gold);color:#080909;font-weight:800;cursor:pointer}
+
+.cart-trigger{position:relative;cursor:pointer}
+.cart-trigger #cartCount{position:absolute;right:-5px;top:-6px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--gold);color:#090909;font-size:.64rem;display:grid;place-items:center;font-weight:800}
+.cart-backdrop{position:fixed;inset:0;z-index:10030;background:rgba(0,0,0,.62);backdrop-filter:blur(4px)}
+.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(440px,94vw);z-index:10040;background:#0b0d0e;border-left:1px solid rgba(224,181,90,.25);box-shadow:-30px 0 70px rgba(0,0,0,.55);padding:24px;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}
+.cart-head span{display:block;color:var(--gold2);font-size:.7rem;text-transform:uppercase;letter-spacing:.15em}
+.cart-head strong{font-size:1.3rem}
+.cart-head button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#070809;color:#fff;font-size:1.35rem;cursor:pointer}
+.cart-items{display:grid;gap:10px;overflow-y:auto;padding:20px 0;flex:1}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid var(--line);background:#111315;border-radius:12px;padding:13px}
+.cart-item strong{color:var(--gold2);font-size:.87rem}
+.cart-item-actions{display:flex;align-items:center;gap:7px}
+.cart-item-actions button{width:29px;height:29px;border-radius:8px;border:1px solid var(--line);background:#080909;color:#fff;cursor:pointer}
+.cart-empty{color:#989d98;padding:28px 8px;display:none}
+.delivery-check{display:flex;gap:10px;align-items:center;padding:16px 0;border-top:1px solid var(--line);color:#ddd;font-size:.86rem}
+.cart-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:10px}
+.cart-actions button{border-radius:11px;padding:13px 10px;font-weight:700;cursor:pointer}
+.continue-btn{border:1px solid var(--line);background:transparent;color:#fff}
+.checkout-btn{border:0;background:#25D366;color:#06160b}
+
+@media(max-width:860px){.how-steps{grid-template-columns:1fr}.tips-grid{grid-template-columns:1fr;gap:30px}}
+@media(max-width:720px){
+  .beer-modal{width:96vw}
+  .modal-wrap{display:block;height:92vh;overflow-y:auto}
+  .modal-visual{min-height:36vh;height:36vh;padding:18px}
+  .modal-can{max-height:32vh}
+  .modal-info{padding:22px 18px 34px;overflow:visible}
+  .fridge-can img{height:82%!important;max-height:82%!important;max-width:78%!important}
+
+  /* Carrinho mobile: bottom sheet responsivo */
+  .cart-backdrop{background:rgba(0,0,0,.72)}
+  .cart-drawer{
+    top:auto;left:0;right:0;bottom:0;width:100%;height:min(88dvh,760px);
+    padding:18px 16px calc(16px + env(safe-area-inset-bottom));
+    border-left:0;border-top:1px solid rgba(224,181,90,.32);
+    border-radius:22px 22px 0 0;
+    box-shadow:0 -24px 70px rgba(0,0,0,.65);
+    transform:translateY(105%);
+  }
+  .cart-drawer.open{transform:translateY(0)}
+  .cart-head{padding-bottom:14px}
+  .cart-head strong{font-size:1.12rem}
+  .cart-items{padding:14px 0;gap:9px;min-height:0}
+  .cart-item{grid-template-columns:minmax(0,1fr) auto;padding:12px 11px}
+  .cart-item strong{font-size:.8rem;line-height:1.35;overflow-wrap:anywhere}
+  .cart-item-actions{gap:5px}
+  .cart-item-actions button{width:32px;height:32px}
+  .delivery-check{padding:12px 0}
+  .cart-actions{grid-template-columns:1fr;gap:9px;flex:0 0 auto}
+  .cart-actions button{min-height:48px;padding:12px 14px}
+  .checkout-btn{order:1}
+  .continue-btn{order:2}
+}
+@media(max-width:390px){
+  .cart-item{grid-template-columns:1fr}
+  .cart-item-actions{justify-content:flex-start}
+}
+body.cart-open{overflow:hidden}
+
+
+
+/* ===== PRODUÇÃO FINAL — RESPONSIVIDADE, GELADEIRA E ACESSIBILIDADE ===== */
+html,body{max-width:100%;overflow-x:hidden}
+body{min-width:0}
+img,svg{max-width:100%}
+button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
+button,a{touch-action:manipulation}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+
+/* nomes e estilos das cervejas: amarelo ouro em toda a ficha/card */
+.beer-card{color:var(--gold2)}
+.beer-card .beer-meta strong,
+.beer-card .beer-meta span,
+.beer-card .meta h3,
+.beer-card .meta p,
+.modal-info h2,
+.modal-info h3{color:var(--gold2)!important}
+.beer-meta{padding:16px 16px 18px;display:grid;gap:4px;text-align:left}
+.beer-meta strong{font-size:.93rem;line-height:1.25;overflow-wrap:anywhere}
+.beer-meta span{font-size:.76rem;line-height:1.35}
+
+/* ícones sociais */
+.social-icon{width:21px;height:21px;display:block}
+.circle-btn .social-icon{width:20px;height:20px}
+.social-rail a{color:#fff;min-width:44px;min-height:44px;width:44px;height:44px;transition:.2s ease}
+.social-rail a:hover{color:var(--gold2);border-color:rgba(224,181,90,.65);transform:translateY(-2px)}
+
+/* geladeira: quatro latas apoiadas nas duas prateleiras */
+.hero-visual{overflow:hidden}
+.premium-fridge{width:min(455px,88%);height:660px;padding:15px;border-radius:10px;perspective:1100px}
+.fridge-top{height:48px;margin-bottom:7px}
+.fridge-door{height:530px;padding:22px 22px 15px;border-width:6px;border-radius:3px;background:linear-gradient(180deg,rgba(19,29,34,.82),rgba(3,7,9,.95)),radial-gradient(circle at 50% 28%,rgba(162,216,238,.10),transparent 52%)}
+.fridge-shelves{height:100%;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(0,1fr))!important;gap:18px 22px!important;align-items:end!important;justify-items:center!important;padding:0 12px!important}
+.fridge-can{height:100%;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:visible}
+.can-stage{position:relative;width:100%;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.can-stage::after{content:"";position:absolute;left:22%;right:22%;bottom:6px;height:11px;border-radius:50%;background:rgba(0,0,0,.66);filter:blur(5px);z-index:0}
+.fridge-can img{position:relative;z-index:1;width:auto!important;height:auto!important;max-height:88%!important;max-width:78%!important;object-fit:contain;transform:none!important;filter:drop-shadow(0 12px 8px rgba(0,0,0,.62)) drop-shadow(0 1px 1px rgba(255,255,255,.10))!important;transition:transform .22s ease,filter .22s ease}
+.fridge-can:hover img{transform:translateY(-2px) scale(1.018)!important;filter:drop-shadow(0 15px 10px rgba(0,0,0,.70)) drop-shadow(0 0 8px rgba(197,235,255,.14))!important}
+.shelf-line{left:0!important;right:0!important;height:8px!important;z-index:1!important}
+.shelf-line.s1{top:50%!important;transform:translateY(-3px)}
+.shelf-line.s2,.shelf-line.s3,.shelf-line.s4{display:none!important}
+.fridge-base{height:48px;margin-top:7px}
+
+/* controles clicáveis confortáveis */
+.circle-btn{min-width:44px;min-height:44px}
+.filter-btn,.cart-actions button,.modal-whatsapp,.tips-form button{min-height:46px}
+.modal-whatsapp{background:var(--gold);color:#090909;box-shadow:0 12px 30px rgba(201,151,50,.18)}
+
+@media(max-width:1120px){
+  .shell{width:min(94vw,1080px)}
+  .header-inner{gap:20px}.brand{min-width:180px}.brand img{height:62px}
+  nav{gap:16px}nav a{font-size:.8rem}
+  .hero{grid-template-columns:45% 55%}
+  .hero-copy{padding-left:4vw;padding-right:2vw}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+@media(max-width:860px){
+  .shell{width:calc(100% - 32px);max-width:none}
+  .header-inner{height:72px;gap:10px}.brand{min-width:0;flex:1}.brand img{height:52px;max-width:155px}
+  .header-actions{gap:8px}.circle-btn{width:44px;height:44px}.circle-btn[href="#catalogo"],.circle-btn[href="#sobre"]{display:none}
+  .hero{min-height:auto;grid-template-columns:1fr;background:radial-gradient(circle at 50% 52%,rgba(196,148,47,.08),transparent 40%),#070809}
+  .hero-copy{padding:52px 16px 36px;align-items:flex-start}
+  .hero h1{font-size:clamp(3rem,13vw,5rem);line-height:.93}
+  .hero-intro{font-size:.98rem;line-height:1.65;margin:22px 0}
+  .feature-list{width:100%;gap:14px}.feature{grid-template-columns:42px minmax(0,1fr);gap:12px}.feature-icon{width:40px;height:40px}.feature span{line-height:1.4}
+  .hero-visual{min-height:auto!important;padding:18px 16px 52px!important;overflow:hidden}
+  .premium-fridge{width:min(420px,92vw);height:610px;padding:13px}
+  .fridge-top{height:44px;padding:0 11px}.fridge-door{height:490px;padding:18px 14px 13px}.fridge-shelves{gap:14px 14px!important;padding:0 8px!important}.fridge-can img{max-height:86%!important;max-width:82%!important}.fridge-base{height:43px}
+  .social-rail{left:24px;bottom:62px;gap:8px}
+  .catalog,.how-section,.tips-section{padding:54px 0}
+  .catalog-top{gap:20px;margin-bottom:24px}.catalog h2,.how-section h2,.tips-section h2{font-size:clamp(2.35rem,10vw,3.4rem)}
+  .filters{justify-content:flex-start;gap:8px}.filter-btn{padding:9px 14px;font-size:.83rem;flex:0 0 auto}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.beer-card{min-width:0;border-radius:14px}.beer-art{height:230px;padding:14px}.beer-meta{padding:13px 12px 15px}
+  .how-steps{grid-template-columns:1fr;gap:12px}.how-steps article{padding:20px}
+  .tips-grid{grid-template-columns:1fr;gap:24px}.tips-form{padding:20px}
+  .about{grid-template-columns:1fr;min-height:0}.about-photo{min-height:360px}.about-photo img{max-height:360px}.about-copy{padding:48px 16px}.about-copy h2{font-size:clamp(2.4rem,11vw,3.5rem)}
+  .footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center;flex-wrap:wrap}
+  .beer-modal{width:100vw!important;max-width:100vw!important;max-height:100dvh!important;margin:0!important}
+  .beer-modal::backdrop{background:rgba(0,0,0,.88)}
+  .modal-wrap{display:block!important;width:100%;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;border-left:0;border-right:0;overflow-y:auto!important}
+  .modal-visual{min-height:32dvh!important;height:32dvh!important;padding:16px!important}.modal-can{max-height:29dvh!important}.modal-info{padding:20px 18px calc(34px + env(safe-area-inset-bottom))!important;overflow:visible!important}.modal-info h2{font-size:clamp(1.75rem,8vw,2.25rem);line-height:1.05}.modal-info h3{font-size:1rem}.specs,.metrics{grid-template-columns:1fr 1fr;gap:8px 12px}.close{position:fixed;top:10px;right:10px;min-width:44px;min-height:44px}
+  .cart-drawer{height:min(90dvh,760px)}
+}
+
+@media(max-width:560px){
+  .shell{width:calc(100% - 24px)}
+  .header-inner{height:66px}.brand img{height:46px;max-width:132px}.header-actions{gap:6px}.circle-btn{width:42px;height:42px;min-width:42px;min-height:42px}
+  .hero-copy{padding:42px 12px 28px}.eyebrow{font-size:.65rem;letter-spacing:.13em;margin-bottom:14px}.hero h1{font-size:clamp(2.8rem,15vw,4rem)}.hero-intro{font-size:.91rem;margin:18px 0 20px}.feature b{font-size:.97rem}.feature span{font-size:.76rem}
+  .hero-visual{padding:10px 8px 42px!important}.premium-fridge{width:min(350px,94vw);height:540px;padding:11px}.fridge-top{height:40px;font-size:.52rem}.fridge-top strong{font-size:.75rem}.fridge-door{height:435px;padding:16px 10px 11px;border-width:5px}.fridge-shelves{gap:11px 10px!important;padding:0 6px!important}.fridge-can img{max-height:84%!important;max-width:84%!important}.can-stage{padding-bottom:6px}.fridge-base{height:37px;padding:0 16px}
+  .social-rail{left:16px;bottom:45px}.social-rail a{width:42px;height:42px;min-width:42px;min-height:42px}
+  .catalog,.how-section,.tips-section{padding:44px 0}.catalog h2,.how-section h2,.tips-section h2{font-size:clamp(2.05rem,11vw,2.8rem)}.catalog p,.how-lead,.tips-grid>div>p{font-size:.9rem;line-height:1.65}
+  .filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:7px}.filter-btn{width:100%;padding:8px 6px;font-size:.72rem;white-space:normal}
+  .grid{gap:9px}.beer-art{height:190px;padding:11px}.beer-meta{padding:11px 10px 13px}.beer-meta strong{font-size:.8rem}.beer-meta span{font-size:.68rem}
+  .tips-form{padding:16px}.tips-form input,.tips-form textarea{font-size:16px}
+  .about-photo{min-height:310px}.about-photo img{max-height:310px}.about-copy{padding:40px 12px}.about-copy p{font-size:.94rem}
+  .footer-inner{font-size:.78rem}.footer-links{gap:10px;flex-direction:column}
+  .modal-visual{min-height:29dvh!important;height:29dvh!important}.modal-can{max-height:26dvh!important}.modal-info{padding-left:15px!important;padding-right:15px!important}.specs,.metrics{grid-template-columns:1fr}.modal-whatsapp{font-size:.91rem}
+  .cart-drawer{width:100%;height:92dvh;padding-left:12px;padding-right:12px}.cart-item{gap:8px}.cart-item-actions button{min-width:34px;min-height:34px}.cart-actions button{min-height:50px}
+}
+
+@media(max-width:390px){
+  .shell{width:calc(100% - 20px)}
+  .brand img{height:43px;max-width:122px}.circle-btn{width:40px;height:40px;min-width:40px;min-height:40px}
+  .hero-copy{padding-left:10px;padding-right:10px}.hero h1{font-size:clamp(2.6rem,15.5vw,3.65rem)}
+  .premium-fridge{width:min(330px,95vw);height:510px}.fridge-door{height:407px}.fridge-shelves{gap:9px 8px!important}.fridge-can img{max-height:82%!important;max-width:84%!important}
+  .beer-art{height:170px}.beer-meta strong{font-size:.74rem}.beer-meta span{font-size:.64rem}
+  .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cart-item{grid-template-columns:1fr}.cart-item-actions{justify-content:flex-start}
+}
+
+@media(max-width:340px){
+  .brand img{max-width:112px}.hero h1{font-size:2.55rem}.premium-fridge{width:96vw;height:488px}.fridge-door{height:390px}.beer-art{height:155px;padding:9px}.beer-meta{padding:10px 8px 12px}.beer-meta strong{font-size:.7rem}.beer-meta span{font-size:.61rem}
+}
+
+@media(min-width:861px) and (max-width:1180px){
+  .premium-fridge{width:min(430px,90%)}
+}
+
+/* ===== AJUSTE MOBILE v3 — CARDS E LOGO ===== */
+.brand{
+  min-width:76px!important;
+  flex:0 0 auto!important;
+}
+.brand img{
+  width:62px!important;
+  height:62px!important;
+  max-width:62px!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+
+/* Cada card passa a ter duas áreas independentes:
+   imagem em cima e informações sempre abaixo. */
+.beer-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  min-height:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  position:relative!important;
+  text-align:left!important;
+  vertical-align:top!important;
+}
+.beer-art{
+  position:relative!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  overflow:hidden!important;
+  z-index:1!important;
+}
+.beer-art img{
+  display:block!important;
+  position:static!important;
+  margin:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+.beer-meta{
+  position:relative!important;
+  z-index:2!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  background:linear-gradient(180deg,#0e1011,#0a0b0c)!important;
+  border-top:1px solid var(--line)!important;
+  margin:0!important;
+}
+.beer-meta strong,
+.beer-meta span{
+  display:block!important;
+  position:static!important;
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+}
+
+@media(max-width:860px){
+  .header-inner{justify-content:space-between!important}
+  .brand{min-width:58px!important}
+  .brand img{width:52px!important;height:52px!important;max-width:52px!important}
+  .grid{align-items:start!important}
+  .beer-card{height:auto!important}
+  .beer-art{height:220px!important;min-height:220px!important}
+  .beer-art img{max-height:196px!important;max-width:94%!important}
+  .beer-meta{min-height:92px!important;padding:13px 12px 15px!important}
+}
+
+@media(max-width:560px){
+  .brand{min-width:50px!important}
+  .brand img{width:46px!important;height:46px!important;max-width:46px!important}
+  .beer-art{height:178px!important;min-height:178px!important;padding:10px!important}
+  .beer-art img{max-height:158px!important;max-width:92%!important}
+  .beer-meta{min-height:88px!important;padding:11px 10px 13px!important}
+}
+
+@media(max-width:390px){
+  .brand{min-width:46px!important}
+  .brand img{width:42px!important;height:42px!important;max-width:42px!important}
+  .beer-art{height:160px!important;min-height:160px!important;padding:8px!important}
+  .beer-art img{max-height:144px!important;max-width:90%!important}
+  .beer-meta{min-height:84px!important;padding:10px 9px 12px!important}
+}
+
+@media(max-width:340px){
+  .brand img{width:40px!important;height:40px!important;max-width:40px!important}
+  .beer-art{height:145px!important;min-height:145px!important}
+  .beer-art img{max-height:130px!important}
+  .beer-meta{min-height:80px!important;padding:9px 8px 11px!important}
+}
+
+
+/* ===== MOBILE HEADER v4 ===== */
+.instagram-header-btn svg{
+  width:21px;
+  height:21px;
+  display:block;
+}
+@media(max-width:720px){
+  /* No mobile, remove atalhos antigos e mantenha Instagram + carrinho no cabeçalho. */
+  .header-actions > a.circle-btn:not(.instagram-header-btn){
+    display:none!important;
+  }
+  .header-actions{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:8px!important;
+    flex:0 0 auto!important;
+  }
+  .instagram-header-btn,
+  .cart-trigger{
+    display:inline-flex!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  /* Remove atalhos sociais flutuantes/laterais próximos da geladeira, caso existam. */
+  .hero-visual .socials,
+  .hero-visual .social-links,
+  .hero-visual .floating-socials,
+  .hero-visual .social-float,
+  .hero-visual a[href*="instagram.com"],
+  .hero-visual a[href*="wa.me"]{
+    display:none!important;
+  }
+}
+@media(max-width:390px){
+  .header-actions{gap:6px!important}
+  .instagram-header-btn,.cart-trigger{
+    width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  }
+}
+
+
+/* ===== FILTROS DE CARACTERÍSTICA + AJUSTE DE LATAS v5 ===== */
+.filter-btn{
+  touch-action:manipulation;
+  white-space:nowrap;
+}
+.filter-btn:focus-visible,
+.characteristic-filter:focus-visible{
+  outline:3px solid rgba(224,181,90,.72);
+  outline-offset:3px;
+}
+
+/* Latas menores e totalmente contidas dentro do retângulo dos cards. */
+.beer-art{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  padding:20px 16px 14px!important;
+}
+.beer-art img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:76%!important;
+  max-height:80%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+  margin:auto auto 0!important;
+}
+
+/* As características das fichas também funcionam como atalho de filtro. */
+.metric.characteristic-filter{
+  cursor:pointer;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+  user-select:none;
+  touch-action:manipulation;
+}
+.metric.characteristic-filter:hover{
+  border-color:rgba(224,181,90,.62);
+  background:#17191a;
+  transform:translateY(-1px);
+}
+.metric.characteristic-filter::after{
+  content:"Toque para agrupar";
+  display:block;
+  margin-top:7px;
+  color:#a8a59e;
+  font-size:.64rem;
+  line-height:1.25;
+}
+
+@media(max-width:860px){
+  .beer-art{
+    height:208px!important;
+    min-height:208px!important;
+    padding:17px 13px 13px!important;
+  }
+  .beer-art img{
+    max-width:72%!important;
+    max-height:76%!important;
+  }
+}
+@media(max-width:560px){
+  .beer-art{
+    height:168px!important;
+    min-height:168px!important;
+    padding:13px 10px 10px!important;
+  }
+  .beer-art img{
+    max-width:70%!important;
+    max-height:74%!important;
+  }
+}
+@media(max-width:390px){
+  .beer-art{
+    height:152px!important;
+    min-height:152px!important;
+    padding:11px 8px 9px!important;
+  }
+  .beer-art img{
+    max-width:68%!important;
+    max-height:72%!important;
+  }
+}
+@media(max-width:340px){
+  .beer-art{
+    height:140px!important;
+    min-height:140px!important;
+  }
+  .beer-art img{
+    max-width:66%!important;
+    max-height:70%!important;
+  }
+}
+
+
+
+/* ===== CORREÇÃO DE FILTROS E ESPECIFICAÇÕES v7 ===== */
+.catalog{position:relative;z-index:1}
+.catalog-top{position:relative;z-index:2}
+.filters{position:relative!important;z-index:1!important}
+.grid{position:relative;z-index:1}
+
+/* No mobile o título vem primeiro, depois os filtros, depois as cervejas. */
+@media(max-width:860px){
+  .catalog-top{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:20px!important;
+    margin-bottom:28px!important;
+  }
+  .catalog-top>div:first-child{position:relative;z-index:2;width:100%}
+  .catalog h2{position:relative;z-index:2;margin:0!important;padding:0!important}
+  .catalog p{margin-top:10px!important}
+  .filters{
+    width:100%!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    justify-content:flex-start!important;
+    gap:8px!important;
+    padding:2px 2px 8px!important;
+    margin:0!important;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .filters::-webkit-scrollbar{display:none}
+  .filter-btn{flex:0 0 auto!important;width:auto!important;min-height:44px!important;white-space:nowrap!important;padding:9px 14px!important}
+}
+
+/* Especificações clicáveis dentro da ficha. */
+.metric.spec-filter,
+.profile-box.spec-filter{
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.metric.spec-filter:hover,
+.profile-box.spec-filter:hover{
+  border-color:rgba(224,181,90,.68)!important;
+  background:#17191a!important;
+  transform:translateY(-1px);
+}
+.metric.spec-filter:focus-visible,
+.profile-box.spec-filter:focus-visible{
+  outline:3px solid rgba(224,181,90,.72);
+  outline-offset:3px;
+}
+.metric.spec-filter::after,
+.profile-box.spec-filter::after{
+  content:"Toque para agrupar cervejas iguais";
+  display:block;
+  margin-top:7px;
+  color:#a8a59e;
+  font-size:.64rem;
+  line-height:1.25;
+}
+
+.catalog-filter-status{
+  display:none;
+  margin:0 0 22px;
+  padding:12px 14px;
+  border:1px solid rgba(224,181,90,.28);
+  border-radius:12px;
+  background:rgba(201,151,50,.07);
+  color:#d7d4cc;
+  font-size:.82rem;
+}
+.catalog-filter-status.active{display:block}
+.catalog-filter-status strong{color:var(--gold2)}
+.catalog-filter-status button{
+  margin-left:8px;
+  border:0;
+  background:transparent;
+  color:var(--gold2);
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:underline;
+}
+
+
+/* ===== CORREÇÃO DEFINITIVA DOS FILTROS v8 ===== */
+.beer-card[hidden]{display:none!important}
+.catalog-top{position:relative!important;z-index:1!important}
+.filters{position:relative!important;z-index:2!important}
+.filter-btn{cursor:pointer!important;touch-action:manipulation!important}
+.filter-btn.active{
+  border-color:var(--gold2)!important;
+  background:rgba(201,151,50,.17)!important;
+  color:var(--gold2)!important;
+}
+@media(max-width:720px){
+  .catalog-top{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:16px!important;
+  }
+  .catalog-top > div:first-child{
+    position:relative!important;
+    z-index:3!important;
+    width:100%!important;
+  }
+  .filters{
+    width:100%!important;
+    margin:0!important;
+    padding:2px 0 5px!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    gap:8px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  .filter-btn{
+    flex:0 0 auto!important;
+    min-height:44px!important;
+  }
+}
+
+
+/* ===== MOBILE: abrir carrinho após adicionar v10 ===== */
+@media(max-width:720px){
+  #cartDrawer.open,
+  #cartDrawer.is-open,
+  .cart-drawer.open,
+  .cart-drawer.is-open{
+    transform:translateY(0)!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+
+  body.cart-open #cartDrawer,
+  body.cart-open .cart-drawer{
+    transform:translateY(0)!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+
+  #cartOverlay.open,
+  #cartOverlay.is-open,
+  body.cart-open #cartOverlay{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+}
+
+
+/* ===== HEADER FIXO + VÍDEO COMO FUNCIONA v11 ===== */
+
+/* Header fixo durante o scroll */
+header,
+.site-header,
+.main-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:9999!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+/* Garante que anchors não fiquem escondidos atrás do header */
+html{
+  scroll-padding-top:88px;
+}
+
+/* Seção Como funciona com vídeo de fundo */
+#como-funciona,
+.como-funciona{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate;
+}
+
+#como-funciona .como-video-bg,
+.como-funciona .como-video-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.50;
+  z-index:-2;
+  pointer-events:none;
+}
+
+#como-funciona::after,
+.como-funciona::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(8,8,8,.46);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* Todo conteúdo da seção fica acima do vídeo */
+#como-funciona > *:not(.como-video-bg),
+.como-funciona > *:not(.como-video-bg){
+  position:relative;
+  z-index:1;
+}
+
+@media(max-width:720px){
+  html{
+    scroll-padding-top:76px;
+  }
+
+  #como-funciona .como-video-bg,
+  .como-funciona .como-video-bg{
+    object-position:center center;
+  }
+}
+
+
+/* ===== ENQUADRAMENTO DO VÍDEO — HOMEM RECEBENDO CERVEJA v12 ===== */
+#como-funciona .como-video-bg,
+.como-funciona .como-video-bg{
+  object-fit:cover!important;
+  object-position:50% 42%!important;
+}
+
+@media(max-width:720px){
+  #como-funciona .como-video-bg,
+  .como-funciona .como-video-bg{
+    object-position:50% 40%!important;
+  }
+}
+
+
+/* ===== REMOÇÃO DO VÍDEO COMO FUNCIONA v13 ===== */
+#como-funciona::after,
+.como-funciona::after{
+  content:none!important;
+  display:none!important;
+}
+#como-funciona .como-video-bg,
+.como-funciona .como-video-bg{
+  display:none!important;
+}
+
+
+/* ===== LATAS 3D — alteração isolada v14 ===== */
+.beer-art .beer-3d{
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  perspective:900px;
+  will-change:transform;
+  touch-action:pan-y;
+}
+.beer-art .beer-3d > img{
+  transform-origin:50% 58%;
+  transform:rotateY(var(--beer-ry,0deg)) rotateX(var(--beer-rx,0deg)) translateY(var(--beer-float,0px)) scale(var(--beer-scale,1));
+  filter:drop-shadow(0 13px 10px rgba(0,0,0,.28)) brightness(var(--beer-light,1));
+  transition:transform .18s ease-out,filter .18s ease-out;
+  will-change:transform,filter;
+  backface-visibility:hidden;
+}
+.beer-art .beer-3d-gloss{
+  position:absolute;
+  inset:8% 28% 8%;
+  border-radius:42% / 10%;
+  pointer-events:none;
+  opacity:.18;
+  background:linear-gradient(105deg,transparent 24%,rgba(255,255,255,.38) 44%,transparent 58%);
+  transform:translateZ(8px) translateX(var(--beer-gloss,0%));
+  mix-blend-mode:screen;
+}
+@media (prefers-reduced-motion:reduce){
+  .beer-art .beer-3d > img{transition:none!important}
+}
+
+</style>
+</link></link></head>
+<body>
+<div aria-hidden="true" id="global-hop-rain"></div>
+<header>
+<div class="shell header-inner">
+<a aria-label="Cervejando com Diego — início" class="brand" href="#inicio"><img alt="Cervejando com Diego" src="assets/favicon.png"/></a>
+<nav aria-label="Navegação principal">
+<a class="active" href="#inicio">Início</a>
+<a href="#catalogo">Catálogo</a>
+<a href="#sobre">Sobre</a>
+<a href="#como-funciona">Como funciona</a>
+<a href="#dicas">Dicas do Diegão</a>
+<a href="#contato">Contato</a>
+</nav>
+<div class="header-actions">
+<a aria-label="Buscar cervejas" class="circle-btn" href="#catalogSearch"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></a>
+<a aria-label="Sobre o Diegão" class="circle-btn" href="#sobre"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></a>
+<a aria-label="Abrir WhatsApp do Diegão" class="circle-btn" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="social-icon" focusable="false" viewbox="0 0 24 24"><path d="M12.04 2a9.84 9.84 0 0 0-8.47 14.84L2 22l5.3-1.53A9.95 9.95 0 1 0 12.04 2Zm0 17.93a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.14.91.92-3.06-.2-.32A8.02 8.02 0 1 1 12.04 19.93Zm4.43-6.03c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.79-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z" fill="currentColor"></path></svg></a>
+<a aria-label="Instagram do Cervejando com Diego" class="circle-btn instagram-header-btn" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" ry="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.4" cy="6.6" fill="currentColor" r="1.1"></circle></svg>
+</a><button aria-label="Abrir pedido" class="circle-btn cart-trigger" id="cartTrigger" type="button"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h2l2.1 9.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20.5 8H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><circle cx="10" cy="19" r="1.4" fill="currentColor"></circle><circle cx="17" cy="19" r="1.4" fill="currentColor"></circle></svg><span id="cartCount">0</span></button></div>
+</div>
+</header>
+<main>
+<section class="hero" id="inicio">
+<div class="hero-copy">
+<span class="eyebrow">Cervejando com Diego • Seleção autoral</span>
+<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece.</span></h1>
+<p class="hero-intro">Rótulos escolhidos com critério para quem quer descobrir novos sabores sem complicação.</p>
+<div class="feature-list">
+<div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3L12 3Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Curadoria especializada</b><span>Selecionamos apenas o que vale a pena.</span></div></div>
+<div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 15c2.8-1 4-3.2 4-6 2.7 1.5 4.3 3.8 4.3 6.5A5.3 5.3 0 0 1 10 21a5 5 0 0 1-5-5c0-2.2 1.2-4.3 3.2-5.7-.1 1.8-.5 3.4-1.2 4.7Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Cervejas exclusivas</b><span>Rótulos únicos para sair do óbvio.</span></div></div>
+<div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M8 12h8M10 17h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="8" cy="7" r="1.5" fill="currentColor"></circle><circle cx="15" cy="12" r="1.5" fill="currentColor"></circle><circle cx="12" cy="17" r="1.5" fill="currentColor"></circle></svg></div><div><b>Escolha sem complicação</b><span>Descubra por intensidade, amargor e perfil.</span></div></div>
+</div>
+<a class="hero-premium-cta" href="#catalogo">Explorar a seleção <span aria-hidden="true">→</span></a>
+</div>
+<div class="hero-visual">
+<div class="premium-fridge">
+<div class="fridge-curation-plaque">Seleção do Diegão · 04 rótulos em destaque</div>
+<div class="fridge-top"><span>CERVEJANDO COM DIEGO</span><strong>-2.0°</strong></div>
+<div class="fridge-door">
+<div class="fridge-led fridge-led-top"></div><div class="fridge-led fridge-led-left"></div><div class="fridge-led fridge-led-right"></div>
+<div class="fridge-glass-reflection"></div><div class="fridge-condensation"></div>
+<div class="fridge-shelves">
+<button aria-label="Ver detalhes de BREJÓLA Double IPA" class="fridge-can" data-modal="beer-0" type="button"><span class="can-stage"><img alt="BREJÓLA Double IPA" src="assets/brejola-double-ipa.png"/></span></button>
+<button aria-label="Ver detalhes de Croma Blade Runner" class="fridge-can" data-modal="beer-3" type="button"><span class="can-stage"><img alt="Croma Blade Runner" src="assets/croma-blade-runner.png"/></span></button>
+<button aria-label="Ver detalhes de Dogma Lover #2" class="fridge-can" data-modal="beer-5" type="button"><span class="can-stage"><img alt="Dogma Lover #2" src="assets/dogma-lover-2.png"/></span></button>
+<button aria-label="Ver detalhes de Dogma Pilsen" class="fridge-can" data-modal="beer-7" type="button"><span class="can-stage"><img alt="Dogma Pilsen" src="assets/dogma-pilsen.png"/></span></button>
+<span class="shelf-line s1"></span>
+</div>
+</div>
+<div class="fridge-base"><span></span><span></span><span></span></div>
+</div>
+
+</div>
+</section>
+<section class="premium-manifesto" aria-label="Manifesto da curadoria">
+  <div class="shell premium-manifesto-inner">
+    <p><strong>Beba menos,</strong> beba melhor.</p>
+    <span class="manifesto-note">Cervejas que valem a experiência — escolhidas pelo Diegão, uma a uma.</span>
+  </div>
+</section>
+<section class="catalog" id="catalogo">
+<div class="shell">
+<div class="catalog-top">
+<div>
+<h2>A curadoria <span>do Diegão</span></h2>
+<p>Uma seleção enxuta, feita para comparar menos e escolher melhor.</p>
+</div>
+<div class="catalog-tools">
+<label class="catalog-search" for="catalogSearch"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg><input id="catalogSearch" type="search" autocomplete="off" placeholder="Buscar rótulo ou cervejaria" aria-label="Buscar por nome do rótulo ou cervejaria"/></label>
+<div aria-label="Filtros" class="filters">
+<button aria-pressed="true" class="filter-btn active" data-filter="all" type="button">Todas</button>
+<button aria-pressed="false" class="filter-btn" data-filter="leve" type="button">Leves</button>
+<button aria-pressed="false" class="filter-btn" data-filter="amarga" type="button">Amargas</button>
+<button aria-pressed="false" class="filter-btn" data-filter="frutada" type="button">Frutadas</button>
+<button aria-pressed="false" class="filter-btn" data-filter="intensa" type="button">Intensas</button>
+<button aria-pressed="false" class="filter-btn" data-filter="especiais" type="button">Especiais</button>
+</div>
+</div>
+</div>
+<div aria-live="polite" class="catalog-filter-status" id="catalogFilterStatus"></div>
+<div aria-live="polite" class="grid" id="beerCatalogGrid"></div>
+</div>
+</section>
+<section class="tips-section catalog-help" id="dicas">
+<div class="shell tips-grid">
+<div>
+<span class="eyebrow">Dicas do Diegão</span>
+<h2>Não sabe qual escolher? <span>Pergunta pro Diegão.</span></h2>
+<p>Filtrou as cervejas e ainda ficou na dúvida? Conte o que você gosta de beber e o Diegão ajuda a encontrar um rótulo que combine com você.</p>
+<a class="tips-back-catalog" href="#catalogo">Voltar aos filtros do catálogo</a>
+</div>
+<form class="tips-form" id="tipsForm">
+<label>Seu nome<input autocomplete="name" id="tipName" placeholder="Seu nome" required="" type="text"/></label>
+<label>Seu e-mail<input autocomplete="email" id="tipEmail" placeholder="voce@email.com" required="" type="email"/></label>
+<label>Sua pergunta<textarea id="tipQuestion" placeholder="Ex.: gosto de cervejas leves e cítricas. O que você me indica?" required="" rows="5"></textarea></label>
+<button type="submit">Enviar pergunta ao Diegão</button>
+</form>
+</div>
+</section>
+<section class="how-section" id="como-funciona">
+<div class="shell">
+<span class="eyebrow">Super simples</span>
+<h2>Como <span>funciona</span></h2>
+<p class="how-lead">Escolha com calma, monte sua seleção e finalize diretamente com o Diegão pelo WhatsApp. Simples, pessoal e sem checkout engessado.</p>
+<div class="how-steps">
+<article><b>01</b><strong>Escolha seus rótulos</strong><p>Clique nas cervejas para conhecer estilo, intensidade, amargor, perfil e todos os detalhes.</p></article>
+<article><b>02</b><strong>Continue comprando</strong><p>Adicione quantas cervejas quiser ao pedido. Você pode continuar escolhendo antes de finalizar.</p></article>
+<article><b>03</b><strong>Finalize no WhatsApp</strong><p>Envie o pedido pronto para o Diegão. Se quiser entrega, marque essa opção antes de finalizar.</p></article>
+</div>
+</div>
+</section>
+
+<section class="about" id="sobre">
+<div class="about-photo about-carousel" aria-label="Fotos do Diegão">
+  <button class="about-photo-nav about-photo-prev" type="button" aria-label="Foto anterior do Diegão">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+  </button>
+  <div class="about-photo-stage">
+    <img class="about-slide is-active" alt="Diegão em um bar com uma cerveja artesanal" src="assets/diegao-curadoria-1.jpeg"/>
+    <img class="about-slide" alt="Diegão brindando com um copo de cerveja" src="assets/diegao-curadoria-2.jpeg"/>
+  </div>
+  <button class="about-photo-nav about-photo-next" type="button" aria-label="Próxima foto do Diegão">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+  </button>
+  <div class="about-photo-dots" aria-label="Selecionar foto">
+    <button class="about-dot is-active" type="button" aria-label="Mostrar foto 1" aria-pressed="true"></button>
+    <button class="about-dot" type="button" aria-label="Mostrar foto 2" aria-pressed="false"></button>
+  </div>
+</div>
+<div class="about-copy">
+<span class="eyebrow">Quem faz a curadoria</span>
+<h2 class="about-title-stacked">Cervejando<br/><span>com Diego</span></h2>
+<p class="about-lead">Curadoria feita por quem transforma curiosidade em repertório.</p>
+<p>Que eu sou apaixonado por cervejas já não é nenhum segredo, né? Por isso, selecionei rótulos que traduzem estilos sem complicação e aproximam você de cervejas que realmente valem a experiência.</p>
+<p>Juntos, vamos explorar sabores, aromas e histórias em cada gole.</p>
+<p class="tagline">Um brinde à cultura cervejeira.</p>
+</div>
+</section>
+</main>
+<footer id="contato">
+<div class="shell footer-inner">
+<div>© Cervejando com Diego</div>
+<div class="footer-links">
+<a aria-label="Abrir Instagram @cervejandocomdiego em nova aba" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">@cervejandocomdiego</a>
+<a aria-label="Abrir WhatsApp do Diegão em nova aba" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank">(16) 99792-7171</a>
+</div>
+</div>
+</footer>
+<div id="beerModalMount"></div>
+
+
+
+
+
+
+
+
+
+
+<div class="cart-backdrop" hidden="" id="cartBackdrop"></div>
+<aside aria-hidden="true" aria-label="Seu pedido" class="cart-drawer" id="cartDrawer">
+<div class="cart-head">
+<div><span>Seu pedido</span><strong>Cervejas escolhidas</strong></div>
+<button aria-label="Fechar pedido" id="cartClose" type="button">×</button>
+</div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-empty" id="cartEmpty">Seu pedido ainda está vazio.</div>
+<label class="delivery-check"><input id="deliveryCheck" type="checkbox"/> Quero consultar entrega</label>
+<div class="cart-actions">
+<button class="continue-btn" id="continueShopping" type="button">Continuar comprando</button>
+<button class="checkout-btn" id="checkoutWhats" type="button">Finalizar pedido no WhatsApp</button>
+</div>
+</aside>
+<script src="data/cervejas.js"></script><script src="data/supabase.js"></script><script>
+/* ===== CATÁLOGO DATA-DRIVEN v17.1 ===== */
+function createNode(tag,className,text){
+  const node=document.createElement(tag);
+  if(className) node.className=className;
+  if(text!==undefined&&text!==null) node.textContent=String(text);
+  return node;
+}
+
+function normalizeCardText(value=''){
+  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+}
+
+function formatBeerPrice(value){
+  const number=Number(value);
+  if(value===null||value===undefined||value===''||!Number.isFinite(number)) return 'Preço sob consulta';
+  return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(number);
+}
+
+function stockInfo(status){
+  const normalized=String(status||'in_stock').toLowerCase();
+  if(normalized==='sold_out') return {label:'Esgotado',className:'sold-out'};
+  if(normalized==='low_stock') return {label:'Últimas unidades',className:'low-stock'};
+  return {label:'Em estoque',className:'in-stock'};
+}
+
+function metricLevel(value,type){
+  const text=normalizeCardText(value);
+  if(type==='intensity'){
+    if(text.includes('muito intensa')) return 5;
+    if(text.includes('media/alta')) return 4;
+    if(text.includes('intensa')) return 4;
+    if(text.includes('media')) return 3;
+    if(text.includes('leve')) return 1;
+  }
+  if(type==='bitterness'){
+    if(text.includes('medio/alto')) return 4;
+    if(text.includes('alto')) return 5;
+    if(text.includes('medio')) return 3;
+    if(text.includes('muito baixo')) return 1;
+    if(text.includes('baixo')) return 2;
+  }
+  return 0;
+}
+
+function metricDescriptor(level,type){
+  const intensity=['Não divulgado','Suave','Leve','Marcante','Intensa','Extrema'];
+  const bitterness=['Não divulgado','Muito baixo','Baixo','Médio','Alto','Muito alto'];
+  return (type==='bitterness'?bitterness:intensity)[Math.max(0,Math.min(5,level))];
+}
+
+function createMetricScale(label,value,type){
+  const wrap=createNode('div',`card-metric ${type}`);
+  const level=metricLevel(value,type);
+  const descriptor=metricDescriptor(level,type);
+  wrap.setAttribute('aria-label',`${label}: ${descriptor}${level?`, ${level} de 5`:''}`);
+  const labelNode=createNode('span','card-metric-label',label);
+  const scale=createNode('span','card-thermo');
+  const fill=createNode('span','card-thermo-fill');
+  fill.style.width=`${Math.max(0,Math.min(5,level))*20}%`;
+  scale.append(fill);
+  const metaNode=createNode('span','card-metric-meta',level?`${level}/5 · ${descriptor}`:descriptor);
+  wrap.append(labelNode,scale,metaNode);
+  return wrap;
+}
+
+function renderBeerCatalog(){
+  const source=Array.isArray(window.CERVEJANDO_BEERS)?window.CERVEJANDO_BEERS:[];
+  const beers=[...source].sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
+  const grid=document.getElementById('beerCatalogGrid');
+  const modalMount=document.getElementById('beerModalMount');
+  if(!grid||!modalMount) return;
+
+  grid.replaceChildren();
+  modalMount.replaceChildren();
+
+  beers.forEach(beer=>{
+    if(beer.active!==false){
+      const card=createNode('article','beer-card');
+      card.dataset.tags=(beer.tags||[]).join(' ');
+      card.dataset.target=beer.id;
+      card.setAttribute('role','button');
+      card.tabIndex=0;
+      card.setAttribute('aria-label',beer.card?.ariaLabel||`Ver detalhes de ${beer.detail?.title||beer.card?.name||'cerveja'}`);
+
+      const stock=stockInfo(beer.stockStatus);
+      card.dataset.stockStatus=beer.stockStatus||'in_stock';
+      card.dataset.search=normalizeCardText([beer.card?.brand,beer.card?.name,beer.detail?.title,beer.detail?.style,beer.detail?.brewery].filter(Boolean).join(' '));
+      if(stock.className==='sold-out') card.classList.add('is-sold-out');
+
+      const art=createNode('div','beer-art');
+      const stockBadge=createNode('span',`stock-badge ${stock.className}`,stock.label);
+      art.append(stockBadge);
+      const three=createNode('div','beer-3d');
+      three.setAttribute('aria-hidden','true');
+      const img=document.createElement('img');
+      img.src=beer.card.image;
+      img.alt=beer.card.alt||beer.detail.title;
+      const gloss=createNode('div','beer-3d-gloss');
+      three.append(img,gloss);
+      art.append(three);
+
+      const meta=createNode('div','beer-meta');
+      const identity=createNode('div','beer-identity');
+      identity.append(createNode('strong','',beer.card.brand),createNode('span','',beer.card.name));
+      const style=createNode('span','beer-style',beer.detail.style||beer.detail.subtitle||'Estilo não divulgado');
+      const priceRow=createNode('div','beer-price-row');
+      priceRow.append(createNode('strong','beer-price',formatBeerPrice(beer.price)),createNode('span','beer-volume',beer.detail.volume||'Volume não divulgado'));
+      const metricBox=createNode('div','card-metrics');
+      metricBox.append(createMetricScale('Intensidade',beer.detail.intensity,'intensity'),createMetricScale('Amargor',beer.detail.bitterness,'bitterness'));
+      const addCard=createNode('button','card-add add-to-order',stock.className==='sold-out'?'Esgotado':'Adicionar ao pedido');
+      addCard.type='button';
+      addCard.dataset.beer=beer.detail.orderName||beer.detail.title;
+      addCard.disabled=stock.className==='sold-out';
+      addCard.setAttribute('aria-label',stock.className==='sold-out'?`${beer.detail.title} está esgotada`:`Adicionar ${beer.detail.title} ao pedido`);
+      meta.append(identity,style,priceRow,metricBox,addCard);
+      card.append(art,meta);
+      grid.append(card);
+    }
+
+    const d=beer.detail;
+    const dialog=createNode('dialog','beer-modal');
+    dialog.id=beer.id;
+
+    const wrap=createNode('div','modal-wrap');
+    const close=createNode('button','close','×');
+    close.type='button';
+    close.setAttribute('aria-label','Fechar');
+
+    const visual=createNode('div','modal-visual');
+    visual.append(createNode('div','hop-rain'));
+    const modalImg=document.createElement('img');
+    modalImg.className='modal-can';
+    modalImg.src=d.image;
+    modalImg.alt=d.imageAlt||d.title;
+    visual.append(modalImg);
+
+    const info=createNode('div','modal-info');
+    info.append(createNode('h2','',d.title),createNode('h3','',d.subtitle));
+
+    const specs=createNode('div','specs');
+    [
+      ['Estilo',d.style],
+      ['Cervejaria',d.brewery],
+      ['Preço',formatBeerPrice(beer.price)],
+      ['Volume',d.volume],
+      ['Teor alcoólico',d.abv],
+      ['IBU',d.ibu],
+      ['Lúpulos utilizados',d.hops]
+    ].forEach(([label,value])=>{
+      const row=document.createElement('div');
+      row.append(createNode('b','',label),document.createTextNode(value||'Não divulgado'));
+      specs.append(row);
+    });
+    info.append(specs,createNode('h4','','Sobre a cerveja'),createNode('p','',d.description));
+
+    const metrics=createNode('div','metrics');
+    [['Intensidade',d.intensity],['Amargor',d.bitterness]].forEach(([label,value])=>{
+      const row=createNode('div','metric');
+      row.append(createNode('b','',label),document.createTextNode(value||'Não divulgado'));
+      metrics.append(row);
+    });
+    info.append(metrics);
+
+    const profile=createNode('div','profile-box');
+    profile.append(createNode('b','','Perfil'),createNode('span','',d.profile));
+    info.append(profile);
+
+    const good=createNode('div','good-for');
+    good.append(createNode('b','','Boa escolha para quem'),createNode('p','',d.goodFor));
+    info.append(good);
+
+    const modalStock=stockInfo(beer.stockStatus);
+    const add=createNode('button','modal-whatsapp add-to-order',modalStock.className==='sold-out'?'Esgotado':'Adicionar ao carrinho');
+    add.type='button';
+    add.dataset.beer=d.orderName||d.title;
+    add.disabled=modalStock.className==='sold-out';
+    info.append(add);
+
+    wrap.append(close,visual,info);
+    dialog.append(wrap);
+    modalMount.append(dialog);
+  });
+}
+
+async function bootCervejandoSite(){
+  if(typeof window.loadCervejandoCatalog==='function'){
+    await window.loadCervejandoCatalog();
+  }
+  renderBeerCatalog();
+
+
+const WHATSAPP_NUMBER='5516997927171';
+
+function openBeerModal(id){
+  const modal=document.getElementById(id);
+  if(!modal) return;
+  if(typeof modal.showModal==='function') modal.showModal();
+  else modal.setAttribute('open','');
+  const info=modal.querySelector('.modal-info');
+  if(info) info.scrollTop=0;
+}
+
+document.querySelectorAll('.fridge-can').forEach(btn=>btn.addEventListener('click',()=>openBeerModal(btn.dataset.modal)));
+
+const cards=[...document.querySelectorAll('.beer-card')];
+const filterButtons=[...document.querySelectorAll('.filter-btn')];
+const filterStatus=document.getElementById('catalogFilterStatus');
+
+function normalizeSpec(value=''){
+  return value
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu,' ')
+    .replace(/[^a-zA-Z0-9/+#\s.-]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim()
+    .toLowerCase();
+}
+
+function modalForCard(card){
+  return document.getElementById(card.dataset.target||card.dataset.modal||'');
+}
+
+function readMetric(modal,label){
+  const wanted=normalizeSpec(label);
+  const metric=[...(modal?.querySelectorAll('.metric')||[])].find(item=>
+    normalizeSpec(item.querySelector('b')?.textContent||'')===wanted
+  );
+  if(!metric) return '';
+  const clone=metric.cloneNode(true);
+  clone.querySelector('b')?.remove();
+  return normalizeSpec(clone.textContent||'');
+}
+
+function readProfile(modal){
+  return normalizeSpec(modal?.querySelector('.profile-box span')?.textContent||'');
+}
+
+function semanticMatch(label,cardValue,clickedValue){
+  const l=normalizeSpec(label), a=normalizeSpec(cardValue), b=normalizeSpec(clickedValue);
+  if(!a||!b) return false;
+  if(l==='intensidade'){
+    if(b.includes('muito intensa')) return a.includes('muito intensa');
+    if(b.includes('intensa')) return a.includes('intensa');
+    if(b.includes('leve')) return a.includes('leve');
+    if(b.includes('media/alta')) return a.includes('media/alta');
+    if(b==='media') return a==='media';
+  }
+  if(l==='amargor'){
+    if(b.includes('medio/alto')) return a.includes('medio/alto');
+    if(b==='alto') return a==='alto';
+    if(b.includes('muito baixo')) return a.includes('muito baixo');
+    if(b==='baixo') return a==='baixo';
+    if(b==='medio') return a==='medio';
+  }
+  if(l==='perfil'){
+    const clickedParts=b.split(/\s*[•·]\s*|\s{2,}/).filter(Boolean);
+    if(clickedParts.length>1) return clickedParts.every(part=>a.includes(part));
+    return a.includes(b);
+  }
+  return a===b;
+}
+
+function clearFilterStatus(){
+  if(!filterStatus) return;
+  filterStatus.classList.remove('active');
+  filterStatus.replaceChildren();
+}
+
+function showFilterStatus(label,value,count){
+  if(!filterStatus) return;
+  filterStatus.classList.add('active');
+  filterStatus.replaceChildren();
+  const text=document.createElement('span');
+  text.append(document.createTextNode('Agrupando por '));
+  const strong=document.createElement('strong');
+  strong.textContent=`${label}: ${value}`;
+  text.append(strong,document.createTextNode(` — ${count} ${count===1?'cerveja':'cervejas'}.`));
+  const clear=document.createElement('button');
+  clear.type='button';
+  clear.textContent='Ver todas';
+  clear.addEventListener('click',()=>applyCatalogFilter('all',{scroll:false}));
+  filterStatus.append(text,clear);
+}
+
+let activeCategoryFilter='all';
+let activeSpecificationFilter=null;
+let catalogSearchTerm='';
+const catalogSearch=document.getElementById('catalogSearch');
+
+function aliasesFor(filter){
+  const aliases={
+    leve:['leve','leves'],
+    amarga:['amarga','amargas'],
+    frutada:['frutada','frutadas'],
+    intensa:['intensa','intensas'],
+    especiais:['especial','especiais']
+  };
+  return aliases[filter]||[filter];
+}
+
+function refreshCatalogVisibility(){
+  let count=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase().split(/\s+/).filter(Boolean);
+    const categoryMatch=activeCategoryFilter==='all'||aliasesFor(activeCategoryFilter).some(tag=>tags.includes(tag));
+    const searchMatch=!catalogSearchTerm||(card.dataset.search||'').includes(catalogSearchTerm);
+    let specMatch=true;
+    if(activeSpecificationFilter){
+      const {label,value}=activeSpecificationFilter;
+      const modal=modalForCard(card);
+      const cardValue=normalizeSpec(label)==='perfil' ? readProfile(modal) : readMetric(modal,label);
+      specMatch=semanticMatch(label,cardValue,value);
+    }
+    // A busca textual percorre o catálogo inteiro, independentemente
+    // da categoria ou especificação selecionada anteriormente.
+    const match=catalogSearchTerm ? searchMatch : (categoryMatch&&specMatch);
+    card.hidden=!match;
+    if(match){card.style.removeProperty('display');count++;}
+    else card.style.setProperty('display','none','important');
+  });
+
+  if(catalogSearchTerm){
+    showFilterStatus('Busca',catalogSearch?.value.trim()||catalogSearchTerm,count);
+  }else if(activeSpecificationFilter){
+    showFilterStatus(activeSpecificationFilter.label,activeSpecificationFilter.value,count);
+  }else if(activeCategoryFilter!=='all'){
+    const label=filterButtons.find(b=>b.dataset.filter===activeCategoryFilter)?.textContent.trim()||activeCategoryFilter;
+    showFilterStatus('Característica',label,count);
+  }else{
+    clearFilterStatus();
+  }
+}
+
+function applyCatalogFilter(filter,{scroll=true}={}){
+  activeCategoryFilter=(filter||'all').toLowerCase();
+  activeSpecificationFilter=null;
+  filterButtons.forEach(btn=>{
+    const active=btn.dataset.filter===activeCategoryFilter;
+    btn.classList.toggle('active',active);
+    btn.setAttribute('aria-pressed',active?'true':'false');
+  });
+  refreshCatalogVisibility();
+  if(scroll) document.getElementById('catalogo')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function applySpecificationFilter(label,value,{scroll=true}={}){
+  activeSpecificationFilter={label,value};
+  activeCategoryFilter='all';
+  filterButtons.forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.filter==='all');
+    btn.setAttribute('aria-pressed',btn.dataset.filter==='all'?'true':'false');
+  });
+  refreshCatalogVisibility();
+  if(scroll) document.getElementById('catalogo')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+catalogSearch?.addEventListener('input',()=>{
+  catalogSearchTerm=normalizeCardText(catalogSearch.value.trim());
+  refreshCatalogVisibility();
+});
+
+cards.forEach(card=>{
+  card.addEventListener('click',event=>{
+    if(event.target.closest('button,a,input')) return;
+    openBeerModal(card.dataset.target||card.dataset.modal);
+  });
+  card.addEventListener('keydown',event=>{
+    if(event.key==='Enter'||event.key===' '){
+      event.preventDefault();
+      openBeerModal(card.dataset.target||card.dataset.modal);
+    }
+  });
+});
+
+filterButtons.forEach(btn=>{
+  btn.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    applyCatalogFilter(btn.dataset.filter,{scroll:false});
+  });
+});
+
+// Toda especificação relevante da ficha passa a ser um filtro real.
+document.querySelectorAll('.beer-modal').forEach(modal=>{
+  modal.querySelectorAll('.metric').forEach(metric=>{
+    const label=(metric.querySelector('b')?.textContent||'').trim();
+    const clone=metric.cloneNode(true);
+    clone.querySelector('b')?.remove();
+    const value=clone.textContent.trim();
+    if(!label||!value) return;
+    metric.classList.add('spec-filter');
+    metric.setAttribute('role','button');
+    metric.setAttribute('tabindex','0');
+    metric.setAttribute('aria-label',`Agrupar cervejas por ${label}: ${value}`);
+    const activate=()=>{
+      if(modal.open) modal.close();
+      applySpecificationFilter(label,value,{scroll:true});
+    };
+    metric.addEventListener('click',activate);
+    metric.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}
+    });
+  });
+
+  const profile=modal.querySelector('.profile-box');
+  const profileValue=profile?.querySelector('span')?.textContent.trim();
+  if(profile&&profileValue){
+    profile.classList.add('spec-filter');
+    profile.setAttribute('role','button');
+    profile.setAttribute('tabindex','0');
+    profile.setAttribute('aria-label',`Agrupar cervejas por perfil: ${profileValue}`);
+    const activateProfile=()=>{
+      if(modal.open) modal.close();
+      applySpecificationFilter('Perfil',profileValue,{scroll:true});
+    };
+    profile.addEventListener('click',activateProfile);
+    profile.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){event.preventDefault();activateProfile();}
+    });
+  }
+});
+
+
+// ===== CONTROLES DE MODAIS E CARRINHO v9 =====
+document.querySelectorAll('.beer-modal').forEach(modal=>{
+  modal.querySelector('.close')?.addEventListener('click',()=>modal.close());
+  modal.addEventListener('click',event=>{
+    if(event.target===modal) modal.close();
+  });
+});
+
+let cart={};
+const drawer=document.getElementById('cartDrawer');
+const backdrop=document.getElementById('cartBackdrop');
+const cartCount=document.getElementById('cartCount');
+const cartItems=document.getElementById('cartItems');
+const cartEmpty=document.getElementById('cartEmpty');
+const delivery=document.getElementById('deliveryCheck');
+const cartCloseButton=document.getElementById('cartClose');
+const cartTrigger=document.getElementById('cartTrigger');
+const continueShopping=document.getElementById('continueShopping');
+const checkoutWhats=document.getElementById('checkoutWhats');
+
+const cartTotal=()=>Object.values(cart).reduce((sum,qty)=>sum+qty,0);
+
+function renderCart(){
+  if(cartCount) cartCount.textContent=String(cartTotal());
+  if(!cartItems || !cartEmpty) return;
+
+  cartItems.replaceChildren();
+  const entries=Object.entries(cart);
+  cartEmpty.style.display=entries.length?'none':'block';
+
+  entries.forEach(([name,qty])=>{
+    const row=document.createElement('div');
+    row.className='cart-item';
+
+    const title=document.createElement('strong');
+    title.textContent=name;
+
+    const actions=document.createElement('div');
+    actions.className='cart-item-actions';
+
+    const minus=document.createElement('button');
+    minus.type='button';
+    minus.dataset.a='minus';
+    minus.setAttribute('aria-label',`Diminuir quantidade de ${name}`);
+    minus.textContent='−';
+
+    const quantity=document.createElement('span');
+    quantity.textContent=String(qty);
+    quantity.setAttribute('aria-label',`${qty} unidades`);
+
+    const plus=document.createElement('button');
+    plus.type='button';
+    plus.dataset.a='plus';
+    plus.setAttribute('aria-label',`Aumentar quantidade de ${name}`);
+    plus.textContent='+';
+
+    const remove=document.createElement('button');
+    remove.type='button';
+    remove.dataset.a='remove';
+    remove.setAttribute('aria-label',`Remover ${name} do carrinho`);
+    remove.textContent='×';
+
+    minus.addEventListener('click',()=>{
+      cart[name]-=1;
+      if(cart[name]<=0) delete cart[name];
+      renderCart();
+    });
+    plus.addEventListener('click',()=>{
+      cart[name]=(cart[name]||0)+1;
+      renderCart();
+    });
+    remove.addEventListener('click',()=>{
+      delete cart[name];
+      renderCart();
+    });
+
+    actions.append(minus,quantity,plus,remove);
+    row.append(title,actions);
+    cartItems.appendChild(row);
+  });
+}
+
+function openCart(){
+  if(!drawer || !backdrop) return;
+  renderCart();
+  backdrop.hidden=false;
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden','false');
+  document.body.classList.add('cart-open');
+  cartCloseButton?.focus({preventScroll:true});
+}
+
+function closeCart(){
+  if(!drawer || !backdrop) return;
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden','true');
+  document.body.classList.remove('cart-open');
+  backdrop.hidden=true;
+}
+
+document.querySelectorAll('.add-to-order').forEach(btn=>{
+  btn.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    const beer=btn.dataset.beer;
+    if(!beer) return;
+    cart[beer]=(cart[beer]||0)+1;
+    const modal=btn.closest('dialog');
+    if(modal?.open) modal.close();
+    renderCart();
+    openCart();
+  });
+});
+
+cartTrigger?.addEventListener('click',event=>{
+  event.preventDefault();
+  openCart();
+});
+
+cartCloseButton?.addEventListener('click',event=>{
+  event.preventDefault();
+  closeCart();
+});
+
+continueShopping?.addEventListener('click',event=>{
+  event.preventDefault();
+  closeCart();
+  document.getElementById('catalogo')?.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+backdrop?.addEventListener('click',closeCart);
+
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape' && drawer?.classList.contains('open')) closeCart();
+});
+
+checkoutWhats?.addEventListener('click',event=>{
+  event.preventDefault();
+  const entries=Object.entries(cart);
+  if(!entries.length){
+    alert('Escolha pelo menos uma cerveja antes de finalizar.');
+    return;
+  }
+
+  let msg='Olá, Diegão! Montei meu pedido pelo site 🍺\n\n';
+  entries.forEach(([name,qty])=>{ msg+=`• ${qty}x ${name}\n`; });
+  msg+='\n'+(delivery?.checked
+    ?'Também quero consultar a possibilidade de entrega.'
+    :'Podemos combinar retirada ou entrega.');
+  msg+='\n\nPode me confirmar disponibilidade e valores?';
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+});
+
+renderCart();
+
+document.getElementById('tipsForm')?.addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=document.getElementById('tipName').value.trim();
+  const email=document.getElementById('tipEmail').value.trim();
+  const question=document.getElementById('tipQuestion').value.trim();
+  const msg=`Olá, Diegão! Tenho uma pergunta pelo site.\n\nNome: ${name}\nE-mail: ${email}\nPergunta: ${question}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+});
+
+function openCartAfterAdd(){
+  document.querySelectorAll('dialog[open]').forEach(dialog=>{
+    try{ dialog.close(); }catch(e){ dialog.removeAttribute('open'); }
+  });
+
+  requestAnimationFrame(()=>{
+    if(typeof openCart === 'function'){
+      openCart();
+      return;
+    }
+
+    const drawer=document.getElementById('cartDrawer');
+    const overlay=document.getElementById('cartOverlay');
+
+    if(drawer){
+      drawer.classList.add('open','is-open');
+      drawer.setAttribute('aria-hidden','false');
+    }
+    if(overlay){
+      overlay.classList.add('open','is-open');
+    }
+    document.body.classList.add('cart-open');
+  });
+}
+
+
+document.addEventListener('click',event=>{
+  const addButton=event.target.closest(
+    '.add-to-order, .add-to-cart, [data-add-to-cart], [data-add-cart], [data-cart-add]'
+  );
+  if(!addButton) return;
+  setTimeout(()=>openCartAfterAdd(),0);
+});
+
+
+/* ===== LATAS 3D — interação isolada v14 ===== */
+(()=>{
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const cans=[...document.querySelectorAll('.beer-art .beer-3d')];
+  if(!cans.length) return;
+
+  let visible=new Set(), raf=0, start=performance.now();
+
+  const render=(now)=>{
+    if(!reduce){
+      const t=(now-start)/1000;
+      visible.forEach((el,i)=>{
+        if(el.dataset.dragging==='1'||el.dataset.hover==='1') return;
+        const ry=Math.sin(t*.62+i*.73)*3.2;
+        const fy=Math.sin(t*.85+i*.51)*1.8;
+        el.style.setProperty('--beer-ry',ry.toFixed(2)+'deg');
+        el.style.setProperty('--beer-float',fy.toFixed(2)+'px');
+      });
+    }
+    raf=requestAnimationFrame(render);
+  };
+
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>e.isIntersecting?visible.add(e.target):visible.delete(e.target));
+    },{rootMargin:'160px 0px',threshold:.05});
+    cans.forEach(el=>io.observe(el));
+  }else cans.forEach(el=>visible.add(el));
+
+  cans.forEach(el=>{
+    let sx=0,sy=0,moved=false;
+
+    if(fine){
+      el.addEventListener('pointerenter',()=>{
+        el.dataset.hover='1';
+        el.style.setProperty('--beer-scale','1.025');
+      });
+      el.addEventListener('pointermove',e=>{
+        const r=el.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        el.style.setProperty('--beer-ry',(x*10).toFixed(2)+'deg');
+        el.style.setProperty('--beer-rx',(-y*4).toFixed(2)+'deg');
+        el.style.setProperty('--beer-gloss',(x*24).toFixed(1)+'%');
+        el.style.setProperty('--beer-light','1.035');
+      });
+      el.addEventListener('pointerleave',()=>{
+        el.dataset.hover='0';
+        el.style.removeProperty('--beer-rx');
+        el.style.removeProperty('--beer-scale');
+        el.style.removeProperty('--beer-light');
+      });
+    }
+
+    el.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='mouse') return;
+      sx=e.clientX; sy=e.clientY; moved=false; el.dataset.dragging='1';
+    },{passive:true});
+
+    el.addEventListener('pointermove',e=>{
+      if(el.dataset.dragging!=='1'||e.pointerType==='mouse') return;
+      const dx=e.clientX-sx, dy=e.clientY-sy;
+      if(Math.abs(dy)>Math.abs(dx)) return; // vertical scroll always wins
+      if(Math.abs(dx)>5) moved=true;
+      const rot=Math.max(-12,Math.min(12,dx*.12));
+      el.style.setProperty('--beer-ry',rot.toFixed(2)+'deg');
+      el.style.setProperty('--beer-gloss',(rot*1.5).toFixed(1)+'%');
+    },{passive:true});
+
+    const end=()=>{
+      el.dataset.dragging='0';
+      setTimeout(()=>{ moved=false; },80);
+    };
+    el.addEventListener('pointerup',end,{passive:true});
+    el.addEventListener('pointercancel',end,{passive:true});
+  });
+
+  raf=requestAnimationFrame(render);
+})();
+
+}
+bootCervejandoSite();
+
+
+
+// Curadoria: galeria de fotos do Diegão
+(() => {
+  const carousel = document.querySelector('.about-carousel');
+  if (!carousel) return;
+  const slides = [...carousel.querySelectorAll('.about-slide')];
+  const dots = [...carousel.querySelectorAll('.about-dot')];
+  const prev = carousel.querySelector('.about-photo-prev');
+  const next = carousel.querySelector('.about-photo-next');
+  let current = 0;
+  const show = (index) => {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+    dots.forEach((dot, i) => {
+      const active = i === current;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-pressed', String(active));
+    });
+  };
+  prev?.addEventListener('click', () => show(current - 1));
+  next?.addEventListener('click', () => show(current + 1));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+})();
+</script>
+<style>@keyframes fall{to{transform:translateY(900px) rotate(360deg)}}
+/* ===== CATÁLOGO EXPANDIDO v17.1 ===== */
+.feature-icon svg,.circle-btn svg{width:20px;height:20px;display:block}
+.catalog h2,.how-section h2,.tips-section h2{text-transform:none!important;letter-spacing:-.015em}
+.catalog-tools{display:grid;gap:14px;justify-items:end;min-width:min(100%,620px)}
+.catalog-search{width:min(100%,420px);height:46px;display:flex;align-items:center;gap:10px;padding:0 15px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:#0d0f10;color:#aaa;transition:border-color .2s ease,box-shadow .2s ease}
+.catalog-search:focus-within{border-color:rgba(224,181,90,.7);box-shadow:0 0 0 3px rgba(201,151,50,.1)}
+.catalog-search svg{width:18px;height:18px;flex:0 0 auto;color:var(--gold2)}
+.catalog-search input{width:100%;border:0;outline:0;background:transparent;color:#f3f1eb;font:inherit;font-size:.88rem}
+.catalog-search input::placeholder{color:#777}
+.beer-card{display:flex;flex-direction:column;position:relative}
+.beer-art{position:relative}
+.stock-badge{position:absolute;top:12px;left:12px;z-index:4;padding:7px 10px;border-radius:999px;font-size:.66rem;font-weight:800;letter-spacing:.02em;border:1px solid transparent;backdrop-filter:blur(7px)}
+.stock-badge.in-stock{color:#bfe6c8;background:rgba(25,83,48,.72);border-color:rgba(112,207,137,.25)}
+.stock-badge.low-stock{color:#ffe2a4;background:rgba(112,72,12,.78);border-color:rgba(238,177,58,.3)}
+.stock-badge.sold-out{color:#d8d8d8;background:rgba(60,60,60,.82);border-color:rgba(255,255,255,.15)}
+.beer-card.is-sold-out .beer-art img{filter:grayscale(.65) saturate(.35) opacity(.62) drop-shadow(0 18px 16px rgba(0,0,0,.45))!important}
+.beer-card.is-sold-out{border-color:rgba(255,255,255,.09)}
+.beer-meta{display:flex;flex-direction:column;gap:10px;flex:1;padding:16px 16px 17px!important;border-top:1px solid var(--line)}
+.beer-identity{min-height:42px}
+.beer-identity strong{display:block;font-family:Oswald,sans-serif;font-size:.77rem;letter-spacing:.1em;color:var(--gold2)!important}
+.beer-identity span{display:block;margin-top:2px;color:#f1efe9!important;font-weight:800;font-size:.96rem;line-height:1.15}
+.beer-style{display:block;color:#aaa!important;font-size:.72rem;line-height:1.3;min-height:1em}
+.beer-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+.beer-price{font-size:.86rem;color:#f0cf85!important}
+.beer-volume{font-size:.7rem;color:#999!important;white-space:nowrap}
+.card-metrics{display:grid;gap:10px}
+.card-metric{display:grid;grid-template-columns:1fr;gap:4px;padding:1px 0}
+.card-metric-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card-metric-label{font-size:.61rem;color:#aaa!important;text-transform:none;letter-spacing:.02em}
+.card-metric-value{font-size:.57rem;color:#888;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.card-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;width:100%;height:4px}
+.card-scale i{display:block;width:100%;height:4px;border-radius:999px;background:rgba(255,255,255,.09);border:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+.card-metric.intensity .card-scale i.filled{background:linear-gradient(90deg,#9d8048,#d5b978);box-shadow:0 0 7px rgba(202,169,102,.12)}
+.card-metric.bitterness .card-scale i.filled{background:linear-gradient(90deg,#87582e,#c1874a);box-shadow:0 0 7px rgba(176,115,59,.11)}
+.card-metric-descriptor{font-size:.55rem;color:#817d75;line-height:1;text-align:right;letter-spacing:.015em}
+.card-add{margin-top:auto;width:100%;min-height:39px;border-radius:10px;border:1px solid rgba(224,181,90,.42);background:rgba(201,151,50,.08);color:var(--gold2);font-weight:800;font-size:.72rem;cursor:pointer;transition:.2s ease}
+.card-add:hover:not(:disabled){background:var(--gold2);color:#090a0b}
+.card-add:disabled{cursor:not-allowed;color:#777;border-color:rgba(255,255,255,.1);background:#111}
+.tips-section.catalog-help{border-top:1px solid rgba(224,181,90,.13);border-bottom:1px solid rgba(224,181,90,.13);background:radial-gradient(circle at 20% 30%,rgba(201,151,50,.09),transparent 36%),#090a0b}
+.tips-back-catalog{display:inline-flex;margin-top:16px;color:var(--gold2);font-weight:800;font-size:.82rem;border-bottom:1px solid rgba(224,181,90,.4);padding-bottom:5px}
+@media(max-width:860px){.catalog-tools{justify-items:stretch;min-width:0}.catalog-search{width:100%;max-width:none}.catalog-top{align-items:stretch}.filters{justify-content:flex-start}}
+@media(max-width:560px){.beer-art{height:205px!important}.beer-meta{padding:12px 11px 13px!important;gap:8px}.stock-badge{top:8px;left:8px;padding:5px 7px;font-size:.57rem}.beer-identity{min-height:38px}.beer-identity strong{font-size:.65rem}.beer-identity span{font-size:.82rem}.beer-style{font-size:.64rem}.beer-price-row{display:grid;gap:3px}.beer-price{font-size:.75rem}.beer-volume{font-size:.62rem}.card-metric-label{font-size:.54rem}.card-metric-value{font-size:.52rem}.card-scale{gap:2px;height:3px}.card-scale i{height:3px}.card-metric-descriptor{font-size:.5rem}.card-add{font-size:.64rem;min-height:36px}.catalog-search{height:44px}}
+
+
+/* ===== DIREÇÃO PREMIUM v17.2 ===== */
+:root{
+  --bg:#080807;
+  --panel:#0e0e0c;
+  --panel2:#12110e;
+  --gold:#a98547;
+  --gold2:#c9aa6b;
+  --text:#f1eee7;
+  --muted:#9e9a91;
+  --line:rgba(217,199,161,.12);
+}
+body{
+  background:
+    radial-gradient(circle at 14% 8%,rgba(171,139,80,.045),transparent 24%),
+    radial-gradient(circle at 88% 34%,rgba(171,139,80,.035),transparent 28%),
+    #080807;
+  letter-spacing:-.005em;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:.15;
+  background-image:radial-gradient(rgba(255,255,255,.16) .45px,transparent .55px);
+  background-size:4px 4px;mix-blend-mode:soft-light;
+}
+#global-hop-rain{display:none!important}
+.shell{width:min(1380px,92vw)}
+header{background:rgba(8,8,7,.82);border-bottom:1px solid rgba(217,199,161,.10);backdrop-filter:blur(24px) saturate(120%)}
+.header-inner{height:80px;gap:34px}
+.brand{min-width:180px}.brand img{height:58px}
+nav{gap:28px}
+nav a{font-family:Poppins,sans-serif;text-transform:none;letter-spacing:.015em;font-size:.78rem;color:#bbb7af;font-weight:500}
+nav a:hover,nav a.active{color:#e9dcc1}
+.circle-btn{width:40px;height:40px;border-color:rgba(217,199,161,.16);background:rgba(15,15,13,.76);transition:.2s ease}
+.circle-btn:hover{border-color:rgba(201,170,107,.5);transform:translateY(-1px);color:#d5bd8c}
+.hero{min-height:calc(100vh - 80px);grid-template-columns:46% 54%;background:linear-gradient(100deg,#080807 0 47%,#0b0b09 47% 100%);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:6vw;bottom:28px;width:110px;height:1px;background:linear-gradient(90deg,var(--gold2),transparent);opacity:.55}
+.hero-copy{padding-top:88px;padding-bottom:78px;position:relative;z-index:3}
+.eyebrow{color:#baa06e;font-size:.66rem;letter-spacing:.24em;font-weight:600;margin-bottom:25px}
+.hero h1{font-family:"Cormorant Garamond",serif;text-transform:none;font-size:clamp(4.5rem,6.8vw,8.1rem);font-weight:600;line-height:.82;letter-spacing:-.055em;max-width:760px}
+.hero h1 span{color:#c6aa72;font-style:italic;font-weight:500}
+.hero-intro{max-width:515px;color:#b9b5ad;font-size:.98rem;line-height:1.85;margin:36px 0 32px}
+.hero-intro strong{color:#e1d6c0;font-weight:600}
+.feature-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 30px;max-width:620px}
+.feature{grid-template-columns:1fr;gap:8px;border-top:1px solid rgba(217,199,161,.13);padding:15px 12px 0 0}
+.feature-icon{display:none}
+.feature b{font-family:Poppins,sans-serif;text-transform:none;letter-spacing:0;font-size:.75rem;color:#d4bc89;font-weight:600}
+.feature span{font-size:.68rem;line-height:1.5;color:#77746e}
+.hero-premium-cta{display:inline-flex;align-items:center;gap:18px;width:max-content;padding:13px 0 11px;border-bottom:1px solid rgba(201,170,107,.52);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#e2cfaa;font-weight:600;transition:.2s ease}
+.hero-premium-cta span{font-size:1.05rem;transition:transform .2s ease}.hero-premium-cta:hover span{transform:translateX(5px)}
+.hero-visual{min-height:760px;padding:48px 4vw 48px 1vw;background:radial-gradient(circle at 50% 40%,rgba(195,160,95,.07),transparent 42%)}
+.premium-fridge{width:min(420px,88%);height:680px;border-radius:4px;border:1px solid rgba(220,205,173,.15);background:linear-gradient(145deg,#171713,#070706 48%,#11100d);box-shadow:0 42px 110px rgba(0,0,0,.68),0 0 70px rgba(172,139,78,.045)}
+.fridge-curation-plaque{position:absolute;right:14px;top:-28px;color:#8e846f;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.fridge-top{height:48px;color:#726e66;background:linear-gradient(180deg,#11110f,#080807);border-color:rgba(217,199,161,.08)}
+.fridge-top strong{color:#d9e1dc;text-shadow:none;font-weight:500}
+.fridge-door{height:548px;padding:27px 24px;background:linear-gradient(180deg,rgba(16,18,17,.70),rgba(5,7,7,.91)),radial-gradient(circle at 50% 25%,rgba(210,227,225,.06),transparent 55%)}
+.fridge-shelves{grid-template-columns:repeat(2,1fr)!important;grid-template-rows:repeat(2,1fr)!important;gap:22px 16px!important}
+.fridge-can img{height:90%!important;max-height:90%!important;max-width:88%!important;filter:drop-shadow(0 14px 14px rgba(0,0,0,.72));transition:transform .35s cubic-bezier(.2,.7,.2,1),filter .35s ease}
+.fridge-can:hover img{transform:translateY(-5px) scale(1.025);filter:drop-shadow(0 18px 18px rgba(0,0,0,.78))}
+.shelf-line.s1{top:50%!important;height:4px;opacity:.58}.shelf-line.s2,.shelf-line.s3,.shelf-line.s4{display:none!important}
+.fridge-led-top{opacity:.68}.fridge-led-left,.fridge-led-right{opacity:.42}
+.social-rail{left:auto;right:4px;bottom:56px}.social-rail a{border-color:rgba(217,199,161,.15);background:rgba(8,8,7,.55);color:#a9a49b}
+.premium-manifesto{border-bottom:1px solid rgba(217,199,161,.10);background:#0a0a08;padding:32px 0}
+.premium-manifesto-inner{display:grid;grid-template-columns:170px 1fr 1fr;align-items:center;gap:36px}
+.manifesto-index{color:#756f64;font-size:.61rem;letter-spacing:.16em;text-transform:uppercase}
+.premium-manifesto p{margin:0;font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,3vw,3.15rem);line-height:1;color:#ddd2bd}
+.premium-manifesto p strong{font-weight:600;color:#c7a96e}
+.manifesto-note{color:#858079;font-size:.78rem;line-height:1.75;max-width:430px;justify-self:end}
+.catalog{padding:104px 0 116px;background:linear-gradient(180deg,#090908,#080807)}
+.catalog-top{align-items:start;margin-bottom:46px}
+.catalog h2,.how-section h2,.tips-section h2,.about-copy h2{font-family:"Cormorant Garamond",serif!important;font-weight:600!important;letter-spacing:-.045em!important;line-height:.95!important}
+.catalog h2{font-size:clamp(3.2rem,4.6vw,5.4rem)}
+.catalog h2 span,.how-section h2 span,.tips-section h2 span,.about-copy h2 span{color:#bea067;font-style:italic;font-weight:500}
+.catalog p{color:#827e76;font-size:.84rem;margin-top:14px}
+.catalog-tools{gap:18px}
+.catalog-search{border-radius:3px;height:44px;background:#0b0b09;border-color:rgba(217,199,161,.14)}
+.filter-btn{border-radius:2px;padding:9px 16px;text-transform:none;font-family:Poppins,sans-serif;font-size:.68rem;letter-spacing:.015em;color:#9b978f;border-color:rgba(217,199,161,.15);background:transparent}
+.filter-btn.active,.filter-btn:hover{background:#c0a269;color:#0a0907;border-color:#c0a269}
+.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.beer-card{border-radius:6px;background:linear-gradient(180deg,#0f0f0d,#0a0a09);border-color:rgba(217,199,161,.10);box-shadow:none;transition:transform .35s cubic-bezier(.2,.75,.2,1),border-color .35s ease,box-shadow .35s ease}
+.beer-card:hover{transform:translateY(-5px);border-color:rgba(201,170,107,.32);box-shadow:0 22px 55px rgba(0,0,0,.22)}
+.beer-art{height:355px;padding:30px;background:radial-gradient(circle at 50% 35%,rgba(217,199,161,.045),transparent 48%)}
+.stock-badge{top:14px;left:14px;border-radius:2px;padding:6px 8px;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;background:rgba(10,10,9,.72)!important;backdrop-filter:blur(12px)}
+.stock-badge.in-stock{color:#9fb5a0;border-color:rgba(145,177,148,.2)}.stock-badge.low-stock{color:#d6b778;border-color:rgba(214,183,120,.24)}.stock-badge.sold-out{color:#9b9994}
+.beer-meta{padding:19px 18px 20px!important;gap:11px;border-top-color:rgba(217,199,161,.09)}
+.beer-identity{min-height:46px}.beer-identity strong{font-family:Poppins,sans-serif;font-size:.58rem;letter-spacing:.17em;color:#99835b!important;font-weight:600}.beer-identity span{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:600!important;line-height:1.05;color:#ede7dc!important;margin-top:5px}
+.beer-style{font-size:.66rem;color:#77736c!important;letter-spacing:.02em}
+.beer-price-row{padding:11px 0;border-color:rgba(217,199,161,.08)}.beer-price{font-family:"Cormorant Garamond",serif;font-size:1.08rem;color:#d4bd8d!important;font-weight:600!important}.beer-volume{color:#74716b!important;font-size:.62rem}
+.card-metric-label{font-size:.58rem;color:#77736c!important}.card-scale i{width:6px;height:6px;border-color:rgba(201,170,107,.30)}.card-scale i.filled{background:#b99b61;border-color:#b99b61;box-shadow:none}
+.card-add{border-radius:2px;min-height:42px;background:transparent;border-color:rgba(201,170,107,.25);color:#c7ab76;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase}.card-add:hover:not(:disabled){background:#b99b61;border-color:#b99b61;color:#0b0907}
+.tips-section.catalog-help{padding:100px 0;background:linear-gradient(120deg,#0c0c0a,#090908);border-color:rgba(217,199,161,.10)}
+.tips-grid{grid-template-columns:.85fr 1.15fr;gap:90px}.tips-form{border-radius:5px;background:#0d0d0b;border-color:rgba(217,199,161,.12);padding:34px}.tips-form input,.tips-form textarea{border-radius:3px;background:#090908;border-color:rgba(217,199,161,.13)}.tips-form button{border-radius:2px;background:#b99b61;color:#0b0907;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem}
+.how-section{padding:104px 0;background:#080807;border-color:rgba(217,199,161,.10)}.how-lead{color:#918d85;max-width:720px;font-size:.92rem}.how-steps{gap:0;border-top:1px solid rgba(217,199,161,.11);border-bottom:1px solid rgba(217,199,161,.11)}.how-steps article{border:0;border-right:1px solid rgba(217,199,161,.10);border-radius:0;background:transparent;padding:34px 34px 34px 0;margin-right:34px}.how-steps article:last-child{border-right:0}.how-steps article b{font-family:"Cormorant Garamond",serif;color:#806d49;font-size:1.35rem;font-weight:500}.how-steps article strong{font-family:"Cormorant Garamond",serif;font-size:1.45rem;font-weight:600;color:#ded7ca}.how-steps article p{color:#77736c;font-size:.78rem}
+.about{min-height:680px;border-color:rgba(217,199,161,.10)}.about-photo{background:radial-gradient(circle at 50% 35%,rgba(183,150,91,.09),transparent 43%),#0d0d0b}.about-copy{background:#0a0a08;padding-left:8vw}.about-copy h2{font-size:clamp(3.8rem,5vw,6rem);text-transform:none;margin-bottom:28px}.about-copy p{color:#9d9991;font-size:.92rem;line-height:1.9}.about-copy .tagline{color:#bba16e;font-family:"Cormorant Garamond",serif;font-size:1.25rem;font-weight:600}
+footer{background:#070706;border-color:rgba(217,199,161,.10);font-size:.72rem;color:#6f6b65}.footer-links a{color:#918b80}
+.modal-wrap{border-radius:7px;background:#0c0c0a;border-color:rgba(201,170,107,.22)}.modal-info h2{font-family:"Cormorant Garamond",serif!important;text-transform:none!important;font-size:3rem;color:#d7c49d!important}.modal-info h3{color:#93815e}.modal-whatsapp{border-radius:2px;box-shadow:none}.close{border-radius:2px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.feature-list{grid-template-columns:1fr;gap:10px}.feature{grid-template-columns:1fr}.hero h1{font-size:clamp(4.2rem,7.6vw,6.7rem)}}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero-copy{padding:70px 6vw 40px}.hero h1{font-size:clamp(4rem,12vw,6.2rem)}.hero-visual{padding-top:38px}.premium-manifesto-inner{grid-template-columns:1fr;gap:12px}.manifesto-note{justify-self:start}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tips-grid{grid-template-columns:1fr;gap:40px}.how-steps{grid-template-columns:1fr}.how-steps article{border-right:0;border-bottom:1px solid rgba(217,199,161,.10);margin:0;padding:26px 0}.how-steps article:last-child{border-bottom:0}.about{grid-template-columns:1fr}.about-copy{padding:70px 7vw}}
+@media(max-width:560px){.header-inner{height:68px}.brand img{height:49px}.hero{min-height:auto}.hero-copy{padding:52px 18px 34px}.hero h1{font-size:clamp(3.5rem,16vw,5.1rem);line-height:.86}.hero-intro{font-size:.88rem;margin:28px 0}.feature-list{display:none}.hero-visual{padding:26px 18px 54px}.premium-fridge{width:min(340px,92vw);height:565px}.fridge-door{height:440px;padding:22px 16px}.fridge-top{height:42px}.fridge-curation-plaque{top:-22px;right:10px;font-size:.48rem}.premium-manifesto{padding:25px 0}.premium-manifesto p{font-size:2.15rem}.catalog{padding:74px 0 86px}.catalog h2{font-size:3.2rem}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.beer-art{height:215px!important;padding:17px}.beer-identity span{font-size:1rem}.beer-meta{padding:13px 11px 14px!important}.tips-section.catalog-help,.how-section{padding:74px 0}.about-copy h2{font-size:3.3rem}}
+/* ===== v17.4 · MÉTRICAS HORIZONTAIS + SOBRE ===== */
+.card-metrics{display:grid;gap:9px}
+.card-metric{display:grid!important;grid-template-columns:minmax(78px,.9fr) minmax(72px,1.35fr) auto;align-items:center;gap:8px;padding:3px 0!important}
+.card-metric-head{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;min-width:0}
+.card-metric-label{white-space:nowrap}
+.card-metric-value{font-size:.55rem!important;line-height:1.05}
+.card-scale{width:100%!important;min-width:0;height:5px!important;align-self:center}
+.card-scale i{height:5px!important}
+.card-metric-descriptor{white-space:nowrap;text-align:right!important;align-self:center;line-height:1.1!important}
+.about-copy .about-lead{font-family:"Cormorant Garamond",serif;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.25;color:#ded4bf;font-weight:600;max-width:610px;margin:0 0 18px}
+.about-copy .tagline{margin-top:18px;font-size:clamp(1.3rem,2vw,1.65rem)!important;line-height:1.2}
+@media(max-width:860px){
+  .about-copy{padding:62px 7vw 68px!important}
+  .about-copy p{max-width:680px}
+}
+@media(max-width:560px){
+  .card-metrics{gap:7px}
+  .card-metric{grid-template-columns:minmax(53px,.9fr) minmax(42px,1.2fr) auto;gap:5px;padding:2px 0!important}
+  .card-metric-label{font-size:.50rem!important;letter-spacing:0}
+  .card-metric-value{font-size:.47rem!important}
+  .card-scale{gap:4px!important;height:6px!important}
+  .card-scale i{flex-basis:6px!important;width:6px!important;min-width:6px!important;height:6px!important}
+  .card-metric-descriptor{font-size:.46rem!important;max-width:48px;white-space:normal;text-align:right!important}
+  .about-photo{min-height:300px!important}
+  .about-photo img{max-height:300px!important}
+  .about-copy{padding:48px 18px 54px!important}
+  .about-copy h2{font-size:clamp(2.9rem,14vw,4rem)!important;margin-bottom:22px!important}
+  .about-copy .about-lead{font-size:1.28rem;line-height:1.24;margin-bottom:16px}
+  .about-copy p{font-size:.92rem!important;line-height:1.72!important;margin:0 0 14px}
+  .about-copy .tagline{font-size:1.35rem!important;margin-top:21px!important}
+}
+@media(max-width:390px){
+  .grid{gap:8px!important}
+  .beer-meta{padding:11px 9px 12px!important}
+  .card-metric{grid-template-columns:minmax(49px,.85fr) minmax(38px,1.15fr) auto;gap:4px}
+  .card-metric-label{font-size:.47rem!important}
+  .card-metric-descriptor{font-size:.43rem!important;max-width:43px}
+  .card-add{font-size:.61rem!important}
+}
+
+
+
+/* v17.5 premium: hero, manifesto e galeria da curadoria */
+@media (min-width: 861px){
+  .hero{grid-template-columns:53% 47%;}
+  .hero-copy{padding-left:max(5vw,calc((100vw - 1440px)/2));padding-right:0;}
+  .hero h1{font-size:clamp(4rem,5.7vw,7.2rem);max-width:none;}
+  .hero-nowrap{white-space:nowrap;display:inline-block;color:inherit!important;font-style:normal!important;font-weight:600!important;}
+  .hero-visual{justify-items:end;padding-left:0;padding-right:max(2vw,calc((100vw - 1500px)/2));}
+  .premium-fridge{margin-left:auto;margin-right:0;}
+  .premium-manifesto-inner{grid-template-columns:auto 1fr;gap:42px;}
+  .premium-manifesto p{white-space:nowrap;}
+  .manifesto-note{white-space:nowrap;max-width:none;justify-self:end;}
+  .about-title-nowrap{white-space:nowrap;}
+}
+.premium-manifesto-inner{align-items:center;}
+.about-carousel{position:relative;display:grid;place-items:stretch;overflow:hidden;min-height:680px;background:#0d0d0b;}
+.about-photo-stage{position:absolute;inset:0;overflow:hidden;}
+.about-slide{position:absolute!important;inset:0;width:100%;height:100%;max-height:none!important;object-fit:cover!important;object-position:center;opacity:0;transform:scale(1.015);transition:opacity .42s ease,transform .55s ease;z-index:1!important;}
+.about-slide.is-active{opacity:1;transform:scale(1);}
+.about-carousel:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.08),transparent 26% 72%,rgba(0,0,0,.14)),linear-gradient(0deg,rgba(0,0,0,.22),transparent 32%);z-index:2;pointer-events:none;}
+.about-photo-nav{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid rgba(224,206,169,.30);background:rgba(9,9,8,.64);backdrop-filter:blur(8px);color:#e1cfaa;display:grid;place-items:center;cursor:pointer;transition:.2s ease;}
+.about-photo-nav:hover{background:rgba(196,160,95,.18);border-color:rgba(224,206,169,.55);}
+.about-photo-nav svg{width:20px;height:20px;}
+.about-photo-prev{left:20px}.about-photo-next{right:20px}
+.about-photo-dots{position:absolute;z-index:4;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:9px;}
+.about-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:.2s ease;}
+.about-dot.is-active{width:24px;border-radius:999px;background:#c4a05f;}
+@media(max-width:1100px) and (min-width:861px){
+  .hero{grid-template-columns:55% 45%;}
+  .hero h1{font-size:clamp(3.55rem,5.2vw,5.6rem);}
+  .premium-fridge{width:min(390px,92%);}
+  .manifesto-note{font-size:.72rem;}
+}
+@media(max-width:860px){
+  .hero-nowrap{white-space:normal;}
+  .premium-manifesto-inner{grid-template-columns:1fr;gap:10px;}
+  .manifesto-note{justify-self:start;white-space:normal;}
+  .about-carousel{min-height:520px;}
+  .about-title-nowrap{white-space:nowrap;font-size:clamp(2.65rem,11vw,4rem)!important;}
+}
+@media(max-width:560px){
+  .about-carousel{min-height:430px!important;}
+  .about-slide{object-position:center 35%;}
+  .about-photo-nav{width:40px;height:40px;}
+  .about-photo-prev{left:12px}.about-photo-next{right:12px}
+  .about-photo-dots{bottom:16px;}
+  .about-title-nowrap{font-size:clamp(2.45rem,10.8vw,3.25rem)!important;letter-spacing:-.055em!important;}
+}
+@media(max-width:390px){
+  .about-title-nowrap{font-size:clamp(2.15rem,10.2vw,2.75rem)!important;}
+}
+
+
+/* ===== v17.9 · MÉTRICAS TRAVADAS EM UMA ÚNICA LINHA HORIZONTAL ===== */
+.card-metrics{
+  display:grid!important;
+  gap:8px!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.card-metric{
+  display:grid!important;
+  grid-template-columns:max-content max-content minmax(0,1fr)!important;
+  grid-template-areas:"label scale meta"!important;
+  align-items:center!important;
+  column-gap:8px!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:3px 0!important;
+}
+.card-metric-label{
+  grid-area:label!important;
+  display:block!important;
+  white-space:nowrap!important;
+  font-size:.56rem!important;
+  line-height:1!important;
+  color:#817d75!important;
+}
+.card-scale{
+  grid-area:scale!important;
+  display:inline-flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:5px!important;
+  width:max-content!important;
+  min-width:max-content!important;
+  max-width:none!important;
+  height:8px!important;
+  writing-mode:horizontal-tb!important;
+}
+.card-scale i{
+  display:block!important;
+  flex:0 0 8px!important;
+  width:8px!important;
+  min-width:8px!important;
+  max-width:8px!important;
+  height:8px!important;
+  min-height:8px!important;
+  max-height:8px!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.10)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)!important;
+}
+.card-metric.intensity .card-scale i.filled{
+  background:#c9aa6b!important;
+  box-shadow:0 0 8px rgba(201,170,107,.18)!important;
+}
+.card-metric.bitterness .card-scale i.filled{
+  background:#b9783f!important;
+  box-shadow:0 0 8px rgba(185,120,63,.16)!important;
+}
+.card-metric-meta{
+  grid-area:meta!important;
+  display:block!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  text-align:right!important;
+  font-size:.52rem!important;
+  line-height:1!important;
+  color:#8c877e!important;
+  font-weight:700!important;
+  font-variant-numeric:tabular-nums!important;
+}
+.about-title-stacked{white-space:normal!important;line-height:.82!important}
+.about-title-stacked span{display:inline-block;margin-top:.08em}
+@media (min-width:861px){
+  .hero-visual{padding-right:max(3.5vw,calc((100vw - 1500px)/2 + 20px))!important}
+  .premium-fridge{margin-left:auto!important;margin-right:clamp(14px,1.5vw,26px)!important}
+}
+@media(max-width:560px){
+  .card-metric{column-gap:4px!important}
+  .card-metric-label{font-size:.47rem!important;letter-spacing:-.01em!important}
+  .card-scale{gap:3px!important;height:6px!important}
+  .card-scale i{
+    flex-basis:6px!important;width:6px!important;min-width:6px!important;max-width:6px!important;
+    height:6px!important;min-height:6px!important;max-height:6px!important
+  }
+  .card-metric-meta{font-size:.40rem!important;letter-spacing:-.01em!important}
+  .about-title-stacked{font-size:clamp(3rem,14vw,4.15rem)!important;line-height:.8!important}
+}
+@media(max-width:390px){
+  .card-metric{column-gap:3px!important}
+  .card-metric-label{font-size:.42rem!important}
+  .card-scale{gap:2px!important;height:5px!important}
+  .card-scale i{
+    flex-basis:5px!important;width:5px!important;min-width:5px!important;max-width:5px!important;
+    height:5px!important;min-height:5px!important;max-height:5px!important
+  }
+  .card-metric-meta{font-size:.37rem!important}
+}
+
+/* ===== v17.10 · MÉTRICAS LIMPAS, SEM INDICADOR GRÁFICO ===== */
+.card-metric{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;width:100%!important;min-width:0!important;padding:4px 0!important}
+.card-metric-label{flex:0 0 auto!important;white-space:nowrap!important;font-size:.56rem!important;line-height:1!important}
+.card-metric-meta{flex:0 1 auto!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;text-align:right!important;font-size:.52rem!important;line-height:1!important}
+.card-scale{display:none!important}
+.card-metric.intensity .card-metric-meta{color:#c9aa6b!important}
+.card-metric.bitterness .card-metric-meta{color:#b9783f!important}
+@media(max-width:560px){.card-metric{gap:6px!important}.card-metric-label{font-size:.48rem!important}.card-metric-meta{font-size:.44rem!important}}
+@media(max-width:390px){.card-metric-label{font-size:.44rem!important}.card-metric-meta{font-size:.40rem!important}}
+
+/* ===== v17.11 · MINI TERMÔMETRO HORIZONTAL CONTÍNUO ===== */
+.card-metric{
+  display:grid!important;
+  grid-template-columns:max-content minmax(64px,1fr) max-content!important;
+  align-items:center!important;
+  gap:9px!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:4px 0!important;
+}
+.card-metric-label{
+  white-space:nowrap!important;
+  font-size:.56rem!important;
+  line-height:1!important;
+  color:#817d75!important;
+}
+.card-thermo{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  min-width:64px!important;
+  height:4px!important;
+  border-radius:999px!important;
+  overflow:hidden!important;
+  background:rgba(255,255,255,.09)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)!important;
+}
+.card-thermo-fill{
+  display:block!important;
+  height:100%!important;
+  border-radius:inherit!important;
+  transition:width .35s ease!important;
+}
+.card-metric.intensity .card-thermo-fill{
+  background:linear-gradient(90deg,#9d8048,#d5b978)!important;
+  box-shadow:0 0 8px rgba(201,170,107,.16)!important;
+}
+.card-metric.bitterness .card-thermo-fill{
+  background:linear-gradient(90deg,#87582e,#c1874a)!important;
+  box-shadow:0 0 8px rgba(185,120,63,.14)!important;
+}
+.card-metric-meta{
+  white-space:nowrap!important;
+  text-align:right!important;
+  font-size:.52rem!important;
+  line-height:1!important;
+  font-weight:700!important;
+  font-variant-numeric:tabular-nums!important;
+}
+.card-metric.intensity .card-metric-meta{color:#c9aa6b!important}
+.card-metric.bitterness .card-metric-meta{color:#b9783f!important}
+.card-scale{display:none!important}
+@media(max-width:560px){
+  .card-metric{grid-template-columns:max-content minmax(46px,1fr) max-content!important;gap:5px!important}
+  .card-metric-label{font-size:.47rem!important}
+  .card-thermo{min-width:46px!important;height:3px!important}
+  .card-metric-meta{font-size:.41rem!important}
+}
+@media(max-width:390px){
+  .card-metric{grid-template-columns:max-content minmax(38px,1fr) max-content!important;gap:4px!important}
+  .card-metric-label{font-size:.43rem!important}
+  .card-thermo{min-width:38px!important}
+  .card-metric-meta{font-size:.38rem!important}
+}
+</style>
+</body>
+</html>
