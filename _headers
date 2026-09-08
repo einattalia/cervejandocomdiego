@@ -1,0 +1,14 @@
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-UJDVREjp5fN+atIlEGt+El9crr8RT1OGx5IynU0RKOo='; script-src-attr 'none'; style-src-elem 'self' https://fonts.googleapis.com 'sha256-ZSTkbJ3THbQ9ALZo4CWvAnakwTA2b41Zxf8zdmV/EBQ=' 'sha256-9q3XGLIF4Ju92sGJVMEPWCmTjjFfQUugQjJt89jCN0s='; style-src-attr 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://cqtdrpwnjnetbcnuqtyv.supabase.co; connect-src 'self' https://cqtdrpwnjnetbcnuqtyv.supabase.co; media-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), publickey-credentials-get=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+
+/admin/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
