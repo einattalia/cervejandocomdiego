@@ -28,3 +28,12 @@ body:not(.admin-authenticated) #appView{display:none!important}
   .image-editor{grid-template-columns:82px minmax(0,1fr)!important}
   .dialog-actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(23,21,18,0),#171512 24%);padding-top:20px;padding-bottom:4px;z-index:3}
 }
+
+
+/* v18.4 — login corrigido + mostrar/ocultar senha */
+.password-field{position:relative;display:block}
+.password-field input{padding-right:50px}
+.password-toggle{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:9px;background:transparent;color:var(--muted);display:grid;place-items:center;font-size:20px;line-height:1;cursor:pointer}
+.password-toggle:hover,.password-toggle:focus-visible{color:var(--gold);background:rgba(201,164,91,.10);outline:none}
+.password-toggle[aria-pressed="true"]{color:var(--gold)}
+.eye-icon{display:block;transform:scaleX(1.25)}
