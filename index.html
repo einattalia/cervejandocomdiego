@@ -947,7 +947,159 @@ html{
 }
 
 </style>
-</link></link></head>
+</link></link>
+<style id="v18-2-mobile-fixes">
+/* ===== v18.2 · ajustes solicitados: mobile, tema claro, foto e modal ===== */
+body.theme-light{
+  --bg:#d8ccba!important;
+  --panel:#e8dfd1!important;
+  --panel2:#cdbfa9!important;
+  --text:#211d18!important;
+  --muted:#675e53!important;
+  --line:rgba(58,46,32,.20)!important;
+  --glass:rgba(238,230,217,.78)!important;
+  background:#d8ccba!important;
+}
+body.theme-light header{background:rgba(216,204,186,.94)!important}
+body.theme-light .hero{background:radial-gradient(circle at 76% 35%,rgba(116,86,45,.13),transparent 30%),linear-gradient(90deg,#ddd2c1 0 53%,#cdbda6 53% 100%)!important}
+body.theme-light .catalog{background:linear-gradient(#d9cebd,#c9baa3)!important}
+body.theme-light .premium-manifesto{background:#c6b69f!important}
+body.theme-light .tips-section,
+body.theme-light .how-section{background:#d1c4b1!important}
+body.theme-light .about-copy{background:#d9cebd!important}
+body.theme-light footer{background:#c5b59e!important}
+body.theme-light .beer-card{background:linear-gradient(180deg,#eee7db,#ddd1bf)!important;border-color:rgba(58,46,32,.18)!important;box-shadow:0 12px 30px rgba(54,42,28,.09)!important}
+body.theme-light .beer-art{background:radial-gradient(circle at 50% 35%,rgba(112,82,43,.11),transparent 55%)!important}
+body.theme-light .beer-meta{background:rgba(232,223,209,.62)!important}
+body.theme-light .catalog-search-wrap input,
+body.theme-light #catalogSearch,
+body.theme-light .tips-form,
+body.theme-light .tips-form input,
+body.theme-light .tips-form textarea{background:#e9dfd0!important}
+body.theme-light .metric{background:#d3c5b1!important}
+body.theme-light .modal-wrap{background:#e2d7c7!important}
+body.theme-light .cart-drawer{background:#ddd1c0!important}
+
+/* Foto do Diegão: ocupa 100% do quadro, sem borda/faixa aparente. */
+.about-photo.about-carousel{position:relative!important;overflow:hidden!important;background:#0d0d0b!important}
+.about-photo-stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important}
+.about-photo img.about-slide{
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  min-width:100%!important;min-height:100%!important;
+  max-width:none!important;max-height:none!important;
+  object-fit:cover!important;object-position:center 35%!important;
+  margin:0!important;padding:0!important;
+}
+
+/* Modal mobile: todas as especificações permanecem visíveis e roláveis. */
+@media(max-width:720px){
+  .beer-modal{
+    width:100vw!important;max-width:100vw!important;
+    height:100dvh!important;max-height:100dvh!important;
+    margin:0!important;padding:0!important;
+  }
+  .beer-modal[open]{display:block!important}
+  .beer-modal .modal-wrap{
+    display:block!important;
+    width:100%!important;height:100dvh!important;max-height:100dvh!important;
+    overflow-y:auto!important;overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    border-radius:0!important;
+  }
+  .beer-modal .modal-visual{height:31dvh!important;min-height:31dvh!important}
+  .beer-modal .modal-info{
+    display:block!important;
+    min-height:69dvh!important;
+    padding:20px 18px calc(42px + env(safe-area-inset-bottom))!important;
+    overflow:visible!important;
+  }
+  .beer-modal .specs{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    width:100%!important;
+    margin:18px 0 24px!important;
+  }
+  .beer-modal .specs>div{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    min-height:48px!important;
+    padding:10px 0!important;
+    color:#e8e2d8!important;
+    font-size:.88rem!important;
+    line-height:1.4!important;
+  }
+  .beer-modal .specs b{display:block!important;visibility:visible!important;opacity:1!important;margin-bottom:4px!important}
+  body.theme-light .beer-modal .specs>div{color:#2f2922!important;border-bottom-color:rgba(61,48,32,.16)!important}
+  body.theme-light .beer-modal .specs b{color:#6e6255!important}
+}
+
+/* Cards mobile: grade alinhada e todos os cards com exatamente a mesma estrutura/altura. */
+@media(max-width:560px){
+  .grid#beerCatalogGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch!important}
+  #beerCatalogGrid .beer-card{
+    display:grid!important;
+    grid-template-rows:205px minmax(0,1fr)!important;
+    height:455px!important;min-height:455px!important;max-height:455px!important;
+    align-self:stretch!important;overflow:hidden!important;
+  }
+  #beerCatalogGrid .beer-art{height:205px!important;min-height:205px!important;max-height:205px!important;padding:12px!important}
+  #beerCatalogGrid .beer-meta{
+    height:250px!important;min-height:250px!important;max-height:250px!important;
+    display:flex!important;flex-direction:column!important;
+    padding:12px 10px 13px!important;gap:7px!important;overflow:hidden!important;
+  }
+  #beerCatalogGrid .beer-identity{height:45px!important;min-height:45px!important;max-height:45px!important;overflow:hidden!important}
+  #beerCatalogGrid .beer-style{height:18px!important;min-height:18px!important;max-height:18px!important;overflow:hidden!important;white-space:nowrap!important;text-overflow:ellipsis!important}
+  #beerCatalogGrid .beer-price-row{height:38px!important;min-height:38px!important;max-height:38px!important}
+  #beerCatalogGrid .card-metrics{height:55px!important;min-height:55px!important;max-height:55px!important;margin-top:0!important}
+  #beerCatalogGrid .card-add{margin-top:auto!important;min-height:36px!important;max-height:36px!important;height:36px!important}
+  body.theme-light #beerCatalogGrid .beer-card{background:linear-gradient(180deg,#eee5d8,#d8cab6)!important}
+}
+@media(max-width:390px){
+  #beerCatalogGrid .beer-card{grid-template-rows:180px minmax(0,1fr)!important;height:425px!important;min-height:425px!important;max-height:425px!important}
+  #beerCatalogGrid .beer-art{height:180px!important;min-height:180px!important;max-height:180px!important}
+  #beerCatalogGrid .beer-meta{height:245px!important;min-height:245px!important;max-height:245px!important;padding:10px 8px 11px!important}
+}
+
+
+/* ===== v18.3 · refinamentos finais solicitados ===== */
+body.theme-light{
+  background:linear-gradient(180deg,rgba(191,151,58,.34),rgba(153,112,31,.23)),#d1b46f!important;
+  color:#2d2417!important;
+}
+body.theme-light header{background:rgba(190,151,65,.84)!important;border-bottom-color:rgba(88,61,18,.22)!important}
+body.theme-light .hero{background:linear-gradient(90deg,rgba(211,180,111,.92) 0 54%,rgba(179,137,55,.76) 54% 100%)!important}
+body.theme-light .catalog{background:linear-gradient(180deg,rgba(205,174,105,.93),rgba(181,141,62,.82))!important}
+body.theme-light .premium-manifesto,body.theme-light .how-section,body.theme-light .tips-section{background:rgba(190,151,69,.72)!important}
+body.theme-light .about-copy{background:rgba(199,166,94,.84)!important}
+body.theme-light footer{background:rgba(166,126,50,.84)!important}
+body.theme-light .beer-card{background:linear-gradient(180deg,rgba(239,220,177,.94),rgba(210,180,116,.92))!important}
+body.theme-light .beer-meta{background:rgba(228,203,149,.64)!important}
+body.theme-light .metric{background:rgba(190,151,69,.34)!important}
+body.theme-light .modal-wrap{background:#d7ba78!important}
+body.theme-light .cart-drawer{background:#c9aa67!important}
+.about-photo,.about-photo.about-carousel{min-height:100%!important}
+.about-photo-stage{inset:0!important}
+.about-photo img,.about-photo img.about-slide{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important}
+@media(max-width:560px){
+  #beerCatalogGrid{align-items:stretch!important}
+  #beerCatalogGrid .beer-card{height:100%!important;min-height:470px!important;display:flex!important;flex-direction:column!important}
+  #beerCatalogGrid .beer-art{height:215px!important;min-height:215px!important;flex:0 0 215px!important}
+  #beerCatalogGrid .beer-meta{flex:1 1 auto!important;display:flex!important;flex-direction:column!important}
+  #beerCatalogGrid .card-add{margin-top:auto!important}
+  body.theme-light #beerCatalogGrid .beer-card{min-height:470px!important}
+  .about-photo{height:340px!important;min-height:340px!important}
+  .about-photo img,.about-photo img.about-slide{height:100%!important;max-height:none!important;object-fit:cover!important}
+  .beer-modal .modal-info{display:block!important;visibility:visible!important;opacity:1!important}
+  .beer-modal .specs{display:grid!important;grid-template-columns:1fr!important}
+  .beer-modal .specs>div{display:block!important;visibility:visible!important;opacity:1!important}
+}
+
+</style>
+</head>
 <body>
 <div aria-hidden="true" id="global-hop-rain"></div>
 <header>
