@@ -30,7 +30,7 @@
 <link href="assets/favicon.png" rel="apple-touch-icon">
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/>
 <link href="assets/theme-toggle.css" rel="stylesheet"/>
 <style>
 :root{
@@ -1236,270 +1236,194 @@ body.theme-light .mobile-nav a{color:#3f3932!important;border-color:rgba(66,57,4
 }
 </style>
 
-<style id="v194-card-premium-only">
-/* ===== v19.4 · SOMENTE CARDS DAS CERVEJAS ===== */
-/* Mantém toda a estrutura, dados e funcionalidades da v19.3. */
+<style id="v195-front-card-fix">
+/* v19.5 — alterações pontuais solicitadas. Este bloco prevalece sobre regras legadas. */
+
+/* HEADER: somente navegação solicitada + ações à direita */
+header .header-inner{gap:24px!important}
+header nav{display:flex;align-items:center;gap:clamp(14px,1.55vw,28px)!important;white-space:nowrap}
+header nav a{font-family:Poppins,Arial,sans-serif!important;font-weight:400!important;font-size:.76rem!important}
+header .header-actions{display:flex!important;align-items:center!important;gap:8px!important;margin-left:auto!important;flex:0 0 auto}
+header .header-actions .circle-btn,header .header-actions .theme-toggle{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+
+/* HERO: formato exato + divisor antes da seleção */
+.hero h1{font-family:Poppins,Arial,sans-serif!important;font-weight:700!important;text-transform:none!important;line-height:.96!important;letter-spacing:-.052em!important}
+.hero h1 span{font-family:Poppins,Arial,sans-serif!important;font-style:normal!important;font-weight:700!important}
+.hero-slogan{margin:12px 0 0!important}
+.hero-selection-divider{width:min(360px,100%);height:1px;background:linear-gradient(90deg,rgba(201,170,107,.58),rgba(201,170,107,.12),transparent);margin:16px 0 14px}
+.hero-premium-cta{margin-top:0!important;border-bottom:0!important;padding:4px 0 9px!important}
+
+/* CATÁLOGO: busca discreta, imediatamente antes dos filtros/cards */
+.catalog-top{margin-bottom:18px!important;gap:18px!important}
+.catalog-tools{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-items:unset!important;width:100%!important;gap:12px!important}
+.catalog-search{width:min(360px,100%)!important;height:40px!important;border-radius:12px!important;padding:0 13px!important;background:#0b0c0c!important}
+.catalog-search svg{width:14px!important;height:14px!important;min-width:14px!important}
+.catalog-search input{font-size:.78rem!important;font-weight:400!important}
+.catalog-search::before,.catalog-search::after{display:none!important;content:none!important}
+.filters{position:static!important;z-index:auto!important;margin:0!important;justify-content:flex-start!important}
+#beerCatalogGrid{position:relative!important;z-index:1!important;margin-top:20px!important}
+
+/* CARDS: reconstrução visual isolada sem mudar dados/funcionalidade */
+#beerCatalogGrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important}
 #beerCatalogGrid .beer-card{
-  position:relative!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:stretch!important;
-  overflow:hidden!important;
-  min-width:0!important;
-  height:100%!important;
-  border:1px solid rgba(201,170,107,.30)!important;
-  border-radius:10px!important;
-  background:linear-gradient(180deg,#0d0e0d 0%,#090a0a 100%)!important;
-  box-shadow:none!important;
+  display:flex!important;flex-direction:column!important;height:100%!important;min-height:600px!important;
+  border:1px solid rgba(201,170,107,.24)!important;border-radius:14px!important;overflow:hidden!important;
+  background:linear-gradient(180deg,#0d0f0f 0%,#090a0a 100%)!important;color:#eee9df!important;
+  box-shadow:none!important;transform:none;
 }
-#beerCatalogGrid .beer-card:hover{
-  transform:translateY(-4px)!important;
-  border-color:rgba(224,181,90,.55)!important;
-  box-shadow:0 18px 44px rgba(0,0,0,.28)!important;
-}
+#beerCatalogGrid .beer-card:hover{transform:translateY(-3px)!important;border-color:rgba(201,170,107,.5)!important;box-shadow:0 18px 38px rgba(0,0,0,.24)!important}
 #beerCatalogGrid .beer-art{
-  position:relative!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:100%!important;
-  height:355px!important;
-  padding:38px 22px 24px!important;
-  background:
-    radial-gradient(circle at 50% 48%,rgba(255,255,255,.055),transparent 34%),
-    linear-gradient(180deg,#0d0e0d,#0a0b0a)!important;
-  border-bottom:1px solid rgba(217,199,161,.10)!important;
+  position:relative!important;height:350px!important;min-height:350px!important;padding:48px 24px 20px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:radial-gradient(circle at 50% 48%,rgba(201,170,107,.055),transparent 42%),linear-gradient(180deg,#0d0f0f,#0b0c0c)!important;
+  border-bottom:1px solid rgba(255,255,255,.07)!important;overflow:hidden!important;
 }
-#beerCatalogGrid .beer-3d{
-  position:relative!important;
-  width:100%!important;
-  height:100%!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  transform:none!important;
-  perspective:none!important;
-}
-#beerCatalogGrid .beer-3d>img{
-  position:static!important;
-  display:block!important;
-  width:auto!important;
-  height:auto!important;
-  max-width:78%!important;
-  max-height:94%!important;
-  margin:auto!important;
-  object-fit:contain!important;
-  transform:none!important;
-  filter:drop-shadow(0 18px 18px rgba(0,0,0,.42))!important;
-}
-#beerCatalogGrid .stock-badge{
-  top:14px!important;
-  left:14px!important;
-  padding:7px 10px!important;
-  border-radius:3px!important;
-  background:rgba(8,10,9,.86)!important;
-  backdrop-filter:blur(8px)!important;
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.58rem!important;
-  line-height:1!important;
-  font-weight:700!important;
-  letter-spacing:.055em!important;
-  text-transform:uppercase!important;
-}
-#beerCatalogGrid .stock-badge.in-stock{color:#b8d1bd!important;border-color:rgba(129,171,139,.30)!important}
-#beerCatalogGrid .stock-badge.low-stock{color:#d9b366!important;border-color:rgba(217,179,102,.38)!important}
-#beerCatalogGrid .stock-badge.sold-out{color:#aaa7a0!important;border-color:rgba(255,255,255,.15)!important}
-#beerCatalogGrid .beer-meta{
-  display:flex!important;
-  flex-direction:column!important;
-  flex:1!important;
-  gap:11px!important;
-  padding:21px 18px 20px!important;
-  text-align:left!important;
-  background:#0a0b0b!important;
-  border-top:0!important;
-}
-#beerCatalogGrid .beer-identity{
-  display:block!important;
-  min-height:0!important;
-  height:auto!important;
-  overflow:visible!important;
-}
-#beerCatalogGrid .beer-identity strong{
-  display:block!important;
-  margin:0 0 7px!important;
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.66rem!important;
-  line-height:1.15!important;
-  font-weight:700!important;
-  letter-spacing:.16em!important;
-  text-transform:uppercase!important;
-  color:#d3ad60!important;
-}
-#beerCatalogGrid .beer-identity span{
-  display:block!important;
-  margin:0!important;
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:1.18rem!important;
-  line-height:1.2!important;
-  font-weight:700!important;
-  letter-spacing:-.02em!important;
-  color:#d7b76d!important;
-}
-#beerCatalogGrid .beer-style{
-  display:block!important;
-  min-height:0!important;
-  margin:0!important;
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.72rem!important;
-  line-height:1.4!important;
-  font-weight:400!important;
-  color:#b6b0a6!important;
-}
-#beerCatalogGrid .beer-price-row{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:14px!important;
-  margin-top:2px!important;
-  padding:13px 0!important;
-  border-top:1px solid rgba(217,199,161,.09)!important;
-  border-bottom:1px solid rgba(217,199,161,.09)!important;
-}
-#beerCatalogGrid .beer-price{
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.79rem!important;
-  line-height:1.2!important;
-  font-weight:500!important;
-  color:#d5b46c!important;
-}
-#beerCatalogGrid .beer-volume{
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.72rem!important;
-  line-height:1!important;
-  font-weight:400!important;
-  color:#c6c1b8!important;
-  white-space:nowrap!important;
-}
-#beerCatalogGrid .card-metrics{
-  display:grid!important;
-  gap:10px!important;
-  margin:1px 0 3px!important;
-}
-#beerCatalogGrid .card-metric{
-  display:grid!important;
-  grid-template-columns:max-content minmax(76px,1fr) max-content!important;
-  align-items:center!important;
-  gap:9px!important;
-  width:100%!important;
-  min-width:0!important;
-  padding:2px 0!important;
-}
-#beerCatalogGrid .card-metric-label{
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.60rem!important;
-  line-height:1!important;
-  font-weight:400!important;
-  color:#b8aa8b!important;
-  white-space:nowrap!important;
-}
-#beerCatalogGrid .card-thermo{
-  position:relative!important;
-  display:block!important;
-  width:100%!important;
-  min-width:76px!important;
-  height:5px!important;
-  overflow:hidden!important;
-  border-radius:999px!important;
-  background:rgba(235,235,235,.13)!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)!important;
-}
-#beerCatalogGrid .card-thermo-fill{
-  display:block!important;
-  height:100%!important;
-  border-radius:999px!important;
-}
-#beerCatalogGrid .card-metric.intensity .card-thermo-fill{
-  background:linear-gradient(90deg,#9d8048,#d6b86f)!important;
-  box-shadow:none!important;
-}
-#beerCatalogGrid .card-metric.bitterness .card-thermo-fill{
-  background:linear-gradient(90deg,#8d572e,#c78348)!important;
-  box-shadow:none!important;
-}
-#beerCatalogGrid .card-metric-meta{
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.56rem!important;
-  line-height:1!important;
-  font-weight:700!important;
-  white-space:nowrap!important;
-  text-align:right!important;
-}
-#beerCatalogGrid .card-metric.intensity .card-metric-meta{color:#d4b15f!important}
-#beerCatalogGrid .card-metric.bitterness .card-metric-meta{color:#d08a50!important}
-#beerCatalogGrid .card-add{
-  width:100%!important;
-  min-height:49px!important;
-  margin-top:auto!important;
-  padding:11px 12px!important;
-  border:1px solid rgba(210,174,96,.48)!important;
-  border-radius:3px!important;
-  background:transparent!important;
-  color:#d3b16c!important;
-  font-family:Poppins,Arial,sans-serif!important;
-  font-size:.67rem!important;
-  line-height:1.2!important;
-  font-weight:700!important;
-  letter-spacing:.035em!important;
-  text-transform:uppercase!important;
-}
-#beerCatalogGrid .card-add:hover:not(:disabled){background:#c9aa6b!important;color:#0a0907!important;border-color:#c9aa6b!important}
-#beerCatalogGrid .card-add:disabled{background:transparent!important;color:#6e6c67!important;border-color:rgba(255,255,255,.14)!important}
+#beerCatalogGrid .stock-badge{position:absolute!important;top:14px!important;left:14px!important;z-index:5!important;border-radius:3px!important;font-size:.57rem!important;letter-spacing:.075em!important;padding:7px 9px!important;font-weight:600!important}
+#beerCatalogGrid .beer-3d{width:100%!important;height:100%!important;display:flex!important;align-items:center!important;justify-content:center!important;transform:none!important;perspective:none!important}
+#beerCatalogGrid .beer-3d>img{position:static!important;width:auto!important;height:auto!important;max-width:76%!important;max-height:95%!important;object-fit:contain!important;margin:auto!important;transform:none!important;filter:drop-shadow(0 18px 18px rgba(0,0,0,.52))!important}
+#beerCatalogGrid .beer-3d-gloss{display:none!important}
+#beerCatalogGrid .beer-meta{flex:1!important;display:flex!important;flex-direction:column!important;gap:11px!important;padding:20px 18px 20px!important;text-align:left!important}
+#beerCatalogGrid .beer-identity{display:block!important;min-height:0!important;height:auto!important;overflow:visible!important}
+#beerCatalogGrid .beer-identity strong{display:block!important;color:#d5b56f!important;font-size:.64rem!important;font-weight:600!important;letter-spacing:.13em!important;text-transform:uppercase!important}
+#beerCatalogGrid .beer-identity span{display:block!important;color:#d5b56f!important;font-size:1.17rem!important;line-height:1.22!important;font-weight:500!important;margin-top:7px!important}
+#beerCatalogGrid .beer-style{display:block!important;color:#c2bbb0!important;font-size:.73rem!important;line-height:1.35!important;min-height:0!important;margin-top:-2px!important}
+#beerCatalogGrid .beer-price-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:13px 0!important;border-top:1px solid rgba(255,255,255,.07)!important;border-bottom:1px solid rgba(255,255,255,.07)!important}
+#beerCatalogGrid .beer-price{color:#d8b66f!important;font-size:.84rem!important;font-weight:500!important}
+#beerCatalogGrid .beer-volume{color:#c7c0b5!important;font-size:.72rem!important;white-space:nowrap!important}
+#beerCatalogGrid .card-metrics{display:grid!important;gap:11px!important;margin-top:1px!important}
+#beerCatalogGrid .card-metric{display:grid!important;grid-template-columns:72px minmax(70px,1fr) max-content!important;align-items:center!important;gap:8px!important;padding:0!important}
+#beerCatalogGrid .card-metric-label{color:#cbb987!important;font-size:.61rem!important;font-weight:400!important;white-space:nowrap!important}
+#beerCatalogGrid .card-thermo{display:block!important;position:relative!important;height:5px!important;border-radius:999px!important;background:rgba(255,255,255,.13)!important;overflow:hidden!important;min-width:0!important}
+#beerCatalogGrid .card-thermo-fill{display:block!important;height:100%!important;border-radius:inherit!important;background:linear-gradient(90deg,#aa8b50,#d6bb7c)!important}
+#beerCatalogGrid .card-metric.bitterness .card-thermo-fill{background:linear-gradient(90deg,#9a6135,#ca894d)!important}
+#beerCatalogGrid .card-metric-meta{color:#d8b66f!important;font-size:.58rem!important;font-weight:600!important;white-space:nowrap!important;text-align:right!important}
+#beerCatalogGrid .card-add{margin-top:auto!important;min-height:48px!important;border-radius:3px!important;border:1px solid rgba(201,170,107,.42)!important;background:transparent!important;color:#d7b76f!important;font-size:.68rem!important;font-weight:600!important;letter-spacing:.03em!important;text-transform:uppercase!important}
+#beerCatalogGrid .card-add:hover:not(:disabled){background:rgba(201,170,107,.10)!important;color:#e8cb8c!important}
+#beerCatalogGrid .card-add:disabled{color:#777!important;border-color:rgba(255,255,255,.10)!important;background:transparent!important}
 
-/* O mesmo padrão no tema claro, sem alterar o restante do tema. */
-body.theme-light #beerCatalogGrid .beer-card{background:#fffdf9!important;border-color:rgba(123,92,43,.20)!important}
-body.theme-light #beerCatalogGrid .beer-art{background:radial-gradient(circle at 50% 48%,rgba(127,91,39,.08),transparent 38%),#f9f5ed!important;border-bottom-color:rgba(77,60,38,.10)!important}
-body.theme-light #beerCatalogGrid .beer-meta{background:#fffdf9!important}
-body.theme-light #beerCatalogGrid .beer-identity span{color:#6f501f!important}
-body.theme-light #beerCatalogGrid .beer-style{color:#70685f!important}
-body.theme-light #beerCatalogGrid .beer-price-row{border-color:rgba(77,60,38,.11)!important}
-body.theme-light #beerCatalogGrid .beer-price{color:#805d24!important}
-body.theme-light #beerCatalogGrid .beer-volume{color:#554f48!important}
-body.theme-light #beerCatalogGrid .card-metric-label{color:#6d6358!important}
-body.theme-light #beerCatalogGrid .card-thermo{background:rgba(62,53,43,.14)!important}
-body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color:rgba(118,83,30,.40)!important}
+/* Tema claro dos cards: off-white e contraste legível */
+body.theme-light .catalog-search{background:#fffdf9!important;border-color:rgba(66,57,45,.16)!important;color:#4f463d!important}
+body.theme-light .catalog-search input{color:#322d27!important}body.theme-light .catalog-search input::placeholder{color:#8a8177!important}
+body.theme-light #beerCatalogGrid .beer-card{background:linear-gradient(180deg,#fffdf9,#f5efe6)!important;border-color:rgba(116,83,37,.20)!important;color:#352f28!important}
+body.theme-light #beerCatalogGrid .beer-art{background:radial-gradient(circle at 50% 48%,rgba(155,112,48,.06),transparent 42%),#fbf7f0!important;border-bottom-color:rgba(66,57,45,.09)!important}
+body.theme-light #beerCatalogGrid .beer-identity strong,body.theme-light #beerCatalogGrid .beer-identity span,body.theme-light #beerCatalogGrid .beer-price,body.theme-light #beerCatalogGrid .card-metric-meta{color:#765322!important}
+body.theme-light #beerCatalogGrid .beer-style,body.theme-light #beerCatalogGrid .beer-volume{color:#5e554b!important}
+body.theme-light #beerCatalogGrid .beer-price-row{border-color:rgba(66,57,45,.10)!important}
+body.theme-light #beerCatalogGrid .card-metric-label{color:#66563d!important}
+body.theme-light #beerCatalogGrid .card-thermo{background:rgba(66,57,45,.14)!important}
+body.theme-light #beerCatalogGrid .card-add{color:#6d4b1c!important;border-color:rgba(109,75,28,.38)!important}
 
-@media(max-width:860px){
-  #beerCatalogGrid .beer-art{height:310px!important;padding:30px 16px 21px!important}
-  #beerCatalogGrid .beer-3d>img{max-width:80%!important;max-height:94%!important}
+/* CURADORIA: duas fotos lado a lado, setas nas laterais */
+.about-photo-pair{position:relative!important;overflow:hidden!important;padding:0!important;background:#0d0d0b!important}
+.about-photo-pair .about-photo-track{position:absolute!important;inset:0!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px!important;width:100%!important;height:100%!important;transform:none!important;overflow:hidden!important}
+.about-photo-pair .about-slide{display:block!important;position:static!important;opacity:1!important;visibility:visible!important;transform:none!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;border-radius:10px!important}
+.about-photo-pair .about-photo-nav{display:grid!important;top:50%!important;z-index:8!important;width:42px!important;height:42px!important;background:rgba(7,7,6,.72)!important}
+.about-photo-pair .about-photo-prev{left:14px!important}.about-photo-pair .about-photo-next{right:14px!important}
+.about-photo-pair.is-reversed .about-slide:first-child{order:2}.about-photo-pair.is-reversed .about-slide:last-child{order:1}
+
+@media(max-width:1100px){
+  header nav{gap:13px!important}header nav a{font-size:.69rem!important}.brand{min-width:150px!important}.brand img{max-width:150px!important}
+  #beerCatalogGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
-@media(max-width:560px){
-  #beerCatalogGrid .beer-art{height:235px!important;padding:27px 10px 16px!important}
-  #beerCatalogGrid .beer-3d>img{max-width:82%!important;max-height:95%!important}
-  #beerCatalogGrid .stock-badge{top:9px!important;left:9px!important;padding:6px 7px!important;font-size:.49rem!important}
-  #beerCatalogGrid .beer-meta{padding:14px 11px 13px!important;gap:8px!important}
-  #beerCatalogGrid .beer-identity strong{font-size:.53rem!important;margin-bottom:5px!important}
-  #beerCatalogGrid .beer-identity span{font-size:.90rem!important;line-height:1.18!important}
-  #beerCatalogGrid .beer-style{font-size:.60rem!important}
-  #beerCatalogGrid .beer-price-row{gap:6px!important;padding:10px 0!important}
-  #beerCatalogGrid .beer-price{font-size:.65rem!important}
-  #beerCatalogGrid .beer-volume{font-size:.58rem!important}
-  #beerCatalogGrid .card-metrics{gap:7px!important}
-  #beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(42px,1fr) max-content!important;gap:5px!important}
-  #beerCatalogGrid .card-metric-label{font-size:.46rem!important}
-  #beerCatalogGrid .card-thermo{min-width:42px!important;height:4px!important}
-  #beerCatalogGrid .card-metric-meta{font-size:.39rem!important}
-  #beerCatalogGrid .card-add{min-height:39px!important;padding:8px 6px!important;font-size:.56rem!important}
+@media(max-width:900px){
+  header nav{display:none!important}.mobile-menu-toggle{display:flex!important}
+  header .header-inner{gap:7px!important}.brand{margin-right:auto!important;min-width:0!important}
+  header .header-actions{gap:5px!important}
+  header .header-actions .circle-btn,header .header-actions .theme-toggle,.mobile-menu-toggle{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important}
+  header .instagram-header-btn{display:grid!important}
+  #beerCatalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important}
+  #beerCatalogGrid .beer-card{min-height:560px!important}
+  #beerCatalogGrid .beer-art{height:300px!important;min-height:300px!important;padding:44px 16px 18px!important}
+  .about{grid-template-columns:1fr!important}.about-photo-pair{height:430px!important;min-height:430px!important}
+}
+@media(max-width:620px){
+  header .header-actions>a[aria-label*="WhatsApp"],header .instagram-header-btn{display:grid!important}
+  .brand img{max-width:106px!important;height:auto!important}
+  header .header-inner{height:66px!important}
+  header .header-actions .circle-btn,header .header-actions .theme-toggle,.mobile-menu-toggle{width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important}
+  header .header-actions{gap:3px!important}.mobile-menu-toggle{margin-left:2px!important}
+  .hero-copy{padding-left:16px!important;padding-right:16px!important}.hero h1{font-size:clamp(2.45rem,12vw,3.6rem)!important;letter-spacing:-.045em!important}.hero-selection-divider{width:230px;margin:13px 0 11px}
+  .catalog-search{width:100%!important;max-width:none!important;height:40px!important}.filters{overflow-x:auto!important;flex-wrap:nowrap!important;padding-bottom:4px!important;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
+  #beerCatalogGrid{grid-template-columns:1fr!important;gap:16px!important}
+  #beerCatalogGrid .beer-card{min-height:0!important}
+  #beerCatalogGrid .beer-art{height:360px!important;min-height:360px!important;padding:50px 22px 22px!important}
+  #beerCatalogGrid .beer-3d>img{max-width:72%!important;max-height:96%!important}
+  #beerCatalogGrid .beer-meta{padding:18px 16px 18px!important}
+  #beerCatalogGrid .beer-identity span{font-size:1.14rem!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:70px minmax(80px,1fr) max-content!important;gap:7px!important}
+  #beerCatalogGrid .card-metric-label{font-size:.59rem!important}#beerCatalogGrid .card-metric-meta{font-size:.56rem!important}
+  .about-photo-pair{height:370px!important;min-height:370px!important}.about-photo-pair .about-photo-track{gap:5px!important;padding:5px!important}.about-photo-pair .about-slide{border-radius:8px!important}.about-photo-pair .about-photo-nav{width:36px!important;height:36px!important}.about-photo-pair .about-photo-prev{left:8px!important}.about-photo-pair .about-photo-next{right:8px!important}
 }
 @media(max-width:390px){
-  #beerCatalogGrid .beer-art{height:215px!important}
-  #beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(34px,1fr) max-content!important;gap:4px!important}
-  #beerCatalogGrid .card-thermo{min-width:34px!important;height:3px!important}
-  #beerCatalogGrid .card-metric-label{font-size:.42rem!important}
-  #beerCatalogGrid .card-metric-meta{font-size:.35rem!important}
+  .brand img{max-width:92px!important}header .header-actions .circle-btn,header .header-actions .theme-toggle,.mobile-menu-toggle{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important}
+  #beerCatalogGrid .beer-art{height:330px!important;min-height:330px!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:62px minmax(62px,1fr) max-content!important;gap:6px!important}
 }
 </style>
 
+
+<style id="v19-6-fine-tuning">
+/* v19.6 — ajustes pontuais solicitados. Nada fora de hero/features e curadoria. */
+/* Alinhamento uniforme dos 3 benefícios do hero */
+@media (min-width:561px){
+  .feature-list{align-items:stretch!important;}
+  .feature{height:100%!important;align-content:start!important;padding-top:15px!important;}
+  .feature>div:last-child{display:flex!important;flex-direction:column!important;align-items:flex-start!important;height:100%!important;}
+  .feature b{display:flex!important;align-items:flex-start!important;min-height:38px!important;line-height:1.35!important;}
+  .feature span{display:block!important;margin-top:5px!important;}
+}
+/* Apenas a primeira linha do título principal em itálico, mantendo Poppins */
+.hero h1 .hero-nowrap{font-style:italic!important;}
+.hero h1>span:not(.hero-nowrap){font-style:normal!important;}
+
+/* Quem faz a curadoria: respiro lateral e setas fluidas/responsivas */
+@media (min-width:901px){
+  .about{padding-left:2cm!important;box-sizing:border-box!important;}
+  .about-photo-pair{border-radius:14px!important;}
+}
+.about-photo-pair .about-photo-nav{
+  width:clamp(34px,3vw,44px)!important;
+  height:clamp(34px,3vw,44px)!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+.about-photo-pair .about-photo-nav svg{width:clamp(16px,1.6vw,20px)!important;height:clamp(16px,1.6vw,20px)!important;}
+.about-photo-pair .about-photo-prev{left:clamp(8px,1.4vw,18px)!important;}
+.about-photo-pair .about-photo-next{right:clamp(8px,1.4vw,18px)!important;}
+@media (max-width:900px){
+  .about{padding-inline:20px!important;box-sizing:border-box!important;gap:22px!important;}
+  .about-photo-pair{width:100%!important;min-width:0!important;border-radius:12px!important;overflow:hidden!important;}
+  .about-photo-pair .about-photo-track{padding:7px!important;gap:7px!important;}
+  .about-photo-pair .about-photo-prev{left:8px!important;}
+  .about-photo-pair .about-photo-next{right:8px!important;}
+}
+@media (max-width:560px){
+  .about{padding-inline:16px!important;}
+  .about-photo-pair{height:340px!important;min-height:340px!important;}
+  .about-photo-pair .about-photo-track{padding:5px!important;gap:5px!important;}
+  .about-photo-pair .about-photo-nav{width:34px!important;height:34px!important;}
+  .about-photo-pair .about-photo-prev{left:6px!important;}
+  .about-photo-pair .about-photo-next{right:6px!important;}
+}
+</style>
+
+
+<style id="v197-hero-editorial-match">
+/* v19.7 — alteração exclusivamente tipográfica solicitada:
+   "A cerveja de sempre" replica o tratamento de "do Diegão". */
+.hero h1 .hero-nowrap{
+  font-family:"Cormorant Garamond",serif!important;
+  font-style:italic!important;
+  font-weight:500!important;
+  color:#bea067!important;
+  letter-spacing:-.045em!important;
+}
+body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
+</style>
+
+<style id="v20-commerce-age">
+.legal-age-footer{display:flex;align-items:center;gap:9px;margin-top:7px;color:#8f8b84;font-size:.68rem;line-height:1.35}.legal-age-footer strong,.cart-age-note strong,.age-legal-copy strong{display:inline-grid;place-items:center;min-width:32px;height:24px;padding:0 6px;border:1px solid rgba(201,170,107,.45);border-radius:999px;color:#d4bd8d;font-size:.72rem;letter-spacing:.04em}.cart-age-note{display:flex;gap:9px;align-items:flex-start;padding:12px 0;color:#aaa49a;font-size:.72rem;line-height:1.45}.age-confirmation{display:flex!important;grid-template-columns:auto 1fr!important;align-items:flex-start!important;gap:11px!important;margin:16px 0 8px;padding:14px;border:1px solid rgba(201,170,107,.25);background:rgba(185,155,97,.06);border-radius:4px;color:#c9c1b5!important;font-size:.74rem!important;line-height:1.5;cursor:pointer}.age-confirmation input{width:18px!important;height:18px!important;margin:2px 0 0;accent-color:#b99b61}.age-confirmation strong{color:#e0c996}.age-legal-copy{margin:8px 0 14px;color:#77736c;font-size:.67rem;display:flex;align-items:center;gap:8px}.checkout-pay:not(:disabled){box-shadow:0 10px 24px rgba(185,155,97,.15)}body.theme-light .legal-age-footer,body.theme-light .cart-age-note,body.theme-light .age-legal-copy{color:#5f564c!important}body.theme-light .age-confirmation{color:#4f473e!important;background:rgba(137,97,37,.06)!important;border-color:rgba(137,97,37,.2)!important}body.theme-light .age-confirmation strong{color:#765019!important}@media(max-width:620px){.legal-age-footer{justify-content:center}.age-confirmation{font-size:.72rem!important}}
+</style>
 </head>
 <body>
 <div aria-hidden="true" id="global-hop-rain"></div>
@@ -1509,28 +1433,30 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
 <nav aria-label="Navegação principal">
 <a class="active" href="#inicio">Início</a>
 <a href="#catalogo">Catálogo</a>
-<a href="#eventos">Eventos</a>
-<a href="#sobre">Sobre</a>
 <a href="#como-funciona">Como funciona</a>
+<a href="#eventos">Eventos</a>
 <a href="#dicas">Dicas do Diegão</a>
 <a href="#contato">Contato</a>
 </nav>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#eventos">Eventos</a><a href="#sobre">Sobre</a><a href="#como-funciona">Como funciona</a><a href="#dicas">Dicas do Diegão</a><a href="#contato">Contato</a>
+  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#como-funciona">Como funciona</a><a href="#eventos">Eventos</a><a href="#dicas">Dicas do Diegão</a><a href="#contato">Contato</a>
 </div>
 <div class="header-actions">
+<button aria-label="Abrir pedido" class="circle-btn cart-trigger" id="cartTrigger" type="button"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h2l2.1 9.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20.5 8H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><circle cx="10" cy="19" r="1.4" fill="currentColor"></circle><circle cx="17" cy="19" r="1.4" fill="currentColor"></circle></svg><span id="cartCount">0</span></button>
 <a aria-label="Abrir WhatsApp do Diegão" class="circle-btn" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="social-icon" focusable="false" viewbox="0 0 24 24"><path d="M12.04 2a9.84 9.84 0 0 0-8.47 14.84L2 22l5.3-1.53A9.95 9.95 0 1 0 12.04 2Zm0 17.93a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.14.91.92-3.06-.2-.32A8.02 8.02 0 1 1 12.04 19.93Zm4.43-6.03c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.79-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z" fill="currentColor"></path></svg></a>
 <a aria-label="Instagram do Cervejando com Diego" class="circle-btn instagram-header-btn" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" ry="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.4" cy="6.6" fill="currentColor" r="1.1"></circle></svg>
-</a><button aria-label="Ativar tema claro" aria-pressed="false" class="theme-toggle" id="themeToggle" title="Usar tema claro" type="button"><svg aria-hidden="true" class="theme-icon-sun" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg><svg aria-hidden="true" class="theme-icon-moon" focusable="false" viewBox="0 0 24 24"><path d="M20 15.4A8.4 8.4 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/></svg></button><button aria-label="Abrir pedido" class="circle-btn cart-trigger" id="cartTrigger" type="button"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h2l2.1 9.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20.5 8H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><circle cx="10" cy="19" r="1.4" fill="currentColor"></circle><circle cx="17" cy="19" r="1.4" fill="currentColor"></circle></svg><span id="cartCount">0</span></button></div>
+</a>
+<button aria-label="Ativar tema claro" aria-pressed="false" class="theme-toggle" id="themeToggle" title="Usar tema claro" type="button"><svg aria-hidden="true" class="theme-icon-sun" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg><svg aria-hidden="true" class="theme-icon-moon" focusable="false" viewBox="0 0 24 24"><path d="M20 15.4A8.4 8.4 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/></svg></button>
+</div>
 </div>
 </header>
 <main>
 <section class="hero" id="inicio">
 <div class="hero-copy">
 <span class="eyebrow">Cervejando com Diego • Seleção autoral</span>
-<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece;</span></h1>
+<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece.</span></h1>
 <p class="hero-intro">Rótulos escolhidos com critério para quem quer descobrir novos sabores sem complicação.</p>
 <div class="feature-list">
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3L12 3Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Curadoria especializada</b><span>Selecionamos apenas o que vale a pena.</span></div></div>
@@ -1538,6 +1464,7 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M8 12h8M10 17h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="8" cy="7" r="1.5" fill="currentColor"></circle><circle cx="15" cy="12" r="1.5" fill="currentColor"></circle><circle cx="12" cy="17" r="1.5" fill="currentColor"></circle></svg></div><div><b>Escolha sem complicação</b><span>Descubra por intensidade, amargor e perfil.</span></div></div>
 </div>
 <p class="hero-slogan">Beba menos, beba melhor.</p>
+<div class="hero-selection-divider" aria-hidden="true"></div>
 <a class="hero-premium-cta" href="#catalogo">Explorar a seleção <span aria-hidden="true">→</span></a>
 </div>
 <div class="hero-visual">
@@ -1617,27 +1544,23 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
 <div class="how-steps">
 <article><b>01</b><strong>Escolha seus rótulos</strong><p>Clique nas cervejas para conhecer estilo, intensidade, amargor, perfil e todos os detalhes.</p></article>
 <article><b>02</b><strong>Continue comprando</strong><p>Adicione quantas cervejas quiser ao pedido. Você pode continuar escolhendo antes de finalizar.</p></article>
-<article><b>03</b><strong>Finalize no WhatsApp</strong><p>Envie o pedido pronto para o Diegão. Se quiser entrega, marque essa opção antes de finalizar.</p></article>
+<article><b>03</b><strong>Pague com segurança</strong><p>Finalize pelo checkout seguro. Você confirma que tem 18 anos ou mais antes de seguir para o pagamento. Se preferir, o WhatsApp continua disponível.</p></article>
 </div>
 </div>
 </section>
 
 <section class="about" id="sobre">
-<div class="about-photo about-carousel" aria-label="Fotos do Diegão">
-  <button class="about-photo-nav about-photo-prev" type="button" aria-label="Foto anterior do Diegão">
+<div class="about-photo about-carousel about-photo-pair" aria-label="Fotos do Diegão">
+  <button class="about-photo-nav about-photo-prev" type="button" aria-label="Alternar fotos do Diegão">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
   </button>
-  <div class="about-photo-stage">
+  <div class="about-photo-stage about-photo-track">
     <img class="about-slide is-active" alt="Diegão em um bar com uma cerveja artesanal" src="assets/diegao-curadoria-1.jpeg"/>
     <img class="about-slide" alt="Diegão brindando com um copo de cerveja" src="assets/diegao-curadoria-2.jpeg"/>
   </div>
-  <button class="about-photo-nav about-photo-next" type="button" aria-label="Próxima foto do Diegão">
+  <button class="about-photo-nav about-photo-next" type="button" aria-label="Alternar fotos do Diegão">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
   </button>
-  <div class="about-photo-dots" aria-label="Selecionar foto">
-    <button class="about-dot is-active" type="button" aria-label="Mostrar foto 1" aria-pressed="true"></button>
-    <button class="about-dot" type="button" aria-label="Mostrar foto 2" aria-pressed="false"></button>
-  </div>
 </div>
 <div class="about-copy">
 <span class="eyebrow">Quem faz a curadoria</span>
@@ -1651,7 +1574,7 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
 </main>
 <footer id="contato">
 <div class="shell footer-inner">
-<div>© Cervejando com Diego</div>
+<div><div>© Cervejando com Diego</div><div class="legal-age-footer"><strong>18+</strong><span>Venda proibida para menores de 18 anos. Beba com moderação.</span></div></div>
 <div class="footer-links">
 <a aria-label="Abrir Instagram @cervejandocomdiego em nova aba" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">@cervejandocomdiego</a>
 <a aria-label="Abrir WhatsApp do Diegão em nova aba" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank">(16) 99792-7171</a>
@@ -1679,7 +1602,8 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
 <div class="cart-empty" id="cartEmpty">Seu pedido ainda está vazio.</div>
 <label class="delivery-check"><input id="deliveryCheck" type="checkbox"/> Quero receber por entrega</label>
 <div class="cart-summary"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
-<p class="cart-note">A taxa de entrega, quando aplicável, será informada antes do pagamento.</p>
+<p class="cart-note">A taxa de entrega, quando aplicável, será calculada antes do pagamento.</p>
+<div class="cart-age-note"><strong>18+</strong><span>Ao finalizar a compra, será necessário declarar que você tem 18 anos ou mais.</span></div>
 <div class="cart-actions">
 <button class="continue-btn" id="continueShopping" type="button">Continuar comprando</button>
 <button class="checkout-btn" id="checkoutSite" type="button">Finalizar compra</button>
@@ -1699,15 +1623,19 @@ body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color
         <label><input type="radio" name="deliveryType" value="delivery"/> Entrega</label>
       </fieldset>
       <div class="checkout-full address-fields" id="addressFields" hidden>
+        <div class="checkout-grid compact-grid"><label>CEP<input id="customerPostalCode" name="postalCode" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000"/></label><label>Cidade<input id="customerCity" name="city" autocomplete="address-level2" maxlength="100" value="São Carlos"/></label></div>
         <label>Endereço<input id="customerAddress" name="address" autocomplete="street-address" maxlength="220"/></label>
         <div class="checkout-grid compact-grid"><label>Número<input id="customerNumber" name="number" maxlength="20"/></label><label>Bairro<input id="customerDistrict" name="district" maxlength="100"/></label></div>
+        <label>Complemento<input id="customerComplement" name="complement" maxlength="120" placeholder="Apto, bloco, referência (opcional)"/></label>
       </div>
       <label class="checkout-full">Observações<textarea id="customerNotes" name="notes" rows="3" maxlength="500" placeholder="Alguma informação importante sobre o pedido?"></textarea></label>
     </div>
     <div class="checkout-order-summary"><div><span>Itens</span><strong id="checkoutItemsCount">0</strong></div><div><span>Subtotal</span><strong id="checkoutSubtotal">R$ 0,00</strong></div></div>
     <p class="checkout-payment-note">Pagamento disponível conforme os métodos configurados no Stripe. Cartão já pode ser habilitado; Pix pode ser ativado pela conta Stripe quando disponível.</p>
+    <label class="age-confirmation"><input id="ageConfirmed" name="ageConfirmed" type="checkbox" required/><span><strong>Declaro ter 18 anos ou mais</strong> e estar ciente de que a venda de bebidas alcoólicas para menores de idade é proibida.</span></label>
+    <p class="age-legal-copy"><strong>18+</strong> Venda proibida para menores de 18 anos. Beba com moderação.</p>
     <div class="checkout-message" id="checkoutMessage" aria-live="polite"></div>
-    <button class="checkout-pay" id="checkoutPay" type="submit">Ir para pagamento seguro</button>
+    <button class="checkout-pay" id="checkoutPay" type="submit" disabled>Confirmar idade para continuar</button>
   </form>
 </dialog>
 <script src="data/theme.js"></script><script src="data/cervejas.js"></script><script src="data/supabase.js"></script><script src="data/events.js"></script><script>
@@ -2917,5 +2845,14 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
   window.addEventListener('resize',()=>{if(window.innerWidth>900) close()});
 })();
 </script>
+
+<script id="v195-about-pair-script">
+(()=>{
+  const pair=document.querySelector('.about-photo-pair');
+  if(!pair) return;
+  pair.querySelectorAll('.about-photo-nav').forEach(btn=>btn.addEventListener('click',()=>pair.classList.toggle('is-reversed')));
+})();
+</script>
+
 </body>
 </html>
