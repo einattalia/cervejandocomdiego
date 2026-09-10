@@ -1,6 +1,6 @@
 {
-  "name": "cervejando-com-diego-v20-18plus",
-  "version": "20.1.0",
+  "name": "cervejando-com-diego-v20-2-18plus",
+  "version": "20.2.0",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
