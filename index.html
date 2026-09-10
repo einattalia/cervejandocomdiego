@@ -30,7 +30,7 @@
 <link href="assets/favicon.png" rel="apple-touch-icon">
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Oswald:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="assets/theme-toggle.css" rel="stylesheet"/>
 <style>
 :root{
@@ -1120,6 +1120,386 @@ body.theme-light .circle-btn,body.theme-light .theme-toggle{color:#4d463e!import
 @media(max-width:900px){.header-events-mobile{display:inline-flex;align-items:center;justify-content:center;margin-left:auto}.header-actions{margin-left:0!important}}
 @media(max-width:560px){.header-events-mobile{font-size:.66rem;padding:7px 9px}.events-section{padding:66px 0}.events-heading{margin-bottom:22px}.events-heading h2{font-size:clamp(2.7rem,14vw,4rem)}.events-grid{grid-template-columns:1fr;gap:13px}.event-card{border-radius:18px}.event-body{padding:16px}.event-card h3{font-size:1.5rem}.event-description{font-size:.84rem}.header-inner{gap:7px!important}.brand img{max-width:118px!important}.instagram-header-btn{display:none!important}}
 </style>
+
+<style id="v193-layout-refinement">
+/* v19.3 — refinamento solicitado para Vercel */
+html,body,button,input,textarea,select{font-family:Poppins,Arial,sans-serif!important}
+body{font-weight:400}
+h1,h2,h3,.event-card h3,.modal-info h2,.about-copy h2,.how-section h2,.tips-section h2,.catalog h2,.beer-identity span,.beer-price,.checkout-head h2,.checkout-order-summary strong,.cart-summary strong{font-family:Poppins,Arial,sans-serif!important;font-style:normal!important}
+h1,h2,h3,.event-card h3,.modal-info h2,.about-copy h2,.how-section h2,.tips-section h2,.catalog h2{font-weight:700!important}
+.hero h1{font-family:Poppins,Arial,sans-serif!important;font-weight:700!important;letter-spacing:-.055em!important;line-height:.91!important;font-size:clamp(3.75rem,5.25vw,6.55rem)!important;max-width:800px!important}
+.hero h1 span{font-style:normal!important;font-weight:700!important;color:#c6aa72!important}
+nav a,.feature b,.filter-btn,.beer-identity strong,.how-steps article b,.how-steps article strong,.about-copy .about-lead,.about-copy .tagline,.premium-manifesto p{font-family:Poppins,Arial,sans-serif!important}
+nav a,.feature b,.filter-btn,.beer-identity strong,.how-steps article b{font-weight:600!important}
+.beer-identity span,.beer-price,.about-copy .about-lead,.about-copy .tagline,.how-steps article strong{font-weight:500!important}
+
+/* header desktop */
+.header-inner{position:relative}
+.mobile-menu-toggle,.mobile-nav{display:none}
+.header-actions{margin-left:auto}
+
+/* hero */
+.hero-copy{padding-right:2vw!important}
+.hero-slogan{margin:8px 0 5px;color:#d9c18e;font-size:.9rem;font-weight:600;letter-spacing:.01em}
+@media(min-width:861px){
+  .hero{grid-template-columns:54% 46%!important}
+  .hero-visual{padding-left:0!important;padding-right:5vw!important;justify-items:start!important}
+  .premium-fridge{margin-left:clamp(0px,1vw,16px)!important;margin-right:auto!important;transform:translateX(-18px)}
+}
+
+/* catálogo: busca pequena acima dos filtros */
+.catalog-top{grid-template-columns:1fr!important;align-items:start!important;gap:26px!important}
+.catalog-tools{width:100%!important;min-width:0!important;justify-items:start!important;gap:12px!important}
+.catalog-search{width:min(100%,310px)!important;height:38px!important;padding:0 12px!important;border-radius:10px!important}
+.catalog-search svg{width:14px!important;height:14px!important}
+.catalog-search input{font-size:.78rem!important}
+.filters{justify-content:flex-start!important;width:100%!important;position:relative!important;z-index:1!important}
+
+/* cards */
+#beerCatalogGrid .beer-card{align-items:stretch!important}
+#beerCatalogGrid .beer-art{display:flex!important;align-items:center!important;justify-content:center!important;padding:26px 18px!important}
+#beerCatalogGrid .beer-3d{width:100%!important;height:100%!important;display:flex!important;align-items:center!important;justify-content:center!important;transform:none!important;perspective:none!important}
+#beerCatalogGrid .beer-3d>img{position:static!important;display:block!important;margin:auto!important;max-width:74%!important;max-height:92%!important;width:auto!important;height:auto!important;transform:none!important;object-fit:contain!important}
+#beerCatalogGrid .beer-3d-gloss{display:none!important}
+#beerCatalogGrid .beer-meta{gap:9px!important;text-align:left!important}
+#beerCatalogGrid .beer-identity{height:auto!important;min-height:44px!important;max-height:none!important;overflow:visible!important}
+#beerCatalogGrid .beer-identity strong{font-size:.62rem!important;letter-spacing:.14em!important}
+#beerCatalogGrid .beer-identity span{font-size:1.02rem!important;line-height:1.25!important;margin-top:4px!important;color:#f0ece3!important}
+#beerCatalogGrid .beer-style{font-size:.69rem!important;color:#9d978e!important}
+#beerCatalogGrid .beer-price-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:9px 0!important}
+#beerCatalogGrid .beer-price{font-size:.96rem!important;color:#d8bc83!important}
+#beerCatalogGrid .beer-volume{font-size:.63rem!important}
+#beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(52px,1fr) max-content!important;gap:7px!important}
+#beerCatalogGrid .card-metric-label{font-size:.52rem!important}
+#beerCatalogGrid .card-metric-meta{font-size:.47rem!important}
+#beerCatalogGrid .card-add{border-radius:8px!important}
+
+/* Quem faz a curadoria — foto e texto lado a lado; setas lateralizadas */
+.about{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:stretch!important}
+.about-photo-nav{top:50%!important}
+.about-photo-prev{left:18px!important}.about-photo-next{right:18px!important}
+.about-copy{display:flex!important;justify-content:center!important;min-width:0!important}
+
+/* tema claro off-white: contraste preservado */
+body.theme-light{background:#faf8f3!important;color:#2f2a24!important}
+body.theme-light header{background:rgba(250,248,243,.96)!important}
+body.theme-light .hero{background:linear-gradient(90deg,#faf8f3 0 54%,#f2ece3 54% 100%)!important}
+body.theme-light .hero h1 span{color:#765322!important}
+body.theme-light .hero-slogan{color:#6b542f!important}
+body.theme-light nav a{color:#554d44!important}body.theme-light nav a:hover,body.theme-light nav a.active{color:#7f5c26!important}
+body.theme-light .mobile-menu-toggle span{background:#443d35!important}
+body.theme-light .mobile-nav{background:#fffdf9!important;border-color:rgba(66,57,45,.12)!important;box-shadow:0 18px 45px rgba(54,42,28,.14)!important}
+body.theme-light .mobile-nav a{color:#3f3932!important;border-color:rgba(66,57,45,.08)!important}
+
+/* menu mobile */
+@media(max-width:900px){
+  .header-inner{height:72px!important;gap:9px!important}
+  .brand{min-width:0!important;margin-right:auto}.brand img{height:50px!important;max-width:118px!important}
+  nav{display:none!important}
+  .mobile-menu-toggle{display:flex;width:40px;height:40px;border:1px solid rgba(217,199,161,.16);background:rgba(15,15,13,.76);border-radius:50%;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:0;cursor:pointer;color:inherit}
+  .mobile-menu-toggle span{display:block;width:17px;height:1.5px;border-radius:99px;background:#e7dfd0;transition:.2s ease}
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+  .mobile-nav{display:none;position:absolute;top:calc(100% + 8px);left:4vw;right:4vw;z-index:10020;background:#0c0c0a;border:1px solid rgba(217,199,161,.14);border-radius:14px;padding:8px;box-shadow:0 20px 48px rgba(0,0,0,.42)}
+  .mobile-nav.open{display:grid}
+  .mobile-nav a{display:block;padding:13px 14px;color:#ddd5c6;text-decoration:none;font-size:.82rem;font-weight:500;border-bottom:1px solid rgba(217,199,161,.08)}
+  .mobile-nav a:last-child{border-bottom:0}
+  .header-actions{margin-left:0!important;gap:7px!important}
+  .instagram-header-btn{display:none!important}
+  .hero-slogan{margin-top:2px}
+  .catalog-search{width:min(100%,290px)!important}
+}
+@media(max-width:560px){
+  .header-actions>a[aria-label*="WhatsApp"]{display:none!important}
+  .circle-btn,.theme-toggle,.mobile-menu-toggle{width:38px!important;height:38px!important}
+  .hero-copy{padding:54px 18px 34px!important}
+  .hero h1{font-size:clamp(2.65rem,11.7vw,4.05rem)!important;line-height:.96!important;letter-spacing:-.045em!important}
+  .hero-nowrap{white-space:normal!important}
+  .hero-slogan{font-size:.8rem;margin:7px 0 4px}
+  .hero-visual{padding:18px 18px 52px!important;justify-items:center!important}
+  .premium-fridge{transform:none!important;margin:0 auto!important}
+  .catalog-top{gap:20px!important}
+  .catalog-tools{gap:11px!important}
+  .catalog-search{width:100%!important;max-width:260px!important;height:36px!important}
+  #beerCatalogGrid .beer-art{height:220px!important;padding:16px 10px!important}
+  #beerCatalogGrid .beer-3d>img{max-width:78%!important;max-height:92%!important}
+  #beerCatalogGrid .beer-meta{padding:13px 11px 14px!important}
+  #beerCatalogGrid .beer-identity span{font-size:.87rem!important}
+  #beerCatalogGrid .beer-price-row{display:flex!important;gap:6px!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(38px,1fr) max-content!important;gap:4px!important}
+  #beerCatalogGrid .card-metric-label{font-size:.43rem!important}
+  #beerCatalogGrid .card-metric-meta{font-size:.38rem!important}
+  .about{grid-template-columns:1fr!important}
+  .about-carousel{min-height:430px!important}
+  .about-copy{padding:58px 7vw!important}
+}
+</style>
+
+<style id="v194-card-premium-only">
+/* ===== v19.4 · SOMENTE CARDS DAS CERVEJAS ===== */
+/* Mantém toda a estrutura, dados e funcionalidades da v19.3. */
+#beerCatalogGrid .beer-card{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  overflow:hidden!important;
+  min-width:0!important;
+  height:100%!important;
+  border:1px solid rgba(201,170,107,.30)!important;
+  border-radius:10px!important;
+  background:linear-gradient(180deg,#0d0e0d 0%,#090a0a 100%)!important;
+  box-shadow:none!important;
+}
+#beerCatalogGrid .beer-card:hover{
+  transform:translateY(-4px)!important;
+  border-color:rgba(224,181,90,.55)!important;
+  box-shadow:0 18px 44px rgba(0,0,0,.28)!important;
+}
+#beerCatalogGrid .beer-art{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  height:355px!important;
+  padding:38px 22px 24px!important;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(255,255,255,.055),transparent 34%),
+    linear-gradient(180deg,#0d0e0d,#0a0b0a)!important;
+  border-bottom:1px solid rgba(217,199,161,.10)!important;
+}
+#beerCatalogGrid .beer-3d{
+  position:relative!important;
+  width:100%!important;
+  height:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  transform:none!important;
+  perspective:none!important;
+}
+#beerCatalogGrid .beer-3d>img{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:78%!important;
+  max-height:94%!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  transform:none!important;
+  filter:drop-shadow(0 18px 18px rgba(0,0,0,.42))!important;
+}
+#beerCatalogGrid .stock-badge{
+  top:14px!important;
+  left:14px!important;
+  padding:7px 10px!important;
+  border-radius:3px!important;
+  background:rgba(8,10,9,.86)!important;
+  backdrop-filter:blur(8px)!important;
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.58rem!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.055em!important;
+  text-transform:uppercase!important;
+}
+#beerCatalogGrid .stock-badge.in-stock{color:#b8d1bd!important;border-color:rgba(129,171,139,.30)!important}
+#beerCatalogGrid .stock-badge.low-stock{color:#d9b366!important;border-color:rgba(217,179,102,.38)!important}
+#beerCatalogGrid .stock-badge.sold-out{color:#aaa7a0!important;border-color:rgba(255,255,255,.15)!important}
+#beerCatalogGrid .beer-meta{
+  display:flex!important;
+  flex-direction:column!important;
+  flex:1!important;
+  gap:11px!important;
+  padding:21px 18px 20px!important;
+  text-align:left!important;
+  background:#0a0b0b!important;
+  border-top:0!important;
+}
+#beerCatalogGrid .beer-identity{
+  display:block!important;
+  min-height:0!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+#beerCatalogGrid .beer-identity strong{
+  display:block!important;
+  margin:0 0 7px!important;
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.66rem!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+  color:#d3ad60!important;
+}
+#beerCatalogGrid .beer-identity span{
+  display:block!important;
+  margin:0!important;
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:1.18rem!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+  color:#d7b76d!important;
+}
+#beerCatalogGrid .beer-style{
+  display:block!important;
+  min-height:0!important;
+  margin:0!important;
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.72rem!important;
+  line-height:1.4!important;
+  font-weight:400!important;
+  color:#b6b0a6!important;
+}
+#beerCatalogGrid .beer-price-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+  margin-top:2px!important;
+  padding:13px 0!important;
+  border-top:1px solid rgba(217,199,161,.09)!important;
+  border-bottom:1px solid rgba(217,199,161,.09)!important;
+}
+#beerCatalogGrid .beer-price{
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.79rem!important;
+  line-height:1.2!important;
+  font-weight:500!important;
+  color:#d5b46c!important;
+}
+#beerCatalogGrid .beer-volume{
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.72rem!important;
+  line-height:1!important;
+  font-weight:400!important;
+  color:#c6c1b8!important;
+  white-space:nowrap!important;
+}
+#beerCatalogGrid .card-metrics{
+  display:grid!important;
+  gap:10px!important;
+  margin:1px 0 3px!important;
+}
+#beerCatalogGrid .card-metric{
+  display:grid!important;
+  grid-template-columns:max-content minmax(76px,1fr) max-content!important;
+  align-items:center!important;
+  gap:9px!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:2px 0!important;
+}
+#beerCatalogGrid .card-metric-label{
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.60rem!important;
+  line-height:1!important;
+  font-weight:400!important;
+  color:#b8aa8b!important;
+  white-space:nowrap!important;
+}
+#beerCatalogGrid .card-thermo{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  min-width:76px!important;
+  height:5px!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:rgba(235,235,235,.13)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)!important;
+}
+#beerCatalogGrid .card-thermo-fill{
+  display:block!important;
+  height:100%!important;
+  border-radius:999px!important;
+}
+#beerCatalogGrid .card-metric.intensity .card-thermo-fill{
+  background:linear-gradient(90deg,#9d8048,#d6b86f)!important;
+  box-shadow:none!important;
+}
+#beerCatalogGrid .card-metric.bitterness .card-thermo-fill{
+  background:linear-gradient(90deg,#8d572e,#c78348)!important;
+  box-shadow:none!important;
+}
+#beerCatalogGrid .card-metric-meta{
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.56rem!important;
+  line-height:1!important;
+  font-weight:700!important;
+  white-space:nowrap!important;
+  text-align:right!important;
+}
+#beerCatalogGrid .card-metric.intensity .card-metric-meta{color:#d4b15f!important}
+#beerCatalogGrid .card-metric.bitterness .card-metric-meta{color:#d08a50!important}
+#beerCatalogGrid .card-add{
+  width:100%!important;
+  min-height:49px!important;
+  margin-top:auto!important;
+  padding:11px 12px!important;
+  border:1px solid rgba(210,174,96,.48)!important;
+  border-radius:3px!important;
+  background:transparent!important;
+  color:#d3b16c!important;
+  font-family:Poppins,Arial,sans-serif!important;
+  font-size:.67rem!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  letter-spacing:.035em!important;
+  text-transform:uppercase!important;
+}
+#beerCatalogGrid .card-add:hover:not(:disabled){background:#c9aa6b!important;color:#0a0907!important;border-color:#c9aa6b!important}
+#beerCatalogGrid .card-add:disabled{background:transparent!important;color:#6e6c67!important;border-color:rgba(255,255,255,.14)!important}
+
+/* O mesmo padrão no tema claro, sem alterar o restante do tema. */
+body.theme-light #beerCatalogGrid .beer-card{background:#fffdf9!important;border-color:rgba(123,92,43,.20)!important}
+body.theme-light #beerCatalogGrid .beer-art{background:radial-gradient(circle at 50% 48%,rgba(127,91,39,.08),transparent 38%),#f9f5ed!important;border-bottom-color:rgba(77,60,38,.10)!important}
+body.theme-light #beerCatalogGrid .beer-meta{background:#fffdf9!important}
+body.theme-light #beerCatalogGrid .beer-identity span{color:#6f501f!important}
+body.theme-light #beerCatalogGrid .beer-style{color:#70685f!important}
+body.theme-light #beerCatalogGrid .beer-price-row{border-color:rgba(77,60,38,.11)!important}
+body.theme-light #beerCatalogGrid .beer-price{color:#805d24!important}
+body.theme-light #beerCatalogGrid .beer-volume{color:#554f48!important}
+body.theme-light #beerCatalogGrid .card-metric-label{color:#6d6358!important}
+body.theme-light #beerCatalogGrid .card-thermo{background:rgba(62,53,43,.14)!important}
+body.theme-light #beerCatalogGrid .card-add{color:#76531e!important;border-color:rgba(118,83,30,.40)!important}
+
+@media(max-width:860px){
+  #beerCatalogGrid .beer-art{height:310px!important;padding:30px 16px 21px!important}
+  #beerCatalogGrid .beer-3d>img{max-width:80%!important;max-height:94%!important}
+}
+@media(max-width:560px){
+  #beerCatalogGrid .beer-art{height:235px!important;padding:27px 10px 16px!important}
+  #beerCatalogGrid .beer-3d>img{max-width:82%!important;max-height:95%!important}
+  #beerCatalogGrid .stock-badge{top:9px!important;left:9px!important;padding:6px 7px!important;font-size:.49rem!important}
+  #beerCatalogGrid .beer-meta{padding:14px 11px 13px!important;gap:8px!important}
+  #beerCatalogGrid .beer-identity strong{font-size:.53rem!important;margin-bottom:5px!important}
+  #beerCatalogGrid .beer-identity span{font-size:.90rem!important;line-height:1.18!important}
+  #beerCatalogGrid .beer-style{font-size:.60rem!important}
+  #beerCatalogGrid .beer-price-row{gap:6px!important;padding:10px 0!important}
+  #beerCatalogGrid .beer-price{font-size:.65rem!important}
+  #beerCatalogGrid .beer-volume{font-size:.58rem!important}
+  #beerCatalogGrid .card-metrics{gap:7px!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(42px,1fr) max-content!important;gap:5px!important}
+  #beerCatalogGrid .card-metric-label{font-size:.46rem!important}
+  #beerCatalogGrid .card-thermo{min-width:42px!important;height:4px!important}
+  #beerCatalogGrid .card-metric-meta{font-size:.39rem!important}
+  #beerCatalogGrid .card-add{min-height:39px!important;padding:8px 6px!important;font-size:.56rem!important}
+}
+@media(max-width:390px){
+  #beerCatalogGrid .beer-art{height:215px!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:max-content minmax(34px,1fr) max-content!important;gap:4px!important}
+  #beerCatalogGrid .card-thermo{min-width:34px!important;height:3px!important}
+  #beerCatalogGrid .card-metric-label{font-size:.42rem!important}
+  #beerCatalogGrid .card-metric-meta{font-size:.35rem!important}
+}
+</style>
+
 </head>
 <body>
 <div aria-hidden="true" id="global-hop-rain"></div>
@@ -1135,10 +1515,11 @@ body.theme-light .circle-btn,body.theme-light .theme-toggle{color:#4d463e!import
 <a href="#dicas">Dicas do Diegão</a>
 <a href="#contato">Contato</a>
 </nav>
-<a class="header-events-mobile" href="#eventos">Eventos</a>
+<button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#eventos">Eventos</a><a href="#sobre">Sobre</a><a href="#como-funciona">Como funciona</a><a href="#dicas">Dicas do Diegão</a><a href="#contato">Contato</a>
+</div>
 <div class="header-actions">
-<a aria-label="Buscar cervejas" class="circle-btn" href="#catalogSearch"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></a>
-<a aria-label="Sobre o Diegão" class="circle-btn" href="#sobre"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg></a>
 <a aria-label="Abrir WhatsApp do Diegão" class="circle-btn" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="social-icon" focusable="false" viewbox="0 0 24 24"><path d="M12.04 2a9.84 9.84 0 0 0-8.47 14.84L2 22l5.3-1.53A9.95 9.95 0 1 0 12.04 2Zm0 17.93a8.08 8.08 0 0 1-4.12-1.13l-.3-.18-3.14.91.92-3.06-.2-.32A8.02 8.02 0 1 1 12.04 19.93Zm4.43-6.03c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.64-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.79-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z" fill="currentColor"></path></svg></a>
 <a aria-label="Instagram do Cervejando com Diego" class="circle-btn instagram-header-btn" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" ry="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.4" cy="6.6" fill="currentColor" r="1.1"></circle></svg>
@@ -1149,13 +1530,14 @@ body.theme-light .circle-btn,body.theme-light .theme-toggle{color:#4d463e!import
 <section class="hero" id="inicio">
 <div class="hero-copy">
 <span class="eyebrow">Cervejando com Diego • Seleção autoral</span>
-<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece.</span></h1>
+<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece;</span></h1>
 <p class="hero-intro">Rótulos escolhidos com critério para quem quer descobrir novos sabores sem complicação.</p>
 <div class="feature-list">
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3L12 3Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Curadoria especializada</b><span>Selecionamos apenas o que vale a pena.</span></div></div>
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 15c2.8-1 4-3.2 4-6 2.7 1.5 4.3 3.8 4.3 6.5A5.3 5.3 0 0 1 10 21a5 5 0 0 1-5-5c0-2.2 1.2-4.3 3.2-5.7-.1 1.8-.5 3.4-1.2 4.7Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Cervejas exclusivas</b><span>Rótulos únicos para sair do óbvio.</span></div></div>
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M8 12h8M10 17h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="8" cy="7" r="1.5" fill="currentColor"></circle><circle cx="15" cy="12" r="1.5" fill="currentColor"></circle><circle cx="12" cy="17" r="1.5" fill="currentColor"></circle></svg></div><div><b>Escolha sem complicação</b><span>Descubra por intensidade, amargor e perfil.</span></div></div>
 </div>
+<p class="hero-slogan">Beba menos, beba melhor.</p>
 <a class="hero-premium-cta" href="#catalogo">Explorar a seleção <span aria-hidden="true">→</span></a>
 </div>
 <div class="hero-visual">
@@ -1178,12 +1560,7 @@ body.theme-light .circle-btn,body.theme-light .theme-toggle{color:#4d463e!import
 
 </div>
 </section>
-<section class="premium-manifesto" aria-label="Manifesto da curadoria">
-  <div class="shell premium-manifesto-inner">
-    <p><strong>Beba menos,</strong> beba melhor.</p>
-    <span class="manifesto-note">Cervejas que valem a experiência — escolhidas pelo Diegão, uma a uma.</span>
-  </div>
-</section>
+
 <section class="events-section" id="eventos" aria-labelledby="eventsTitle">
   <div class="shell">
     <div class="events-heading">
@@ -2523,5 +2900,22 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
 @media(max-width:620px){.cart-actions{grid-template-columns:1fr!important}.cart-actions .checkout-btn{grid-column:auto}.checkout-dialog{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border-radius:0}.checkout-card{height:100dvh;max-height:100dvh;padding:20px 15px calc(26px + env(safe-area-inset-bottom))}.checkout-head h2{font-size:2rem}.checkout-grid{grid-template-columns:1fr}.checkout-full{grid-column:auto}.delivery-choice{grid-column:auto;flex-direction:column;gap:10px}.checkout-order-summary{justify-content:space-between}.compact-grid{grid-template-columns:1fr 1fr}}
 
 </style>
+
+<script id="v193-mobile-menu">
+(()=>{
+  const btn=document.getElementById('mobileMenuToggle');
+  const menu=document.getElementById('mobileNav');
+  if(!btn||!menu) return;
+  const close=()=>{btn.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true')};
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    if(open){close();return;}
+    btn.setAttribute('aria-expanded','true');menu.classList.add('open');menu.setAttribute('aria-hidden','false');
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('click',e=>{if(!menu.contains(e.target)&&!btn.contains(e.target)) close()});
+  window.addEventListener('resize',()=>{if(window.innerWidth>900) close()});
+})();
+</script>
 </body>
 </html>
