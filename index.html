@@ -1420,6 +1420,10 @@ body.theme-light #beerCatalogGrid .card-add{color:#6d4b1c!important;border-color
 }
 body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 </style>
+
+<style id="v20-commerce-age">
+.legal-age-footer{display:flex;align-items:center;gap:9px;margin-top:7px;color:#8f8b84;font-size:.68rem;line-height:1.35}.legal-age-footer strong,.cart-age-note strong,.age-legal-copy strong{display:inline-grid;place-items:center;min-width:32px;height:24px;padding:0 6px;border:1px solid rgba(201,170,107,.45);border-radius:999px;color:#d4bd8d;font-size:.72rem;letter-spacing:.04em}.cart-age-note{display:flex;gap:9px;align-items:flex-start;padding:12px 0;color:#aaa49a;font-size:.72rem;line-height:1.45}.age-confirmation{display:flex!important;grid-template-columns:auto 1fr!important;align-items:flex-start!important;gap:11px!important;margin:16px 0 8px;padding:14px;border:1px solid rgba(201,170,107,.25);background:rgba(185,155,97,.06);border-radius:4px;color:#c9c1b5!important;font-size:.74rem!important;line-height:1.5;cursor:pointer}.age-confirmation input{width:18px!important;height:18px!important;margin:2px 0 0;accent-color:#b99b61}.age-confirmation strong{color:#e0c996}.age-legal-copy{margin:8px 0 14px;color:#77736c;font-size:.67rem;display:flex;align-items:center;gap:8px}.checkout-pay:not(:disabled){box-shadow:0 10px 24px rgba(185,155,97,.15)}body.theme-light .legal-age-footer,body.theme-light .cart-age-note,body.theme-light .age-legal-copy{color:#5f564c!important}body.theme-light .age-confirmation{color:#4f473e!important;background:rgba(137,97,37,.06)!important;border-color:rgba(137,97,37,.2)!important}body.theme-light .age-confirmation strong{color:#765019!important}@media(max-width:620px){.legal-age-footer{justify-content:center}.age-confirmation{font-size:.72rem!important}}
+</style>
 </head>
 <body>
 <div aria-hidden="true" id="global-hop-rain"></div>
@@ -1540,7 +1544,7 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 <div class="how-steps">
 <article><b>01</b><strong>Escolha seus rótulos</strong><p>Clique nas cervejas para conhecer estilo, intensidade, amargor, perfil e todos os detalhes.</p></article>
 <article><b>02</b><strong>Continue comprando</strong><p>Adicione quantas cervejas quiser ao pedido. Você pode continuar escolhendo antes de finalizar.</p></article>
-<article><b>03</b><strong>Finalize no WhatsApp</strong><p>Envie o pedido pronto para o Diegão. Se quiser entrega, marque essa opção antes de finalizar.</p></article>
+<article><b>03</b><strong>Pague com segurança</strong><p>Finalize pelo checkout seguro. Você confirma que tem 18 anos ou mais antes de seguir para o pagamento. Se preferir, o WhatsApp continua disponível.</p></article>
 </div>
 </div>
 </section>
@@ -1570,7 +1574,7 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 </main>
 <footer id="contato">
 <div class="shell footer-inner">
-<div>© Cervejando com Diego</div>
+<div><div>© Cervejando com Diego</div><div class="legal-age-footer"><strong>18+</strong><span>Venda proibida para menores de 18 anos. Beba com moderação.</span></div></div>
 <div class="footer-links">
 <a aria-label="Abrir Instagram @cervejandocomdiego em nova aba" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">@cervejandocomdiego</a>
 <a aria-label="Abrir WhatsApp do Diegão em nova aba" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank">(16) 99792-7171</a>
@@ -1598,7 +1602,8 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 <div class="cart-empty" id="cartEmpty">Seu pedido ainda está vazio.</div>
 <label class="delivery-check"><input id="deliveryCheck" type="checkbox"/> Quero receber por entrega</label>
 <div class="cart-summary"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
-<p class="cart-note">A taxa de entrega, quando aplicável, será informada antes do pagamento.</p>
+<p class="cart-note">A taxa de entrega, quando aplicável, será calculada antes do pagamento.</p>
+<div class="cart-age-note"><strong>18+</strong><span>Ao finalizar a compra, será necessário declarar que você tem 18 anos ou mais.</span></div>
 <div class="cart-actions">
 <button class="continue-btn" id="continueShopping" type="button">Continuar comprando</button>
 <button class="checkout-btn" id="checkoutSite" type="button">Finalizar compra</button>
@@ -1618,15 +1623,19 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
         <label><input type="radio" name="deliveryType" value="delivery"/> Entrega</label>
       </fieldset>
       <div class="checkout-full address-fields" id="addressFields" hidden>
+        <div class="checkout-grid compact-grid"><label>CEP<input id="customerPostalCode" name="postalCode" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000"/></label><label>Cidade<input id="customerCity" name="city" autocomplete="address-level2" maxlength="100" value="São Carlos"/></label></div>
         <label>Endereço<input id="customerAddress" name="address" autocomplete="street-address" maxlength="220"/></label>
         <div class="checkout-grid compact-grid"><label>Número<input id="customerNumber" name="number" maxlength="20"/></label><label>Bairro<input id="customerDistrict" name="district" maxlength="100"/></label></div>
+        <label>Complemento<input id="customerComplement" name="complement" maxlength="120" placeholder="Apto, bloco, referência (opcional)"/></label>
       </div>
       <label class="checkout-full">Observações<textarea id="customerNotes" name="notes" rows="3" maxlength="500" placeholder="Alguma informação importante sobre o pedido?"></textarea></label>
     </div>
     <div class="checkout-order-summary"><div><span>Itens</span><strong id="checkoutItemsCount">0</strong></div><div><span>Subtotal</span><strong id="checkoutSubtotal">R$ 0,00</strong></div></div>
     <p class="checkout-payment-note">Pagamento disponível conforme os métodos configurados no Stripe. Cartão já pode ser habilitado; Pix pode ser ativado pela conta Stripe quando disponível.</p>
+    <label class="age-confirmation"><input id="ageConfirmed" name="ageConfirmed" type="checkbox" required/><span><strong>Declaro ter 18 anos ou mais</strong> e estar ciente de que a venda de bebidas alcoólicas para menores de idade é proibida.</span></label>
+    <p class="age-legal-copy"><strong>18+</strong> Venda proibida para menores de 18 anos. Beba com moderação.</p>
     <div class="checkout-message" id="checkoutMessage" aria-live="polite"></div>
-    <button class="checkout-pay" id="checkoutPay" type="submit">Ir para pagamento seguro</button>
+    <button class="checkout-pay" id="checkoutPay" type="submit" disabled>Confirmar idade para continuar</button>
   </form>
 </dialog>
 <script src="data/theme.js"></script><script src="data/cervejas.js"></script><script src="data/supabase.js"></script><script src="data/events.js"></script><script>
