@@ -1,0 +1,12 @@
+/* v20.1 — somente interface 18+ e cache-safe additions. Não altera tipografia/layout v19.7. */
+.footer-age-notice{display:block;margin-top:7px;color:#8f8a81;font-size:.66rem;line-height:1.45}
+.footer-age-notice strong{display:inline-grid;place-items:center;min-width:30px;height:22px;margin-right:6px;padding:0 6px;border:1px solid rgba(217,199,161,.24);border-radius:999px;color:#d0b67f;font-size:.66rem;letter-spacing:.04em}
+.age-confirmation{display:flex!important;grid-template-columns:none!important;align-items:flex-start!important;gap:10px!important;margin:14px 0 4px;padding:13px 14px;border:1px solid rgba(217,199,161,.16);border-radius:3px;background:rgba(185,155,97,.045);color:#aaa49a!important;font-size:.72rem!important;line-height:1.55;font-weight:500!important;cursor:pointer}
+.age-confirmation input{width:18px!important;height:18px!important;min-width:18px;margin:1px 0 0;accent-color:#b99b61}
+.age-confirmation strong{color:#d4bd8d;font-weight:700}
+.checkout-pay:disabled{opacity:.42!important;cursor:not-allowed!important;filter:saturate(.55)}
+body.theme-light .footer-age-notice{color:#655d54!important}
+body.theme-light .footer-age-notice strong{color:#6f4f22!important;border-color:rgba(66,57,45,.22)!important}
+body.theme-light .age-confirmation{background:rgba(137,97,37,.05);border-color:rgba(66,57,45,.14);color:#5e554c!important}
+body.theme-light .age-confirmation strong{color:#6f4f22!important}
+@media(max-width:620px){.footer-age-notice{max-width:330px;margin:8px auto 0}.age-confirmation{font-size:.69rem!important;padding:12px}}
