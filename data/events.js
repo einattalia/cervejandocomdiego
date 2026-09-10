@@ -7,6 +7,22 @@ if(!grid)return;
 const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const safeUrl=v=>{try{const u=new URL(String(v||''),location.origin);return /^https?:$/.test(u.protocol)?u.href:''}catch{return ''}};
 const formatDate=v=>{if(!v)return 'Data a confirmar';const d=new Date(v+'T12:00:00');return Number.isNaN(d.getTime())?'Data a confirmar':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})};
+const dayMs=86400000;
+function eventCallout(v){
+  if(!v)return '';
+  const eventDate=new Date(v+'T12:00:00');
+  if(Number.isNaN(eventDate.getTime()))return '';
+  const now=new Date();
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate(),12);
+  const diff=Math.round((eventDate-today)/dayMs);
+  if(diff<0)return '';
+  if(diff===0)return 'É hoje';
+  if(diff===1)return 'É amanhã';
+  const weekday=eventDate.toLocaleDateString('pt-BR',{weekday:'long'}).replace('-feira','');
+  if(diff<=7)return `É neste ${weekday}`;
+  if(diff<=30)return `Faltam ${diff} dias`;
+  return '';
+}
 function render(rows){
   grid.replaceChildren();
   if(!rows.length){const p=document.createElement('p');p.className='events-empty';p.textContent='Nenhum próximo evento publicado no momento.';grid.append(p);return}
@@ -15,6 +31,8 @@ function render(rows){
     const media=document.createElement('div');media.className='event-image';
     const img=document.createElement('img');img.loading='lazy';img.alt=ev.title?`Evento ${ev.title}`:'Evento cervejeiro';img.src=safeUrl(ev.image_url)||'assets/compartilhamento-de-link.jpg';media.append(img);
     const body=document.createElement('div');body.className='event-body';
+    const calloutText=eventCallout(ev.event_date);
+    if(calloutText){const callout=document.createElement('div');callout.className='event-callout';callout.textContent=calloutText;body.append(callout)}
     const date=document.createElement('span');date.className='event-date';date.textContent=formatDate(ev.event_date);
     const title=document.createElement('h3');title.textContent=ev.title||'Evento';
     const local=document.createElement('div');local.className='event-location';local.textContent=ev.location||'Local a confirmar';
