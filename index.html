@@ -3047,5 +3047,106 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
 }
 </style>
 
+<style id="v2035-mobile-card-uniform-layout">
+/* v20.3.5 — padroniza a altura de cada bloco interno dos cards no mobile */
+@media(max-width:620px){
+  #beerCatalogGrid .beer-card{
+    height:594px!important;
+    min-height:594px!important;
+    max-height:594px!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #beerCatalogGrid .beer-art{
+    flex:0 0 286px!important;
+    height:286px!important;
+    min-height:286px!important;
+    max-height:286px!important;
+  }
+  #beerCatalogGrid .beer-meta{
+    flex:1 1 auto!important;
+    display:grid!important;
+    grid-template-rows:76px 44px 48px 86px 44px!important;
+    gap:8px!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:14px!important;
+    align-content:stretch!important;
+  }
+  #beerCatalogGrid .beer-identity{
+    height:76px!important;
+    min-height:76px!important;
+    max-height:76px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+    overflow:hidden!important;
+  }
+  #beerCatalogGrid .beer-identity strong{
+    min-height:16px!important;
+    max-height:16px!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+  #beerCatalogGrid .beer-identity span{
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    line-clamp:2!important;
+    overflow:hidden!important;
+    min-height:50px!important;
+    max-height:50px!important;
+  }
+  #beerCatalogGrid .beer-style{
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    line-clamp:2!important;
+    overflow:hidden!important;
+    align-self:stretch!important;
+  }
+  #beerCatalogGrid .beer-price-row{
+    height:48px!important;
+    min-height:48px!important;
+    max-height:48px!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    padding:0!important;
+  }
+  #beerCatalogGrid .card-metrics{
+    height:86px!important;
+    min-height:86px!important;
+    max-height:86px!important;
+    display:grid!important;
+    grid-template-rows:1fr 1fr!important;
+    gap:8px!important;
+    overflow:hidden!important;
+  }
+  #beerCatalogGrid .card-metric{
+    height:39px!important;
+    min-height:39px!important;
+    max-height:39px!important;
+    align-items:center!important;
+  }
+  #beerCatalogGrid .card-add{
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    margin:0!important;
+    align-self:stretch!important;
+  }
+}
+@media(max-width:390px){
+  #beerCatalogGrid .beer-card{height:574px!important;min-height:574px!important;max-height:574px!important}
+  #beerCatalogGrid .beer-art{flex-basis:266px!important;height:266px!important;min-height:266px!important;max-height:266px!important}
+}
+</style>
+
 </body>
 </html>
