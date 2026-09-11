@@ -1422,6 +1422,151 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 </style>
 <link rel="stylesheet" href="assets/v20-18plus.css?v=20.2.0"/>
 <meta name="app-version" content="20.1.0-stripe-18plus"/>
+
+<style id="v20-3-4-mobile-card-final-fix">
+/* FIX FINAL MOBILE — impede qualquer regra antiga de sobrepor o conteúdo dos cards */
+@media (max-width:620px){
+  #beerCatalogGrid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+    align-items:start!important;
+  }
+  #beerCatalogGrid .beer-card{
+    display:flex!important;
+    flex-direction:column!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    align-self:auto!important;
+  }
+  #beerCatalogGrid .beer-art{
+    position:relative!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    height:340px!important;
+    min-height:340px!important;
+    max-height:none!important;
+    overflow:hidden!important;
+    padding:42px 18px 18px!important;
+  }
+  #beerCatalogGrid .beer-meta{
+    position:relative!important;
+    display:flex!important;
+    flex-direction:column!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:18px 16px 18px!important;
+    gap:12px!important;
+  }
+  #beerCatalogGrid .beer-identity,
+  #beerCatalogGrid .beer-style,
+  #beerCatalogGrid .beer-price-row,
+  #beerCatalogGrid .card-metrics,
+  #beerCatalogGrid .card-metric,
+  #beerCatalogGrid .card-add{
+    position:relative!important;
+    inset:auto!important;
+    transform:none!important;
+    float:none!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  #beerCatalogGrid .beer-identity{
+    display:block!important;
+    margin:0!important;
+  }
+  #beerCatalogGrid .beer-identity strong,
+  #beerCatalogGrid .beer-identity span{
+    display:block!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+    text-overflow:clip!important;
+  }
+  #beerCatalogGrid .beer-identity strong{
+    font-size:.75rem!important;
+    line-height:1.35!important;
+  }
+  #beerCatalogGrid .beer-identity span{
+    margin-top:5px!important;
+    font-size:1.1rem!important;
+    line-height:1.28!important;
+  }
+  #beerCatalogGrid .beer-style{
+    display:block!important;
+    margin:0!important;
+    white-space:normal!important;
+    text-overflow:clip!important;
+    font-size:.76rem!important;
+    line-height:1.45!important;
+  }
+  #beerCatalogGrid .beer-price-row{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    flex-wrap:wrap!important;
+    gap:8px 12px!important;
+    padding:12px 0!important;
+  }
+  #beerCatalogGrid .beer-volume{
+    white-space:normal!important;
+  }
+  #beerCatalogGrid .card-metrics{
+    display:grid!important;
+    gap:12px!important;
+    margin:0!important;
+  }
+  #beerCatalogGrid .card-metric{
+    display:grid!important;
+    grid-template-columns:82px minmax(0,1fr)!important;
+    grid-template-areas:"label meta" "bar bar"!important;
+    align-items:center!important;
+    gap:5px 10px!important;
+  }
+  #beerCatalogGrid .card-metric-label{
+    grid-area:label!important;
+    font-size:.64rem!important;
+    white-space:normal!important;
+  }
+  #beerCatalogGrid .card-metric-meta{
+    grid-area:meta!important;
+    justify-self:end!important;
+    text-align:right!important;
+    font-size:.61rem!important;
+    white-space:normal!important;
+  }
+  #beerCatalogGrid .card-thermo{
+    grid-area:bar!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  #beerCatalogGrid .card-add{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:46px!important;
+    margin-top:2px!important;
+    padding:11px 12px!important;
+    white-space:normal!important;
+    line-height:1.25!important;
+  }
+}
+@media (max-width:390px){
+  #beerCatalogGrid .beer-art{height:315px!important;min-height:315px!important;padding-top:38px!important}
+  #beerCatalogGrid .beer-meta{padding:16px 14px 16px!important}
+  #beerCatalogGrid .beer-identity span{font-size:1.03rem!important}
+  #beerCatalogGrid .card-metric{grid-template-columns:76px minmax(0,1fr)!important}
+}
+</style>
 </head>
 <body>
 <!-- CERVEJANDO COM DIEGO v20.2.0 — STRIPE + 18+ — BASE VISUAL v19.7 PRESERVADA -->
@@ -1664,15 +1809,17 @@ function stockInfo(status){
 function metricLevel(value,type){
   const text=normalizeCardText(value);
   if(type==='intensity'){
-    if(text.includes('muito intensa')) return 5;
-    if(text.includes('media/alta')) return 4;
+    // Escala oficial do admin: Leve, Moderada, Marcante, Intensa, Extrema
+    if(text.includes('extrema') || text.includes('muito intensa')) return 5;
     if(text.includes('intensa')) return 4;
-    if(text.includes('media')) return 3;
-    if(text.includes('leve')) return 1;
+    if(text.includes('marcante') || text.includes('media/alta')) return 3;
+    if(text.includes('moderada') || text.includes('media')) return 2;
+    if(text.includes('leve') || text.includes('suave')) return 1;
   }
   if(type==='bitterness'){
-    if(text.includes('medio/alto')) return 4;
-    if(text.includes('alto')) return 5;
+    // Escala oficial do admin: Muito baixo, Baixo, Médio, Alto, Muito alto
+    if(text.includes('muito alto')) return 5;
+    if(text.includes('alto') || text.includes('medio/alto')) return 4;
     if(text.includes('medio')) return 3;
     if(text.includes('muito baixo')) return 1;
     if(text.includes('baixo')) return 2;
@@ -1681,7 +1828,7 @@ function metricLevel(value,type){
 }
 
 function metricDescriptor(level,type){
-  const intensity=['Não divulgado','Suave','Leve','Marcante','Intensa','Extrema'];
+  const intensity=['Não divulgado','Leve','Moderada','Marcante','Intensa','Extrema'];
   const bitterness=['Não divulgado','Muito baixo','Baixo','Médio','Alto','Muito alto'];
   return (type==='bitterness'?bitterness:intensity)[Math.max(0,Math.min(5,level))];
 }
