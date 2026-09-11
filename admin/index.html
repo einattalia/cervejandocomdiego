@@ -4,13 +4,13 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0f0e0c">
 <title>Admin | Cervejando com Diego</title>
-<link rel="icon" href="../assets/favicon.png"><link rel="stylesheet" href="admin.css">
+<link rel="icon" href="/assets/favicon.png"><link rel="stylesheet" href="/admin/admin.css?v=20.3.0">
 </head>
 <body>
 <div class="shell">
   <section id="authView" class="auth-wrap">
     <div class="auth-card">
-      <img src="../assets/favicon.png" alt="Cervejando com Diego" class="brandmark">
+      <img src="/assets/favicon.png" alt="Cervejando com Diego" class="brandmark">
       <p class="eyebrow">Área administrativa</p><h1>Cervejando<br><span>com Diego</span></h1>
       <p class="muted">Acesso restrito. Somente contas administrativas autorizadas podem abrir o painel.</p>
       <form id="loginForm" class="stack">
@@ -20,15 +20,15 @@
       </form>
       <div class="auth-actions"><button id="resetBtn" class="text-btn" type="button">Esqueci minha senha</button></div>
       <p id="authMsg" class="message" aria-live="polite"></p>
-      <a class="back" href="../">← Voltar ao site</a>
+      <a class="back" href="/">← Voltar ao site</a>
     </div>
   </section>
 
   <section id="appView" class="app" hidden>
     <aside class="sidebar">
-      <div class="side-brand"><img src="../assets/favicon.png" alt=""><div><strong>Cervejando</strong><span>com Diego</span></div></div>
+      <div class="side-brand"><img src="/assets/favicon.png" alt=""><div><strong>Cervejando</strong><span>com Diego</span></div></div>
       <nav><button data-view="dashboard" class="nav active">Visão geral</button><button data-view="beers" class="nav">Cervejas</button><button data-view="orders" class="nav">Pedidos</button><button data-view="events" class="nav">Eventos</button><button data-view="settings" class="nav">Configurações</button></nav>
-      <div class="side-bottom"><small id="adminEmail"></small><button id="logoutBtn" class="nav danger">Sair</button><a href="../" target="_blank" rel="noopener">Abrir site público ↗</a></div>
+      <div class="side-bottom"><small id="adminEmail"></small><button id="logoutBtn" class="nav danger">Sair</button><a href="/" target="_blank" rel="noopener">Abrir site público ↗</a></div>
     </aside>
     <main class="main">
       <header class="topbar"><button id="menuBtn" class="menu" aria-label="Abrir menu">☰</button><div><p class="eyebrow">Painel administrativo</p><h2 id="pageTitle">Visão geral</h2></div><button id="newBeerTop" class="primary compact">+ Nova cerveja</button></header>
@@ -65,5 +65,5 @@
 <div class="dialog-actions"><button id="deactivateBtn" type="button" class="secondary danger-text">Desativar</button><button type="submit" class="primary">Salvar e publicar</button></div><p id="editorMsg" class="message" aria-live="polite"></p></form></dialog>
 <dialog id="eventDialog"><form id="eventForm" class="editor"><div class="dialog-head"><div><p class="eyebrow">Agenda</p><h2 id="eventEditorTitle">Novo evento</h2></div><button id="closeEventDialog" type="button" class="icon-btn" aria-label="Fechar">×</button></div><input id="eventId" type="hidden"><div class="form-grid two"><label>Nome do evento<input id="eTitle" required placeholder="Ex.: Festival Cervejeiro São Carlos"></label><label>Data<input id="eDate" type="date" required></label><label>Local<input id="eLocation" required placeholder="Ex.: Praça XV, São Carlos - SP"></label><label>Link de compra<input id="ePurchaseUrl" type="url" placeholder="https://..."></label><label>Ordem<input id="eSort" type="number" min="0" value="0"></label><label class="check"><input id="eActive" type="checkbox" checked> Evento ativo no site</label></div><label>Descrição<textarea id="eDescription" rows="5" placeholder="Conte o que o público vai encontrar no evento."></textarea></label><div class="image-editor"><div><img id="eventImagePreview" alt="Prévia do evento"></div><label>Foto do evento<input id="eImage" type="file" accept="image/png,image/jpeg,image/webp"><small>PNG, JPEG ou WebP. Máximo 5 MB.</small></label></div><div class="dialog-actions"><button id="deactivateEventBtn" type="button" class="secondary danger-text">Desativar</button><button type="submit" class="primary">Salvar e publicar</button></div><p id="eventEditorMsg" class="message" aria-live="polite"></p></form></dialog>
 <dialog id="orderDialog"><div class="editor order-editor"><div class="dialog-head"><div><p class="eyebrow">Pedido</p><h2 id="orderTitle">Detalhes do pedido</h2></div><button id="closeOrderDialog" type="button" class="icon-btn" aria-label="Fechar">×</button></div><div id="orderDetail" class="order-detail"></div><div class="order-status-editor"><label>Status do pedido<select id="orderStatus"><option value="awaiting_payment">Aguardando pagamento</option><option value="paid">Pago</option><option value="preparing">Separando</option><option value="ready">Pronto para retirada</option><option value="out_for_delivery">Saiu para entrega</option><option value="completed">Concluído</option><option value="cancelled">Cancelado</option></select></label><button id="saveOrderStatus" class="primary" type="button">Salvar status</button></div><p id="orderMsg" class="message"></p></div></dialog>
-<script src="admin.js" defer></script>
+<script src="/admin/admin.js?v=20.3.0" defer></script>
 </body></html>

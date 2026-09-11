@@ -92,18 +92,34 @@
           "value": "no-cache, max-age=0, must-revalidate"
         }
       ]
-    }
-  ],
-  "redirects": [
+    },
     {
-      "source": "/admin/",
-      "destination": "/admin",
-      "permanent": true
+      "source": "/admin/admin.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/admin/admin.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
     }
   ],
+  "redirects": [],
   "rewrites": [
     {
       "source": "/admin",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/admin/",
       "destination": "/admin/index.html"
     },
     {

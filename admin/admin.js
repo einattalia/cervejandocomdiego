@@ -15,7 +15,22 @@ $('#resetBtn').addEventListener('click',async()=>{const email=$('#email').value.
 $('#logoutBtn').addEventListener('click',async()=>{try{await req('/auth/v1/logout',{method:'POST'})}catch{}clearSession();location.reload()});
 function setView(name){$$('.view').forEach(v=>v.hidden=v.id!==name+'View');$$('.nav[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));$('#pageTitle').textContent={dashboard:'Visão geral',beers:'Cervejas',orders:'Pedidos',events:'Eventos',settings:'Configurações'}[name];if(innerWidth<901)$('.sidebar').classList.remove('open')}
 $$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));$('#menuBtn').addEventListener('click',()=>$('.sidebar').classList.toggle('open'));
-async function loadAll(){msg(appMsg,'Carregando dados…');try{await Promise.all([loadBeers(),loadOrders(),loadEvents(),loadSettings()]);msg(appMsg,'')}catch(err){msg(appMsg,err.message,'error')}}
+async function loadAll(){
+  msg(appMsg,'Carregando dados…');
+  const tasks=[
+    ['cervejas',loadBeers],
+    ['pedidos',loadOrders],
+    ['eventos',loadEvents],
+    ['configurações',loadSettings]
+  ];
+  const failures=[];
+  for(const [name,fn] of tasks){
+    try{await fn()}catch(err){console.error('Falha ao carregar '+name,err);failures.push(name+': '+(err?.message||'erro desconhecido'))}
+  }
+  if(failures.length){
+    msg(appMsg,'Painel aberto. Alguns módulos não carregaram: '+failures.join(' | '),'error');
+  }else{msg(appMsg,'')}
+}
 async function loadBeers(){beers=await req('/rest/v1/beers?select=*&order=sort_order.asc');renderBeers();$('#statTotal').textContent=beers.length;$('#statActive').textContent=beers.filter(b=>b.active).length;$('#statSold').textContent=beers.filter(b=>b.stock_status==='sold_out').length;renderRecent()}
 function stockLabel(s){return s==='sold_out'?'Esgotado':s==='low_stock'?'Últimas unidades':'Em estoque'}function price(v){return v==null?'Preço sob consulta':Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 function beerImage(src){if(!src)return '/assets/favicon.png';const value=String(src).trim();if(/^https?:\/\//i.test(value)||value.startsWith('data:')||value.startsWith('blob:')||value.startsWith('/'))return value;return '/'+value.replace(/^\.\//,'').replace(/^\.\.\//,'')}
