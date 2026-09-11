@@ -3271,5 +3271,71 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
 }
 </style>
 
+
+<style id="v2037-mobile-card-button-visible">
+/* v20.3.7 — reserva espaço real para o botão de adicionar ao pedido */
+@media(max-width:620px){
+  #beerCatalogGrid .beer-card{
+    height:690px!important;
+    min-height:690px!important;
+    max-height:690px!important;
+  }
+  #beerCatalogGrid .beer-art{
+    flex:0 0 280px!important;
+    height:280px!important;
+    min-height:280px!important;
+    max-height:280px!important;
+  }
+  #beerCatalogGrid .beer-meta{
+    flex:0 0 410px!important;
+    height:410px!important;
+    min-height:410px!important;
+    max-height:410px!important;
+    padding:14px!important;
+    display:grid!important;
+    grid-template-rows:76px 44px 48px 96px 50px!important;
+    gap:8px!important;
+    overflow:hidden!important;
+  }
+  #beerCatalogGrid .card-metrics{
+    height:96px!important;
+    min-height:96px!important;
+    max-height:96px!important;
+  }
+  #beerCatalogGrid .card-add{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    height:50px!important;
+    min-height:50px!important;
+    max-height:50px!important;
+    margin:0!important;
+    visibility:visible!important;
+    opacity:1!important;
+    position:static!important;
+    flex:none!important;
+  }
+}
+@media(max-width:390px){
+  #beerCatalogGrid .beer-card{
+    height:670px!important;
+    min-height:670px!important;
+    max-height:670px!important;
+  }
+  #beerCatalogGrid .beer-art{
+    flex-basis:260px!important;
+    height:260px!important;
+    min-height:260px!important;
+    max-height:260px!important;
+  }
+  #beerCatalogGrid .beer-meta{
+    flex-basis:410px!important;
+    height:410px!important;
+    min-height:410px!important;
+    max-height:410px!important;
+  }
+}
+</style>
+
 </body>
 </html>
