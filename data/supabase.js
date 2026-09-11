@@ -11,7 +11,8 @@
   const SUPABASE_PUBLISHABLE_KEY='sb_publishable_hY5y6tve470_iBtkQuQiLw_Vs38_nBy';
 
   function mapBeer(row,tags){
-    const image=row.image_url||'';
+    const media=Array.isArray(row.media_urls)?row.media_urls.filter(x=>x&&x.url):[];
+    const image=row.image_url||media.find(x=>x.type!=='video')?.url||media[0]?.url||'';
     return {
       id:row.slug,
       slug:row.slug,
@@ -20,6 +21,7 @@
       tags:tags||[],
       price:row.price===null||row.price===undefined?null:Number(row.price),
       stockStatus:row.stock_status||'in_stock',
+      media:media.length?media:[image?{url:image,type:'image'}:null].filter(Boolean),
       card:{
         brand:row.brand||'',
         name:row.name||'',
@@ -68,7 +70,7 @@
     const fallback=Array.isArray(window.CERVEJANDO_BEERS)?window.CERVEJANDO_BEERS:[];
     try{
       const [rows,tagRows]=await Promise.all([
-        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status&active=eq.true&order=sort_order.asc'),
+        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status,media_urls&active=eq.true&order=sort_order.asc'),
         supabaseFetch('/rest/v1/beer_tags?select=beer_id,tag')
       ]);
 

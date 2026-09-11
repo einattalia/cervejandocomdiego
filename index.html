@@ -946,6 +946,9 @@ html{
   .beer-art .beer-3d > img{transition:none!important}
 }
 
+
+/* v20.5 — galeria multimídia da cerveja */
+.modal-visual{position:relative}.beer-media-stage{width:100%;height:100%;display:grid;place-items:center;min-width:0;min-height:0}.modal-video{width:min(100%,620px);max-height:520px;background:#000;border-radius:10px}.beer-media-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:8;width:44px;height:54px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(0,0,0,.58);color:#fff;font-size:34px;line-height:1;display:grid;place-items:center;backdrop-filter:blur(8px)}.beer-media-nav.prev{left:14px}.beer-media-nav.next{right:14px}.beer-media-count{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;background:rgba(0,0,0,.62);color:#fff;padding:5px 9px;border-radius:999px;font-size:11px}@media(max-width:560px){.beer-media-nav{width:38px;height:46px;font-size:29px}.beer-media-nav.prev{left:7px}.beer-media-nav.next{right:7px}.modal-video{max-height:27dvh}}
 </style>
 </link></link>
 <style id="v18-2-mobile-fixes">
@@ -1913,11 +1916,22 @@ function renderBeerCatalog(){
 
     const visual=createNode('div','modal-visual');
     visual.append(createNode('div','hop-rain'));
-    const modalImg=document.createElement('img');
-    modalImg.className='modal-can';
-    modalImg.src=d.image;
-    modalImg.alt=d.imageAlt||d.title;
-    visual.append(modalImg);
+    const mediaList=(Array.isArray(beer.media)&&beer.media.length?beer.media:[{url:d.image,type:'image'}]).filter(m=>m&&m.url);
+    let mediaIndex=0;
+    const mediaStage=createNode('div','beer-media-stage');
+    function showBeerMedia(index){
+      mediaIndex=(index+mediaList.length)%mediaList.length;
+      mediaStage.replaceChildren();
+      const m=mediaList[mediaIndex];
+      if(m.type==='video'){const v=document.createElement('video');v.className='modal-can modal-video';v.src=m.url;v.controls=true;v.playsInline=true;v.preload='metadata';mediaStage.append(v)}
+      else{const im=document.createElement('img');im.className='modal-can';im.src=m.url;im.alt=d.imageAlt||d.title;mediaStage.append(im)}
+    }
+    showBeerMedia(0);
+    visual.append(mediaStage);
+    if(mediaList.length>1){
+      const prev=createNode('button','beer-media-nav prev','‹'),next=createNode('button','beer-media-nav next','›');prev.type=next.type='button';prev.setAttribute('aria-label','Mídia anterior');next.setAttribute('aria-label','Próxima mídia');prev.addEventListener('click',e=>{e.stopPropagation();showBeerMedia(mediaIndex-1)});next.addEventListener('click',e=>{e.stopPropagation();showBeerMedia(mediaIndex+1)});visual.append(prev,next);
+      const count=createNode('span','beer-media-count',`1 / ${mediaList.length}`);visual.append(count);const originalShow=showBeerMedia;showBeerMedia=function(index){originalShow(index);count.textContent=`${mediaIndex+1} / ${mediaList.length}`};showBeerMedia(0);
+    }
 
     const info=createNode('div','modal-info');
     info.append(createNode('h2','',d.title),createNode('h3','',d.subtitle));
