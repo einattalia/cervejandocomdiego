@@ -1725,7 +1725,7 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 <div class="footer-links">
 <a aria-label="Abrir Instagram @cervejandocomdiego em nova aba" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">@cervejandocomdiego</a>
 <a aria-label="Abrir WhatsApp do Diegão em nova aba" href="https://wa.me/5516997927171" rel="noopener noreferrer" target="_blank">(16) 99792-7171</a>
-<a aria-label="Enviar e-mail para Cervejando com Diego" href="mailto:contato@cervejandocomdiego.com.br">contato@cervejandocomdiego.com.br</a>
+<a aria-label="Enviar e-mail para Cervejando com Diego" href="https://mail.google.com/mail/?view=cm&fs=1&to=contato%40cervejandocomdiego.com.br" rel="noopener noreferrer" target="_blank">contato@cervejandocomdiego.com.br</a>
 </div>
 </div>
 </footer>
@@ -2414,7 +2414,10 @@ document.getElementById('tipsForm')?.addEventListener('submit',e=>{
   const question=document.getElementById('tipQuestion').value.trim();
   const subject='Ajuda para escolher uma cerveja';
   const body=`Olá, Diegão! Tenho uma pergunta pelo site.\n\nNome: ${name}\nE-mail: ${email}\nPergunta: ${question}`;
-  window.location.href=`mailto:contato@cervejandocomdiego.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const gmailUrl=`https://mail.google.com/mail/?view=cm&fs=1&to=contato%40cervejandocomdiego.com.br&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoUrl=`mailto:contato@cervejandocomdiego.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const emailWindow=window.open(gmailUrl,'_blank','noopener,noreferrer');
+  if(!emailWindow){ window.location.href=mailtoUrl; }
 });
 
 function openCartAfterAdd(){
