@@ -70,7 +70,7 @@
     const fallback=Array.isArray(window.CERVEJANDO_BEERS)?window.CERVEJANDO_BEERS:[];
     try{
       const [rows,tagRows]=await Promise.all([
-        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status,media_urls&active=eq.true&order=sort_order.asc'),
+        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status&active=eq.true&order=sort_order.asc'),
         supabaseFetch('/rest/v1/beer_tags?select=beer_id,tag')
       ]);
 
