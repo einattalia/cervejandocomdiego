@@ -1,69 +1,653 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0f0e0c">
-<title>Admin | Cervejando com Diego</title>
-<link rel="icon" href="/assets/favicon.png"><link rel="stylesheet" href="/admin/admin.css?v=20.3.0">
-</head>
-<body>
-<div class="shell">
-  <section id="authView" class="auth-wrap">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="noindex,nofollow" name="robots"/>
+  <meta content="#0f0e0c" name="theme-color"/>
+  <title>
+   Admin | Cervejando com Diego
+  </title>
+  <link href="/assets/favicon.png" rel="icon"/>
+  <link href="/admin/admin.css?v=20.3.0" rel="stylesheet"/>
+ </head>
+ <body data-admin-version="20.5.4">
+  <div class="shell">
+   <section class="auth-wrap" id="authView">
     <div class="auth-card">
-      <img src="/assets/favicon.png" alt="Cervejando com Diego" class="brandmark">
-      <p class="eyebrow">Área administrativa</p><h1>Cervejando<br><span>com Diego</span></h1>
-      <p class="muted">Acesso restrito. Somente contas administrativas autorizadas podem abrir o painel.</p>
-      <form id="loginForm" class="stack">
-        <label>E-mail<input id="email" type="email" autocomplete="username" required value="ameninadovideo016@gmail.com"></label>
-        <label>Senha<div class="password-field"><input id="password" type="password" autocomplete="current-password" minlength="6" required><button id="togglePassword" class="password-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false" title="Mostrar/ocultar senha"><span class="eye-icon" aria-hidden="true">◉</span></button></div></label>
-        <button class="primary" type="submit">Entrar</button>
-      </form>
-      <div class="auth-actions"><button id="resetBtn" class="text-btn" type="button">Esqueci minha senha</button></div>
-      <p id="authMsg" class="message" aria-live="polite"></p>
-      <a class="back" href="/">← Voltar ao site</a>
+     <img alt="Cervejando com Diego" class="brandmark" src="/assets/favicon.png"/>
+     <p class="eyebrow">
+      Área administrativa
+     </p>
+     <h1>
+      Cervejando
+      <br/>
+      <span>
+       com Diego
+      </span>
+     </h1>
+     <p class="muted">
+      Acesso restrito. Somente contas administrativas autorizadas podem abrir o painel.
+     </p>
+     <form class="stack" id="loginForm">
+      <label>
+       E-mail
+       <input autocomplete="username" id="email" required="" type="email" value="ameninadovideo016@gmail.com"/>
+      </label>
+      <label>
+       Senha
+       <div class="password-field">
+        <input autocomplete="current-password" id="password" minlength="6" required="" type="password"/>
+        <button aria-label="Mostrar senha" aria-pressed="false" class="password-toggle" id="togglePassword" title="Mostrar/ocultar senha" type="button">
+         <span aria-hidden="true" class="eye-icon">
+          ◉
+         </span>
+        </button>
+       </div>
+      </label>
+      <button class="primary" type="submit">
+       Entrar
+      </button>
+     </form>
+     <div class="auth-actions">
+      <button class="text-btn" id="resetBtn" type="button">
+       Esqueci minha senha
+      </button>
+     </div>
+     <p aria-live="polite" class="message" id="authMsg">
+     </p>
+     <a class="back" href="/">
+      ← Voltar ao site
+     </a>
     </div>
-  </section>
-
-  <section id="appView" class="app" hidden>
+   </section>
+   <section class="app" hidden="" id="appView">
     <aside class="sidebar">
-      <div class="side-brand"><img src="/assets/favicon.png" alt=""><div><strong>Cervejando</strong><span>com Diego</span></div></div>
-      <nav><button data-view="dashboard" class="nav active">Visão geral</button><button data-view="beers" class="nav">Cervejas</button><button data-view="orders" class="nav">Pedidos</button><button data-view="events" class="nav">Eventos</button><button data-view="settings" class="nav">Configurações</button></nav>
-      <div class="side-bottom"><small id="adminEmail"></small><button id="logoutBtn" class="nav danger">Sair</button><a href="/" target="_blank" rel="noopener">Abrir site público ↗</a></div>
+     <div class="side-brand">
+      <img alt="" src="/assets/favicon.png"/>
+      <div>
+       <strong>
+        Cervejando
+       </strong>
+       <span>
+        com Diego
+       </span>
+      </div>
+     </div>
+     <nav>
+      <button class="nav active" data-view="dashboard">
+       Visão geral
+      </button>
+      <button class="nav" data-view="beers">
+       Cervejas
+      </button>
+      <button class="nav" data-view="orders">
+       Pedidos
+      </button>
+      <button class="nav" data-view="events">
+       Eventos
+      </button>
+      <button class="nav" data-view="settings">
+       Configurações
+      </button>
+     </nav>
+     <div class="side-bottom">
+      <small id="adminEmail">
+      </small>
+      <button class="nav danger" id="logoutBtn">
+       Sair
+      </button>
+      <a href="/" rel="noopener" target="_blank">
+       Abrir site público ↗
+      </a>
+     </div>
     </aside>
     <main class="main">
-      <header class="topbar"><button id="menuBtn" class="menu" aria-label="Abrir menu">☰</button><div><p class="eyebrow">Painel administrativo</p><h2 id="pageTitle">Visão geral</h2></div><button id="newBeerTop" class="primary compact">+ Nova cerveja</button></header>
-      <p id="appMsg" class="message" aria-live="polite"></p>
-
-      <div id="dashboardView" class="view">
-        <div class="stats"><article><span>Rótulos</span><strong id="statTotal">—</strong></article><article><span>Ativos</span><strong id="statActive">—</strong></article><article><span>Esgotados</span><strong id="statSold">—</strong></article><article><span>Pedidos</span><strong id="statOrders">—</strong></article><article><span>Pagos</span><strong id="statPaid">—</strong></article><article><span>Faturamento</span><strong id="statRevenue">—</strong></article></div>
-        <section class="panel"><div class="panel-head"><div><p class="eyebrow">Catálogo</p><h3>Últimos rótulos</h3></div><button class="secondary" data-go="beers">Gerenciar cervejas</button></div><div id="recentBeers" class="mini-list"></div></section>
+     <header class="topbar">
+      <button aria-label="Abrir menu" class="menu" id="menuBtn">
+       ☰
+      </button>
+      <div>
+       <p class="eyebrow">
+        Painel administrativo
+       </p>
+       <h2 id="pageTitle">
+        Visão geral
+       </h2>
       </div>
-
-      <div id="beersView" class="view" hidden>
-        <section class="panel"><div class="panel-head"><div><p class="eyebrow">Catálogo</p><h3>Cervejas</h3></div><button id="newBeerBtn" class="primary">+ Adicionar cerveja</button></div><div class="toolbar"><input id="beerSearch" type="search" placeholder="Buscar rótulo ou cervejaria…"></div><div id="beerList" class="beer-list"></div></section>
+      <button class="primary compact" id="newBeerTop">
+       + Nova cerveja
+      </button>
+     </header>
+     <p aria-live="polite" class="message" id="appMsg">
+     </p>
+     <div class="view" id="dashboardView">
+      <div class="stats">
+       <article>
+        <span>
+         Rótulos
+        </span>
+        <strong id="statTotal">
+         —
+        </strong>
+       </article>
+       <article>
+        <span>
+         Ativos
+        </span>
+        <strong id="statActive">
+         —
+        </strong>
+       </article>
+       <article>
+        <span>
+         Esgotados
+        </span>
+        <strong id="statSold">
+         —
+        </strong>
+       </article>
+       <article>
+        <span>
+         Pedidos
+        </span>
+        <strong id="statOrders">
+         —
+        </strong>
+       </article>
+       <article>
+        <span>
+         Pagos
+        </span>
+        <strong id="statPaid">
+         —
+        </strong>
+       </article>
+       <article>
+        <span>
+         Faturamento
+        </span>
+        <strong id="statRevenue">
+         —
+        </strong>
+       </article>
       </div>
-
-      <div id="ordersView" class="view" hidden><section class="panel"><div class="panel-head"><div><p class="eyebrow">Pedidos</p><h3>Pedidos registrados</h3></div><button id="refreshOrders" class="secondary">Atualizar pedidos</button></div><p class="muted">Compras iniciadas pelo checkout aparecem aqui. O pagamento é confirmado automaticamente pelo webhook do Stripe.</p><div id="ordersList" class="orders-list"></div></section></div>
-
-      <div id="eventsView" class="view" hidden><section class="panel"><div class="panel-head"><div><p class="eyebrow">Agenda</p><h3>Eventos</h3></div><button id="newEventBtn" class="primary">+ Adicionar evento</button></div><p class="muted">Cadastre os eventos que aparecerão na nova seção Eventos do site.</p><div id="eventsAdminList" class="events-admin-list"></div></section></div>
-
-      <div id="settingsView" class="view" hidden><section class="panel narrow"><p class="eyebrow">Configurações</p><h3>Contato do site</h3><form id="settingsForm" class="form-grid"><label>WhatsApp<input id="setWhatsapp"></label><label>Instagram<input id="setInstagram"></label><button class="primary" type="submit">Salvar configurações</button></form></section></div>
+      <section class="panel">
+       <div class="panel-head">
+        <div>
+         <p class="eyebrow">
+          Catálogo
+         </p>
+         <h3>
+          Últimos rótulos
+         </h3>
+        </div>
+        <button class="secondary" data-go="beers">
+         Gerenciar cervejas
+        </button>
+       </div>
+       <div class="mini-list" id="recentBeers">
+       </div>
+      </section>
+     </div>
+     <div class="view" hidden="" id="beersView">
+      <section class="panel">
+       <div class="panel-head">
+        <div>
+         <p class="eyebrow">
+          Catálogo
+         </p>
+         <h3>
+          Cervejas
+         </h3>
+        </div>
+        <button class="primary" id="newBeerBtn">
+         + Adicionar cerveja
+        </button>
+       </div>
+       <div class="toolbar">
+        <input id="beerSearch" placeholder="Buscar rótulo ou cervejaria…" type="search"/>
+       </div>
+       <div class="beer-list" id="beerList">
+       </div>
+      </section>
+     </div>
+     <div class="view" hidden="" id="ordersView">
+      <section class="panel">
+       <div class="panel-head">
+        <div>
+         <p class="eyebrow">
+          Pedidos
+         </p>
+         <h3>
+          Pedidos registrados
+         </h3>
+        </div>
+        <button class="secondary" id="refreshOrders">
+         Atualizar pedidos
+        </button>
+       </div>
+       <p class="muted">
+        Compras iniciadas pelo checkout aparecem aqui. O pagamento é confirmado automaticamente pelo webhook do Stripe.
+       </p>
+       <div class="orders-list" id="ordersList">
+       </div>
+      </section>
+     </div>
+     <div class="view" hidden="" id="eventsView">
+      <section class="panel">
+       <div class="panel-head">
+        <div>
+         <p class="eyebrow">
+          Agenda
+         </p>
+         <h3>
+          Eventos
+         </h3>
+        </div>
+        <button class="primary" id="newEventBtn">
+         + Adicionar evento
+        </button>
+       </div>
+       <p class="muted">
+        Cadastre os eventos que aparecerão na nova seção Eventos do site.
+       </p>
+       <div class="events-admin-list" id="eventsAdminList">
+       </div>
+      </section>
+     </div>
+     <div class="view" hidden="" id="settingsView">
+      <section class="panel narrow">
+       <p class="eyebrow">
+        Configurações
+       </p>
+       <h3>
+        Contato do site
+       </h3>
+       <form class="form-grid" id="settingsForm">
+        <label>
+         WhatsApp
+         <input id="setWhatsapp"/>
+        </label>
+        <label>
+         Instagram
+         <input id="setInstagram"/>
+        </label>
+        <button class="primary" type="submit">
+         Salvar configurações
+        </button>
+       </form>
+      </section>
+     </div>
     </main>
-  </section>
-</div>
-
-<dialog id="beerDialog"><form id="beerForm" class="editor"><div class="dialog-head"><div><p class="eyebrow">Catálogo</p><h2 id="editorTitle">Nova cerveja</h2></div><button id="closeDialog" type="button" class="icon-btn" aria-label="Fechar">×</button></div><input id="beerId" type="hidden">
-<div class="form-grid two">
-<label>Marca<input id="fBrand" required placeholder="Ex.: DOGMA"></label><label>Nome do rótulo<input id="fName" required placeholder="Ex.: Lover #2"></label><label>Título completo<input id="fTitle" required placeholder="Ex.: DOGMA — LOVER #2"></label><label>Subtítulo<input id="fSubtitle" placeholder="Ex.: American IPA"></label><label>Slug<input id="fSlug" required placeholder="ex: dogma-lover-2"></label><label>Estilo<input id="fStyle" placeholder="Ex.: American IPA"></label><label>Cervejaria<input id="fBrewery" placeholder="Ex.: Dogma"></label><label>Volume<input id="fVolume" placeholder="473 ml"></label><label>Preço (R$)<input id="fPrice" type="number" min="0" step="0.01"></label><label>ABV<input id="fAbv" placeholder="5% ABV"></label><label>IBU<input id="fIbu"></label><label>Lúpulos<input id="fHops"></label><label>Nome no pedido<input id="fOrderName" placeholder="Nome exibido no carrinho/pedido"></label><label>Texto alternativo da imagem<input id="fImageAlt" placeholder="Descrição acessível da lata"></label><label>Sinal do card<input id="fSignal" type="number" min="0" max="5" step="1"></label><label>Ordem<input id="fSort" type="number" min="0"></label>
-<label>Intensidade<select id="fIntensity"><option>🟢 Leve</option><option>🟡 Moderada</option><option>🟠 Marcante</option><option>🔴 Intensa</option><option>🔥 Extrema</option></select></label>
-<label>Amargor<select id="fBitterness"><option>🟢 Muito baixo</option><option>🟡 Baixo</option><option>🟠 Médio</option><option>🔴 Alto</option><option>🔥 Muito alto</option></select></label>
-<label>Quantidade em estoque<input id="fStockQty" type="number" min="0" step="1" placeholder="Ex.: 12"></label><label>Status de estoque<select id="fStock"><option value="in_stock">Em estoque</option><option value="low_stock">Últimas unidades</option><option value="sold_out">Esgotado</option></select></label><label class="check"><input id="fActive" type="checkbox" checked> Produto ativo no site</label><label class="check"><input id="fFeatured" type="checkbox"> Produto em destaque</label>
-</div>
-<label>Perfil<input id="fProfile"></label><label>Recomendação<textarea id="fRecommendation" rows="2"></textarea></label><label>Descrição<textarea id="fDescription" rows="4"></textarea></label>
-<fieldset><legend>Categorias</legend><div class="checks"><label><input type="checkbox" name="tag" value="leve">Leve</label><label><input type="checkbox" name="tag" value="amargas">Amarga</label><label><input type="checkbox" name="tag" value="frutadas">Frutada</label><label><input type="checkbox" name="tag" value="intensas">Intensa</label><label><input type="checkbox" name="tag" value="especiais">Especial</label></div></fieldset>
-<div class="media-editor"><div class="media-editor-head"><div><strong>Imagens e vídeos</strong><small>A primeira mídia será a capa do card. Você pode adicionar várias imagens e vídeos.</small></div><label class="secondary media-add">+ Adicionar mídias<input id="fMedia" type="file" accept="image/png,image/jpeg,image/webp,video/mp4,video/webm,video/quicktime" multiple></label></div><div id="mediaPreviewList" class="media-preview-list"></div><small class="media-note">Imagens: até 5 MB cada. Vídeos: até 40 MB cada. Use as setas para alterar a ordem; a primeira mídia é a capa.</small></div>
-<div class="dialog-actions"><button id="deactivateBtn" type="button" class="secondary danger-text">Desativar</button><button type="submit" class="primary">Salvar e publicar</button></div><p id="editorMsg" class="message" aria-live="polite"></p></form></dialog>
-<dialog id="eventDialog"><form id="eventForm" class="editor"><div class="dialog-head"><div><p class="eyebrow">Agenda</p><h2 id="eventEditorTitle">Novo evento</h2></div><button id="closeEventDialog" type="button" class="icon-btn" aria-label="Fechar">×</button></div><input id="eventId" type="hidden"><div class="form-grid two"><label>Nome do evento<input id="eTitle" required placeholder="Ex.: Festival Cervejeiro São Carlos"></label><label>Data inicial<input id="eDate" type="date" required></label><label>Data final <small>(opcional)</small><input id="eEndDate" type="date"></label><label>Local<input id="eLocation" required placeholder="Ex.: Praça XV, São Carlos - SP"></label><label>Link de compra<input id="ePurchaseUrl" type="url" placeholder="https://..."></label><label>Instagram do evento<input id="eInstagram" type="text" placeholder="@nomedoevento"></label><label>Ordem<input id="eSort" type="number" min="0" value="0"></label><label class="check"><input id="eActive" type="checkbox" checked> Evento ativo no site</label></div><label>Descrição<textarea id="eDescription" rows="5" placeholder="Conte o que o público vai encontrar no evento."></textarea></label><div class="image-editor"><div><img id="eventImagePreview" alt="Prévia do evento"></div><label>Foto do evento<input id="eImage" type="file" accept="image/png,image/jpeg,image/webp"><small>PNG, JPEG ou WebP. Máximo 5 MB.</small></label></div><div class="dialog-actions"><button id="deactivateEventBtn" type="button" class="secondary danger-text">Desativar</button><button type="submit" class="primary">Salvar e publicar</button></div><p id="eventEditorMsg" class="message" aria-live="polite"></p></form></dialog>
-<dialog id="orderDialog"><div class="editor order-editor"><div class="dialog-head"><div><p class="eyebrow">Pedido</p><h2 id="orderTitle">Detalhes do pedido</h2></div><button id="closeOrderDialog" type="button" class="icon-btn" aria-label="Fechar">×</button></div><div id="orderDetail" class="order-detail"></div><div class="order-status-editor"><label>Status do pedido<select id="orderStatus"><option value="awaiting_payment">Aguardando pagamento</option><option value="paid">Pago</option><option value="preparing">Separando</option><option value="ready">Pronto para retirada</option><option value="out_for_delivery">Saiu para entrega</option><option value="completed">Concluído</option><option value="cancelled">Cancelado</option></select></label><button id="saveOrderStatus" class="primary" type="button">Salvar status</button></div><p id="orderMsg" class="message"></p></div></dialog>
-<script src="/admin/admin.js?v=20.5.3" defer></script>
-</body></html>
+   </section>
+  </div>
+  <dialog id="beerDialog">
+   <form class="editor" id="beerForm">
+    <div class="dialog-head">
+     <div>
+      <p class="eyebrow">
+       Catálogo
+      </p>
+      <h2 id="editorTitle">
+       Nova cerveja
+      </h2>
+     </div>
+     <button aria-label="Fechar" class="icon-btn" id="closeDialog" type="button">
+      ×
+     </button>
+    </div>
+    <input id="beerId" type="hidden"/>
+    <div class="form-grid two">
+     <label>
+      Marca
+      <input id="fBrand" placeholder="Ex.: DOGMA" required=""/>
+     </label>
+     <label>
+      Nome do rótulo
+      <input id="fName" placeholder="Ex.: Lover #2" required=""/>
+     </label>
+     <label>
+      Título completo
+      <input id="fTitle" placeholder="Ex.: DOGMA — LOVER #2" required=""/>
+     </label>
+     <label>
+      Subtítulo
+      <input id="fSubtitle" placeholder="Ex.: American IPA"/>
+     </label>
+     <label>
+      Slug
+      <input id="fSlug" placeholder="ex: dogma-lover-2" required=""/>
+     </label>
+     <label>
+      Estilo
+      <input id="fStyle" placeholder="Ex.: American IPA"/>
+     </label>
+     <label>
+      Cervejaria
+      <input id="fBrewery" placeholder="Ex.: Dogma"/>
+     </label>
+     <label>
+      Volume
+      <input id="fVolume" placeholder="473 ml"/>
+     </label>
+     <label>
+      Preço (R$)
+      <input id="fPrice" min="0" step="0.01" type="number"/>
+     </label>
+     <label>
+      ABV
+      <input id="fAbv" placeholder="5% ABV"/>
+     </label>
+     <label>
+      IBU
+      <input id="fIbu"/>
+     </label>
+     <label>
+      Lúpulos
+      <input id="fHops"/>
+     </label>
+     <label>
+      Nome no pedido
+      <input id="fOrderName" placeholder="Nome exibido no carrinho/pedido"/>
+     </label>
+     <label>
+      Texto alternativo da imagem
+      <input id="fImageAlt" placeholder="Descrição acessível da lata"/>
+     </label>
+     <label>
+      Sinal do card
+      <input id="fSignal" max="5" min="0" step="1" type="number"/>
+     </label>
+     <label>
+      Ordem
+      <input id="fSort" min="0" type="number"/>
+     </label>
+     <label>
+      Intensidade
+      <select id="fIntensity">
+       <option>
+        🟢 Leve
+       </option>
+       <option>
+        🟡 Moderada
+       </option>
+       <option>
+        🟠 Marcante
+       </option>
+       <option>
+        🔴 Intensa
+       </option>
+       <option>
+        🔥 Extrema
+       </option>
+      </select>
+     </label>
+     <label>
+      Amargor
+      <select id="fBitterness">
+       <option>
+        🟢 Muito baixo
+       </option>
+       <option>
+        🟡 Baixo
+       </option>
+       <option>
+        🟠 Médio
+       </option>
+       <option>
+        🔴 Alto
+       </option>
+       <option>
+        🔥 Muito alto
+       </option>
+      </select>
+     </label>
+     <label>
+      Quantidade em estoque
+      <input id="fStockQty" min="0" placeholder="Ex.: 12" step="1" type="number"/>
+     </label>
+     <label>
+      Status de estoque
+      <select id="fStock">
+       <option value="in_stock">
+        Em estoque
+       </option>
+       <option value="low_stock">
+        Últimas unidades
+       </option>
+       <option value="sold_out">
+        Esgotado
+       </option>
+      </select>
+     </label>
+     <label class="check">
+      <input checked="" id="fActive" type="checkbox"/>
+      Produto ativo no site
+     </label>
+     <label class="check">
+      <input id="fFeatured" type="checkbox"/>
+      Produto em destaque
+     </label>
+    </div>
+    <label>
+     Perfil
+     <input id="fProfile"/>
+    </label>
+    <label>
+     Recomendação
+     <textarea id="fRecommendation" rows="2"></textarea>
+    </label>
+    <label>
+     Descrição
+     <textarea id="fDescription" rows="4"></textarea>
+    </label>
+    <fieldset>
+     <legend>
+      Categorias
+     </legend>
+     <div class="checks">
+      <label>
+       <input name="tag" type="checkbox" value="leve"/>
+       Leve
+      </label>
+      <label>
+       <input name="tag" type="checkbox" value="amargas"/>
+       Amarga
+      </label>
+      <label>
+       <input name="tag" type="checkbox" value="frutadas"/>
+       Frutada
+      </label>
+      <label>
+       <input name="tag" type="checkbox" value="intensas"/>
+       Intensa
+      </label>
+      <label>
+       <input name="tag" type="checkbox" value="especiais"/>
+       Especial
+      </label>
+     </div>
+    </fieldset>
+    <div class="media-editor">
+     <div class="media-editor-head">
+      <div>
+       <strong>
+        Imagens e vídeos
+       </strong>
+       <small>
+        A primeira mídia será a capa do card. Você pode adicionar várias imagens e vídeos.
+       </small>
+      </div>
+      <label class="secondary media-add">
+       + Adicionar mídias
+       <input accept="image/png,image/jpeg,image/webp,video/mp4,video/webm,video/quicktime" id="fMedia" multiple="" type="file"/>
+      </label>
+     </div>
+     <div class="media-preview-list" id="mediaPreviewList">
+     </div>
+     <small class="media-note">
+      Imagens: até 5 MB cada. Vídeos: até 40 MB cada. Use as setas para alterar a ordem; a primeira mídia é a capa.
+     </small>
+    </div>
+    <div class="dialog-actions">
+     <button class="secondary danger-text" id="deactivateBtn" type="button">
+      Desativar
+     </button>
+     <button class="primary" type="submit">
+      Salvar e publicar
+     </button>
+    </div>
+    <p aria-live="polite" class="message" id="editorMsg">
+    </p>
+   </form>
+  </dialog>
+  <dialog id="eventDialog">
+   <form class="editor" id="eventForm">
+    <div class="dialog-head">
+     <div>
+      <p class="eyebrow">
+       Agenda
+      </p>
+      <h2 id="eventEditorTitle">
+       Novo evento
+      </h2>
+     </div>
+     <button aria-label="Fechar" class="icon-btn" id="closeEventDialog" type="button">
+      ×
+     </button>
+    </div>
+    <input id="eventId" type="hidden"/>
+    <div class="form-grid">
+     <label>
+      Nome do evento
+      <input id="eTitle" placeholder="Ex.: Festival Cervejeiro São Carlos" required=""/>
+     </label>
+    </div>
+    <fieldset class="event-period">
+     <legend>
+      Período do evento
+     </legend>
+     <div class="form-grid two">
+      <label>
+       Data inicial
+       <input id="eDate" required="" type="date"/>
+      </label>
+      <label>
+       Data final
+       <small>
+        (opcional)
+       </small>
+       <input id="eEndDate" type="date"/>
+      </label>
+     </div>
+     <small class="event-period-help">
+      Para evento de um único dia, deixe a Data final em branco.
+     </small>
+    </fieldset>
+    <div class="form-grid two">
+     <label>
+      Local
+      <input id="eLocation" placeholder="Ex.: Praça XV, São Carlos - SP" required=""/>
+     </label>
+     <label>
+      Instagram do evento
+      <input id="eInstagram" placeholder="@nomedoevento" type="text"/>
+     </label>
+     <label>
+      Link de compra
+      <input id="ePurchaseUrl" placeholder="https://..." type="url"/>
+     </label>
+     <label>
+      Ordem
+      <input id="eSort" min="0" type="number" value="0"/>
+     </label>
+     <label class="check">
+      <input checked="" id="eActive" type="checkbox"/>
+      Evento ativo no site
+     </label>
+    </div>
+    <label>
+     Descrição
+     <textarea id="eDescription" placeholder="Conte o que o público vai encontrar no evento." rows="5"></textarea>
+    </label>
+    <div class="image-editor">
+     <div>
+      <img alt="Prévia do evento" id="eventImagePreview"/>
+     </div>
+     <label>
+      Foto do evento
+      <input accept="image/png,image/jpeg,image/webp" id="eImage" type="file"/>
+      <small>
+       PNG, JPEG ou WebP. Máximo 5 MB.
+      </small>
+     </label>
+    </div>
+    <div class="dialog-actions">
+     <button class="secondary danger-text" id="deactivateEventBtn" type="button">
+      Desativar
+     </button>
+     <button class="primary" type="submit">
+      Salvar e publicar
+     </button>
+    </div>
+    <p aria-live="polite" class="message" id="eventEditorMsg">
+    </p>
+   </form>
+  </dialog>
+  <dialog id="orderDialog">
+   <div class="editor order-editor">
+    <div class="dialog-head">
+     <div>
+      <p class="eyebrow">
+       Pedido
+      </p>
+      <h2 id="orderTitle">
+       Detalhes do pedido
+      </h2>
+     </div>
+     <button aria-label="Fechar" class="icon-btn" id="closeOrderDialog" type="button">
+      ×
+     </button>
+    </div>
+    <div class="order-detail" id="orderDetail">
+    </div>
+    <div class="order-status-editor">
+     <label>
+      Status do pedido
+      <select id="orderStatus">
+       <option value="awaiting_payment">
+        Aguardando pagamento
+       </option>
+       <option value="paid">
+        Pago
+       </option>
+       <option value="preparing">
+        Separando
+       </option>
+       <option value="ready">
+        Pronto para retirada
+       </option>
+       <option value="out_for_delivery">
+        Saiu para entrega
+       </option>
+       <option value="completed">
+        Concluído
+       </option>
+       <option value="cancelled">
+        Cancelado
+       </option>
+      </select>
+     </label>
+     <button class="primary" id="saveOrderStatus" type="button">
+      Salvar status
+     </button>
+    </div>
+    <p class="message" id="orderMsg">
+    </p>
+   </div>
+  </dialog>
+  <script defer="" src="/admin/admin.js?v=20.5.3">
+  </script>
+ </body>
+</html>
