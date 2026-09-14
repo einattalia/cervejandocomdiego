@@ -820,17 +820,17 @@ button,a{touch-action:manipulation}
 /* ===== HEADER FIXO + VÍDEO COMO FUNCIONA v11 ===== */
 
 /* Header fixo durante o scroll */
-header{
-  position:fixed !important;
-  top:0 !important;
-  left:0 !important;
-  right:0 !important;
-  width:100% !important;
-  z-index:99999 !important;
-  background:rgba(5,6,7,.92);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+header,
+.site-header,
+.main-header{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  z-index:9999!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
 }
 
 /* Garante que anchors não fiquem escondidos atrás do header */
@@ -1573,6 +1573,126 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
   #beerCatalogGrid .card-metric{grid-template-columns:76px minmax(0,1fr)!important}
 }
 </style>
+
+<style id="v2057-mobile-header-centered">
+/* v20.5.7 — header fixo + composição mobile: menu | logo central | carrinho */
+body{padding-top:80px!important;}
+html{scroll-padding-top:96px!important;}
+
+@media(max-width:900px){
+  body{padding-top:74px!important;}
+  html{scroll-padding-top:86px!important;}
+
+  header .header-inner{
+    height:74px!important;
+    position:relative!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:0!important;
+  }
+
+  header .brand{
+    position:absolute!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%)!important;
+    margin:0!important;
+    min-width:0!important;
+    width:auto!important;
+    z-index:2!important;
+  }
+  header .brand img{
+    width:54px!important;
+    height:54px!important;
+    max-width:54px!important;
+    object-fit:contain!important;
+    display:block!important;
+  }
+
+  header .mobile-menu-toggle{
+    display:flex!important;
+    position:absolute!important;
+    left:16px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    margin:0!important;
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    z-index:4!important;
+  }
+
+  header .header-actions{
+    position:absolute!important;
+    right:16px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    margin:0!important;
+    padding:0!important;
+    display:flex!important;
+    gap:0!important;
+    z-index:4!important;
+  }
+  header .header-actions > *{display:none!important;}
+  header .header-actions #cartTrigger{
+    display:inline-flex!important;
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+
+  header .mobile-nav{
+    top:calc(100% + 8px)!important;
+    left:16px!important;
+    right:16px!important;
+    width:auto!important;
+    padding:8px!important;
+  }
+  header .mobile-nav > a{padding:14px 16px!important;}
+  .mobile-nav-tools{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+    padding:10px 8px 6px!important;
+    margin-top:2px!important;
+    border-top:1px solid rgba(217,199,161,.10)!important;
+  }
+  .mobile-nav-tools .mobile-nav-instagram,
+  .mobile-nav-tools .mobile-nav-theme{
+    min-height:42px!important;
+    border:1px solid rgba(217,199,161,.14)!important;
+    border-radius:10px!important;
+    background:rgba(255,255,255,.025)!important;
+    color:#d9cfbd!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-decoration:none!important;
+    font:600 .72rem Poppins,sans-serif!important;
+    cursor:pointer!important;
+    padding:9px 10px!important;
+  }
+  body.theme-light .mobile-nav-tools{border-top-color:rgba(66,57,45,.10)!important;}
+  body.theme-light .mobile-nav-tools .mobile-nav-instagram,
+  body.theme-light .mobile-nav-tools .mobile-nav-theme{
+    background:#faf7f0!important;
+    border-color:rgba(66,57,45,.12)!important;
+    color:#4d443a!important;
+  }
+}
+
+@media(max-width:390px){
+  header .mobile-menu-toggle{left:12px!important;}
+  header .header-actions{right:12px!important;}
+  header .brand img{width:50px!important;height:50px!important;max-width:50px!important;}
+  header .mobile-nav{left:12px!important;right:12px!important;}
+}
+</style>
 </head>
 <body>
 <!-- CERVEJANDO COM DIEGO v20.2.0 — STRIPE + 18+ — BASE VISUAL v19.7 PRESERVADA -->
@@ -1591,6 +1711,10 @@ body.theme-light .hero h1 .hero-nowrap{color:#896125!important;}
 <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
   <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#eventos">Eventos</a><a href="#sobre">Quem faz a curadoria</a>
+  <div class="mobile-nav-tools">
+    <a class="mobile-nav-instagram" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank" aria-label="Instagram do Cervejando com Diego">Instagram</a>
+    <button class="mobile-nav-theme" id="mobileThemeToggle" type="button" aria-label="Alternar tema do site">Alternar tema</button>
+  </div>
 </div>
 <div class="header-actions">
 <button aria-label="Abrir pedido" class="circle-btn cart-trigger" id="cartTrigger" type="button"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M3 5h2l2.1 9.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20.5 8H6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path><circle cx="10" cy="19" r="1.4" fill="currentColor"></circle><circle cx="17" cy="19" r="1.4" fill="currentColor"></circle></svg><span id="cartCount">0</span></button>
@@ -3360,5 +3484,23 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
 }
 </style>
 
+
+<script id="v2057-mobile-theme-proxy">
+(()=>{
+  const mobileTheme=document.getElementById('mobileThemeToggle');
+  const desktopTheme=document.getElementById('themeToggle');
+  if(!mobileTheme||!desktopTheme) return;
+  mobileTheme.addEventListener('click',()=>{
+    desktopTheme.click();
+    const menu=document.getElementById('mobileNav');
+    const btn=document.getElementById('mobileMenuToggle');
+    if(menu&&btn){
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden','true');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+</script>
 </body>
 </html>
