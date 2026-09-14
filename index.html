@@ -952,6 +952,25 @@ html{
 
 /* v20.5 — galeria multimídia da cerveja */
 .modal-visual{position:relative}.beer-media-stage{width:100%;height:100%;display:grid;place-items:center;min-width:0;min-height:0}.modal-video{width:min(100%,620px);max-height:520px;background:#000;border-radius:10px}.beer-media-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:8;width:44px;height:54px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(0,0,0,.58);color:#fff;font-size:34px;line-height:1;display:grid;place-items:center;backdrop-filter:blur(8px)}.beer-media-nav.prev{left:14px}.beer-media-nav.next{right:14px}.beer-media-count{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;background:rgba(0,0,0,.62);color:#fff;padding:5px 9px;border-radius:999px;font-size:11px}@media(max-width:560px){.beer-media-nav{width:38px;height:46px;font-size:29px}.beer-media-nav.prev{left:7px}.beer-media-nav.next{right:7px}.modal-video{max-height:27dvh}}
+
+/* ===== v20.5.9 · Dicas do Diegão: envio direto + popup ===== */
+.tips-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.tips-form-status{min-height:1.4em;margin:8px 0 0;color:#e8c77d;font-size:.9rem;line-height:1.45}
+.tips-form button:disabled{opacity:.7;cursor:wait;transform:none!important}
+.tips-success-modal{width:min(520px,calc(100vw - 32px));max-width:520px;padding:0;border:0;background:transparent;color:var(--text);overflow:visible}
+.tips-success-modal::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(7px)}
+.tips-success-card{position:relative;padding:38px 34px 32px;border:1px solid rgba(201,151,50,.42);border-radius:24px;background:#0d0f10;box-shadow:0 28px 80px rgba(0,0,0,.55);text-align:center}
+.tips-success-icon{font-size:2.6rem;line-height:1;margin-bottom:14px}
+.tips-success-card h2{margin:0 0 14px;color:var(--gold2);font-family:Oswald,sans-serif;font-size:clamp(1.8rem,5vw,2.4rem);text-transform:uppercase}
+.tips-success-card p{margin:0 auto 12px;max-width:440px;color:#d8d4cc;line-height:1.65}
+.tips-success-close{position:absolute;top:12px;right:14px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.07);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+.tips-success-catalog{width:100%;min-height:50px;margin-top:12px;border:0;border-radius:12px;background:var(--gold);color:#090909;font-weight:800;cursor:pointer;transition:.2s ease}
+.tips-success-catalog:hover{transform:translateY(-2px);filter:brightness(1.05)}
+body.theme-light .tips-success-card{background:#f4ecdf;border-color:rgba(125,85,15,.28)}
+body.theme-light .tips-success-card p{color:#403b35}
+body.theme-light .tips-success-close{background:rgba(0,0,0,.08);color:#17130d}
+@media(max-width:560px){.tips-success-card{padding:34px 20px 24px;border-radius:20px}}
+
 </style>
 </link></link>
 <style id="v18-2-mobile-fixes">
@@ -1794,13 +1813,27 @@ html{scroll-padding-top:96px!important;}
 <a class="tips-back-catalog" href="#catalogo">Voltar aos filtros do catálogo</a>
 </div>
 <form class="tips-form" id="tipsForm">
-<label>Seu nome<input autocomplete="name" id="tipName" placeholder="Seu nome" required="" type="text"/></label>
-<label>Seu e-mail<input autocomplete="email" id="tipEmail" placeholder="voce@email.com" required="" type="email"/></label>
-<label>Sua pergunta<textarea id="tipQuestion" placeholder="Ex.: gosto de cervejas leves e cítricas. O que você me indica?" required="" rows="5"></textarea></label>
-<button type="submit">Enviar pergunta ao Diegão</button>
+<label>Seu nome<input autocomplete="name" id="tipName" maxlength="80" placeholder="Seu nome" required="" type="text"/></label>
+<label>Seu e-mail<input autocomplete="email" id="tipEmail" maxlength="160" placeholder="voce@email.com" required="" type="email"/></label>
+<label>Sua pergunta<textarea id="tipQuestion" maxlength="2000" placeholder="Ex.: gosto de cervejas leves e cítricas. O que você me indica?" required="" rows="5"></textarea></label>
+<div class="tips-honeypot" aria-hidden="true"><label>Não preencha este campo<input autocomplete="off" id="tipWebsite" tabindex="-1" type="text"/></label></div>
+<button id="tipsSubmitButton" type="submit">Enviar pergunta ao Diegão</button>
+<p aria-live="polite" class="tips-form-status" id="tipsFormStatus"></p>
 </form>
 </div>
 </section>
+
+<dialog aria-labelledby="tipsSuccessTitle" class="tips-success-modal" id="tipsSuccessModal">
+  <div class="tips-success-card">
+    <button aria-label="Fechar" class="tips-success-close" id="tipsSuccessClose" type="button">×</button>
+    <div aria-hidden="true" class="tips-success-icon">🍻</div>
+    <h2 id="tipsSuccessTitle">Recebi sua pergunta!</h2>
+    <p>Valeu por me chamar! Sua mensagem chegou por aqui e, assim que eu puder, respondo você por e-mail.</p>
+    <p>Enquanto isso, dá uma olhada nas cervejas que separei por aqui. Vai que a próxima favorita já está te esperando. 😏</p>
+    <button class="tips-success-catalog" id="tipsSuccessCatalog" type="button">🍺 Explorar o catálogo</button>
+  </div>
+</dialog>
+
 <section class="how-section" id="como-funciona">
 <div class="shell">
 <span class="eyebrow">Super simples</span>
@@ -2535,17 +2568,47 @@ checkoutWhats?.addEventListener('click',event=>{
 
 renderCart();
 
-document.getElementById('tipsForm')?.addEventListener('submit',e=>{
+const tipsForm=document.getElementById('tipsForm');
+const tipsSubmitButton=document.getElementById('tipsSubmitButton');
+const tipsFormStatus=document.getElementById('tipsFormStatus');
+const tipsSuccessModal=document.getElementById('tipsSuccessModal');
+
+tipsForm?.addEventListener('submit',async e=>{
   e.preventDefault();
   const name=document.getElementById('tipName').value.trim();
   const email=document.getElementById('tipEmail').value.trim();
   const question=document.getElementById('tipQuestion').value.trim();
-  const subject='Ajuda para escolher uma cerveja';
-  const body=`Olá, Diegão! Tenho uma pergunta pelo site.\n\nNome: ${name}\nE-mail: ${email}\nPergunta: ${question}`;
-  const gmailUrl=`https://mail.google.com/mail/?view=cm&fs=1&to=contato%40cervejandocomdiego.com.br&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const mailtoUrl=`mailto:contato@cervejandocomdiego.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const emailWindow=window.open(gmailUrl,'_blank','noopener,noreferrer');
-  if(!emailWindow){ window.location.href=mailtoUrl; }
+  const website=document.getElementById('tipWebsite')?.value.trim() || '';
+  if(!name || !email || !question) return;
+
+  tipsSubmitButton.disabled=true;
+  tipsSubmitButton.textContent='Enviando...';
+  tipsFormStatus.textContent='';
+
+  try{
+    const response=await fetch('/api/send-question',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,email,question,website})
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(result.error || 'Não foi possível enviar sua pergunta.');
+    tipsForm.reset();
+    tipsSuccessModal?.showModal();
+  }catch(error){
+    console.error('Erro ao enviar pergunta:',error);
+    tipsFormStatus.textContent='Não consegui enviar sua mensagem agora. Tente novamente em alguns instantes.';
+  }finally{
+    tipsSubmitButton.disabled=false;
+    tipsSubmitButton.textContent='Enviar pergunta ao Diegão';
+  }
+});
+
+document.getElementById('tipsSuccessClose')?.addEventListener('click',()=>tipsSuccessModal?.close());
+tipsSuccessModal?.addEventListener('click',e=>{ if(e.target===tipsSuccessModal) tipsSuccessModal.close(); });
+document.getElementById('tipsSuccessCatalog')?.addEventListener('click',()=>{
+  tipsSuccessModal?.close();
+  document.getElementById('catalogo')?.scrollIntoView({behavior:'smooth',block:'start'});
 });
 
 function openCartAfterAdd(){
