@@ -1,4 +1,4 @@
-const EMAIL_RE=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function clean(value,max){ return String(value || '').trim().slice(0,max); }
 
 export default async function handler(req,res){
@@ -10,7 +10,10 @@ export default async function handler(req,res){
   const website=clean(req.body?.website,200);
 
   if(website) return res.status(200).json({ok:true});
-  if(!name || !email || !question || !EMAIL_RE.test(email)) return res.status(400).json({error:'Confira seu nome, e-mail e pergunta.'});
+  if(!name) return res.status(400).json({error:'Informe seu nome.'});
+  if(!email) return res.status(400).json({error:'Informe seu e-mail.'});
+  if(!EMAIL_RE.test(email)) return res.status(400).json({error:'Informe um e-mail válido.'});
+  if(!question) return res.status(400).json({error:'Escreva sua pergunta.'});
 
   const apiKey=process.env.RESEND_API_KEY;
   const from=process.env.QUESTION_FROM_EMAIL || 'Cervejando com Diego <site@cervejandocomdiego.com.br>';
