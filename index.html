@@ -3567,3 +3567,29 @@ body.theme-light .checkout-dialog{background:#fffdf9!important;color:#302b25!imp
 </script>
 </body>
 </html>
+
+<style id="v20511-uniform-product-media-size">
+/* v20.5.11 — padroniza a área visual de latas e garrafas no catálogo */
+#beerCatalogGrid .beer-art{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#beerCatalogGrid .beer-art img,
+#beerCatalogGrid .beer-art .beer-3d{
+  width:100%!important;
+  height:100%!important;
+  max-width:82%!important;
+  max-height:82%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  margin:auto!important;
+}
+@media(max-width:620px){
+  #beerCatalogGrid .beer-art img,
+  #beerCatalogGrid .beer-art .beer-3d{
+    max-width:86%!important;
+    max-height:86%!important;
+  }
+}
+</style>
