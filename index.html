@@ -1712,6 +1712,228 @@ html{scroll-padding-top:96px!important;}
   header .mobile-nav{left:12px!important;right:12px!important;}
 }
 </style>
+
+<style id="v20-5-12-hero-message">
+/* v20.5.12 — nova hierarquia editorial do Hero; sem impacto nas demais seções */
+.hero-message-v20512{margin:0 0 28px;}
+.hero .hero-familiar{
+  margin:0 0 10px;
+  font-family:"Poppins",sans-serif;
+  font-size:clamp(1rem,1.35vw,1.2rem);
+  font-weight:400;
+  line-height:1.45;
+  color:var(--muted);
+}
+.hero .hero-familiar span{
+  font-family:"Cormorant Garamond",serif;
+  font-size:1.28em;
+  font-style:italic;
+  font-weight:500;
+  color:#bea067;
+  letter-spacing:-.025em;
+}
+.hero .hero-different{
+  margin:0;
+  max-width:720px;
+  font-family:"Poppins",sans-serif!important;
+  font-size:clamp(2.35rem,5.1vw,5rem)!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+  color:var(--text)!important;
+}
+.hero .hero-different strong{
+  font-weight:800;
+  color:#d6b45f;
+}
+.hero .hero-signature{
+  margin:18px 0 0;
+  font-family:"Poppins",sans-serif;
+  font-size:clamp(.9rem,1.1vw,1.02rem);
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:.015em;
+  color:var(--muted);
+}
+body.theme-light .hero .hero-familiar span{color:#896125;}
+body.theme-light .hero .hero-different strong{color:#896125;}
+@media(max-width:620px){
+  .hero-message-v20512{margin-bottom:24px;}
+  .hero .hero-familiar{font-size:.98rem;margin-bottom:12px;}
+  .hero .hero-different{font-size:clamp(2.35rem,12vw,3.45rem)!important;line-height:1.01!important;}
+  .hero .hero-signature{margin-top:15px;font-size:.9rem;max-width:32ch;}
+}
+</style>
+
+<style id="v20-5-16-static-hero">
+/* v20.5.16 — Hero limpo, sem ponto final e sem animações */
+.hero-message-v20512{padding-bottom:0}
+.hero .hero-signature{position:static;margin:18px 0 0!important;width:auto;max-width:720px}
+.hero .hero-signature b{font-weight:800;color:#d6b45f}
+body.theme-light .hero .hero-signature b{color:#896125}
+@media(max-width:620px){.hero .hero-signature{margin-top:15px!important;line-height:1.7}}
+</style>
+
+
+<style id="v20-5-17-hero-refinement">
+/* v20.5.17 — Hero em uma linha + assinatura com revelação progressiva */
+.hero .hero-different{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  white-space:nowrap!important;
+  font-family:"Poppins",sans-serif!important;
+  font-size:clamp(2rem,3.45vw,4.25rem)!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  line-height:1.08!important;
+  letter-spacing:-.045em!important;
+  color:var(--text)!important;
+}
+.hero .hero-different em{
+  font:inherit!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  color:inherit!important;
+  letter-spacing:inherit!important;
+}
+.hero .hero-signature{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:.28em!important;
+  align-items:baseline!important;
+  margin:16px 0 0!important;
+  max-width:100%!important;
+}
+.hero .hero-signature .signature-step{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(7px);
+  filter:blur(2px);
+  animation:signatureReveal .95s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.hero .hero-signature .step-1{animation-delay:.45s}
+.hero .hero-signature .step-2{animation-delay:1.35s}
+.hero .hero-signature .step-3{animation-delay:2.25s}
+.hero .hero-signature b{font-weight:800!important;color:#d6b45f!important}
+@keyframes signatureReveal{to{opacity:1;transform:translateY(0);filter:blur(0)}}
+body.theme-light .hero .hero-signature b{color:#896125!important}
+
+@media(max-width:860px){
+  .hero .hero-different{
+    font-size:clamp(1.72rem,7.15vw,3.25rem)!important;
+    letter-spacing:-.05em!important;
+    line-height:1.1!important;
+  }
+}
+@media(max-width:620px){
+  .hero .hero-different{
+    font-size:clamp(1.55rem,7.25vw,2.65rem)!important;
+    letter-spacing:-.052em!important;
+  }
+  .hero .hero-signature{
+    margin-top:13px!important;
+    font-size:clamp(.78rem,3.45vw,.92rem)!important;
+    line-height:1.55!important;
+    gap:.22em!important;
+  }
+}
+@media(max-width:390px){
+  .hero .hero-different{font-size:7.05vw!important;letter-spacing:-.055em!important}
+  .hero .hero-signature{font-size:3.35vw!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero .hero-signature .signature-step{opacity:1;transform:none;filter:none;animation:none}
+}
+</style>
+
+
+<style id="v20-5-18-hero-size-yellow">
+/* v20.5.18 — Hero maior + “beber diferente” dourado */
+.hero .hero-different{
+  font-size:52px!important;
+}
+.hero .hero-different em{
+  color:#d6b45f!important;
+  font-style:italic!important;
+  font-weight:400!important;
+}
+body.theme-light .hero .hero-different em{color:#896125!important;}
+@media(max-width:860px){
+  .hero .hero-different{font-size:clamp(2rem,5.7vw,44px)!important;}
+}
+@media(max-width:620px){
+  .hero .hero-different{font-size:clamp(1.45rem,6.9vw,30px)!important;}
+}
+@media(max-width:390px){
+  .hero .hero-different{font-size:6.8vw!important;}
+}
+</style>
+
+
+<style id="v20-5-19-hero-typography-fade">
+/* v20.5.19 — hierarquia do hero + fade-in disparado quando o texto entra na tela */
+.hero .hero-familiar{
+  font-size:clamp(1.18rem,1.65vw,1.48rem)!important;
+  line-height:1.4!important;
+  margin-bottom:12px!important;
+}
+.hero .hero-familiar span{font-size:1.32em!important;}
+.hero .hero-different{
+  font-family:"Cormorant Garamond",serif!important;
+  font-size:clamp(3rem,4.35vw,4.35rem)!important;
+  font-weight:600!important;
+  letter-spacing:-.045em!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.hero .hero-different em{
+  font-family:inherit!important;
+  font-size:inherit!important;
+  font-weight:500!important;
+  font-style:italic!important;
+  color:#bea067!important;
+}
+body.theme-light .hero .hero-different em{color:#896125!important;}
+.hero .hero-signature .signature-step{
+  opacity:0!important;
+  transform:translateY(10px)!important;
+  filter:blur(3px)!important;
+  animation:none!important;
+  transition:opacity 1.05s ease,transform 1.05s cubic-bezier(.22,.61,.36,1),filter 1.05s ease!important;
+}
+.hero .hero-signature.signature-playing .signature-step{opacity:1!important;transform:translateY(0)!important;filter:blur(0)!important;}
+.hero .hero-signature.signature-playing .step-1{transition-delay:.15s!important;}
+.hero .hero-signature.signature-playing .step-2{transition-delay:1.15s!important;}
+.hero .hero-signature.signature-playing .step-3{transition-delay:2.15s!important;}
+@media(max-width:860px){
+  .hero .hero-familiar{font-size:clamp(1.08rem,2.6vw,1.32rem)!important;}
+  .hero .hero-different{font-size:clamp(2.45rem,7vw,3.65rem)!important;}
+}
+@media(max-width:620px){
+  .hero .hero-familiar{font-size:clamp(1rem,4.15vw,1.15rem)!important;}
+  .hero .hero-different{font-size:clamp(1.75rem,8.2vw,2.75rem)!important;letter-spacing:-.052em!important;}
+}
+@media(max-width:390px){.hero .hero-different{font-size:8vw!important;}}
+@media(prefers-reduced-motion:reduce){
+  .hero .hero-signature .signature-step{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;}
+}
+</style>
+<script id="v20-5-19-signature-fade">
+document.addEventListener('DOMContentLoaded',function(){
+  const signature=document.querySelector('.hero-signature');
+  if(!signature) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){signature.classList.add('signature-playing');return;}
+  const play=()=>{signature.classList.remove('signature-playing');void signature.offsetWidth;requestAnimationFrame(()=>signature.classList.add('signature-playing'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((entries,observer)=>{entries.forEach(entry=>{if(entry.isIntersecting){play();observer.unobserve(entry.target);}});},{threshold:.45});
+    io.observe(signature);
+  }else{setTimeout(play,250);}
+});
+</script>
+
 </head>
 <body>
 <!-- CERVEJANDO COM DIEGO v20.2.0 — STRIPE + 18+ — BASE VISUAL v19.7 PRESERVADA -->
@@ -1749,14 +1971,17 @@ html{scroll-padding-top:96px!important;}
 <section class="hero" id="inicio">
 <div class="hero-copy">
 <span class="eyebrow">Cervejando com Diego • Seleção autoral</span>
-<h1><span class="hero-nowrap">A cerveja de sempre</span><br/><span>você já conhece.</span></h1>
-<p class="hero-intro">Rótulos escolhidos com critério para quem quer descobrir novos sabores sem complicação.</p>
+<div class="hero-message-v20512">
+  <p class="hero-familiar"><span>A cerveja de sempre</span> você já conhece.</p>
+  <h1 class="hero-different">Agora vem <em>beber diferente</em></h1>
+  <p class="hero-signature" aria-label="Eu seleciono. Você escolhe. A gente bebe melhor."><span class="signature-step step-1">Eu seleciono.</span> <span class="signature-step step-2">Você escolhe.</span> <span class="signature-step step-3">A gente <b>bebe</b> melhor.</span></p>
+</div>
 <div class="feature-list">
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3L12 3Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Curadoria especializada</b><span>Selecionamos apenas o que vale a pena.</span></div></div>
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 15c2.8-1 4-3.2 4-6 2.7 1.5 4.3 3.8 4.3 6.5A5.3 5.3 0 0 1 10 21a5 5 0 0 1-5-5c0-2.2 1.2-4.3 3.2-5.7-.1 1.8-.5 3.4-1.2 4.7Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path></svg></div><div><b>Cervejas exclusivas</b><span>Rótulos únicos para sair do óbvio.</span></div></div>
 <div class="feature"><div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M8 12h8M10 17h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path><circle cx="8" cy="7" r="1.5" fill="currentColor"></circle><circle cx="15" cy="12" r="1.5" fill="currentColor"></circle><circle cx="12" cy="17" r="1.5" fill="currentColor"></circle></svg></div><div><b>Escolha sem complicação</b><span>Descubra por intensidade, amargor e perfil.</span></div></div>
 </div>
-<p class="hero-slogan">Beba menos, beba melhor.</p>
+
 <div class="hero-selection-divider" aria-hidden="true"></div>
 <a class="hero-premium-cta" href="#catalogo">Explorar a seleção <span aria-hidden="true">→</span></a>
 </div>
@@ -1876,7 +2101,7 @@ html{scroll-padding-top:96px!important;}
 <p class="about-lead">Curadoria feita por quem transforma curiosidade em repertório.</p>
 <p>Que eu sou apaixonado por cervejas já não é nenhum segredo, né? Por isso, selecionei rótulos que traduzem estilos sem complicação e aproximam você de cervejas que realmente valem a experiência.</p>
 <p>Juntos, vamos explorar sabores, aromas e histórias em cada gole.</p>
-<p class="tagline">Um brinde à cultura cervejeira.</p>
+<p class="tagline">Um brinde à cultura cervejeira. <strong class="curadoria-manifesto">Beba menos, beba melhor.</strong></p>
 </div>
 </section>
 </main>
