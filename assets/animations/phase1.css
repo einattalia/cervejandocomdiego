@@ -1,0 +1,29 @@
+/* Cervejando com Diego — Fase 1: motion system */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+header{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,transform .35s var(--motion-ease)}
+header.motion-scrolled{background:rgba(7,8,9,.86)!important;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);box-shadow:0 12px 42px rgba(0,0,0,.18)}
+body.theme-light header.motion-scrolled{background:rgba(250,246,239,.88)!important}
+.motion-reveal{opacity:0;transform:translateY(30px)}
+.motion-reveal.is-visible{opacity:1;transform:none;transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease)}
+.hero .eyebrow,.hero .hero-familiar,.hero .hero-different,.hero .feature,.hero .hero-premium-cta,.hero .premium-fridge{will-change:transform,opacity}
+.hero .premium-fridge{transform-origin:50% 58%}
+.hero-premium-cta,.filter-btn,.circle-btn,.card-add,.tips-form button{position:relative;overflow:hidden;isolation:isolate}
+.motion-ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.12;transform:translate(-50%,-50%) scale(0);pointer-events:none;z-index:-1;animation:motionRipple .65s ease-out forwards}
+@keyframes motionRipple{to{transform:translate(-50%,-50%) scale(12);opacity:0}}
+#beerCatalogGrid .beer-card{transform-style:preserve-3d;will-change:transform;transition:border-color .3s ease,box-shadow .3s ease!important}
+#beerCatalogGrid .beer-card .beer-art,#beerCatalogGrid .beer-card .beer-meta{transition:transform .45s var(--motion-ease)}
+#beerCatalogGrid .beer-card.motion-hover .beer-art{transform:translateY(-4px) scale(1.025)}
+#beerCatalogGrid .beer-card.motion-hover .beer-meta{transform:translateY(-2px)}
+#beerCatalogGrid .beer-card.motion-enter{animation:cardEnter .7s var(--motion-ease) both}
+@keyframes cardEnter{from{opacity:0;transform:translateY(24px) scale(.975)}to{opacity:1;transform:none}}
+#cartCount.motion-pop{animation:cartPop .48s var(--motion-ease)}
+@keyframes cartPop{0%{transform:scale(1)}45%{transform:scale(1.5) rotate(-8deg)}100%{transform:scale(1)}}
+.motion-toast{position:fixed;right:24px;top:108px;z-index:12000;padding:12px 16px;border:1px solid rgba(224,181,90,.35);background:rgba(10,11,12,.92);color:#fff;border-radius:999px;box-shadow:0 16px 45px rgba(0,0,0,.28);font-size:.82rem;font-weight:700;letter-spacing:.02em;pointer-events:none;opacity:0;transform:translateY(-10px)}
+body.theme-light .motion-toast{background:rgba(255,253,249,.96);color:#302b25}
+.motion-cursor{position:fixed;left:0;top:0;width:76px;height:76px;border-radius:50%;z-index:13000;pointer-events:none;display:grid;place-items:center;text-align:center;padding:8px;background:rgba(201,151,50,.94);color:#080909;font-family:Oswald,sans-serif;font-size:.66rem;line-height:1.05;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translate(-50%,-50%) scale(.65);transition:opacity .2s ease,transform .25s var(--motion-ease);mix-blend-mode:normal}
+.motion-cursor.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media(pointer:coarse),(max-width:860px){.motion-cursor{display:none!important}#beerCatalogGrid .beer-card{transform:none!important}}
+@media(max-width:620px){.motion-toast{right:12px;left:12px;top:84px;text-align:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-reveal,.motion-reveal.is-visible{opacity:1!important;transform:none!important;transition:none!important}.motion-cursor{display:none!important}#beerCatalogGrid .beer-card,#beerCatalogGrid .beer-card *{animation:none!important;transition:none!important;transform:none!important}}
