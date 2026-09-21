@@ -1,0 +1,30 @@
+/* Cervejando com Diego — Fase 2 refinada */
+.how-section{position:relative;overflow:clip}
+.how-section .shell{position:relative}
+.how-steps{position:relative}
+.how-steps article{will-change:transform,opacity;transform-origin:center center}
+.how-steps article b{transition:transform .35s ease,opacity .35s ease}
+.how-steps article.is-story-active b{transform:scale(1.08)}
+.how-steps article.is-story-active{z-index:2}
+.phase2-progress{position:absolute;left:0;right:0;bottom:-22px;height:2px;background:color-mix(in srgb,currentColor 12%,transparent);overflow:hidden;pointer-events:none}
+.phase2-progress span{display:block;width:100%;height:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;opacity:.65;transition:transform .35s ease}
+
+/* Mantém Dicas -> Como funciona compacto; sem pin/spacer artificial do ScrollTrigger. */
+#dicas.tips-section.catalog-help{margin-bottom:0!important}
+#como-funciona.how-section{margin-top:0!important;min-height:0!important}
+
+/* Curadoria limpa: foto sem textos sobrepostos. */
+.about{position:relative;overflow:clip}
+.about-photo-stage{will-change:transform}
+.about-copy{position:relative;z-index:2}
+.phase2-manifesto,.phase2-word-cloud{display:none!important}
+
+@media (max-width:900px){
+  .phase2-progress{display:none}
+  .how-steps article{transition:transform .4s ease,opacity .4s ease}
+  .how-steps article.is-story-active{transform:translateX(4px)}
+}
+@media (prefers-reduced-motion:reduce){
+ .phase2-progress{display:none!important}
+ .how-steps article{opacity:1!important;transform:none!important;filter:none!important}
+}
