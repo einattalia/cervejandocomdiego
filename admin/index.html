@@ -480,9 +480,10 @@
       </div>
       <label class="secondary media-add">
        + Adicionar mídias
-       <input accept="image/png,image/jpeg,image/webp,video/mp4,video/webm,video/quicktime" id="fMedia" multiple="" type="file"/>
+       <input accept="image/*,video/mp4,video/webm,video/quicktime" id="fMedia" multiple="" type="file"/>
       </label>
      </div>
+     <p class="message media-selection-msg" id="mediaSelectionMsg"></p>
      <div class="media-preview-list" id="mediaPreviewList">
      </div>
      <small class="media-note">
@@ -646,7 +647,7 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=20.5.3">
+  <script defer="" src="/admin/admin.js?v=20.9.2">
   </script>
  </body>
 </html>
