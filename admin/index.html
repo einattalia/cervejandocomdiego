@@ -316,10 +316,6 @@
       <input id="fSubtitle" placeholder="Ex.: American IPA"/>
      </label>
      <label>
-      Slug
-      <input id="fSlug" placeholder="ex: dogma-lover-2" required=""/>
-     </label>
-     <label>
       Estilo
       <input id="fStyle" placeholder="Ex.: American IPA"/>
      </label>
@@ -348,20 +344,9 @@
       <input id="fHops"/>
      </label>
      <label>
-      Nome no pedido
-      <input id="fOrderName" placeholder="Nome exibido no carrinho/pedido"/>
-     </label>
-     <label>
-      Texto alternativo da imagem
-      <input id="fImageAlt" placeholder="Descrição acessível da lata"/>
-     </label>
-     <label>
-      Sinal do card
-      <input id="fSignal" max="5" min="0" step="1" type="number"/>
-     </label>
-     <label>
-      Ordem
+      Posição no catálogo
       <input id="fSort" min="0" type="number"/>
+      <small class="field-help">Números menores aparecem primeiro.</small>
      </label>
      <label>
       Intensidade
@@ -442,9 +427,23 @@
      Descrição
      <textarea id="fDescription" rows="4"></textarea>
     </label>
+    <fieldset class="curation-fieldset">
+     <legend>
+      Curadoria do Diegão
+     </legend>
+     <p class="muted" style="margin-top:0">Escolha em quais seleções esta cerveja aparece. Você pode marcar mais de uma.</p>
+     <div class="checks">
+      <label><input name="tag" type="checkbox" value="curadoria:pra-comecar"/> Pra começar</label>
+      <label><input name="tag" type="checkbox" value="curadoria:amargor"/> Pra quem gosta de amargor</label>
+      <label><input name="tag" type="checkbox" value="curadoria:facil"/> Fácil de beber</label>
+      <label><input name="tag" type="checkbox" value="curadoria:sair-pilsen"/> Pra sair da Pilsen</label>
+      <label><input name="tag" type="checkbox" value="curadoria:diegao"/> Escolhas do Diegão</label>
+      <label><input name="tag" type="checkbox" value="curadoria:novidades"/> Chegaram agora</label>
+     </div>
+    </fieldset>
     <fieldset>
      <legend>
-      Categorias
+      Características técnicas
      </legend>
      <div class="checks">
       <label>
