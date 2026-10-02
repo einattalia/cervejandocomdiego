@@ -20,3 +20,20 @@ body.theme-light .filter-btn.active,body.theme-light .filter-btn:hover{color:#11
 body.theme-light footer#contato,body.theme-light header.motion-scrolled{background:#000!important;color:#fff!important}
 body.theme-light header .brand img,body.theme-light #ageGate img{content:normal!important;mix-blend-mode:normal!important;background:transparent!important}
 body.theme-light .premium-fridge .p3-door-title{color:#fff!important}
+
+/* Leitura em preto puro e rodapé alinhado. */
+body.theme-light{--text:#000;--muted:#000;color:#000!important}
+body.theme-light main :is(p,h1,h2,h3,h4,label,input,textarea,select,.eyebrow,.hero-signature,.signature-step,.feature b,.feature span,.quiz-progress,.quiz-progress span,.drink-path-lead,.how-steps strong,.event-location,.event-description,.event-date,.beer-volume):not(.premium-fridge *){color:#000!important}
+body.theme-light main :is(p,h1,h2,h3,h4) :is(span,em,strong):not(.premium-fridge *){color:#000!important}
+body.theme-light main :is(a,button:not(:disabled)):not(.premium-fridge *){color:#000!important}
+body.theme-light #beerCatalogGrid :is(.beer-identity,.beer-meta,.beer-name,.beer-style,.beer-price,.beer-volume,.card-metric-label,.card-metric-value,.card-metric-descriptor),
+body.theme-light #beerCatalogGrid :is(.beer-identity,.beer-meta) :is(strong,span,p,h3){color:#000!important}
+body.theme-light #beerCatalogGrid .card-add:not(:disabled),body.theme-light #beerCatalogGrid .card-add:not(:disabled):hover{color:#000!important}
+body.theme-light #contato .footer-inner{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:18px!important;text-align:center!important}
+body.theme-light #contato .footer-inner>div:first-child{display:flex;flex-direction:column;align-items:center;gap:10px}
+body.theme-light #contato .footer-age-notice{margin:0!important;text-align:center!important}
+body.theme-light #contato .footer-links{display:flex!important;flex-wrap:wrap;justify-content:center!important;align-items:center!important;gap:12px 24px!important;margin:0!important}
+body.theme-light #contato .developer-credit{margin:20px 0 0!important;padding:0 3vw!important;text-align:center!important;color:#fff!important}
+@media(max-width:600px){body.theme-light #contato .footer-links{flex-direction:column!important;gap:12px!important}}
+
+body.theme-light main #beerCatalogGrid .beer-card :is(.beer-name,.beer-brewery,.beer-style,.beer-abv,.beer-price,.beer-volume){color:#000!important}
