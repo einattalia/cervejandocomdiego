@@ -23,3 +23,7 @@ body.theme-light #contato .developer-credit{display:block!important;width:100%;m
  body.theme-light #contato .footer-inner>div:first-child>span{flex-basis:100%;white-space:normal;}
  body.theme-light #contato .footer-links a{max-width:100%;white-space:normal;overflow-wrap:anywhere;}
 }
+/* Latas acionáveis mantêm a apresentação e a proporção das imagens. */
+body.theme-light .premium-fridge button.fridge-can{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:6px;color:inherit;cursor:pointer;}
+body.theme-light .premium-fridge button.fridge-can:focus-visible{outline:2px solid #9aca3c;outline-offset:3px;}
+body.theme-light .premium-fridge button.fridge-can:disabled{cursor:not-allowed;}
