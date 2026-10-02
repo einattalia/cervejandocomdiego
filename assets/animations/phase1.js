@@ -69,20 +69,10 @@
     if(window.gsap&&!reduce){gsap.killTweensOf(t);gsap.fromTo(t,{opacity:0,y:-10},{opacity:1,y:0,duration:.3,onComplete:()=>gsap.to(t,{opacity:0,y:-8,duration:.3,delay:1.05})})}else{t.style.opacity='1';setTimeout(()=>t.style.opacity='0',1200)}
   }
 
-  function cursor(){
-    if(!fine||reduce) return; const c=document.createElement('div');c.className='motion-cursor';document.body.append(c);
-    let x=innerWidth/2,y=innerHeight/2,cx=x,cy=y;
-    addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY},{passive:true});
-    const loop=()=>{cx+=(x-cx)*.18;cy+=(y-cy)*.18;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(loop)};loop();
-    const map=[['#sobre','DIEGÃO'],['#eventos','PARTIU?']];
-    document.addEventListener('pointerover',e=>{const hit=map.find(([s])=>e.target.closest(s));if(hit){c.textContent=hit[1];c.classList.add('show')}});
-    document.addEventListener('pointerout',e=>{if(map.some(([s])=>e.target.closest(s))&&!map.some(([s])=>e.relatedTarget?.closest?.(s)))c.classList.remove('show')});
-  }
-
   function navActive(){
     const links=qa('nav a[href^="#"]'); const sections=links.map(a=>q(a.getAttribute('href'))).filter(Boolean); if(!sections.length)return;
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-35% 0px -55%'});sections.forEach(s=>io.observe(s));
   }
 
-  addEventListener('DOMContentLoaded',()=>{headerMotion();reveals();buttonRipples();cards();cartFeedback();cursor();navActive();setTimeout(heroIntro,40)});
+  addEventListener('DOMContentLoaded',()=>{headerMotion();reveals();buttonRipples();cards();cartFeedback();navActive();setTimeout(heroIntro,40)});
 })();

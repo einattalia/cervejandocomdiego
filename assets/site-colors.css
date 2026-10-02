@@ -1,0 +1,22 @@
+/* Identidade fixa: conteúdo branco, cabeçalho e rodapé pretos. */
+html{color-scheme:light}
+body.theme-light{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111;--muted:#555;background:#fff!important;color:#111!important}
+body.theme-light::before{display:none!important}
+body.theme-light header,body.theme-light footer,body.theme-light .mobile-nav{background:#000!important;color:#fff!important;border-color:#333!important}
+body.theme-light header nav a,body.theme-light .mobile-nav a,body.theme-light .footer-links a,body.theme-light .footer-age-notice,body.theme-light .footer-age-notice strong{color:#fff!important}
+body.theme-light header .circle-btn,body.theme-light header .mobile-menu-toggle{background:#000!important;color:#fff!important;border-color:#555!important}
+body.theme-light .mobile-menu-toggle span{background:#fff!important}
+body.theme-light .hero,body.theme-light .catalog,body.theme-light .premium-manifesto,body.theme-light .tips-section,body.theme-light .how-section,body.theme-light .about-copy,body.theme-light .about-photo,body.theme-light .events-section,body.theme-light .drink-path,body.theme-light .beer-quiz{background:#fff!important;color:#111!important}
+body.theme-light .hero-visual::before{background:none!important}
+body.theme-light .hero-familiar,body.theme-light .hero-familiar span,body.theme-light .hero-different,body.theme-light .hero-signature,body.theme-light .hero-signature .signature-step{color:#111!important}
+body.theme-light #beerCatalogGrid .beer-card,body.theme-light #beerCatalogGrid .beer-art,body.theme-light #beerCatalogGrid .beer-meta,body.theme-light .tips-form,body.theme-light .quiz-card,body.theme-light .quiz-pick,body.theme-light .drink-path-card,body.theme-light .event-card,body.theme-light .event-body{background:#fff!important;color:#111!important;border-color:#ddd!important}
+body.theme-light #beerCatalogGrid .beer-card h3,body.theme-light #beerCatalogGrid .beer-identity strong,body.theme-light #beerCatalogGrid .beer-name,body.theme-light .event-card h3,body.theme-light .quiz-question h3{color:#111!important}
+body.theme-light .event-location,body.theme-light .event-description,body.theme-light .events-heading p,body.theme-light .drink-path-lead,body.theme-light .quiz-progress{color:#555!important}
+body.theme-light .quiz-options button,body.theme-light .quiz-result-actions button{background:#fff!important;color:#111!important;border-color:#aaa!important}
+body.theme-light .filter-btn.active,body.theme-light .filter-btn:hover{color:#111!important}
+.developer-credit{margin:0;padding:0 3vw 24px;text-align:center;font-size:.85rem;color:#fff}
+.motion-cursor{display:none!important}
+
+body.theme-light footer#contato,body.theme-light header.motion-scrolled{background:#000!important;color:#fff!important}
+body.theme-light header .brand img,body.theme-light #ageGate img{content:normal!important;mix-blend-mode:normal!important;background:transparent!important}
+body.theme-light .premium-fridge .p3-door-title{color:#fff!important}

@@ -1947,11 +1947,12 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
+<link rel="stylesheet" href="assets/site-colors.css?v=1">
 </head>
-<body>
+<body class="theme-light">
 <section id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageQuestion">
   <div class="age-card">
-    <img src="assets/logo-diego-contorno.png?v=25" alt="Cervejando com Diego"/>
+    <img src="assets/logo-diego-copo-contorno.png?v=1" alt="Cervejando com Diego"/>
     <h2 id="ageTitle">Verificação de idade</h2>
     <p id="ageQuestion">Para continuar, você confirma ter 18 anos ou mais?</p>
     <div class="age-actions"><button id="ageNo" type="button">Não</button><button id="ageYes" type="button">Sim</button></div>
@@ -1963,7 +1964,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <div aria-hidden="true" id="global-hop-rain"></div>
 <header>
 <div class="shell header-inner">
-<a aria-label="Cervejando com Diego — início" class="brand" href="#inicio"><img alt="Cervejando com Diego" src="assets/logo-diego-contorno.png?v=25"/></a>
+<a aria-label="Cervejando com Diego — início" class="brand" href="#inicio"><img alt="Cervejando com Diego" src="assets/logo-diego-copo-contorno.png?v=1"/></a>
 <nav aria-label="Navegação principal">
 <a class="active" href="#inicio">Início</a>
 <a href="#catalogo">Catálogo</a>
@@ -1977,7 +1978,7 @@ document.addEventListener('DOMContentLoaded',function(){
   <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#eventos">Eventos</a><a href="#sobre">Quem faz a curadoria</a>
   <div class="mobile-nav-tools">
     <a class="mobile-nav-instagram" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank" aria-label="Instagram do Cervejando com Diego">Instagram</a>
-    <button class="mobile-nav-theme" id="mobileThemeToggle" type="button" aria-label="Alternar tema do site">Alternar tema</button>
+    
   </div>
 </div>
 <div class="header-actions">
@@ -1986,7 +1987,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <a aria-label="Instagram do Cervejando com Diego" class="circle-btn instagram-header-btn" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><rect fill="none" height="18" rx="5" ry="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="2"></circle><circle cx="17.4" cy="6.6" fill="currentColor" r="1.1"></circle></svg>
 </a>
-<button aria-label="Ativar tema claro" aria-pressed="false" class="theme-toggle" id="themeToggle" title="Usar tema claro" type="button"><svg aria-hidden="true" class="theme-icon-sun" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg><svg aria-hidden="true" class="theme-icon-moon" focusable="false" viewBox="0 0 24 24"><path d="M20 15.4A8.4 8.4 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/></svg></button>
+
 </div>
 </div>
 </header>
@@ -2031,7 +2032,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 <section class="beer-quiz" id="diegão-o-que-eu-bebo" aria-labelledby="quizTitle">
 <div class="shell quiz-shell">
-<div class="quiz-copy"><span class="eyebrow">Curadoria em 3 perguntas</span><h2 id="quizTitle">Diegão, <span>o que eu bebo?</span> 🍺</h2><p>Responde sem pensar demais. A gente cruza seu momento com os rótulos disponíveis.</p></div>
+<div class="quiz-copy"><span class="eyebrow">Curadoria em 3 perguntas</span><h2 id="quizTitle">Diegão,<br><span>o que eu bebo?</span></h2><p>Responde sem pensar demais. A gente cruza seu momento com os rótulos disponíveis.</p></div>
 <div class="quiz-card" id="beerQuiz">
 <div class="quiz-progress"><span id="quizStepLabel">Pergunta 1 de 3</span><i><b id="quizProgressBar"></b></i></div>
 <div class="quiz-question" data-step="0"><h3>Hoje você quer algo…</h3><div class="quiz-options"><button data-value="leve">Leve</button><button data-value="equilibrado">Equilibrado</button><button data-value="intenso">Intenso</button></div></div>
@@ -2152,6 +2153,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <a aria-label="Enviar e-mail para Cervejando com Diego" href="https://mail.google.com/mail/?view=cm&fs=1&to=contato%40cervejandocomdiego.com.br" rel="noopener noreferrer" target="_blank">contato@cervejandocomdiego.com.br</a>
 </div>
 </div>
+<p class="developer-credit">Desenvolvido por AMDV-016</p>
 </footer>
 <div id="beerModalMount"></div>
 
@@ -2208,7 +2210,7 @@ document.addEventListener('DOMContentLoaded',function(){
     <button class="checkout-pay" id="checkoutPay" type="submit" disabled>Ir para pagamento seguro</button>
   </form>
 </dialog>
-<script src="data/theme.js?v=20.2.0"></script><script src="data/cervejas.js?v=20.2.0"></script><script src="data/supabase.js?v=20.2.0"></script><script src="data/events.js?v=20.5.3"></script><script>
+<script src="data/cervejas.js?v=20.2.0"></script><script src="data/supabase.js?v=20.2.0"></script><script src="data/events.js?v=20.5.3"></script><script>
 /* ===== CATÁLOGO DATA-DRIVEN v17.1 ===== */
 function createNode(tag,className,text){
   const node=document.createElement(tag);
@@ -3857,23 +3859,7 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 </style>
 
 
-<script id="v2057-mobile-theme-proxy">
-(()=>{
-  const mobileTheme=document.getElementById('mobileThemeToggle');
-  const desktopTheme=document.getElementById('themeToggle');
-  if(!mobileTheme||!desktopTheme) return;
-  mobileTheme.addEventListener('click',()=>{
-    desktopTheme.click();
-    const menu=document.getElementById('mobileNav');
-    const btn=document.getElementById('mobileMenuToggle');
-    if(menu&&btn){
-      menu.classList.remove('open');
-      menu.setAttribute('aria-hidden','true');
-      btn.setAttribute('aria-expanded','false');
-    }
-  });
-})();
-</script>
+
 
 <!-- Motion system — Fase 1 -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
