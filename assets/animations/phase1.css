@@ -4,7 +4,7 @@ html{scroll-behavior:smooth}
 body{overflow-x:hidden}
 header{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,transform .35s var(--motion-ease)}
 header.motion-scrolled{background:rgba(7,8,9,.86)!important;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);box-shadow:0 12px 42px rgba(0,0,0,.18)}
-body.theme-light header.motion-scrolled{background:rgba(250,246,239,.88)!important}
+body.theme-light header.motion-scrolled{background:rgba(246,246,246,.88)!important}
 .motion-reveal{opacity:0;transform:translateY(30px)}
 .motion-reveal.is-visible{opacity:1;transform:none;transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease)}
 .hero .eyebrow,.hero .hero-familiar,.hero .hero-different,.hero .feature,.hero .hero-premium-cta,.hero .premium-fridge{will-change:transform,opacity}
@@ -20,9 +20,9 @@ body.theme-light header.motion-scrolled{background:rgba(250,246,239,.88)!importa
 @keyframes cardEnter{from{opacity:0;transform:translateY(24px) scale(.975)}to{opacity:1;transform:none}}
 #cartCount.motion-pop{animation:cartPop .48s var(--motion-ease)}
 @keyframes cartPop{0%{transform:scale(1)}45%{transform:scale(1.5) rotate(-8deg)}100%{transform:scale(1)}}
-.motion-toast{position:fixed;right:24px;top:108px;z-index:12000;padding:12px 16px;border:1px solid rgba(224,181,90,.35);background:rgba(10,11,12,.92);color:#fff;border-radius:999px;box-shadow:0 16px 45px rgba(0,0,0,.28);font-size:.82rem;font-weight:700;letter-spacing:.02em;pointer-events:none;opacity:0;transform:translateY(-10px)}
-body.theme-light .motion-toast{background:rgba(255,253,249,.96);color:#302b25}
-.motion-cursor{position:fixed;left:0;top:0;width:0;height:0;border-radius:50%;z-index:13000;pointer-events:none;display:grid;place-items:center;text-align:center;padding:0;background:rgba(201,151,50,.94);color:#080909;font-family:Oswald,sans-serif;font-size:0;line-height:1.05;letter-spacing:.08em;text-transform:uppercase;opacity:0;overflow:hidden;transform:translate(-50%,-50%) scale(1);transition:width .28s var(--motion-ease),height .28s var(--motion-ease),padding .28s var(--motion-ease),font-size .2s ease,opacity .2s ease,transform .25s var(--motion-ease);mix-blend-mode:normal}
+.motion-toast{position:fixed;right:24px;top:108px;z-index:12000;padding:12px 16px;border:1px solid rgba(154,202,60,.35);background:rgba(10,11,12,.92);color:#fff;border-radius:999px;box-shadow:0 16px 45px rgba(0,0,0,.28);font-size:.82rem;font-weight:700;letter-spacing:.02em;pointer-events:none;opacity:0;transform:translateY(-10px)}
+body.theme-light .motion-toast{background:rgba(253,253,253,.96);color:#2c2c2c}
+.motion-cursor{position:fixed;left:0;top:0;width:0;height:0;border-radius:50%;z-index:13000;pointer-events:none;display:grid;place-items:center;text-align:center;padding:0;background:rgba(154,202,60,.94);color:#080909;font-family:Oswald,sans-serif;font-size:0;line-height:1.05;letter-spacing:.08em;text-transform:uppercase;opacity:0;overflow:hidden;transform:translate(-50%,-50%) scale(1);transition:width .28s var(--motion-ease),height .28s var(--motion-ease),padding .28s var(--motion-ease),font-size .2s ease,opacity .2s ease,transform .25s var(--motion-ease);mix-blend-mode:normal}
 .motion-cursor.show{width:50px;height:50px;padding:5px;font-size:.48rem;opacity:1;transform:translate(-50%,-50%) scale(1)}
 @media(pointer:coarse),(max-width:860px){.motion-cursor{display:none!important}#beerCatalogGrid .beer-card{transform:none!important}}
 @media(max-width:620px){.motion-toast{right:12px;left:12px;top:84px;text-align:center}}

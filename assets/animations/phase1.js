@@ -74,7 +74,7 @@
     let x=innerWidth/2,y=innerHeight/2,cx=x,cy=y;
     addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY},{passive:true});
     const loop=()=>{cx+=(x-cx)*.18;cy+=(y-cy)*.18;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(loop)};loop();
-    const map=[['#beerCatalogGrid .beer-card','VER RÓTULO'],['.fridge-can','CONHECER'],['#sobre','DIEGÃO'],['#eventos','PARTIU?']];
+    const map=[['#sobre','DIEGÃO'],['#eventos','PARTIU?']];
     document.addEventListener('pointerover',e=>{const hit=map.find(([s])=>e.target.closest(s));if(hit){c.textContent=hit[1];c.classList.add('show')}});
     document.addEventListener('pointerout',e=>{if(map.some(([s])=>e.target.closest(s))&&!map.some(([s])=>e.relatedTarget?.closest?.(s)))c.classList.remove('show')});
   }

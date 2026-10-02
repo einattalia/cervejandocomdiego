@@ -1,0 +1,115 @@
+/* Paleta do Diegão: preto, branco e verde #9ACA3C. */
+:root{--gold:#9aca3c;--gold2:#9aca3c;--text:#fff;--muted:#bdbdbd}
+body.theme-light{--gold:#52751b;--gold2:#52751b;--text:#111;--muted:#555}
+body:not(.theme-light){color:#fff}
+body.theme-light,body.theme-light .hero,body.theme-light .catalog,body.theme-light .tips-section,body.theme-light .how-section,body.theme-light .about-copy,body.theme-light footer{background-color:#fff!important}
+#ageGate .age-card{border-color:#9aca3c}
+#ageGate button{border-color:#9aca3c;color:#9aca3c}
+#ageGate #ageYes{background:#9aca3c;color:#111}
+#beerCatalogGrid .beer-card{cursor:default!important;min-height:0!important;height:auto!important;max-height:none!important;border-radius:12px!important;background:#111!important;border-color:#333!important}
+#beerCatalogGrid .beer-meta{height:auto!important;min-height:0!important;max-height:none!important;gap:12px!important;padding:20px 18px!important;background:#111!important}
+#beerCatalogGrid .beer-art{background:#080808!important}
+#beerCatalogGrid .beer-identity{height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important}
+#beerCatalogGrid .beer-identity .beer-name{margin:0!important;font-family:Poppins,sans-serif!important;font-size:1.25rem!important;font-weight:800!important;line-height:1.25!important;color:#fff!important;text-transform:uppercase;overflow-wrap:anywhere;letter-spacing:0!important}
+#beerCatalogGrid .beer-identity .beer-brewery{font-size:.875rem!important;line-height:1.4!important;font-weight:500!important;letter-spacing:0!important;margin-top:6px!important;color:#bdbdbd!important}
+#beerCatalogGrid .beer-style-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#beerCatalogGrid .beer-style-row .beer-style{display:block!important;color:#9aca3c!important;font-size:.875rem!important;line-height:1.4!important;white-space:normal!important;overflow:visible!important;height:auto!important;max-height:none!important;margin:0!important;flex:1 1 100px}
+#beerCatalogGrid .beer-abv{color:#fff;font-size:.875rem;line-height:1.4;font-weight:700;white-space:nowrap}
+#beerCatalogGrid .beer-price-row{height:auto!important;min-height:44px!important;max-height:none!important}
+#beerCatalogGrid .beer-price{font-size:1rem!important;font-weight:700!important;color:#fff!important}
+#beerCatalogGrid .beer-volume{font-size:.875rem!important;color:#bdbdbd!important}
+#beerCatalogGrid .card-add{background:#9aca3c!important;color:#111!important;border-color:#9aca3c!important;min-height:48px!important;height:auto!important;max-height:none!important;font-size:.875rem!important;text-transform:none!important;white-space:normal!important;padding:12px!important}
+#beerCatalogGrid .card-add:hover:not(:disabled){background:#b2dd60!important;color:#111!important}
+#beerCatalogGrid .card-add:disabled{background:#252525!important;border-color:#444!important;color:#bbb!important}
+.fridge-can{cursor:default!important}
+#beerCatalogGrid .stock-badge{font-size:.75rem!important}
+body.theme-light #beerCatalogGrid .beer-card,body.theme-light #beerCatalogGrid .beer-meta{background:#fff!important}
+body.theme-light #beerCatalogGrid .beer-art{background:#f4f4f4!important}
+body.theme-light #beerCatalogGrid .beer-identity .beer-name,body.theme-light #beerCatalogGrid .beer-abv,body.theme-light #beerCatalogGrid .beer-price{color:#111!important}
+body.theme-light #beerCatalogGrid .beer-identity .beer-brewery,body.theme-light #beerCatalogGrid .beer-volume{color:#555!important}
+body.theme-light #beerCatalogGrid .beer-style-row .beer-style{color:#52751b!important}
+@media(max-width:600px){
+ #beerCatalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ #beerCatalogGrid .beer-art{height:235px!important;min-height:235px!important;max-height:235px!important;padding:38px 12px 18px!important}
+ #beerCatalogGrid .beer-meta{padding:14px 12px!important}
+ #beerCatalogGrid .beer-identity .beer-name{font-size:1rem!important}
+ #beerCatalogGrid .beer-style-row{gap:5px}
+ #beerCatalogGrid .beer-price-row{flex-wrap:wrap!important;gap:4px!important}
+}
+@media(max-width:340px){#beerCatalogGrid{grid-template-columns:1fr!important}}
+#beerCatalogGrid .beer-abv{color:#fff!important}
+#beerCatalogGrid .beer-art{flex:0 0 340px!important}
+#beerCatalogGrid .beer-meta{flex:1 1 auto!important;overflow:visible!important}
+@media(max-width:600px){#beerCatalogGrid .beer-art{flex-basis:235px!important}#beerCatalogGrid .beer-style-row .beer-style{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important}#beerCatalogGrid .beer-identity .beer-name{display:block!important;-webkit-line-clamp:unset!important;line-clamp:unset!important}}
+
+#beerCatalogGrid .beer-meta{display:flex!important;flex-direction:column!important;grid-template-rows:none!important;align-content:normal!important}
+#beerCatalogGrid .beer-identity{display:block!important}
+#beerCatalogGrid .beer-style-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:8px!important}
+#beerCatalogGrid .beer-style-row .beer-style{width:auto!important;min-width:0!important}
+#beerCatalogGrid .beer-price{max-width:none!important;white-space:normal!important;overflow:visible!important;flex:1 1 85px}
+#beerCatalogGrid .beer-volume{max-width:none!important;overflow:visible!important}
+#beerCatalogGrid .card-add{width:100%!important;margin-top:auto!important;flex:0 0 auto!important;max-width:none!important}
+#beerCatalogGrid .beer-card[hidden]{display:none!important}
+
+#beerCatalogGrid .stock-badge{max-width:calc(100% - 24px)!important;left:12px!important;white-space:normal!important;overflow-wrap:anywhere!important;padding:6px!important}
+#beerCatalogGrid .beer-abv{max-width:80px;white-space:normal!important;text-align:right}
+
+/* Títulos quadrados e catálogo aberto: conteúdo determina a altura. */
+:root{--font-display:"Barlow Condensed",sans-serif}
+.hero h1,.hero h1 em,.catalog h2,.how-section h2,.tips-section h2,.about-copy h2,
+.events-heading h2,.beer-quiz h2,.drink-path h2,.premium-manifesto p,
+.how-steps article strong,.about-copy .about-lead,.about-copy .tagline,
+.checkout-head h2,#ageGate h2{
+ font-family:var(--font-display)!important;font-weight:700!important;
+ letter-spacing:-.02em!important;line-height:1.08!important
+}
+.hero h1 em{font-style:normal!important}
+#beerCatalogGrid{align-items:start!important}
+#beerCatalogGrid .beer-card,
+body.theme-light #beerCatalogGrid .beer-card{
+ height:auto!important;min-height:0!important;max-height:none!important;
+ display:flex!important;flex-direction:column!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;overflow:visible!important;transform:none!important
+}
+#beerCatalogGrid .beer-card:hover{border:0!important;box-shadow:none!important;transform:none!important}
+#beerCatalogGrid .beer-art,
+body.theme-light #beerCatalogGrid .beer-art{
+ height:clamp(240px,28vw,340px)!important;min-height:0!important;max-height:none!important;
+ flex:0 0 auto!important;background:transparent!important;border:0!important;overflow:visible!important
+}
+#beerCatalogGrid .beer-meta,
+body.theme-light #beerCatalogGrid .beer-meta{
+ flex:0 0 auto!important;display:flex!important;grid-template-rows:none!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ overflow:visible!important;background:transparent!important;
+ border:0!important;padding:16px 8px 24px!important;gap:12px!important
+}
+#beerCatalogGrid .beer-identity,
+#beerCatalogGrid .beer-style-row,
+#beerCatalogGrid .beer-style,
+#beerCatalogGrid .beer-price-row{
+ height:auto!important;min-height:0!important;max-height:none!important;
+ overflow:visible!important;-webkit-line-clamp:unset!important;line-clamp:unset!important
+}
+#beerCatalogGrid .beer-identity .beer-name{
+ font-family:var(--font-display)!important;font-weight:700!important;
+ font-size:1.5rem!important;line-height:1.15!important;
+ white-space:normal!important;overflow:visible!important;
+ text-overflow:clip!important;overflow-wrap:anywhere!important
+}
+#beerCatalogGrid .beer-identity .beer-brewery{
+ display:block!important;height:auto!important;min-height:0!important;max-height:none!important;
+ white-space:normal!important;overflow:visible!important;text-overflow:clip!important
+}
+#beerCatalogGrid .beer-style-row{width:100%!important;grid-template-columns:minmax(0,1fr) auto!important}
+#beerCatalogGrid .beer-style{white-space:normal!important;text-overflow:clip!important;overflow-wrap:anywhere!important}
+#beerCatalogGrid .beer-price-row{flex-wrap:wrap!important}
+#beerCatalogGrid .card-add{margin-top:4px!important;height:auto!important;min-height:48px!important}
+#beerCatalogGrid .stock-badge{max-width:calc(100% - 16px)!important;left:8px!important}
+@media(max-width:600px){
+ #beerCatalogGrid .beer-art{height:230px!important;flex-basis:auto!important;padding:32px 8px 12px!important}
+ #beerCatalogGrid .beer-meta{padding:14px 4px 24px!important}
+ #beerCatalogGrid .beer-identity .beer-name{font-size:1.2rem!important}
+ .hero h1{font-size:clamp(2.75rem,12vw,4.5rem)!important}
+}

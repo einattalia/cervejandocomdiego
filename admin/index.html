@@ -9,8 +9,9 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png" rel="icon"/>
-  <link href="/admin/admin.css?v=20.3.0" rel="stylesheet"/>
- </head>
+  <link href="/admin/admin.css?v=21.0" rel="stylesheet"/>
+ <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
+</head>
  <body data-admin-version="20.5.4">
   <div class="shell">
    <section class="auth-wrap" id="authView">
@@ -299,29 +300,29 @@
     </div>
     <input id="beerId" type="hidden"/>
     <div class="form-grid two">
-     <label>
+     <label hidden>
       Marca
-      <input id="fBrand" placeholder="Ex.: DOGMA" required=""/>
+      <input id="fBrand" placeholder="Ex.: DOGMA"/>
      </label>
      <label>
-      Nome do rótulo
+      Nome da cerveja
       <input id="fName" placeholder="Ex.: Lover #2" required=""/>
      </label>
-     <label>
+     <label hidden>
       Título completo
-      <input id="fTitle" placeholder="Ex.: DOGMA — LOVER #2" required=""/>
+      <input id="fTitle" placeholder="Ex.: DOGMA — LOVER #2"/>
      </label>
-     <label>
+     <label hidden>
       Subtítulo
       <input id="fSubtitle" placeholder="Ex.: American IPA"/>
      </label>
      <label>
       Estilo
-      <input id="fStyle" placeholder="Ex.: American IPA"/>
+      <input required="" id="fStyle" placeholder="Ex.: American IPA"/>
      </label>
      <label>
       Cervejaria
-      <input id="fBrewery" placeholder="Ex.: Dogma"/>
+      <input required="" id="fBrewery" placeholder="Ex.: Dogma"/>
      </label>
      <label>
       Volume
@@ -333,13 +334,13 @@
      </label>
      <label>
       ABV
-      <input id="fAbv" placeholder="5% ABV"/>
+      <input required="" id="fAbv" placeholder="5% ABV"/>
      </label>
-     <label>
+     <label hidden>
       IBU
       <input id="fIbu"/>
      </label>
-     <label>
+     <label hidden>
       Lúpulos
       <input id="fHops"/>
      </label>
@@ -348,7 +349,7 @@
       <input id="fSort" min="0" type="number"/>
       <small class="field-help">Números menores aparecem primeiro.</small>
      </label>
-     <label>
+     <label hidden>
       Intensidade
       <select id="fIntensity">
        <option>
@@ -368,7 +369,7 @@
        </option>
       </select>
      </label>
-     <label>
+     <label hidden>
       Amargor
       <select id="fBitterness">
        <option>
@@ -415,15 +416,15 @@
       Produto em destaque
      </label>
     </div>
-    <label>
+    <label hidden>
      Perfil
      <input id="fProfile"/>
     </label>
-    <label>
+    <label hidden>
      Recomendação
      <textarea id="fRecommendation" rows="2"></textarea>
     </label>
-    <label>
+    <label hidden>
      Descrição
      <textarea id="fDescription" rows="4"></textarea>
     </label>
@@ -441,7 +442,7 @@
       <label><input name="tag" type="checkbox" value="curadoria:novidades"/> Chegaram agora</label>
      </div>
     </fieldset>
-    <fieldset>
+    <fieldset hidden>
      <legend>
       Características técnicas
      </legend>
@@ -647,7 +648,7 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=20.9.2">
+  <script defer="" src="/admin/admin.js?v=21.0">
   </script>
  </body>
 </html>
