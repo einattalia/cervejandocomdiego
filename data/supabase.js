@@ -17,6 +17,7 @@
       id:row.slug,
       slug:row.slug,
       active:row.active!==false,
+      featured:row.featured===true,
       sortOrder:Number(row.sort_order)||0,
       tags:tags||[],
       price:row.price===null||row.price===undefined?null:Number(row.price),

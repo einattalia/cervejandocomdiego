@@ -407,10 +407,11 @@
       Produto ativo no site
      </label>
      <label class="check">
-      <input id="fFeatured" type="checkbox"/>
-      Produto em destaque
+      <input id="fFeatured" type="checkbox" aria-describedby="fridgeHelp"/>
+      Mostrar na geladeira
      </label>
     </div>
+    <p id="fridgeHelp" class="muted">Marque até 8 rótulos ativos. A geladeira mostra 4 por prateleira, seguindo o campo Posição no catálogo.</p>
     <label hidden>
      Perfil
      <input id="fProfile"/>
@@ -425,7 +426,7 @@
     </label>
     <fieldset class="curation-fieldset">
      <legend>
-      Curadoria do Diegão
+      Seleção do Diegão
      </legend>
      <p class="muted" style="margin-top:0">Escolha em quais seleções esta cerveja aparece. Você pode marcar mais de uma.</p>
      <div class="checks">
@@ -643,7 +644,7 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=21.0">
+  <script defer="" src="/admin/admin.js?v=23.0">
   </script>
  </body>
 </html>

@@ -48,7 +48,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🌿 Lupulado • 🍊 Cítrico • 🌲 Resinoso",
       "goodFor": "já gosta de IPA e procura uma cerveja mais intensa, alcoólica e amarga.",
       "orderName": "BREJÓLA — DOUBLE IPA"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-1",
@@ -64,7 +65,7 @@ window.CERVEJANDO_BEERS = [
     "card": {
       "brand": "BREJÓLA",
       "name": "New England Ipa",
-      "image": "assets/brejola-neipa.png",
+      "image": "assets/brejola-new-england-ipa.png",
       "alt": "BREJÓLA NEW ENGLAND IPA",
       "signal": 3,
       "ariaLabel": "Ver detalhes da cerveja"
@@ -72,7 +73,7 @@ window.CERVEJANDO_BEERS = [
     "detail": {
       "title": "BREJÓLA — NEW ENGLAND IPA",
       "subtitle": "New England IPA",
-      "image": "assets/brejola-neipa.png",
+      "image": "assets/brejola-new-england-ipa.png",
       "imageAlt": "BREJÓLA — NEW ENGLAND IPA",
       "style": "New England IPA",
       "brewery": "Brejó",
@@ -86,7 +87,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🥭 Tropical • 🍊 Cítrico • 🌿 Lupulado",
       "goodFor": "gosta de IPA, mas prefere muito aroma e sabores frutados em vez de somente amargor.",
       "orderName": "BREJÓLA — NEW ENGLAND IPA"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-2",
@@ -123,7 +125,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "☕ Torrado • 🍫 Chocolate • 🍮 Caramelo • 🪵 Amadeirado",
       "goodFor": "gosta de café, chocolate e cervejas escuras, mas não quer começar por uma Stout extremamente pesada.",
       "orderName": "ZEV — BROWN PORTER AMBURANA"
-    }
+    },
+    "featured": false
   },
   {
     "id": "beer-3",
@@ -161,7 +164,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🥭 Tropical • 🍑 Frutado • 🍊 Cítrico • 🌿 Lupulado",
       "goodFor": "procura uma IPA extremamente aromática, encorpada e potente.",
       "orderName": "CROMA — BLADE RUNNER"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-4",
@@ -198,7 +202,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🥭 Tropical • 🍊 Cítrico • 🍑 Frutado",
       "goodFor": "quer entrar no mundo das IPAs por uma cerveja aromática e frutada, sem procurar amargor extremo.",
       "orderName": "DÁDIVA — ÁPICE"
-    }
+    },
+    "featured": false
   },
   {
     "id": "beer-5",
@@ -237,7 +242,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🍊 Cítrico • 🥭 Tropical • 🌿 Herbal • 🌲 Resinoso",
       "goodFor": "é apaixonado por lúpulo e quer explorar uma IPA mais complexa, aromática e potente.",
       "orderName": "DOGMA — LOVER #2"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-6",
@@ -275,7 +281,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🍫 Chocolate • ☕ Café • 🥥 Coco • 🔥 Torrado",
       "goodFor": "gosta de cervejas escuras, encorpadas e complexas — especialmente quem curte chocolate, café e coco.",
       "orderName": "SALVADOR — ENGESA OIL COCONUT STOUT EDITION"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-8",
@@ -313,7 +320,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🍈 Frutado • 🍫 Cacau • 🍋 Ácido • 🌴 Tropical",
       "goodFor": "gosta de sabores ácidos, frutas tropicais ou simplesmente quer provar algo completamente diferente.",
       "orderName": "GREENHOUSE — ANNONA MURICATA"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-9",
@@ -351,7 +359,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🌿 Herbal • 🌲 Resinoso • 🍊 Cítrico • 🌱 Dank",
       "goodFor": "gosta das IPAs mais clássicas, secas, herbais e com amargor evidente.",
       "orderName": "GREENHOUSE — CANNABIS INDICA"
-    }
+    },
+    "featured": false
   },
   {
     "id": "beer-10",
@@ -389,7 +398,8 @@ window.CERVEJANDO_BEERS = [
       "profile": "🥭 Tropical • 🍊 Cítrico • 🍑 Frutado • 🌿 Lupulado",
       "goodFor": "já curte NEIPAs e procura uma versão mais potente, encorpada e intensa.",
       "orderName": "STORMY — DOUBLE METEOR"
-    }
+    },
+    "featured": true
   },
   {
     "id": "beer-7",
@@ -426,6 +436,7 @@ window.CERVEJANDO_BEERS = [
       "profile": "🌾 Maltado • 🌿 Herbal • ❄️ Refrescante",
       "goodFor": "bebe Pilsen e Lager no dia a dia e quer experimentar uma cerveja artesanal sem partir diretamente para estilos intensos.",
       "orderName": "DOGMA — PILSEN"
-    }
+    },
+    "featured": true
   }
 ];
