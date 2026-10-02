@@ -14,7 +14,7 @@
    function active(i){steps.forEach((s,n)=>s.classList.toggle('is-story-active',n===i)); if(prog.firstElementChild) prog.firstElementChild.style.transform=`scaleX(${(i+1)/steps.length})`;}
    if(window.gsap&&window.ScrollTrigger){
      steps.forEach((step,i)=>{
-       gsap.fromTo(step,{opacity:.58,y:desktop?24:16,scale:.985},{opacity:1,y:0,scale:1,duration:.55,ease:'power2.out',scrollTrigger:{trigger:step,start:'top 82%',toggleActions:'play none none reverse',onEnter:()=>active(i),onEnterBack:()=>active(i)}});
+       gsap.fromTo(step,{opacity:.58,y:desktop?24:16,scale:.985},{opacity:1,y:0,scale:1,duration:.55,ease:'power2.out',scrollTrigger:{trigger:step,start:'top 82%',once:true,toggleActions:'play none none none',onEnter:()=>active(i),onEnterBack:()=>active(i)}});
      });
    }else{
      const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)active(steps.indexOf(e.target))}),{threshold:.5});
@@ -37,5 +37,5 @@
    qa('#eventos .events-heading,#dicas .tips-grid>div:first-child').forEach(el=>gsap.fromTo(el,{y:12},{y:-5,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:1}}));
  }
 
- addEventListener('DOMContentLoaded',()=>setTimeout(()=>{howStory();curatorStory();sectionDepth();window.ScrollTrigger?.refresh()},80));
+ addEventListener('DOMContentLoaded',()=>setTimeout(()=>{howStory();window.ScrollTrigger?.refresh()},80));
 })();

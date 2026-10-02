@@ -29,11 +29,43 @@
   }
 
   function reveals(){
-    const targets=qa('main > section:not(.hero) .eyebrow, main > section:not(.hero) h2, main > section:not(.hero) .catalog-top > div:first-child, .how-section .feature, .about-copy, .tips-grid > div');
-    targets.forEach(el=>el.classList.add('motion-reveal'));
-    if(reduce){targets.forEach(el=>el.classList.add('is-visible'));return;}
-    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.14,rootMargin:'0px 0px -8%'});
-    targets.forEach(el=>io.observe(el));
+    const preference=matchMedia('(prefers-reduced-motion: reduce)');
+    if(preference.matches || !window.IntersectionObserver || !Element.prototype.animate) return;
+    const registered=new WeakSet(), played=new Set(), running=new Set();
+    const observer=new IntersectionObserver(entries=>{
+      let cardIndex=0;
+      entries.filter(entry=>entry.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top||a.boundingClientRect.left-b.boundingClientRect.left).forEach(entry=>{
+        const el=entry.target;
+        observer.unobserve(el);
+        const key=el.matches('.beer-card') ? el.dataset.target : null;
+        if(key && played.has(key)) return;
+        if(key) played.add(key);
+        el.dataset.scrollRevealed='true';
+        if(preference.matches) return;
+        const mobile=matchMedia('(max-width: 700px)').matches;
+        const isCard=el.matches('.beer-card');
+        const delay=isCard ? Math.min(cardIndex++,3)*(mobile?45:75) : 0;
+        const animation=el.animate([
+          {opacity:0,translate:'0 '+(mobile?10:20)+'px'},
+          {opacity:1,translate:'0 0'}
+        ],{duration:mobile?420:620,delay,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+        running.add(animation);
+        const done=()=>running.delete(animation);
+        animation.addEventListener('finish',done,{once:true});
+        animation.addEventListener('cancel',done,{once:true});
+      });
+    },{threshold:.06,rootMargin:'0px 0px -24px'});
+    const register=el=>{if(!registered.has(el)){registered.add(el);observer.observe(el)}};
+    qa('main > section:not(.hero) .eyebrow,main > section:not(.hero) h2,main > section:not(.hero) p,.about-photo,footer').filter(el=>!el.closest('.beer-card,.how-steps,.event-card,.quiz-card,.tips-success')).forEach(register);
+    const grid=q('#beerCatalogGrid');
+    if(grid){
+      const refresh=()=>qa('.beer-card',grid).forEach(register);
+      refresh();
+      new MutationObserver(refresh).observe(grid,{childList:true});
+    }
+    preference.addEventListener('change',event=>{
+      if(event.matches){observer.disconnect();running.forEach(animation=>animation.cancel());running.clear()}
+    });
   }
 
   function buttonRipples(){
@@ -49,7 +81,6 @@
     const grid=q('#beerCatalogGrid'); if(!grid) return;
     const init=()=>qa('.beer-card',grid).forEach((card,i)=>{
       if(card.dataset.motionReady) return; card.dataset.motionReady='1';
-      if(!reduce){card.classList.add('motion-enter');card.style.animationDelay=`${Math.min(i,7)*55}ms`;}
       if(fine&&!reduce){
         card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateX(${-y*3.2}deg) rotateY(${x*4.2}deg) translateY(-4px)`;card.classList.add('motion-hover')});
         card.addEventListener('pointerleave',()=>{card.style.transform='';card.classList.remove('motion-hover')});
