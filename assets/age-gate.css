@@ -1,12 +1,12 @@
 /* Edite as cores e o tamanho da janela aqui. */
-#ageGate{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.93);overflow:auto;font-family:Poppins,sans-serif;color:#f0f0f0}
+#ageGate{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.93);overflow:auto;font-family:"Barlow Condensed",sans-serif!important;color:#f0f0f0}
 #ageGate[hidden]{display:none!important}
 #ageGate .age-card{width:min(100%,480px);padding:32px 24px;border:1px solid #9aca3c;border-radius:22px;background:#111315;text-align:center;box-shadow:0 20px 80px #000}
 #ageGate img{width:100px;height:100px;object-fit:contain;margin-bottom:16px}
 #ageGate h2{font-size:1.65rem;line-height:1.2;margin:0 0 20px;text-transform:uppercase}
 #ageGate p{font-size:1rem;line-height:1.6;margin:0 0 24px}
 #ageGate .age-actions{display:flex;gap:12px}
-#ageGate button{flex:1;min-height:52px;border:1px solid #9aca3c;border-radius:10px;background:#111315;color:#9aca3c;font:600 1.1rem Poppins,sans-serif;cursor:pointer}
+#ageGate button{flex:1;min-height:52px;border:1px solid #9aca3c;border-radius:10px;background:#111315;color:#9aca3c;font:600 1.1rem "Barlow Condensed",sans-serif;cursor:pointer}
 #ageGate #ageYes{background:#9aca3c;color:#111315}
 #ageGate button:focus-visible{outline:3px solid white;outline-offset:4px}
 #ageGate small{display:block;font-size:.875rem;line-height:1.5;margin-top:22px;color:#bbb}

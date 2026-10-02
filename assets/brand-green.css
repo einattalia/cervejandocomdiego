@@ -10,7 +10,7 @@ body.theme-light,body.theme-light .hero,body.theme-light .catalog,body.theme-lig
 #beerCatalogGrid .beer-meta{height:auto!important;min-height:0!important;max-height:none!important;gap:12px!important;padding:20px 18px!important;background:#111!important}
 #beerCatalogGrid .beer-art{background:#080808!important}
 #beerCatalogGrid .beer-identity{height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important}
-#beerCatalogGrid .beer-identity .beer-name{margin:0!important;font-family:Poppins,sans-serif!important;font-size:1.25rem!important;font-weight:800!important;line-height:1.25!important;color:#fff!important;text-transform:uppercase;overflow-wrap:anywhere;letter-spacing:0!important}
+#beerCatalogGrid .beer-identity .beer-name{margin:0!important;font-family:"Barlow Condensed",sans-serif!important;font-size:1.25rem!important;font-weight:800!important;line-height:1.25!important;color:#fff!important;text-transform:uppercase;overflow-wrap:anywhere;letter-spacing:0!important}
 #beerCatalogGrid .beer-identity .beer-brewery{font-size:.875rem!important;line-height:1.4!important;font-weight:500!important;letter-spacing:0!important;margin-top:6px!important;color:#bdbdbd!important}
 #beerCatalogGrid .beer-style-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
 #beerCatalogGrid .beer-style-row .beer-style{display:block!important;color:#9aca3c!important;font-size:.875rem!important;line-height:1.4!important;white-space:normal!important;overflow:visible!important;height:auto!important;max-height:none!important;margin:0!important;flex:1 1 100px}
@@ -60,7 +60,7 @@ body.theme-light #beerCatalogGrid .beer-style-row .beer-style{color:#52751b!impo
 .events-heading h2,.beer-quiz h2,.drink-path h2,.premium-manifesto p,
 .how-steps article strong,.about-copy .about-lead,.about-copy .tagline,
 .checkout-head h2,#ageGate h2{
- font-family:var(--font-display)!important;font-weight:700!important;
+ font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;
  letter-spacing:-.02em!important;line-height:1.08!important
 }
 .hero h1 em{font-style:normal!important}
@@ -93,7 +93,7 @@ body.theme-light #beerCatalogGrid .beer-meta{
  overflow:visible!important;-webkit-line-clamp:unset!important;line-clamp:unset!important
 }
 #beerCatalogGrid .beer-identity .beer-name{
- font-family:var(--font-display)!important;font-weight:700!important;
+ font-family:"Barlow Condensed",sans-serif!important;font-weight:700!important;
  font-size:1.5rem!important;line-height:1.15!important;
  white-space:normal!important;overflow:visible!important;
  text-overflow:clip!important;overflow-wrap:anywhere!important
@@ -113,3 +113,29 @@ body.theme-light #beerCatalogGrid .beer-meta{
  #beerCatalogGrid .beer-identity .beer-name{font-size:1.2rem!important}
  .hero h1{font-size:clamp(2.75rem,12vw,4.5rem)!important}
 }
+/* Barlow em todo o site; aproxima a abertura do header. */
+body,body *{font-family:"Barlow Condensed",sans-serif!important}
+.hero .hero-copy{padding-top:28px!important;justify-content:flex-start!important}
+.hero .hero-copy>.eyebrow{margin-top:0!important;margin-bottom:14px!important}
+@media(max-width:860px){.hero .hero-copy{padding-top:20px!important}}
+@media(max-width:560px){.hero .hero-copy{padding-top:16px!important}}
+
+/* Linhas alinhadas, com altura livre definida pelo maior conteúdo da linha. */
+#beerCatalogGrid{align-items:stretch!important}
+#beerCatalogGrid .beer-card,
+body.theme-light #beerCatalogGrid .beer-card{
+ height:100%!important;align-self:stretch!important;min-height:0!important;max-height:none!important
+}
+#beerCatalogGrid .beer-meta,
+body.theme-light #beerCatalogGrid .beer-meta{
+ flex:1 1 auto!important
+}
+#beerCatalogGrid .card-add{margin-top:auto!important}
+#beerCatalogGrid .beer-art .beer-3d{
+ height:100%!important;display:flex!important;align-items:center!important;justify-content:center!important
+}
+#beerCatalogGrid .beer-art .beer-3d>img{
+ height:92%!important;width:auto!important;max-height:92%!important;max-width:100%!important;
+ object-fit:contain!important;margin:0!important
+}
+#beerCatalogGrid .beer-card .beer-art,#beerCatalogGrid .beer-card .beer-meta{transform:none!important}

@@ -6,9 +6,9 @@
 .p3-door-panel:after{content:"";position:absolute;right:18px;top:18%;bottom:18%;width:5px;border-radius:8px;background:linear-gradient(#282a28,#767676 45%,#1a1b19);box-shadow:0 0 0 1px rgba(255,255,255,.07)}
 .p3-door-content{position:relative;z-index:2;text-align:center;padding:28px;max-width:300px}
 .p3-door-kicker{display:block;color:var(--p3-gold);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
-.p3-door-title{font-family:Oswald,sans-serif;font-size:clamp(2rem,3vw,3rem);line-height:.95;text-transform:uppercase;margin:0 0 12px}
+.p3-door-title{font-family:"Barlow Condensed",sans-serif!important;font-size:clamp(2rem,3vw,3rem);line-height:.95;text-transform:uppercase;margin:0 0 12px}
 .p3-door-copy{color:#aaa;font-size:.78rem;line-height:1.55;margin:0 0 20px}
-.p3-open-fridge{appearance:none;border:1px solid rgba(154,202,60,.65);background:rgba(154,202,60,.06);color:#9aca3c;border-radius:999px;padding:11px 17px;font:700 .66rem/1 Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.25s ease}
+.p3-open-fridge{appearance:none;border:1px solid rgba(154,202,60,.65);background:rgba(154,202,60,.06);color:#9aca3c;border-radius:999px;padding:11px 17px;font:700 .66rem/1 "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.25s ease}
 .p3-open-fridge:hover,.p3-open-fridge:focus-visible{background:var(--p3-gold);color:#090909;transform:translateY(-2px)}
 .premium-fridge.p3-open .p3-door-panel{transform:rotateY(-104deg);opacity:.18;pointer-events:none}
 .premium-fridge:not(.p3-open) .fridge-can{pointer-events:none}
