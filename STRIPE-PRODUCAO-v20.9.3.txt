@@ -1,0 +1,41 @@
+CONFIGURACAO DO WEBHOOK STRIPE - CERVEJANDO COM DIEGO
+
+URL: https://www.cervejandocomdiego.com.br/api/stripe-webhook
+Escopo: Sua conta
+Destino: Endpoint de webhook
+Eventos:
+- checkout.session.completed
+- checkout.session.async_payment_succeeded
+- checkout.session.async_payment_failed
+
+O projeto declara stripe ^18.5.0 (API base 2025-08-27.basil).
+Para alinhar o webhook a essa versao, selecione 2025-08-27.basil.
+Se a versao nao estiver disponivel no painel, confirme a configuracao antes de concluir.
+
+VARIAVEIS EM PRODUCAO NA VERCEL
+STRIPE_SECRET_KEY: chave de producao do servidor.
+STRIPE_WEBHOOK_SECRET: segredo whsec_ do NOVO destino de producao.
+O codigo le apenas os nomes em MAIUSCULAS. As copias minusculas nao sao utilizadas.
+A chave publicavel nao e necessaria neste checkout: o servidor cria a sessao e o navegador e redirecionado.
+
+PUBLICACAO
+1. Cadastre o destino de producao no Stripe.
+2. Copie o segredo de assinatura diretamente para STRIPE_WEBHOOK_SECRET na Vercel.
+3. Publique este codigo corrigido com as variaveis de producao.
+4. Verifique a liberacao de pagamentos na conta Stripe antes de disponibilizar as vendas.
+5. Valide entregas de eventos no Stripe e os pedidos no painel do site.
+
+CORRECAO DESTE PACOTE
+- Marca como pago apenas quando payment_status e paid.
+- Um aviso de falha nao sobrescreve um pedido ja pago.
+- Erros ao registrar uma falha sao retornados ao Stripe para permitir nova entrega.
+- Preserva a exportacao da configuracao bodyParser:false.
+
+Validacao: sintaxe JavaScript e 11 cenarios locais com Stripe/Supabase simulados.
+Nao foram realizadas cobrancas, conexoes ao banco real ou publicacoes.
+O SQL existente contem protecao contra baixa de estoque repetida para pedidos ja pagos;
+a aplicacao desse SQL no banco real nao foi verificada.
+
+FORMAS DE PAGAMENTO
+O checkout existente usa STRIPE_PAYMENT_METHODS e assume card se ela nao estiver definida.
+Habilitar Pix no painel do Stripe, por si so, nao muda essa lista no codigo atual.
