@@ -12,6 +12,23 @@
   <link href="/admin/admin.css?v=29" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
+<style id="site-uppercase">
+/* Caixa alta visual em todas as paginas, sem alterar os dados salvos. */
+@layer site-uppercase {
+  body,
+  body *,
+  body *::before,
+  body *::after,
+  body *::placeholder {
+    text-transform: uppercase !important;
+  }
+
+  /* Senhas continuam exibindo exatamente os caracteres digitados. */
+  body input[type="password"] {
+    text-transform: none !important;
+  }
+}
+</style>
 </head>
  <body data-admin-version="20.5.4">
   <div class="shell">

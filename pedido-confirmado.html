@@ -1,2 +1,19 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Pedido recebido | Cervejando com Diego</title><link rel="icon" href="assets/favicon.png?v=22"><link rel="stylesheet" href="assets/order-success.css?v=25"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
+<style id="site-uppercase">
+/* Caixa alta visual em todas as paginas, sem alterar os dados salvos. */
+@layer site-uppercase {
+  body,
+  body *,
+  body *::before,
+  body *::after,
+  body *::placeholder {
+    text-transform: uppercase !important;
+  }
+
+  /* Senhas continuam exibindo exatamente os caracteres digitados. */
+  body input[type="password"] {
+    text-transform: none !important;
+  }
+}
+</style>
 </head><body><main class="success-shell"><section class="success-card"><img src="assets/logo-diego-contorno.png?v=25" alt="Cervejando com Diego"><span class="eyebrow">Pedido recebido</span><h1>Brinde quase garantido.</h1><p id="statusText">Estamos confirmando o pagamento do seu pedido.</p><div class="order-code"><span>Pedido</span><strong id="orderCode">—</strong></div><p class="hint">Quando o pagamento for confirmado, o pedido entra automaticamente na fila do Diegão.</p><div class="actions"><a href="/">Voltar ao catálogo</a><a class="whatsapp" id="whatsappLink" href="https://wa.me/5516997927171" target="_blank" rel="noopener">Falar com o Diegão</a></div></section></main><script src="data/order-success.js?v=20.1.0"></script></body></html>
