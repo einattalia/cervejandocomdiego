@@ -1948,8 +1948,8 @@ document.addEventListener('DOMContentLoaded',function(){
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 <link rel="stylesheet" href="assets/site-colors.css?v=1">
-<link rel="stylesheet" href="assets/party-events.css?v=20.9.4">
-<script src="assets/party-events.js?v=20.9.4" defer></script>
+<link rel="stylesheet" href="assets/party-events.css?v=20.9.5">
+<script src="assets/party-events.js?v=20.9.5" defer></script>
 <script src="assets/party-content.js?v=20.9.4" defer></script>
 </head>
 <body class="theme-light">
@@ -2127,6 +2127,10 @@ document.addEventListener('DOMContentLoaded',function(){
 <label>Local do evento<input name="local" placeholder="Nome do espaço ou endereço; se não definiu, conte aqui" maxlength="200" required></label>
 <label>Quantidade estimada de convidados<input type="number" name="convidados" min="1" max="100000" step="1" required></label>
 <label>Duração prevista (em horas)<input type="number" name="duracao" min="0.5" max="168" step="0.5" placeholder="Ex.: 4" required></label>
+<label>Quantos convidados devem beber chopp? (opcional)<input type="number" name="pessoas_chopp" min="0" max="100000" step="1" placeholder="Se não souber, usamos o total de convidados"><small>Deixe em branco para considerar todos os convidados.</small></label>
+<label>Perfil de consumo<select name="perfil_consumo"><option value="moderado">Moderado</option><option value="medio" selected>Médio</option><option value="alto">Alto</option></select></label>
+<label class="party-check"><input type="checkbox" name="outras_bebidas"> Também haverá outras bebidas alcoólicas</label>
+<div class="party-wide party-calculator" id="partyCalculator" aria-live="polite"><span class="eyebrow">Estimativa automática</span><strong id="partyCalcLiters">Preencha convidados e duração</strong><span id="partyCalcCups">A estimativa será atualizada conforme você preenche.</span><small>É uma referência para planejamento; o consumo real varia conforme o evento e os convidados.</small></div>
 <label class="party-wide">O que você precisa?<textarea name="necessidades" rows="3" maxlength="1500" placeholder="Conte qual estrutura procura. Se ainda não sabe, podemos ajudar a definir." required></textarea></label>
 <label class="party-wide">Observações (opcional)<textarea name="observacoes" rows="3" maxlength="1500" placeholder="Outras informações sobre o evento"></textarea></label>
 <label>Nome<input name="nome" autocomplete="name" maxlength="120" required></label>

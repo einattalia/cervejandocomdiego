@@ -17,3 +17,7 @@ drop policy if exists "Admins insert party event content" on public.party_event_
 create policy "Admins insert party event content" on public.party_event_content for insert to authenticated with check (public.is_admin(auth.uid()));
 drop policy if exists "Admins update party event content" on public.party_event_content;
 create policy "Admins update party event content" on public.party_event_content for update to authenticated using (public.is_admin(auth.uid())) with check (public.is_admin(auth.uid()));
+
+-- Parâmetros editáveis da calculadora automática de litros de chopp.
+alter table public.party_event_content
+  add column if not exists calculator_settings jsonb not null default '{"liters_per_person_hour":{"moderado":0.25,"medio":0.375,"alto":0.5},"other_drinks_reduction_percent":20,"estimate_range_percent":10,"cup_volume_ml":300}'::jsonb;
