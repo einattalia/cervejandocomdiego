@@ -1948,23 +1948,9 @@ document.addEventListener('DOMContentLoaded',function(){
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 <link rel="stylesheet" href="assets/site-colors.css?v=1">
-<style id="site-uppercase">
-/* Caixa alta visual em todas as paginas, sem alterar os dados salvos. */
-@layer site-uppercase {
-  body,
-  body *,
-  body *::before,
-  body *::after,
-  body *::placeholder {
-    text-transform: uppercase !important;
-  }
-
-  /* Senhas continuam exibindo exatamente os caracteres digitados. */
-  body input[type="password"] {
-    text-transform: none !important;
-  }
-}
-</style>
+<link rel="stylesheet" href="assets/party-events.css?v=20.9.4">
+<script src="assets/party-events.js?v=20.9.4" defer></script>
+<script src="assets/party-content.js?v=20.9.4" defer></script>
 </head>
 <body class="theme-light">
 <section id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageQuestion">
@@ -1987,12 +1973,12 @@ document.addEventListener('DOMContentLoaded',function(){
 <a href="#catalogo">Catálogo</a>
 <a href="#dicas">Dicas do Diegão</a>
 <a href="#como-funciona">Como funciona</a>
-<a href="#eventos">Eventos</a>
+<a href="#festas-eventos">Festas e Eventos</a>
 <a href="#sobre">Seleção do Diegão</a>
 </nav>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#eventos">Eventos</a><a href="#sobre">Seleção do Diegão</a>
+  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#festas-eventos">Festas e Eventos</a><a href="#sobre">Seleção do Diegão</a>
   <div class="mobile-nav-tools">
     <a class="mobile-nav-instagram" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank" aria-label="Instagram do Cervejando com Diego">Instagram</a>
     
@@ -2128,11 +2114,33 @@ document.addEventListener('DOMContentLoaded',function(){
 </div>
 </section>
 
+<section class="events-section" id="festas-eventos" aria-labelledby="festasTitle">
+<div class="shell">
+<div class="events-heading"><div><span class="eyebrow">Festas e Eventos</span><h2 id="festasTitle">Todo encontro merece <span>um brinde.</span></h2></div><p>Monte seu evento ou confira onde encontrar o Diegão.</p></div>
+<nav class="party-links" aria-label="Festas e Eventos"><a href="#monte-seu-evento">Monte seu evento</a><a href="#eventos">Agenda Cervejeira</a></nav>
+<div id="monte-seu-evento" class="party-panel">
+<h3>Monte seu evento</h3><p>Vai reunir a galera? Conte o que você está planejando e peça um orçamento para a estrutura de chopp. Serviço sem equipe para servir.</p>
+<form id="partyForm" class="party-form">
+<label>Tipo de evento<select name="tipo" required><option value="">Selecione</option><option>Aniversário</option><option>Casamento</option><option>Resenha</option><option>Confraternização</option><option>Evento de empresa</option><option>Outro</option></select></label>
+<label>Data do evento<input type="date" name="data" required></label>
+<label>Cidade<input name="cidade" autocomplete="address-level2" maxlength="120" required></label>
+<label>Local do evento<input name="local" placeholder="Nome do espaço ou endereço; se não definiu, conte aqui" maxlength="200" required></label>
+<label>Quantidade estimada de convidados<input type="number" name="convidados" min="1" max="100000" step="1" required></label>
+<label>Duração prevista (em horas)<input type="number" name="duracao" min="0.5" max="168" step="0.5" placeholder="Ex.: 4" required></label>
+<label class="party-wide">O que você precisa?<textarea name="necessidades" rows="3" maxlength="1500" placeholder="Conte qual estrutura procura. Se ainda não sabe, podemos ajudar a definir." required></textarea></label>
+<label class="party-wide">Observações (opcional)<textarea name="observacoes" rows="3" maxlength="1500" placeholder="Outras informações sobre o evento"></textarea></label>
+<label>Nome<input name="nome" autocomplete="name" maxlength="120" required></label>
+<label>WhatsApp com DDD<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="25" placeholder="(16) 99999-9999" required></label>
+<div class="party-wide"><p class="party-note">Ao continuar, você abrirá o WhatsApp para enviar os dados ao Diegão e solicitar atendimento. A disponibilidade e os itens incluídos serão confirmados na proposta. O formulário não confirma uma reserva.</p><button class="event-buy" type="submit">Solicitar orçamento pelo WhatsApp</button><p id="partyStatus" role="status" aria-live="polite"></p><a id="partyContinue" class="event-buy" hidden target="_blank" rel="noopener noreferrer">Abrir mensagem no WhatsApp</a></div>
+</form>
+<div id="partyIncludes" class="party-includes" hidden><h4>O que pode estar incluso</h4><ul id="partyIncludesList"></ul></div>
+<div id="partyGallery" class="party-gallery" hidden aria-label="Fotos da estrutura para eventos"></div>
+</div></div></section>
 <section class="events-section" id="eventos" aria-labelledby="eventsTitle">
   <div class="shell">
     <div class="events-heading">
-      <div><span class="eyebrow">Agenda do Diegão</span><h2 id="eventsTitle">Eventos para <span>beber melhor.</span></h2></div>
-      <p>Festivais, encontros e experiências cervejeiras selecionadas para sair de casa com um bom motivo.</p>
+      <div><span class="eyebrow">Onde encontrar o Diegão</span><h2 id="eventsTitle">Agenda <span>Cervejeira</span></h2></div>
+      <p>Confira os festivais, encontros e eventos cervejeiros com a participação do Diegão.</p>
     </div>
     <div id="eventsGrid" class="events-grid" aria-live="polite"><p class="events-empty">Carregando próximos eventos…</p></div>
   </div>

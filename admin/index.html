@@ -9,26 +9,9 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=29" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=30" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
-<style id="site-uppercase">
-/* Caixa alta visual em todas as paginas, sem alterar os dados salvos. */
-@layer site-uppercase {
-  body,
-  body *,
-  body *::before,
-  body *::after,
-  body *::placeholder {
-    text-transform: uppercase !important;
-  }
-
-  /* Senhas continuam exibindo exatamente os caracteres digitados. */
-  body input[type="password"] {
-    text-transform: none !important;
-  }
-}
-</style>
 </head>
  <body data-admin-version="20.5.4">
   <div class="shell">
@@ -98,7 +81,10 @@
        Pedidos
       </button>
       <button class="nav" data-view="events">
-       Eventos
+       Agenda Cervejeira
+      </button>
+      <button class="nav" data-view="party">
+       Monte seu evento
       </button>
       <button class="nav" data-view="settings">
        Configurações
@@ -255,7 +241,7 @@
           Agenda
          </p>
          <h3>
-          Eventos
+          Agenda Cervejeira
          </h3>
         </div>
         <button class="primary" id="newEventBtn">
@@ -263,10 +249,19 @@
         </button>
        </div>
        <p class="muted">
-        Cadastre os eventos que aparecerão na nova seção Eventos do site.
+        Edite os cards da Agenda Cervejeira: imagem, nome, datas, local, descrição, Instagram e link de ingresso.
        </p>
        <div class="events-admin-list" id="eventsAdminList">
        </div>
+      </section>
+     </div>
+     <div class="view" hidden="" id="partyView">
+      <section class="panel">
+       <div class="panel-head"><div><p class="eyebrow">Festas e Eventos</p><h3>Monte seu evento</h3></div></div>
+       <p class="muted">Edite os itens que podem estar inclusos na estrutura de chopp e escolha até 20 fotos para apresentar o serviço. As mudanças aparecem na página pública depois de salvar.</p>
+       <div class="party-admin-block"><div class="panel-head"><div><h3>O que pode estar incluso</h3><p class="muted">Adicione, edite ou remova os informativos. Cadastre apenas itens oferecidos pelo Diegão.</p></div><button class="secondary" id="addPartyItem" type="button">+ Adicionar item</button></div><div class="party-items-editor" id="partyItemsEditor"></div></div>
+       <div class="party-admin-block"><div class="panel-head"><div><h3>Fotos da estrutura</h3><p class="muted">Adicione até 20 imagens, de até 5 MB cada. Recomendamos pelo menos 10 fotos.</p></div></div><label class="party-upload">Selecionar fotos<input id="partyImagesInput" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><p class="muted" id="partyImagesCount">Nenhuma foto adicionada.</p><div class="party-gallery-editor" id="partyGalleryEditor"></div></div>
+       <button class="primary" id="savePartyContent" type="button">Salvar informativos</button><p class="message" id="partyContentMsg" aria-live="polite"></p>
       </section>
      </div>
      <div class="view" hidden="" id="settingsView">
@@ -661,7 +656,7 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=23.0">
+  <script defer="" src="/admin/admin.js?v=23.2">
   </script>
  </body>
 </html>
