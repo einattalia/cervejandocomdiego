@@ -10,7 +10,7 @@ Este arquivo consolida os READMEs que acompanhavam o projeto até a versão **v2
 - Supabase / banco de dados e painel administrativo
 - Stripe / pagamentos
 - Vercel / publicação e variáveis de ambiente
-- Formulário “Pergunte pro Diegão” / Resend
+- Formulário “Pergunte pro Diegão” / Zoho Mail
 - Histórico e observações técnicas
 
 ---
@@ -594,16 +594,18 @@ ALTERAÇÕES
 - Validação e honeypot anti-spam.
 
 CONFIGURAÇÃO NA VERCEL
-1. No Resend, verifique o domínio cervejandocomdiego.com.br e adicione os registros DNS solicitados.
-2. Crie uma API Key no Resend.
-3. Vercel > Project > Settings > Environment Variables:
-   RESEND_API_KEY = re_...
-   QUESTION_FROM_EMAIL = Cervejando com Diego <site@cervejandocomdiego.com.br>
+1. Use a conta de e-mail do Zoho que enviará as mensagens e gere uma senha específica de aplicativo.
+2. Vercel > Project > Settings > Environment Variables:
+   ZOHO_SMTP_HOST = smtppro.zoho.com
+   ZOHO_SMTP_PORT = 465
+   ZOHO_SMTP_USER = endereço completo da conta Zoho
+   ZOHO_SMTP_PASSWORD = senha específica de aplicativo
+   QUESTION_FROM_EMAIL = Cervejando com Diego <endereço da conta Zoho>
    QUESTION_TO_EMAIL = contato@cervejandocomdiego.com.br
-4. Marque Production (e Preview, se desejar testar previews).
-5. Faça um novo Redeploy.
+3. Marque Production (e Preview, se desejar testar previews).
+4. Faça um novo Redeploy.
 
-A senha do Zoho não deve ser colocada no código.
+Não coloque a senha do Zoho no código. O remetente precisa ser a conta autenticada ou um alias autorizado nela.
 
 ---
 
@@ -680,3 +682,12 @@ CERVEJANDO COM DIEGO — Landing Page final
 - Ícone branco no topo e favicon branco.
 
 Abra index.html no navegador. Para publicar, envie index.html + pasta assets mantendo a estrutura.
+
+## Avisos automáticos de venda
+
+Após o Stripe confirmar o pagamento, o webhook envia um e-mail para `contato@cervejandocomdiego.com.br` com o pedido, cliente, itens, total e entrega/retirada, usando a conta Zoho da loja.
+
+- O envio usa a conta Zoho por SMTP seguro. Na Vercel, configure `ZOHO_SMTP_HOST=smtppro.zoho.com`, `ZOHO_SMTP_PORT=465`, `ZOHO_SMTP_USER` e `ZOHO_SMTP_PASSWORD` (senha específica de aplicativo).
+- O remetente (`ORDER_NOTIFICATION_FROM_EMAIL`) precisa corresponder à conta Zoho autenticada ou a um alias autorizado.
+- O destinatário padrão é `contato@cervejandocomdiego.com.br`; pode ser sobrescrito por `ORDER_NOTIFICATION_TO_EMAIL`.
+- O formulário de perguntas do site também passa a enviar pelo Zoho. A confirmação de pagamento pelo Stripe e os botões/fluxos de WhatsApp existentes continuam ativos.
