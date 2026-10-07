@@ -6,7 +6,7 @@ function isVitruviana(brewery){return String(brewery||'').normalize('NFD').repla
 function effectivePrice(beer){const price=Number(beer.price);return isVitruviana(beer.brewery)?Math.round(price*90)/100:price;}
 module.exports=async function handler(req,res){
  if(req.method!=='POST')return json(res,405,{error:'Método não permitido.'});
- const {STRIPE_SECRET_KEY,SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,STRIPE_PAYMENT_METHODS='card',DELIVERY_FEE_CENTS='0'}=process.env;
+ const {STRIPE_SECRET_KEY,SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,STRIPE_PAYMENT_METHODS='card,pix',DELIVERY_FEE_CENTS='0'}=process.env;
  if(!STRIPE_SECRET_KEY||!SUPABASE_URL||!SUPABASE_SERVICE_ROLE_KEY)return json(res,503,{error:'Pagamento ainda não foi configurado no servidor.'});
  try{
   const body=typeof req.body==='string'?JSON.parse(req.body):req.body||{};const items=Array.isArray(body.items)?body.items:[];

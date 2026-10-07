@@ -15,6 +15,7 @@ Se a versao nao estiver disponivel no painel, confirme a configuracao antes de c
 VARIAVEIS EM PRODUCAO NA VERCEL
 STRIPE_SECRET_KEY: chave de producao do servidor.
 STRIPE_WEBHOOK_SECRET: segredo whsec_ do NOVO destino de producao.
+STRIPE_PAYMENT_METHODS: card,pix (Pix habilitado no Stripe; cobranças em BRL).
 O codigo le apenas os nomes em MAIUSCULAS. As copias minusculas nao sao utilizadas.
 A chave publicavel nao e necessaria neste checkout: o servidor cria a sessao e o navegador e redirecionado.
 
@@ -37,5 +38,5 @@ O SQL existente contem protecao contra baixa de estoque repetida para pedidos ja
 a aplicacao desse SQL no banco real nao foi verificada.
 
 FORMAS DE PAGAMENTO
-O checkout existente usa STRIPE_PAYMENT_METHODS e assume card se ela nao estiver definida.
-Habilitar Pix no painel do Stripe, por si so, nao muda essa lista no codigo atual.
+O checkout aceita os metodos definidos em STRIPE_PAYMENT_METHODS; o padrao do pacote agora e card,pix.
+Se a Vercel ja tiver a variavel definida como card, altere para card,pix e faca novo deploy.

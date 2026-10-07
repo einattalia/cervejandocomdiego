@@ -270,8 +270,8 @@ ATIVAÇÃO (obrigatória para vender):
    SUPABASE_SERVICE_ROLE_KEY=SUA_CHAVE_SERVICE_ROLE (NUNCA colocar no front)
    STRIPE_SECRET_KEY=SUA_CHAVE_SECRETA_STRIPE
    STRIPE_WEBHOOK_SECRET=SEGREDO_DO_WEBHOOK
-   STRIPE_PAYMENT_METHODS=card
-   Para habilitar Pix quando disponível/habilitado na conta: STRIPE_PAYMENT_METHODS=card,pix
+   STRIPE_PAYMENT_METHODS=card,pix
+   O Pix precisa estar habilitado na conta Stripe e aparecerá em cobranças em BRL.
 4. No Stripe, cadastre um webhook apontando para:
    https://SEU-DOMINIO/api/stripe-webhook
    Eventos necessários:
@@ -449,7 +449,7 @@ SUPABASE_URL
 SUPABASE_SERVICE_ROLE_KEY
 STRIPE_SECRET_KEY
 STRIPE_WEBHOOK_SECRET
-STRIPE_PAYMENT_METHODS=card
+STRIPE_PAYMENT_METHODS=card,pix
 DELIVERY_FEE_CENTS=0
 
 BANCO
@@ -489,7 +489,7 @@ IMPORTANTE PARA PUBLICAR NA VERCEL:
   STRIPE_WEBHOOK_SECRET
   SUPABASE_URL
   SUPABASE_SERVICE_ROLE_KEY
-  STRIPE_PAYMENT_METHODS=card
+  STRIPE_PAYMENT_METHODS=card,pix
   DELIVERY_FEE_CENTS=0
 - Rode supabase-v20-stripe-18mais.sql no SQL Editor do Supabase.
 - Depois faça Redeploy na Vercel sem reutilizar build cache, se essa opção estiver disponível.
