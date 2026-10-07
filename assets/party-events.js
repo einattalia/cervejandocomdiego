@@ -4,6 +4,7 @@ const form = document.getElementById('partyForm');
 if (!form) return;
 const date = form.elements.data;
 const phone = form.elements.whatsapp;
+const drinkersInput = form.elements.pessoas_chopp;
 const otherDrinksInput = form.elements.outras_bebidas;
 const defaults = {
   liters_per_person_hour: {moderado: 0.25, medio: 0.375, alto: 0.5},
@@ -21,17 +22,20 @@ phone.addEventListener('input', () => phone.setCustomValidity(''));
 function updateEstimate() {
   const guests = Number(form.elements.convidados.value);
   const duration = Number(form.elements.duracao.value);
+  const drinkers = drinkersInput.value === '' ? guests : Number(drinkersInput.value);
+  const countError = drinkersInput.value !== '' && drinkers > guests;
+  drinkersInput.setCustomValidity(countError ? 'O número de pessoas que beberão chopp não pode ser maior que o total de convidados.' : '');
   const litersLabel = document.getElementById('partyCalcLiters');
   const cupsLabel = document.getElementById('partyCalcCups');
-  if (!Number.isFinite(guests) || guests < 1 || !Number.isFinite(duration) || duration <= 0) {
+  if (!Number.isFinite(guests) || guests < 1 || !Number.isFinite(duration) || duration <= 0 || countError) {
     lastEstimate = null;
-    litersLabel.textContent = 'Preencha convidados e duração';
-    cupsLabel.textContent = 'A estimativa será atualizada conforme você preenche.';
+    litersLabel.textContent = countError ? 'Confira a quantidade de pessoas' : 'Preencha convidados e duração';
+    cupsLabel.textContent = countError ? 'Pessoas que beberão chopp não pode superar o total de convidados.' : 'A estimativa será atualizada conforme você preenche.';
     return null;
   }
   const profile = form.elements.perfil_consumo.value || 'medio';
   const rate = Number(calculatorSettings.liters_per_person_hour?.[profile]) || defaults.liters_per_person_hour[profile] || defaults.liters_per_person_hour.medio;
-  let base = guests * duration * rate;
+  let base = drinkers * duration * rate;
   if (otherDrinksInput.checked) base *= 1 - Math.min(80, Math.max(0, Number(calculatorSettings.other_drinks_reduction_percent) || 0)) / 100;
   const variation = Math.min(50, Math.max(0, Number(calculatorSettings.estimate_range_percent) || 0)) / 100;
   const low = Math.max(0, base * (1 - variation));
@@ -39,7 +43,7 @@ function updateEstimate() {
   const cupMl = Math.max(100, Math.min(1000, Number(calculatorSettings.cup_volume_ml) || defaults.cup_volume_ml));
   const cupsLow = Math.floor(low * 1000 / cupMl);
   const cupsHigh = Math.ceil(high * 1000 / cupMl);
-  lastEstimate = {low, high, cupsLow, cupsHigh, rate, cupMl, profile, otherDrinks:otherDrinksInput.checked};
+  lastEstimate = {low, high, cupsLow, cupsHigh, drinkers, rate, cupMl, profile, otherDrinks:otherDrinksInput.checked};
   litersLabel.textContent = `Estimativa: ${formatNumber(low)} a ${formatNumber(high)} litros`;
   cupsLabel.textContent = `Cerca de ${cupsLow} a ${cupsHigh} copos de ${formatNumber(cupMl)} ml`;
   return lastEstimate;
@@ -66,7 +70,7 @@ async function loadCalculatorSettings() {
 }
 
 ['input','change'].forEach(type => form.addEventListener(type, event => {
-  if (['convidados','duracao','perfil_consumo','outras_bebidas'].includes(event.target.name)) updateEstimate();
+  if (['convidados','duracao','pessoas_chopp','perfil_consumo','outras_bebidas'].includes(event.target.name)) updateEstimate();
 }));
 loadCalculatorSettings();
 
@@ -86,10 +90,11 @@ form.addEventListener('submit', event => {
     'Olá, Diegão! Quero montar meu evento e solicitar um orçamento para a estrutura de chopp.', '',
     `Tipo: ${data.tipo}`, `Data: ${formatted}`, `Cidade: ${data.cidade}`, `Local: ${data.local}`,
     `Convidados estimados: ${data.convidados}`,
+    `Pessoas que devem beber chopp: ${estimate.drinkers}`,
     `Duração prevista: ${data.duracao} horas`,
     `Perfil de consumo: ${profileName}`,
     `Outras bebidas alcoólicas: ${estimate.otherDrinks ? 'Sim' : 'Não'}`,
-    `Estimativa aproximada de consumo de chopp: ${formatNumber(estimate.low)} a ${formatNumber(estimate.high)} litros (aprox. ${estimate.cupsLow} a ${estimate.cupsHigh} copos de ${formatNumber(estimate.cupMl)} ml)`,
+    `Estimativa automática de chopp: ${formatNumber(estimate.low)} a ${formatNumber(estimate.high)} litros (aprox. ${estimate.cupsLow} a ${estimate.cupsHigh} copos de ${formatNumber(estimate.cupMl)} ml)`,
     `O que preciso: ${data.necessidades}`, `Observações: ${data.observacoes.trim() || 'Nenhuma'}`, '',
     `Nome: ${data.nome}`, `WhatsApp: ${data.whatsapp}`
   ].join('\n');

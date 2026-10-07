@@ -2,6 +2,8 @@ const Stripe=require('stripe');
 const {createClient}=require('@supabase/supabase-js');
 function json(res,status,body){res.status(status).setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify(body));}
 function orderCode(){const d=new Date();return `CD${String(d.getUTCFullYear()).slice(-2)}${String(d.getUTCMonth()+1).padStart(2,'0')}${String(d.getUTCDate()).padStart(2,'0')}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;}
+function isVitruviana(brewery){return String(brewery||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes('vitruviana');}
+function effectivePrice(beer){const price=Number(beer.price);return isVitruviana(beer.brewery)?Math.round(price*90)/100:price;}
 module.exports=async function handler(req,res){
  if(req.method!=='POST')return json(res,405,{error:'Método não permitido.'});
  const {STRIPE_SECRET_KEY,SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,STRIPE_PAYMENT_METHODS='card',DELIVERY_FEE_CENTS='0'}=process.env;
@@ -19,10 +21,10 @@ module.exports=async function handler(req,res){
   const normalized=items.map(i=>({slug:String(i.slug||'').trim(),quantity:Math.max(1,Math.min(24,Number(i.quantity)||1))})).filter(i=>i.slug);
   const slugs=[...new Set(normalized.map(i=>i.slug))];
   const supabase=createClient(SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
-  const {data:beers,error:beerError}=await supabase.from('beers').select('id,slug,title,name,order_name,price,stock_status,stock_quantity,active').in('slug',slugs);
+  const {data:beers,error:beerError}=await supabase.from('beers').select('id,slug,title,name,order_name,brewery,price,stock_status,stock_quantity,active').in('slug',slugs);
   if(beerError)throw beerError;if(!beers||beers.length!==slugs.length)return json(res,409,{error:'Um dos rótulos não está mais disponível.'});
   const map=new Map(beers.map(b=>[b.slug,b]));let subtotal=0;const lines=[];
-  for(const item of normalized){const beer=map.get(item.slug);if(!beer||beer.active===false||beer.stock_status==='sold_out')return json(res,409,{error:`${beer?.title||item.slug} está esgotada.`});const price=Number(beer.price);if(!Number.isFinite(price)||price<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});if(Number.isFinite(Number(beer.stock_quantity))&&Number(beer.stock_quantity)<item.quantity)return json(res,409,{error:`Estoque insuficiente de ${beer.title||beer.name}.`});subtotal+=price*item.quantity;lines.push({beer_id:beer.id,beer_slug:beer.slug,beer_name_snapshot:beer.order_name||beer.title||beer.name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});}
+  for(const item of normalized){const beer=map.get(item.slug);if(!beer||beer.active===false||beer.stock_status==='sold_out')return json(res,409,{error:`${beer?.title||item.slug} está esgotada.`});const price=effectivePrice(beer);if(!Number.isFinite(price)||price<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});if(Number.isFinite(Number(beer.stock_quantity))&&Number(beer.stock_quantity)<item.quantity)return json(res,409,{error:`Estoque insuficiente de ${beer.title||beer.name}.`});subtotal+=price*item.quantity;lines.push({beer_id:beer.id,beer_slug:beer.slug,beer_name_snapshot:beer.order_name||beer.title||beer.name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});}
   subtotal=Number(subtotal.toFixed(2));
   const deliveryFee=delivery.type==='delivery'?Math.max(0,Number.parseInt(DELIVERY_FEE_CENTS,10)||0)/100:0;
   const total=Number((subtotal+deliveryFee).toFixed(2));const code=orderCode();
