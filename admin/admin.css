@@ -709,8 +709,8 @@ legend {
   transform:scaleX(1.25)
 }
 
-/* v19 — pedidos, faturamento e estoque */ .stats {
-  grid-template-columns:repeat(6,minmax(0,1fr))
+/* v20.9.19 — conciliação de vendas */ .stats {
+  grid-template-columns:repeat(4,minmax(0,1fr))
 }
  .orders-list {
   display:grid;
@@ -754,6 +754,8 @@ legend {
 .payment-pending {
   color:#9aca3c
 }
+.payment-partially_refunded,.payment-refunded{color:#f0ad7a}
+.payment-expired{color:#aaa}
 .order-editor {
   min-height:420px
 }
@@ -1096,17 +1098,28 @@ legend {
 /* v20.9.16 — faturamento por mês e ano */
 .revenue-panel{margin-bottom:20px}
 .revenue-head{align-items:end}
+.revenue-controls{display:flex;gap:10px;align-items:end}
 .revenue-filters{display:flex;gap:10px;align-items:end}
 .revenue-filters label{min-width:150px}
 .revenue-result{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.7fr);gap:16px;padding:18px;border:1px solid var(--line);border-radius:14px;background:#101010}
+.revenue-result{grid-template-columns:repeat(4,minmax(0,1fr))}
 .revenue-result>div{display:grid;align-content:start;gap:5px}
 .revenue-result span{color:var(--muted);font-size:12px}
 .revenue-result strong{color:var(--gold);font-family:"Barlow Condensed",sans-serif!important;font-size:clamp(28px,4vw,40px);overflow-wrap:anywhere}
 .revenue-note{font-size:12px;margin:12px 0 0}
+.webhook-health-panel{margin-bottom:20px}
+.webhook-health-panel .panel-head{align-items:center}
+.webhook-failure-count{min-width:42px;text-align:center;border-radius:999px;padding:8px 12px;background:#30231b;color:#ffb36b;font-size:20px}
+.webhook-failure-list{display:grid;gap:8px}
+.webhook-failure-row{display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1fr);gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#101010}
+.webhook-failure-row strong{overflow-wrap:anywhere}
+.webhook-failure-row span{color:var(--muted);font-size:12px;overflow-wrap:anywhere}
 @media(max-width:560px){
   .revenue-head{align-items:stretch}
+  .revenue-controls{width:100%;flex-direction:column;align-items:stretch}
   .revenue-filters{width:100%;gap:8px}
   .revenue-filters label{flex:1;min-width:0}
   .revenue-result{grid-template-columns:1fr;gap:14px;padding:15px}
   .revenue-order-count strong{font-size:28px}
+  .webhook-failure-row{grid-template-columns:1fr}
 }

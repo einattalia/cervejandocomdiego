@@ -95,6 +95,12 @@ async function rawBody(req) {
   return Buffer.concat(chunks);
 }
 
+async function linkEventToOrder(supabase, eventId, orderId) {
+  const { error } = await supabase.from('stripe_webhook_events')
+    .update({ order_id: orderId }).eq('event_id', eventId);
+  if (error) throw error;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.statusCode = 405;
@@ -107,21 +113,60 @@ module.exports = async function handler(req, res) {
     return res.end('Webhook not configured');
   }
 
+  let supabase = null;
+  let receivedEventId = null;
   try {
     const stripe = new Stripe(STRIPE_SECRET_KEY);
     const body = await rawBody(req);
     const signature = req.headers['stripe-signature'];
     const event = stripe.webhooks.constructEvent(body, signature, STRIPE_WEBHOOK_SECRET);
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
+    receivedEventId = event.id;
+    supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
+
+    const staleBefore = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { error: staleError } = await supabase.from('stripe_webhook_events').update({
+      processing_status: 'failed', error_message: 'Processamento interrompido; reenvie o evento para tentar novamente.',
+    }).eq('processing_status', 'processing').lt('received_at', staleBefore);
+    if (staleError) throw staleError;
+
+    const { error: claimError } = await supabase.from('stripe_webhook_events').insert({
+      event_id: event.id,
+      event_type: event.type,
+      processing_status: 'processing',
+    });
+    if (claimError) {
+      if (claimError.code !== '23505') throw claimError;
+      const { data: prior, error: priorError } = await supabase.from('stripe_webhook_events')
+        .select('processing_status').eq('event_id', event.id).maybeSingle();
+      if (priorError) throw priorError;
+      if (prior?.processing_status === 'processed' || prior?.processing_status === 'ignored') {
+        res.statusCode = 200;
+        return res.end('Already processed');
+      }
+      if (prior?.processing_status === 'processing') {
+        throw new Error('Evento Stripe já está em processamento; solicitar nova entrega.');
+      }
+      const { data: retryClaim, error: retryError } = await supabase.from('stripe_webhook_events')
+        .update({ processing_status: 'processing', error_message: null, processed_at: null })
+        .eq('event_id', event.id).eq('processing_status', 'failed').select('event_id').maybeSingle();
+      if (retryError) throw retryError;
+      if (!retryClaim) throw new Error('Não foi possível reservar o reprocessamento do evento Stripe.');
+    }
 
     if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
       const session = event.data.object;
       if (session.payment_status !== 'paid') {
+        const { error } = await supabase.from('stripe_webhook_events').update({
+          processing_status: 'ignored', processed_at: new Date().toISOString(),
+          error_message: 'Checkout concluído sem confirmação de pagamento.',
+        }).eq('event_id', event.id);
+        if (error) throw error;
         res.statusCode = 200;
         return res.end('Payment not confirmed');
       }
       const orderId = session.metadata?.order_id || session.client_reference_id;
       if (orderId) {
+        await linkEventToOrder(supabase, event.id, orderId);
         const { error } = await supabase.rpc('mark_order_paid', {
           p_order_id: orderId,
           p_payment_provider: 'stripe',
@@ -136,15 +181,69 @@ module.exports = async function handler(req, res) {
       const session = event.data.object;
       const orderId = session.metadata?.order_id || session.client_reference_id;
       if (orderId) {
-        const { error } = await supabase.from('orders').update({ payment_status: 'failed' }).eq('id', orderId).neq('payment_status', 'paid');
+        await linkEventToOrder(supabase, event.id, orderId);
+        const { error } = await supabase.from('orders').update({ payment_status: 'failed', updated_at: new Date().toISOString() })
+          .eq('id', orderId).not('payment_status', 'in', '(paid,partially_refunded,refunded)');
         if (error) throw error;
       }
     }
+
+    if (event.type === 'checkout.session.expired') {
+      const session = event.data.object;
+      const orderId = session.metadata?.order_id || session.client_reference_id;
+      if (orderId) {
+        await linkEventToOrder(supabase, event.id, orderId);
+        const { error } = await supabase.from('orders').update({
+          payment_status: 'expired', status: 'cancelled', updated_at: new Date().toISOString(),
+        }).eq('id', orderId).not('payment_status', 'in', '(paid,partially_refunded,refunded)');
+        if (error) throw error;
+      }
+    }
+
+    if (event.type === 'charge.refunded') {
+      const charge = event.data.object;
+      const paymentIntentId = typeof charge.payment_intent === 'string' ? charge.payment_intent : charge.payment_intent?.id;
+      if (paymentIntentId) {
+        const { data: order, error: orderError } = await supabase.from('orders')
+          .select('id,total').eq('payment_reference', paymentIntentId).maybeSingle();
+        if (orderError) throw orderError;
+        if (!order) throw new Error(`Estorno Stripe sem pedido correspondente para PaymentIntent ${paymentIntentId}.`);
+        await linkEventToOrder(supabase, event.id, order.id);
+        const refunded = Number((Number(charge.amount_refunded || 0) / 100).toFixed(2));
+        const fullyRefunded = Number(charge.amount_refunded || 0) >= Number(charge.amount || 0);
+        const { error } = await supabase.from('orders').update({
+          amount_refunded: refunded,
+          payment_status: fullyRefunded ? 'refunded' : 'partially_refunded',
+          refunded_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }).eq('id', order.id);
+        if (error) throw error;
+      }
+    }
+
+    const handledTypes = [
+      'checkout.session.completed', 'checkout.session.async_payment_succeeded',
+      'checkout.session.async_payment_failed', 'checkout.session.expired', 'charge.refunded',
+    ];
+    const { error: finishError } = await supabase.from('stripe_webhook_events').update({
+      processing_status: handledTypes.includes(event.type) ? 'processed' : 'ignored',
+      processed_at: new Date().toISOString(), error_message: null,
+    }).eq('event_id', event.id);
+    if (finishError) throw finishError;
 
     res.statusCode = 200;
     return res.end('ok');
   } catch (error) {
     console.error(error);
+    if (supabase && receivedEventId) {
+      try {
+        await supabase.from('stripe_webhook_events').update({
+          processing_status: 'failed', error_message: String(error.message || error).slice(0, 1000),
+        }).eq('event_id', receivedEventId);
+      } catch (logError) {
+        console.error('Could not record Stripe webhook failure:', logError);
+      }
+    }
     res.statusCode = 500;
     return res.end(`Webhook Error: ${error.message}`);
   }

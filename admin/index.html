@@ -9,11 +9,11 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=34" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=36" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
- <body data-admin-version="20.9.18">
+ <body data-admin-version="20.9.20">
   <div class="shell">
    <section class="auth-wrap" id="authView">
     <div class="auth-card">
@@ -157,15 +157,23 @@
        </article>
        <article>
         <span>
-         Pagos
+          Pedidos pagos
         </span>
         <strong id="statPaid">
          —
         </strong>
        </article>
        <article>
+        <span>Pagamentos pendentes</span>
+        <strong id="statPending">—</strong>
+       </article>
+       <article>
+        <span>Falhas / expirados</span>
+        <strong id="statPaymentIssues">—</strong>
+       </article>
+       <article>
         <span>
-         Faturamento total
+         Vendas líquidas
         </span>
         <strong id="statRevenue">
          —
@@ -178,7 +186,9 @@
          <p class="eyebrow">Vendas confirmadas</p>
          <h3 id="revenueHeading">Faturamento por período</h3>
         </div>
-        <div class="revenue-filters">
+        <div class="revenue-controls">
+         <button class="secondary compact" id="reconcileStripeBtn" type="button">Conferir pagamentos</button>
+         <div class="revenue-filters">
          <label for="revenueMonth">Mês
           <select id="revenueMonth" aria-label="Filtrar faturamento por mês">
            <option value="all">Todos os meses</option>
@@ -188,16 +198,26 @@
          <label for="revenueYear">Ano
           <select id="revenueYear" aria-label="Filtrar faturamento por ano"></select>
          </label>
+         </div>
         </div>
        </div>
        <div class="revenue-result">
         <div>
-         <span id="revenuePeriodLabel">Total no período</span>
-         <strong id="revenuePeriodTotal">—</strong>
+         <span>Venda bruta confirmada</span>
+         <strong id="revenueGrossTotal">—</strong>
         </div>
-        <div class="revenue-order-count"><span>Pedidos pagos no período</span><strong id="revenuePeriodOrders">—</strong></div>
+        <div><span>Estornos dos pedidos</span><strong id="revenueRefundedTotal">—</strong></div>
+        <div><span id="revenuePeriodLabel">Venda líquida no período</span><strong id="revenuePeriodTotal">—</strong></div>
+        <div class="revenue-order-count"><span>Pedidos com pagamento</span><strong id="revenuePeriodOrders">—</strong></div>
        </div>
-       <p class="muted revenue-note">O cálculo considera apenas pedidos com pagamento confirmado.</p>
+       <p class="muted revenue-note">Vendas líquidas = pagamentos confirmados menos estornos. O repasse bancário da Stripe é acompanhado separadamente.</p>
+      </section>
+      <section class="panel webhook-health-panel" aria-labelledby="webhookHealthHeading">
+       <div class="panel-head">
+        <div><p class="eyebrow">Monitoramento</p><h3 id="webhookHealthHeading">Falhas na integração de pagamentos</h3></div>
+        <strong class="webhook-failure-count" id="webhookFailureCount">—</strong>
+       </div>
+       <div id="webhookFailureList" class="webhook-failure-list"><p class="muted">Carregando eventos…</p></div>
       </section>
       <section class="panel">
        <div class="panel-head">
@@ -685,7 +705,7 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=23.8">
+  <script defer="" src="/admin/admin.js?v=24.0">
   </script>
  </body>
 </html>
