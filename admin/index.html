@@ -58,7 +58,7 @@
     </div>
    </section>
    <section class="app" hidden="" id="appView">
-    <aside class="sidebar">
+    <aside class="sidebar" id="adminSidebar" aria-label="Navegação administrativa">
      <div class="side-brand">
       <img alt="" src="/assets/logo-diego-contorno.png?v=25"/>
       <div>
@@ -101,6 +101,7 @@
       </a>
      </div>
     </aside>
+    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Fechar menu" hidden></button>
     <main class="main">
      <header class="topbar">
       <button aria-label="Abrir menu" class="menu" id="menuBtn">
@@ -227,7 +228,7 @@
         </button>
        </div>
        <p class="muted">
-        Compras iniciadas pelo checkout aparecem aqui. O pagamento é confirmado automaticamente pelo webhook do Stripe.
+        Compras iniciadas pelo checkout aparecem aqui. O Stripe confirma o pagamento e o status atualiza automaticamente nesta tela em até 15 segundos.
        </p>
        <div class="orders-list" id="ordersList">
        </div>
