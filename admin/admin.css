@@ -1092,3 +1092,21 @@ legend {
   .party-calculator-settings{grid-template-columns:1fr!important}
   .editor{padding-bottom:calc(24px + env(safe-area-inset-bottom))!important}
 }
+
+/* v20.9.16 — faturamento por mês e ano */
+.revenue-panel{margin-bottom:20px}
+.revenue-head{align-items:end}
+.revenue-filters{display:flex;gap:10px;align-items:end}
+.revenue-filters label{min-width:150px}
+.revenue-result{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.7fr);gap:16px;padding:18px;border:1px solid var(--line);border-radius:14px;background:#101010}
+.revenue-result>div{display:grid;align-content:start;gap:5px}
+.revenue-result span{color:var(--muted);font-size:12px}
+.revenue-result strong{color:var(--gold);font-family:"Barlow Condensed",sans-serif!important;font-size:clamp(28px,4vw,40px);overflow-wrap:anywhere}
+.revenue-note{font-size:12px;margin:12px 0 0}
+@media(max-width:560px){
+  .revenue-head{align-items:stretch}
+  .revenue-filters{width:100%;gap:8px}
+  .revenue-filters label{flex:1;min-width:0}
+  .revenue-result{grid-template-columns:1fr;gap:14px;padding:15px}
+  .revenue-order-count strong{font-size:28px}
+}
