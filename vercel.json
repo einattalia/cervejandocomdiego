@@ -126,11 +126,5 @@
       "source": "/pedido-confirmado",
       "destination": "/pedido-confirmado.html"
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/reconcile-stripe",
-      "schedule": "0 * * * *"
-    }
   ]
 }

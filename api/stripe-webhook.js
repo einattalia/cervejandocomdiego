@@ -1,7 +1,6 @@
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const { sendZohoMail } = require('./zoho-mailer');
-const { computeStripeFinancials } = require('./stripe-financials');
 
 
 function escapeHtml(value) {
@@ -168,26 +167,12 @@ module.exports = async function handler(req, res) {
       const orderId = session.metadata?.order_id || session.client_reference_id;
       if (orderId) {
         await linkEventToOrder(supabase, event.id, orderId);
-        const { error: sessionLinkError } = await supabase.from('orders').update({
-          stripe_checkout_session_id: session.id,
-          stripe_livemode: session.livemode === true || event.livemode === true,
-        }).eq('id', orderId);
-        if (sessionLinkError) throw sessionLinkError;
         const { error } = await supabase.rpc('mark_order_paid', {
           p_order_id: orderId,
           p_payment_provider: 'stripe',
           p_payment_reference: session.payment_intent || session.id,
         });
         if (error) throw error;
-        try {
-          const financials = await computeStripeFinancials(stripe, session);
-          if (financials) {
-            const { error: financialsError } = await supabase.from('orders').update(financials).eq('id', orderId);
-            if (financialsError) throw financialsError;
-          }
-        } catch (financialsError) {
-          console.warn('Stripe confirmed payment, but its fee details are not available yet:', financialsError.message);
-        }
         await sendOrderEmailNotice(supabase, orderId);
       }
     }
@@ -197,11 +182,7 @@ module.exports = async function handler(req, res) {
       const orderId = session.metadata?.order_id || session.client_reference_id;
       if (orderId) {
         await linkEventToOrder(supabase, event.id, orderId);
-        const { error } = await supabase.from('orders').update({
-          stripe_checkout_session_id: session.id,
-          stripe_livemode: session.livemode === true || event.livemode === true,
-          payment_status: 'failed', updated_at: new Date().toISOString(),
-        })
+        const { error } = await supabase.from('orders').update({ payment_status: 'failed', updated_at: new Date().toISOString() })
           .eq('id', orderId).not('payment_status', 'in', '(paid,partially_refunded,refunded)');
         if (error) throw error;
       }
@@ -213,8 +194,6 @@ module.exports = async function handler(req, res) {
       if (orderId) {
         await linkEventToOrder(supabase, event.id, orderId);
         const { error } = await supabase.from('orders').update({
-          stripe_checkout_session_id: session.id,
-          stripe_livemode: session.livemode === true || event.livemode === true,
           payment_status: 'expired', status: 'cancelled', updated_at: new Date().toISOString(),
         }).eq('id', orderId).not('payment_status', 'in', '(paid,partially_refunded,refunded)');
         if (error) throw error;
@@ -239,15 +218,6 @@ module.exports = async function handler(req, res) {
           updated_at: new Date().toISOString(),
         }).eq('id', order.id);
         if (error) throw error;
-        try {
-          const financials = await computeStripeFinancials(stripe, charge);
-          if (financials) {
-            const { error: financialsError } = await supabase.from('orders').update(financials).eq('id', order.id);
-            if (financialsError) throw financialsError;
-          }
-        } catch (financialsError) {
-          console.warn('Stripe refund synced, but fee details could not be refreshed:', financialsError.message);
-        }
       }
     }
 

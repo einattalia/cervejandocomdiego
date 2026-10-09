@@ -35,8 +35,7 @@ module.exports=async function handler(req,res){
   const stripeLines=lines.map(l=>({quantity:l.quantity,price_data:{currency:'brl',unit_amount:Math.round(l.unit_price*100),product_data:{name:l.beer_name_snapshot}}}));
   if(deliveryFee>0)stripeLines.push({quantity:1,price_data:{currency:'brl',unit_amount:Math.round(deliveryFee*100),product_data:{name:'Taxa de entrega'}}});
   const session=await stripe.checkout.sessions.create({mode:'payment',payment_method_types:methods.length?methods:['card'],customer_email:customer.email,client_reference_id:order.id,metadata:{order_id:order.id,order_code:code,age_verified:'true'},line_items:stripeLines,success_url:`${origin}/pedido-confirmado?pedido=${encodeURIComponent(code)}&session_id={CHECKOUT_SESSION_ID}`,cancel_url:`${origin}/pedido-confirmado?pedido=${encodeURIComponent(code)}&status=cancelled`});
-  const {error:sessionUpdateError}=await supabase.from('orders').update({stripe_checkout_session_id:session.id,stripe_livemode:session.livemode===true}).eq('id',order.id);
-  if(sessionUpdateError)console.error('Could not persist Stripe Checkout Session:',sessionUpdateError.message);
+  await supabase.from('orders').update({stripe_checkout_session_id:session.id}).eq('id',order.id);
   return json(res,200,{url:session.url,orderCode:code});
  }catch(err){console.error(err);return json(res,500,{error:'Não foi possível criar o checkout. Tente novamente.'});}
 };
