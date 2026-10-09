@@ -2336,8 +2336,9 @@ function renderFridge(beers){
     const stage=document.createElement('span');stage.className='can-stage';
     const img=document.createElement('img');img.src=beer.card.image;
     img.alt=beer.card.alt||[beer.card.brand,beer.card.name].filter(Boolean).join(' ');
-    can.setAttribute('aria-label',can.disabled?img.alt+' — esgotada':'Adicionar '+img.alt+' ao carrinho');
-    can.title=can.disabled?'Esgotado':'Adicionar ao carrinho';stage.append(img);
+    can.setAttribute('aria-label',can.disabled?img.alt+' — esgotada':(hasVitruvianaDiscount(beer)?img.alt+' — 10% de desconto':'Adicionar '+img.alt+' ao carrinho'));
+    can.title=can.disabled?'Esgotado':(hasVitruvianaDiscount(beer)?'10% de desconto · Adicionar ao carrinho':'Adicionar ao carrinho');stage.append(img);
+    if(hasVitruvianaDiscount(beer)) stage.append(createNode('span','fridge-sale-badge','10% OFF'));
     can.append(stage);shelf.append(can);
   });
   const line=document.createElement('span');line.className='shelf-line s1';shelf.append(line);
@@ -2903,7 +2904,7 @@ checkoutWhats?.addEventListener('click',event=>{
   let msg='Olá, Diegão! Montei meu pedido pelo site 🍺\n\n';
   entries.forEach(([name,qty])=>{
     const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);
-    msg+=`• ${qty}x ${name}\n`;
+    msg+=`• ${qty}x ${name}${hasVitruvianaDiscount(beer)?` — 10% OFF: ${formatBeerPrice(beerFinalPrice(beer))} cada`:''}\n`;
   });
   msg+='\n'+(delivery?.checked
     ?'Também quero consultar a possibilidade de entrega.'

@@ -1,5 +1,3 @@
-> **Nota histórica:** esta implementação foi substituída. A automação de venda pelo WhatsApp foi removida na v20.9.9; na versão atual, o aviso de venda confirmada é enviado por e-mail via Zoho quando configurado. Não siga estas instruções para ativar alertas de venda. Consulte o [README principal](README.md) e `ATUALIZACAO-v20.9.9-SEM-AVISO-WHATSAPP.md`.
-
 # Aviso automático de venda confirmada no WhatsApp
 
 O webhook do Stripe agora chama a WhatsApp Business Cloud API da Meta depois de confirmar o pagamento. O envio vale para pedidos pagos com Pix ou cartão, e um registro no Supabase evita avisos duplicados quando o Stripe repete a entrega do webhook.

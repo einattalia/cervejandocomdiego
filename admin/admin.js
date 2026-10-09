@@ -1,48 +1,13 @@
 (()=>{'use strict';
 const defaultCalculatorSettings={liters_per_person_hour:{moderado:0.25,medio:0.375,alto:0.5},other_drinks_reduction_percent:20,estimate_range_percent:10,cup_volume_ml:300};
 const URL='https://cqtdrpwnjnetbcnuqtyv.supabase.co', KEY='sb_publishable_hY5y6tve470_iBtkQuQiLw_Vs38_nBy', FIRST_ADMIN='ameninadovideo016@gmail.com';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)]; let session=null, sessionRefreshPromise=null, beers=[], orders=[], events=[], settingsRow=null, currentOrder=null, orderStatusDirty=false, partyContent={included_items:[],images:[],calculator_settings:{}}, partyImages=[];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)]; let session=null, beers=[], orders=[], events=[], settingsRow=null, currentOrder=null, orderStatusDirty=false, partyContent={included_items:[],images:[],calculator_settings:{}}, partyImages=[];
 const authView=$('#authView'),appView=$('#appView'),authMsg=$('#authMsg'),appMsg=$('#appMsg');
 function msg(el,text,type=''){el.textContent=text||'';el.className='message'+(type?' '+type:'')}
-function sessionExpiry(){
-  const saved=Number(session?.expires_at);
-  if(Number.isFinite(saved)&&saved>0)return saved;
-  try{const part=String(session?.access_token||'').split('.')[1];if(!part)return 0;const b64=part.replace(/-/g,'+').replace(/_/g,'/');const payload=JSON.parse(atob(b64.padEnd(Math.ceil(b64.length/4)*4,'=')));return Number(payload.exp)||0}catch{return 0}
-}
-function saveSession(s){session=s;localStorage.setItem('cd_admin_session',JSON.stringify(s))}
-function clearSession(){session=null;localStorage.removeItem('cd_admin_session')}
-async function refresh(){
-  if(sessionRefreshPromise)return sessionRefreshPromise;
-  if(!session?.refresh_token)return false;
-  const refreshToken=session.refresh_token;
-  sessionRefreshPromise=(async()=>{
-    try{
-      const response=await fetch(URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:refreshToken})});
-      const data=await response.json().catch(()=>null);
-      if(!response.ok||!data?.access_token||!data?.refresh_token)return false;
-      saveSession({...session,...data,user:data.user||session?.user});
-      return true;
-    }catch{return false}
-  })();
-  try{return await sessionRefreshPromise}finally{sessionRefreshPromise=null}
-}
-async function req(path,{method='GET',body,auth=true,headers={},_retried=false}={}){
-  if(auth&&session?.access_token&&sessionExpiry()<=Date.now()/1000+60){
-    if(!await refresh())throw new Error('Sua sessão do Admin expirou ou não pôde ser renovada. Entre novamente no painel.');
-  }
-  const h={apikey:KEY,...headers};if(auth&&session?.access_token)h.Authorization=`Bearer ${session.access_token}`;if(body!==undefined&&!headers['Content-Type'])h['Content-Type']='application/json';
-  const r=await fetch(URL+path,{method,headers:h,body:body===undefined?undefined:(h['Content-Type']==='application/json'?JSON.stringify(body):body)});
-  if(!r.ok){
-    const raw=await r.text();let parsed=null;try{parsed=JSON.parse(raw)}catch{}
-    let message=parsed?.message||parsed?.error_description||parsed?.msg||parsed?.error||raw;
-    if(parsed?.error_code==='invalid_credentials')message='E-mail ou senha não conferem. Confira o e-mail ou toque em “Esqueci minha senha” para redefinir a senha.';
-    const expiredJwt=/\bexp\b|expired|jwt.*(?:invalid|expired)|token.*(?:expired|invalid)/i.test(String(message));
-    if(auth&&!_retried&&expiredJwt&&await refresh())return req(path,{method,body,auth,headers,_retried:true});
-    throw new Error(message||`Erro ${r.status}`)
-  }
-  if(r.status===204)return null;const t=await r.text();return t?JSON.parse(t):null
-}
-async function siteApi(path,{method='GET',body,headers={},_retried=false}={}){if(session?.access_token&&sessionExpiry()<=Date.now()/1000+60&&!await refresh())throw new Error('Sua sessão do Admin expirou ou não pôde ser renovada. Entre novamente no painel.');const requestHeaders={...headers};if(session?.access_token)requestHeaders.Authorization=`Bearer ${session.access_token}`;if(body!==undefined&&!requestHeaders['Content-Type'])requestHeaders['Content-Type']='application/json';let response;try{response=await fetch(path,{method,headers:requestHeaders,body:body===undefined?undefined:(requestHeaders['Content-Type']==='application/json'?JSON.stringify(body):body)})}catch(error){throw new Error('Não foi possível conectar à API do site. Confira se esta versão está publicada e tente novamente.')}const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{}const errorText=data?.error||data?.message||data?.msg||text;if(!response.ok){if(!_retried&&/\bexp\b|expired|jwt.*(?:invalid|expired)|token.*(?:expired|invalid)/i.test(String(errorText))&&await refresh())return siteApi(path,{method,body,headers,_retried:true});throw new Error(errorText||`Erro ${response.status}`)}return data}
+async function req(path,{method='GET',body,auth=true,headers={},_retried=false}={}){const h={apikey:KEY,...headers};if(auth&&session?.access_token)h.Authorization=`Bearer ${session.access_token}`;if(body!==undefined&&!headers['Content-Type'])h['Content-Type']='application/json';const r=await fetch(URL+path,{method,headers:h,body:body===undefined?undefined:(h['Content-Type']==='application/json'?JSON.stringify(body):body)});if(!r.ok){let t=await r.text();let parsed=null;try{parsed=JSON.parse(t);if(parsed.error_code==='invalid_credentials')t='E-mail ou senha não conferem. Confira o e-mail ou toque em “Esqueci minha senha” para redefinir a senha.';else t=parsed.message||parsed.error_description||parsed.msg||parsed.error||t}catch{}const authExpired=auth&&!_retried&&(r.status===401||r.status===403)&&/exp|expired|jwt|token/i.test(String(t));if(authExpired&&await refresh())return req(path,{method,body,auth,headers,_retried:true});throw new Error(t||`Erro ${r.status}`)}if(r.status===204)return null;const t=await r.text();return t?JSON.parse(t):null}
+function saveSession(s){session=s;localStorage.setItem('cd_admin_session',JSON.stringify(s))}function clearSession(){session=null;localStorage.removeItem('cd_admin_session')}
+async function siteApi(path,{method='GET',body,headers={}}={}){const requestHeaders={...headers};if(session?.access_token)requestHeaders.Authorization=`Bearer ${session.access_token}`;if(body!==undefined&&!requestHeaders['Content-Type'])requestHeaders['Content-Type']='application/json';let response;try{response=await fetch(path,{method,headers:requestHeaders,body:body===undefined?undefined:(requestHeaders['Content-Type']==='application/json'?JSON.stringify(body):body)})}catch(error){throw new Error('Não foi possível conectar à API do site. Confira se esta versão está publicada e tente novamente.')}const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{}if(!response.ok)throw new Error(data?.error||data?.message||data?.msg||text||`Erro ${response.status}`);return data}
+async function refresh(){if(!session?.refresh_token)return false;try{const s=await req('/auth/v1/token?grant_type=refresh_token',{method:'POST',auth:false,body:{refresh_token:session.refresh_token}});saveSession(s);return true}catch{return false}}
 async function ensureAdmin(){const uid=session?.user?.id;if(!uid)return false;const email=(session.user.email||'').toLowerCase();if(email===FIRST_ADMIN){try{const rows=await req(`/rest/v1/admin_users?user_id=eq.${encodeURIComponent(uid)}&select=user_id`);if(rows?.length)return true;try{await req('/rest/v1/admin_users',{method:'POST',body:{user_id:uid},headers:{Prefer:'return=minimal'}})}catch(err){console.warn('Não foi possível sincronizar admin_users; acesso autenticado do primeiro administrador será mantido.',err)}return true}catch(err){console.warn('Validação de admin_users indisponível; acesso autenticado do primeiro administrador será mantido.',err);return true}}try{const rows=await req(`/rest/v1/admin_users?user_id=eq.${encodeURIComponent(uid)}&select=user_id`);return !!rows?.length}catch(err){console.warn('Falha ao validar administrador.',err);return false}}
 async function validateSession(){if(!session?.access_token)return false;try{const user=await req('/auth/v1/user');if(!user?.id)return false;session.user=user;saveSession(session);return true}catch{return false}}
 async function enter(){if(!(await validateSession())){clearSession();throw new Error('Sua sessão expirou. Faça login novamente.')}if(!(await ensureAdmin())){clearSession();throw new Error('Esta conta não possui permissão de administrador.')}authView.hidden=true;appView.hidden=false;document.body.classList.add('admin-authenticated');$('#adminEmail').textContent=session.user.email||'';try{await loadAll()}catch(err){msg(appMsg,err.message||'O painel abriu, mas houve falha ao carregar alguns dados.','error')}}
@@ -51,7 +16,7 @@ $('#togglePassword').addEventListener('click',()=>{const input=$('#password'),sh
 $('#resetBtn').addEventListener('click',async()=>{const email=$('#email').value.trim();if(!email)return msg(authMsg,'Informe o e-mail primeiro.','error');try{await req('/auth/v1/recover',{method:'POST',auth:false,body:{email}});msg(authMsg,'Se a conta existir, o Supabase enviará o e-mail de recuperação.','success')}catch(err){msg(authMsg,err.message,'error')}});
 $('#logoutBtn').addEventListener('click',async()=>{try{await req('/auth/v1/logout',{method:'POST'})}catch{}clearSession();location.reload()});
 function closeMobileMenu(){const sidebar=$('#adminSidebar'),backdrop=$('#sidebarBackdrop');sidebar?.classList.remove('open');document.body.classList.remove('admin-menu-open');if(backdrop)backdrop.hidden=true;$('#menuBtn')?.setAttribute('aria-expanded','false')}
-function setView(name){$$('.view').forEach(v=>v.hidden=v.id!==name+'View');$$('.nav[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));$('#pageTitle').textContent={dashboard:'Visão geral',beers:'Cervejas',orders:'Pedidos',events:'Agenda Cervejeira',party:'Monte seu evento',settings:'Configurações'}[name];if(innerWidth<901)closeMobileMenu();if(name==='orders'&&session)refreshOrdersInView();if(name==='dashboard'&&session)loadRevenue()}
+function setView(name){$$('.view').forEach(v=>v.hidden=v.id!==name+'View');$$('.nav[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));$('#pageTitle').textContent={dashboard:'Visão geral',beers:'Cervejas',orders:'Pedidos',events:'Agenda Cervejeira',party:'Monte seu evento',consignment:'Parceiros & Consignação',settings:'Configurações'}[name];if(innerWidth<901)closeMobileMenu();if(name==='consignment'&&session)window.loadConsignment?.();if(name==='orders'&&session)refreshOrdersInView();if(name==='dashboard'&&session)loadRevenue()}
 $$('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));$('#menuBtn').addEventListener('click',()=>{const sidebar=$('#adminSidebar'),backdrop=$('#sidebarBackdrop'),open=!sidebar.classList.contains('open');sidebar.classList.toggle('open',open);document.body.classList.toggle('admin-menu-open',open);backdrop.hidden=!open;$('#menuBtn').setAttribute('aria-expanded',String(open))});$('#sidebarBackdrop').addEventListener('click',closeMobileMenu);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu()});window.addEventListener('resize',()=>{if(innerWidth>900)closeMobileMenu()});
 async function loadAll(){
 msg(appMsg,'Carregando dados…');
@@ -61,7 +26,8 @@ const tasks=[
 ['faturamento',loadRevenue],
 ['eventos',loadEvents],
 ['Monte seu evento',loadPartyContent],
-['configurações',loadSettings]
+['configurações',loadSettings],
+['consignação',async()=>{window.consignmentBeers=beers;await window.loadConsignment?.()}]
 ];
 const failures=[];
 for(const [name,fn] of tasks){
@@ -71,7 +37,7 @@ if(failures.length){
 msg(appMsg,'Painel aberto. Alguns módulos não carregaram: '+failures.join(' | '),'error');
 }else{msg(appMsg,'')}
 }
-async function loadBeers(){beers=await req('/rest/v1/beers?select=*&order=sort_order.asc');renderBeers();$('#statTotal').textContent=beers.length;$('#statActive').textContent=beers.filter(b=>b.active).length;$('#statSold').textContent=beers.filter(b=>b.stock_status==='sold_out').length;renderRecent()}
+async function loadBeers(){beers=await req('/rest/v1/beers?select=*&order=sort_order.asc');window.consignmentBeers=beers;renderBeers();$('#statTotal').textContent=beers.length;$('#statActive').textContent=beers.filter(b=>b.active).length;$('#statSold').textContent=beers.filter(b=>b.stock_status==='sold_out').length;renderRecent()}
 function stockLabel(s){return s==='sold_out'?'Esgotado':s==='low_stock'?'Últimas unidades':'Em estoque'}function price(v){return v==null?'Preço sob consulta':Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 function beerImage(src){if(!src)return '/assets/favicon.png';const value=String(src).trim();if(/^https?:\/\//i.test(value)||value.startsWith('data:')||value.startsWith('blob:')||value.startsWith('/'))return value;return '/'+value.replace(/^\.\//,'').replace(/^\.\.\//,'')}
 function setBeerImage(img,src){img.src=beerImage(src);img.addEventListener('error',()=>{if(!img.dataset.fallback){img.dataset.fallback='1';img.src='/assets/favicon.png'}},{once:true})}

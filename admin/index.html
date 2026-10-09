@@ -77,6 +77,7 @@
       <button class="nav" data-view="beers">
        Cervejas
       </button>
+      <button class="nav" data-view="consignment">Parceiros &amp; Consignação</button>
       <button class="nav" data-view="orders">
        Pedidos
       </button>
@@ -237,7 +238,19 @@
        </div>
       </section>
      </div>
-     <div class="view" hidden="" id="beersView">
+     <div class="view" id="consignmentView" hidden>
+ <section class="consignment-panel"><div class="consignment-heading"><div><h2>Parceiros &amp; Consignação</h2><p>Veja onde estão as latas, o capital investido e os repasses.</p></div><button class="primary" id="newPartnerBtn" type="button">+ Novo parceiro</button></div>
+ <p class="message" id="consignmentMsg"></p>
+ <div class="consignment-kpis"><article><span>Capital em estoque (custo)</span><strong id="conCapital">R$ 0,00</strong></article><article><span>Valor de venda em geladeiras</span><strong id="conRetail">R$ 0,00</strong></article><article><span>Repasses pendentes</span><strong id="conPending">R$ 0,00</strong></article><article><span>Recebido dos parceiros</span><strong id="conReceived">R$ 0,00</strong></article></div>
+ <div class="consignment-toolbar"><label>Estabelecimento<select id="conPartnerFilter"><option value="">Todos os parceiros</option></select></label><button type="button" id="conRefresh">Atualizar painel</button><button type="button" id="conExport">Exportar CSV</button></div>
+ <div class="consignment-heading"><h3>Estabelecimentos</h3></div><div id="conPartnerList" class="consignment-list"></div>
+ <h3>Estoque por cerveja</h3><div class="consignment-table-wrap"><table class="consignment-table"><thead><tr><th>Parceiro</th><th>Cerveja</th><th>Quantidade</th><th>Custo imobilizado</th><th>Valor de venda</th></tr></thead><tbody id="conStockRows"></tbody></table></div>
+ <h3>Últimas movimentações</h3><div id="conHistory" class="consignment-list"></div></section>
+</div>
+<dialog id="conPartnerDialog" class="consignment-dialog"><form id="conPartnerForm"><h3 id="conPartnerTitle">Novo parceiro</h3><input type="hidden" id="conPartnerId"><label>Nome do estabelecimento<input id="conName" required maxlength="160"></label><label>CNPJ<input id="conCnpj" inputmode="numeric" placeholder="00.000.000/0000-00"></label><label>Responsável pela venda<input id="conContact" required></label><label>WhatsApp<input id="conPhone"></label><label>Endereço<input id="conAddress"></label><label>Código da geladeira<input id="conFridge"></label><label>Participação do estabelecimento (%)<input id="conShare" type="number" min="0" max="100" step="0.01" value="50" required></label><label>Status<select id="conStatus"><option value="active">Ativo</option><option value="watch">Em observação</option><option value="inactive">Inativo</option></select></label><p class="message" id="conPartnerMsg"></p><div class="consignment-actions"><button type="button" id="conPartnerCancel">Cancelar</button><button class="primary" type="submit">Salvar parceiro</button></div></form></dialog>
+<dialog id="conMovementDialog" class="consignment-dialog"><form id="conMovementForm"><h3 id="conMovementTitle">Registrar movimentação</h3><input type="hidden" id="conMovementPartner"><label>Operação<select id="conMovementType"><option value="delivery">Abastecimento</option><option value="sale">Venda</option><option value="return">Devolução</option><option value="loss">Perda / avaria</option><option value="adjustment">Ajuste de inventário (+/-)</option></select></label><label>Cerveja do catálogo<select id="conBeer" required></select></label><label>Quantidade<input id="conQuantity" type="number" step="1" min="1" required></label><label>Custo unitário (R$)<input id="conCost" type="number" min="0" step="0.01" required></label><label>Preço unitário de venda (R$)<input id="conPrice" type="number" min="0" step="0.01" required></label><label>Observações<input id="conNotes"></label><p class="message" id="conMovementMsg"></p><div class="consignment-actions"><button type="button" id="conMovementCancel">Cancelar</button><button class="primary" type="submit">Registrar</button></div></form></dialog>
+<dialog id="conSettlementDialog" class="consignment-dialog"><form id="conSettlementForm"><h3>Registrar repasse recebido</h3><input type="hidden" id="conSettlementPartner"><p id="conSettlementPending"></p><label>Valor recebido (R$)<input id="conSettlementAmount" type="number" min="0.01" step="0.01" required></label><label>Observação<input id="conSettlementNotes"></label><p class="message" id="conSettlementMsg"></p><div class="consignment-actions"><button type="button" id="conSettlementCancel">Cancelar</button><button class="primary" type="submit">Registrar recebimento</button></div></form></dialog>
+<div class="view" hidden="" id="beersView">
       <section class="panel">
        <div class="panel-head">
         <div>
@@ -705,7 +718,8 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/admin.js?v=24.2">
+  <script defer="" src="/admin/consignment.js?v=1"></script>
+  <script defer="" src="/admin/admin.js?v=24.1">
   </script>
  </body>
 </html>
