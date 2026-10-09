@@ -69,6 +69,7 @@
 
   window.loadCervejandoCatalog=async function(){
     const fallback=Array.isArray(window.CERVEJANDO_BEERS)?window.CERVEJANDO_BEERS:[];
+    const kitFallback=Array.isArray(window.CERVEJANDO_KITS)?window.CERVEJANDO_KITS:[];
     try{
       const [rows,tagRows]=await Promise.all([
         supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status,media_urls&active=eq.true&order=sort_order.asc'),
@@ -86,11 +87,19 @@
       });
 
       window.CERVEJANDO_BEERS=rows.map(row=>mapBeer(row,tagsByBeer.get(row.id)||[]));
+      try{
+        const kits=await supabaseFetch('/rest/v1/rpc/get_active_kits');
+        window.CERVEJANDO_KITS=(Array.isArray(kits)?kits:[]).map(row=>({
+          id:row.id,slug:row.slug,name:row.name,description:row.description||'',image:row.image_url||'',price:Number(row.price)||0,
+          availableQuantity:row.available_quantity===null?null:Number(row.available_quantity),sortOrder:Number(row.sort_order)||0,active:row.active!==false
+        }));
+      }catch(error){console.warn('Kits não disponíveis; execute supabase-v21-kits.sql para ativar a venda de kits.',error);window.CERVEJANDO_KITS=kitFallback}
       document.documentElement.dataset.catalogSource='supabase';
-      return {source:'supabase',count:window.CERVEJANDO_BEERS.length};
+      return {source:'supabase',count:window.CERVEJANDO_BEERS.length,kits:window.CERVEJANDO_KITS.length};
     }catch(error){
       console.warn('Cervejando com Diego: usando catálogo local de segurança.',error);
       window.CERVEJANDO_BEERS=fallback;
+      window.CERVEJANDO_KITS=kitFallback;
       document.documentElement.dataset.catalogSource='local-fallback';
       return {source:'local-fallback',count:fallback.length};
     }

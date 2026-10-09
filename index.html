@@ -1949,7 +1949,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 <link rel="stylesheet" href="assets/site-colors.css?v=1">
 <link rel="stylesheet" href="assets/party-events.css?v=20.9.5">
-<script src="assets/party-events.js?v=20.9.5" defer></script>
+<script src="assets/party-events.js?v=20.9.7" defer></script>
 <script src="assets/party-content.js?v=20.9.4" defer></script>
 </head>
 <body class="theme-light">
@@ -2071,6 +2071,10 @@ document.addEventListener('DOMContentLoaded',function(){
 <div aria-live="polite" class="grid" id="beerCatalogGrid"></div>
 </div>
 </section>
+<section class="kits-catalog shell" id="kitsCatalogSection" hidden aria-labelledby="kitsCatalogTitle">
+ <div class="kits-catalog-heading"><div><span class="eyebrow">Presentes prontos</span><h2 id="kitsCatalogTitle">Kits do <span>Diegão</span></h2><p>Kits montados com cuidado, prontos para aproveitar ou presentear.</p></div></div>
+ <div class="kits-catalog-grid" id="kitsCatalogGrid"></div>
+</section>
 <section class="tips-section catalog-help" id="dicas">
 <div class="shell tips-grid">
 <div>
@@ -2127,10 +2131,9 @@ document.addEventListener('DOMContentLoaded',function(){
 <label>Local do evento<input name="local" placeholder="Nome do espaço ou endereço; se não definiu, conte aqui" maxlength="200" required></label>
 <label>Quantidade estimada de convidados<input type="number" name="convidados" min="1" max="100000" step="1" required></label>
 <label>Duração prevista (em horas)<input type="number" name="duracao" min="0.5" max="168" step="0.5" placeholder="Ex.: 4" required></label>
-<label>Quantos convidados devem beber chopp? (opcional)<input type="number" name="pessoas_chopp" min="0" max="100000" step="1" placeholder="Se não souber, usamos o total de convidados"><small>Deixe em branco para considerar todos os convidados.</small></label>
 <label>Perfil de consumo<select name="perfil_consumo"><option value="moderado">Moderado</option><option value="medio" selected>Médio</option><option value="alto">Alto</option></select></label>
 <label class="party-check"><input type="checkbox" name="outras_bebidas"> Também haverá outras bebidas alcoólicas</label>
-<div class="party-wide party-calculator" id="partyCalculator" aria-live="polite"><span class="eyebrow">Estimativa automática</span><strong id="partyCalcLiters">Preencha convidados e duração</strong><span id="partyCalcCups">A estimativa será atualizada conforme você preenche.</span><small>É uma referência para planejamento; o consumo real varia conforme o evento e os convidados.</small></div>
+<div class="party-wide party-calculator" id="partyCalculator" aria-live="polite"><span class="eyebrow">Estimativa aproximada de consumo de chopp</span><strong id="partyCalcLiters">Preencha convidados e duração</strong><span id="partyCalcCups">A estimativa será atualizada conforme você preenche.</span><small>É uma referência para planejamento; o consumo real varia conforme o evento e os convidados.</small></div>
 <label class="party-wide">O que você precisa?<textarea name="necessidades" rows="3" maxlength="1500" placeholder="Conte qual estrutura procura. Se ainda não sabe, podemos ajudar a definir." required></textarea></label>
 <label class="party-wide">Observações (opcional)<textarea name="observacoes" rows="3" maxlength="1500" placeholder="Outras informações sobre o evento"></textarea></label>
 <label>Nome<input name="nome" autocomplete="name" maxlength="120" required></label>
@@ -2239,7 +2242,7 @@ document.addEventListener('DOMContentLoaded',function(){
     <button class="checkout-pay" id="checkoutPay" type="submit" disabled>Ir para pagamento seguro</button>
   </form>
 </dialog>
-<script src="data/cervejas.js?v=23.0"></script><script src="data/supabase.js?v=23.0"></script><script src="data/events.js?v=20.5.3"></script><script>
+<script src="data/cervejas.js?v=23.0"></script><script src="data/supabase.js?v=24.0"></script><script src="data/events.js?v=20.5.3"></script><script>
 /* ===== CATÁLOGO DATA-DRIVEN v17.1 ===== */
 function createNode(tag,className,text){
   const node=document.createElement(tag);
@@ -2256,23 +2259,6 @@ function formatBeerPrice(value){
   const number=Number(value);
   if(value===null||value===undefined||value===''||!Number.isFinite(number)) return 'Preço sob consulta';
   return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(number);
-}
-
-const VITRUVIANA_DISCOUNT_RATE=.10;
-function hasVitruvianaDiscount(beer){
-  return normalizeCardText(beer?.detail?.brewery||beer?.card?.brand||'').includes('vitruviana') && Number.isFinite(Number(beer?.price)) && Number(beer.price)>0;
-}
-function beerFinalPrice(beer){
-  if(beer?.price===null||beer?.price===undefined||beer?.price==='') return null;
-  const price=Number(beer?.price);
-  if(!Number.isFinite(price)) return null;
-  return hasVitruvianaDiscount(beer)?Math.round(price*(1-VITRUVIANA_DISCOUNT_RATE)*100)/100:price;
-}
-function createBeerPriceDisplay(beer){
-  const display=createNode('span','beer-price-display');
-  if(hasVitruvianaDiscount(beer)) display.append(createNode('del','beer-price-original',formatBeerPrice(beer.price)));
-  display.append(createNode('strong','beer-price',formatBeerPrice(beerFinalPrice(beer))));
-  return display;
 }
 
 function stockInfo(status){
@@ -2336,10 +2322,8 @@ function renderFridge(beers){
     const stage=document.createElement('span');stage.className='can-stage';
     const img=document.createElement('img');img.src=beer.card.image;
     img.alt=beer.card.alt||[beer.card.brand,beer.card.name].filter(Boolean).join(' ');
-    can.setAttribute('aria-label',can.disabled?img.alt+' — esgotada':(hasVitruvianaDiscount(beer)?img.alt+' — 10% de desconto':'Adicionar '+img.alt+' ao carrinho'));
-    can.title=can.disabled?'Esgotado':(hasVitruvianaDiscount(beer)?'10% de desconto · Adicionar ao carrinho':'Adicionar ao carrinho');stage.append(img);
-    if(hasVitruvianaDiscount(beer)) stage.append(createNode('span','fridge-sale-badge','10% OFF'));
-    can.append(stage);shelf.append(can);
+    can.setAttribute('aria-label',can.disabled?img.alt+' — esgotada':'Adicionar '+img.alt+' ao carrinho');
+    can.title=can.disabled?'Esgotado':'Adicionar ao carrinho';stage.append(img);can.append(stage);shelf.append(can);
   });
   const line=document.createElement('span');line.className='shelf-line s1';shelf.append(line);
   const plaque=document.querySelector('.fridge-curation-plaque');
@@ -2373,7 +2357,6 @@ function renderBeerCatalog(){
       const art=createNode('div','beer-art');
       const stockBadge=createNode('span',`stock-badge ${stock.className}`,stock.label);
       art.append(stockBadge);
-      if(hasVitruvianaDiscount(beer)) art.append(createNode('span','sale-badge','10% OFF'));
       const three=createNode('div','beer-3d');
       three.setAttribute('aria-hidden','true');
       const img=document.createElement('img');
@@ -2393,7 +2376,7 @@ function renderBeerCatalog(){
       const abvLabel=abv?`${abv[0]}%`:'não informado';
       style.append(createNode('span','beer-abv',`ABV ${abvLabel}`));
       const priceRow=createNode('div','beer-price-row');
-      priceRow.append(createBeerPriceDisplay(beer),createNode('span','beer-volume',beer.detail.volume||'Volume não divulgado'));
+      priceRow.append(createNode('strong','beer-price',formatBeerPrice(beer.price)),createNode('span','beer-volume',beer.detail.volume||'Volume não divulgado'));
       const metricBox=createNode('div','card-metrics');
       metricBox.append(createMetricScale('Intensidade',beer.detail.intensity,'intensity'),createMetricScale('Amargor',beer.detail.bitterness,'bitterness'));
       const addCard=createNode('button','card-add add-to-order',stock.className==='sold-out'?'Esgotado':'Adicionar ao pedido');
@@ -2441,16 +2424,14 @@ function renderBeerCatalog(){
     [
       ['Estilo',d.style],
       ['Cervejaria',d.brewery],
-      ['Preço',null],
+      ['Preço',formatBeerPrice(beer.price)],
       ['Volume',d.volume],
       ['Teor alcoólico',d.abv],
       ['IBU',d.ibu],
       ['Lúpulos utilizados',d.hops]
     ].forEach(([label,value])=>{
       const row=document.createElement('div');
-      row.append(createNode('b','',label));
-      if(label==='Preço') row.append(createBeerPriceDisplay(beer));
-      else row.append(document.createTextNode(value||'Não divulgado'));
+      row.append(createNode('b','',label),document.createTextNode(value||'Não divulgado'));
       specs.append(row);
     });
     info.append(specs,createNode('h4','','Sobre a cerveja'),createNode('p','',d.description));
@@ -2484,11 +2465,19 @@ function renderBeerCatalog(){
   });
 }
 
+function renderKitCatalog(){
+  const section=document.getElementById('kitsCatalogSection'),grid=document.getElementById('kitsCatalogGrid');if(!section||!grid)return;
+  const kits=(window.CERVEJANDO_KITS||[]).filter(k=>k.active!==false).sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
+  grid.replaceChildren();section.hidden=!kits.length;
+  kits.forEach(kit=>{const card=createNode('article','kit-card');const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=kit.name;const info=createNode('div','kit-card-info');info.append(createNode('span','eyebrow','Kit pronto'),createNode('h3','',kit.name),createNode('p','',kit.description||'Um kit especial montado pelo Diegão.'));const stock=kit.availableQuantity===null?'Disponível':Number(kit.availableQuantity)>0?`${kit.availableQuantity} disponível${kit.availableQuantity===1?'':'is'}`:'Esgotado';info.append(createNode('span','kit-stock',stock));const footer=createNode('div','kit-card-footer');footer.append(createNode('strong','',formatBeerPrice(kit.price)));const add=createNode('button','card-add add-to-order',Number(kit.availableQuantity)===0?'Esgotado':'Adicionar ao carrinho');add.type='button';add.dataset.beer=kit.name;add.dataset.kitSlug=kit.slug;add.disabled=Number(kit.availableQuantity)===0;footer.append(add);card.append(image,info,footer);grid.append(card)});
+}
+
 async function bootCervejandoSite(){
   if(typeof window.loadCervejandoCatalog==='function'){
     await window.loadCervejandoCatalog();
   }
   renderBeerCatalog();
+  renderKitCatalog();
 
 
 const WHATSAPP_NUMBER='5516997927171';
@@ -2735,6 +2724,7 @@ document.querySelectorAll('.beer-modal').forEach(modal=>{
 });
 
 let cart={};
+function findOrderItem(name){const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);if(beer)return{type:'beer',slug:beer.slug||beer.id,name,price:Number(beer.price)||0};const kit=(window.CERVEJANDO_KITS||[]).find(item=>item.name===name);if(kit)return{type:'kit',slug:kit.slug,name,price:Number(kit.price)||0};return null}
 const drawer=document.getElementById('cartDrawer');
 const backdrop=document.getElementById('cartBackdrop');
 const cartCount=document.getElementById('cartCount');
@@ -2750,13 +2740,13 @@ const checkoutSite=document.getElementById('checkoutSite');
 
 window.CervejandoCart={
   getItems:()=>Object.entries(cart).map(([name,quantity])=>{
-    const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);
-    return {slug:beer?.slug||beer?.id||'',name,quantity,unitPrice:beerFinalPrice(beer)||0};
+    const item=findOrderItem(name);
+    return {type:item?.type||'beer',slug:item?.slug||'',name,quantity,unitPrice:item?.price||0};
   }).filter(item=>item.slug&&item.quantity>0),
   count:()=>cartTotal(),
   subtotal:()=>Object.entries(cart).reduce((sum,[name,qty])=>{
-    const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);
-    return sum+(beerFinalPrice(beer)||0)*qty;
+    const item=findOrderItem(name);
+    return sum+(item?.price||0)*qty;
   },0),
   clear:()=>{cart={};renderCart();}
 };
@@ -2771,8 +2761,8 @@ function renderCart(){
   const entries=Object.entries(cart);
   cartEmpty.style.display=entries.length?'none':'block';
   const subtotal=entries.reduce((sum,[name,qty])=>{
-    const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);
-    const price=beerFinalPrice(beer);
+    const item=findOrderItem(name);
+    const price=Number(item?.price);
     return sum+(Number.isFinite(price)?price*qty:0);
   },0);
   if(cartSubtotal) cartSubtotal.textContent=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(subtotal);
@@ -2902,10 +2892,7 @@ checkoutWhats?.addEventListener('click',event=>{
   }
 
   let msg='Olá, Diegão! Montei meu pedido pelo site 🍺\n\n';
-  entries.forEach(([name,qty])=>{
-    const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);
-    msg+=`• ${qty}x ${name}${hasVitruvianaDiscount(beer)?` — 10% OFF: ${formatBeerPrice(beerFinalPrice(beer))} cada`:''}\n`;
-  });
+  entries.forEach(([name,qty])=>{ msg+=`• ${qty}x ${name}\n`; });
   msg+='\n'+(delivery?.checked
     ?'Também quero consultar a possibilidade de entrega.'
     :'Podemos combinar retirada ou entrega.');
@@ -3028,6 +3015,7 @@ document.addEventListener('click',event=>{
     '.add-to-order, .add-to-cart, [data-add-to-cart], [data-add-cart], [data-cart-add]'
   );
   if(!addButton) return;
+  if(addButton.dataset.kitSlug){const name=addButton.dataset.beer;if(name){cart[name]=(cart[name]||0)+1;renderCart();}}
   setTimeout(()=>openCartAfterAdd(),0);
 });
 
@@ -3141,7 +3129,7 @@ bootCervejandoSite();
   dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
 })();
 </script>
-<script src="data/checkout.js?v=20.2.0"></script>
+<script src="data/checkout.js?v=24.0"></script>
 <style>@keyframes fall{to{transform:translateY(900px) rotate(360deg)}}
 /* ===== CATÁLOGO EXPANDIDO v17.1 ===== */
 .feature-icon svg,.circle-btn svg{width:20px;height:20px;display:block}
@@ -3158,12 +3146,6 @@ bootCervejandoSite();
 .stock-badge.in-stock{color:#bfe6c8;background:rgba(25,83,48,.72);border-color:rgba(112,207,137,.25)}
 .stock-badge.low-stock{color:#9aca3c;background:rgba(154,202,60,.78);border-color:rgba(154,202,60,.3)}
 .stock-badge.sold-out{color:#d8d8d8;background:rgba(60,60,60,.82);border-color:rgba(255,255,255,.15)}
-.sale-badge{position:absolute;top:12px;right:12px;z-index:4;padding:8px 10px;border-radius:999px;background:#f4c542;color:#111;font-size:.69rem;font-weight:900;letter-spacing:.04em;box-shadow:0 4px 16px rgba(0,0,0,.35)}
-.fridge-sale-badge{position:absolute;top:5px;right:3px;z-index:4;padding:5px 6px;border-radius:999px;background:#f4c542;color:#111;font-size:.52rem;font-weight:900;letter-spacing:.02em;box-shadow:0 3px 10px rgba(0,0,0,.4)}
-.beer-price-display{display:inline-flex;align-items:baseline;gap:7px;flex-wrap:wrap}
-.beer-price-original{color:#999;font-size:.73em;text-decoration-thickness:1px}
-.beer-price-display .beer-price{margin:0}
-.specs .beer-price-display{display:inline-flex;justify-content:flex-end}
 .beer-card.is-sold-out .beer-art img{filter:grayscale(.65) saturate(.35) opacity(.62) drop-shadow(0 18px 16px rgba(0,0,0,.45))!important}
 .beer-card.is-sold-out{border-color:rgba(255,255,255,.09)}
 .beer-meta{display:flex;flex-direction:column;gap:10px;flex:1;padding:16px 16px 17px!important;border-top:1px solid var(--line)}
@@ -3190,7 +3172,7 @@ bootCervejandoSite();
 .tips-section.catalog-help{border-top:1px solid rgba(154,202,60,.13);border-bottom:1px solid rgba(154,202,60,.13);background:radial-gradient(circle at 20% 30%,rgba(154,202,60,.09),transparent 36%),#090a0b}
 .tips-back-catalog{display:inline-flex;margin-top:16px;color:var(--gold2);font-weight:800;font-size:.82rem;border-bottom:1px solid rgba(154,202,60,.4);padding-bottom:5px}
 @media(max-width:860px){.catalog-tools{justify-items:stretch;min-width:0}.catalog-search{width:100%;max-width:none}.catalog-top{align-items:stretch}.filters{justify-content:flex-start}}
-@media(max-width:560px){.beer-art{height:205px!important}.beer-meta{padding:12px 11px 13px!important;gap:8px}.stock-badge{top:8px;left:8px;padding:5px 7px;font-size:.57rem}.sale-badge{top:8px;right:8px;padding:6px 7px;font-size:.57rem}.beer-identity{min-height:38px}.beer-identity strong{font-size:.65rem}.beer-identity span{font-size:.82rem}.beer-style{font-size:.64rem}.beer-price-row{display:grid;gap:3px}.beer-price{font-size:.75rem}.beer-price-original{font-size:.68rem}.beer-volume{font-size:.62rem}.card-metric-label{font-size:.54rem}.card-metric-value{font-size:.52rem}.card-scale{gap:2px;height:3px}.card-scale i{height:3px}.card-metric-descriptor{font-size:.5rem}.card-add{font-size:.64rem;min-height:36px}.catalog-search{height:44px}}
+@media(max-width:560px){.beer-art{height:205px!important}.beer-meta{padding:12px 11px 13px!important;gap:8px}.stock-badge{top:8px;left:8px;padding:5px 7px;font-size:.57rem}.beer-identity{min-height:38px}.beer-identity strong{font-size:.65rem}.beer-identity span{font-size:.82rem}.beer-style{font-size:.64rem}.beer-price-row{display:grid;gap:3px}.beer-price{font-size:.75rem}.beer-volume{font-size:.62rem}.card-metric-label{font-size:.54rem}.card-metric-value{font-size:.52rem}.card-scale{gap:2px;height:3px}.card-scale i{height:3px}.card-metric-descriptor{font-size:.5rem}.card-add{font-size:.64rem;min-height:36px}.catalog-search{height:44px}}
 
 
 /* ===== DIREÇÃO PREMIUM v17.2 ===== */
@@ -3978,5 +3960,7 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 .premium-fridge .fridge-can .can-stage{width:100%!important}
 .premium-fridge .fridge-can .can-stage > img{width:auto!important;height:var(--fridge-can-height,80%)!important;max-width:100%!important;max-height:80%!important;object-fit:contain!important;object-position:center bottom!important}
 @media(max-width:560px){.premium-fridge .fridge-shelves{gap:12px 5px!important}}
-</style><script src="assets/fridge-sizing.js?v=1.0"></script><link rel="stylesheet" href="assets/site-typography.css?v=1.2"/></body>
+</style><script src="assets/fridge-sizing.js?v=1.0"></script><link rel="stylesheet" href="assets/site-typography.css?v=1.2"/><style>
+.kits-catalog{padding:clamp(34px,6vw,72px) 20px}.kits-catalog-heading{margin-bottom:24px}.kits-catalog-heading h2{font-size:clamp(2.2rem,5vw,3.6rem);margin:8px 0}.kits-catalog-heading h2 span{color:var(--gold,#9aca3c)}.kits-catalog-heading p{color:#999;max-width:620px}.kits-catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}.kit-card{overflow:hidden;border:1px solid rgba(154,202,60,.2);border-radius:14px;background:linear-gradient(145deg,#151819,#0c0e0f);display:flex;flex-direction:column}.kit-card>img{width:100%;height:230px;object-fit:cover;background:#111}.kit-card-info{padding:18px 18px 5px;flex:1}.kit-card-info h3{font-size:1.45rem;margin:7px 0}.kit-card-info p{color:#aaa;line-height:1.5;min-height:40px}.kit-stock{font-size:.75rem;color:#9aca3c}.kit-card-footer{padding:12px 18px 18px;display:grid;grid-template-columns:1fr;gap:12px}.kit-card-footer strong{font-size:1.45rem;color:#9aca3c}.kit-card-footer button{min-height:44px}.kit-card button:disabled{opacity:.5;cursor:not-allowed}body.theme-light .kit-card{background:#fdfdfd;border-color:rgba(58,58,58,.14)}body.theme-light .kit-card-info p{color:#555}
+</style></body>
 </html>

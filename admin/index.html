@@ -9,11 +9,11 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=36" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=31" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
- <body data-admin-version="20.9.20">
+ <body data-admin-version="20.9.6">
   <div class="shell">
    <section class="auth-wrap" id="authView">
     <div class="auth-card">
@@ -28,7 +28,7 @@
      <form class="stack" id="loginForm">
       <label>
        E-mail
-       <input autocomplete="username" id="email" required="" type="email" value="contato@cervejandocomdiego.com.br"/>
+       <input autocomplete="username" id="email" required="" type="email" value="ameninadovideo016@gmail.com"/>
       </label>
       <label>
        Senha
@@ -58,7 +58,7 @@
     </div>
    </section>
    <section class="app" hidden="" id="appView">
-    <aside class="sidebar" id="adminSidebar" aria-label="Navegação administrativa">
+    <aside class="sidebar">
      <div class="side-brand">
       <img alt="" src="/assets/logo-diego-contorno.png?v=25"/>
       <div>
@@ -77,7 +77,9 @@
       <button class="nav" data-view="beers">
        Cervejas
       </button>
-      <button class="nav" data-view="consignment">Parceiros &amp; Consignação</button>
+      <button class="nav" data-view="kits">
+       Kits
+      </button>
       <button class="nav" data-view="orders">
        Pedidos
       </button>
@@ -102,7 +104,6 @@
       </a>
      </div>
     </aside>
-    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Fechar menu" hidden></button>
     <main class="main">
      <header class="topbar">
       <button aria-label="Abrir menu" class="menu" id="menuBtn">
@@ -158,68 +159,21 @@
        </article>
        <article>
         <span>
-          Pedidos pagos
+         Pagos
         </span>
         <strong id="statPaid">
          —
         </strong>
        </article>
        <article>
-        <span>Pagamentos pendentes</span>
-        <strong id="statPending">—</strong>
-       </article>
-       <article>
-        <span>Falhas / expirados</span>
-        <strong id="statPaymentIssues">—</strong>
-       </article>
-       <article>
         <span>
-         Vendas líquidas
+         Faturamento
         </span>
         <strong id="statRevenue">
          —
         </strong>
        </article>
       </div>
-      <section class="panel revenue-panel" aria-labelledby="revenueHeading">
-       <div class="panel-head revenue-head">
-        <div>
-         <p class="eyebrow">Vendas confirmadas</p>
-         <h3 id="revenueHeading">Faturamento por período</h3>
-        </div>
-        <div class="revenue-controls">
-         <button class="secondary compact" id="reconcileStripeBtn" type="button">Conferir pagamentos</button>
-         <div class="revenue-filters">
-         <label for="revenueMonth">Mês
-          <select id="revenueMonth" aria-label="Filtrar faturamento por mês">
-           <option value="all">Todos os meses</option>
-           <option value="01">Janeiro</option><option value="02">Fevereiro</option><option value="03">Março</option><option value="04">Abril</option><option value="05">Maio</option><option value="06">Junho</option><option value="07">Julho</option><option value="08">Agosto</option><option value="09">Setembro</option><option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
-          </select>
-         </label>
-         <label for="revenueYear">Ano
-          <select id="revenueYear" aria-label="Filtrar faturamento por ano"></select>
-         </label>
-         </div>
-        </div>
-       </div>
-       <div class="revenue-result">
-        <div>
-         <span>Venda bruta confirmada</span>
-         <strong id="revenueGrossTotal">—</strong>
-        </div>
-        <div><span>Estornos dos pedidos</span><strong id="revenueRefundedTotal">—</strong></div>
-        <div><span id="revenuePeriodLabel">Venda líquida no período</span><strong id="revenuePeriodTotal">—</strong></div>
-        <div class="revenue-order-count"><span>Pedidos com pagamento</span><strong id="revenuePeriodOrders">—</strong></div>
-       </div>
-       <p class="muted revenue-note">Vendas líquidas = pagamentos confirmados menos estornos. O repasse bancário da Stripe é acompanhado separadamente.</p>
-      </section>
-      <section class="panel webhook-health-panel" aria-labelledby="webhookHealthHeading">
-       <div class="panel-head">
-        <div><p class="eyebrow">Monitoramento</p><h3 id="webhookHealthHeading">Falhas na integração de pagamentos</h3></div>
-        <strong class="webhook-failure-count" id="webhookFailureCount">—</strong>
-       </div>
-       <div id="webhookFailureList" class="webhook-failure-list"><p class="muted">Carregando eventos…</p></div>
-      </section>
       <section class="panel">
        <div class="panel-head">
         <div>
@@ -238,21 +192,7 @@
        </div>
       </section>
      </div>
-     <div class="view" id="consignmentView" hidden>
- <section class="consignment-panel"><div class="consignment-heading"><div><h2>Parceiros &amp; Consignação</h2><p>Veja onde estão as latas, o capital investido e os repasses.</p></div><button class="primary" id="newPartnerBtn" type="button">+ Novo parceiro</button></div>
- <p class="message" id="consignmentMsg"></p>
- <div class="consignment-kpis"><article><span>Capital em estoque (custo)</span><strong id="conCapital">R$ 0,00</strong></article><article><span>Valor de venda em geladeiras</span><strong id="conRetail">R$ 0,00</strong></article><article><span>Repasses pendentes</span><strong id="conPending">R$ 0,00</strong></article><article><span>Recebido dos parceiros</span><strong id="conReceived">R$ 0,00</strong></article></div>
- <div class="consignment-toolbar"><label>Estabelecimento<select id="conPartnerFilter"><option value="">Todos os parceiros</option></select></label><button type="button" id="conRefresh">Atualizar painel</button><button type="button" id="conExport">Exportar CSV</button></div>
- <div class="consignment-heading"><h3>Estabelecimentos</h3></div><div id="conPartnerList" class="consignment-list"></div>
- <h3>Estoque por cerveja</h3><div class="consignment-table-wrap"><table class="consignment-table"><thead><tr><th>Parceiro</th><th>Cerveja</th><th>Quantidade</th><th>Custo imobilizado</th><th>Valor de venda</th></tr></thead><tbody id="conStockRows"></tbody></table></div>
- <h3>Últimas movimentações</h3><div id="conHistory" class="consignment-list"></div></section>
-</div>
-<section id="conPartnerDetail" class="consignment-detail" hidden><div class="consignment-heading"><div><button type="button" id="conBack">← Todos os parceiros</button><h2 id="conDetailName">Parceiro</h2><p id="conDetailMeta"></p></div><button class="primary" type="button" id="conNewVisit">+ Registrar visita quinzenal</button></div><div class="consignment-kpis" id="conDetailKpis"></div><div class="consignment-detail-grid"><section class="consignment-detail-card"><h3>Contrato do parceiro</h3><p id="conContractInfo">Nenhum contrato anexado</p><input id="conContractFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"><div class="consignment-actions"><button type="button" id="conUploadContract">Anexar / substituir contrato</button><button type="button" id="conOpenContract">Visualizar contrato</button></div><p class="message" id="conContractMsg"></p></section><section class="consignment-detail-card"><h3>Resumo financeiro</h3><div id="conDetailFinance"></div><div class="consignment-actions"><button type="button" id="conDetailSettlement">Registrar repasse recebido</button><button type="button" id="conDetailMovement">Abastecer / movimentar</button></div></section></div><h3>Estoque atual por rótulo</h3><div class="consignment-table-wrap"><table class="consignment-table"><thead><tr><th>Cerveja</th><th>Em estoque</th><th>Vendidas (total)</th><th>Custo em estoque</th><th>Venda potencial</th></tr></thead><tbody id="conDetailStock"></tbody></table></div><h3>Histórico de visitas</h3><div id="conVisitsList" class="consignment-list"></div><p class="message" id="conDetailMsg"></p></section>
-<dialog id="conVisitDialog" class="consignment-dialog"><form id="conVisitForm"><h3>Conferência quinzenal</h3><p id="conVisitPartnerName"></p><label>Data da visita<input type="date" id="conVisitDate" required></label><p class="consignment-hint">Informe o estoque físico encontrado em cada rótulo. O sistema calcula as vendas pela diferença entre o saldo esperado e a contagem. Reposição e devolução são registradas separadamente.</p><div id="conVisitBeerRows" class="consignment-visit-rows"></div><label>Valor recebido nesta visita (R$)<input id="conVisitReceived" type="number" min="0" step="0.01" value="0" required></label><label>Observações<textarea id="conVisitNotes" rows="3"></textarea></label><p id="conVisitPreview" class="consignment-hint"></p><p class="message" id="conVisitMsg"></p><div class="consignment-actions"><button type="button" id="conVisitCancel">Cancelar</button><button class="primary" type="submit" id="conVisitSave">Salvar visita e atualizar estoque</button></div></form></dialog>
-<dialog id="conPartnerDialog" class="consignment-dialog"><form id="conPartnerForm"><h3 id="conPartnerTitle">Novo parceiro</h3><input type="hidden" id="conPartnerId"><label>Nome do estabelecimento<input id="conName" required maxlength="160"></label><label>CNPJ<input id="conCnpj" inputmode="numeric" placeholder="00.000.000/0000-00"></label><label>Responsável pela venda<input id="conContact" required></label><label>WhatsApp<input id="conPhone"></label><label>Endereço<input id="conAddress"></label><label>Código da geladeira<input id="conFridge"></label><label>Participação do estabelecimento (%)<input id="conShare" type="number" min="0" max="100" step="0.01" value="50" required></label><label>Status<select id="conStatus"><option value="active">Ativo</option><option value="watch">Em observação</option><option value="inactive">Inativo</option></select></label><p class="message" id="conPartnerMsg"></p><div class="consignment-actions"><button type="button" id="conPartnerCancel">Cancelar</button><button class="primary" type="submit">Salvar parceiro</button></div></form></dialog>
-<dialog id="conMovementDialog" class="consignment-dialog"><form id="conMovementForm"><h3 id="conMovementTitle">Registrar movimentação</h3><input type="hidden" id="conMovementPartner"><label>Operação<select id="conMovementType"><option value="delivery">Abastecimento</option><option value="sale">Venda</option><option value="return">Devolução</option><option value="loss">Perda / avaria</option><option value="adjustment">Ajuste de inventário (+/-)</option></select></label><label>Cerveja do catálogo<select id="conBeer" required></select></label><label>Quantidade<input id="conQuantity" type="number" step="1" min="1" required></label><label>Custo unitário (R$)<input id="conCost" type="number" min="0" step="0.01" required></label><label>Preço unitário de venda (R$)<input id="conPrice" type="number" min="0" step="0.01" required></label><label>Observações<input id="conNotes"></label><p class="message" id="conMovementMsg"></p><div class="consignment-actions"><button type="button" id="conMovementCancel">Cancelar</button><button class="primary" type="submit">Registrar</button></div></form></dialog>
-<dialog id="conSettlementDialog" class="consignment-dialog"><form id="conSettlementForm"><h3>Registrar repasse recebido</h3><input type="hidden" id="conSettlementPartner"><p id="conSettlementPending"></p><label>Valor recebido (R$)<input id="conSettlementAmount" type="number" min="0.01" step="0.01" required></label><label>Observação<input id="conSettlementNotes"></label><p class="message" id="conSettlementMsg"></p><div class="consignment-actions"><button type="button" id="conSettlementCancel">Cancelar</button><button class="primary" type="submit">Registrar recebimento</button></div></form></dialog>
-<div class="view" hidden="" id="beersView">
+     <div class="view" hidden="" id="beersView">
       <section class="panel">
        <div class="panel-head">
         <div>
@@ -274,6 +214,27 @@
        </div>
       </section>
      </div>
+     <div class="view" hidden="" id="kitsView">
+      <section class="panel">
+       <div class="panel-head">
+        <div><p class="eyebrow">Catálogo</p><h3>Construtor de kits</h3><p class="muted">Monte kits fechados com cervejas, copos, brindes e embalagens. O cliente compra o kit pronto.</p></div>
+        <button class="primary" id="newKitBtn" type="button">+ Criar kit</button>
+       </div>
+       <p class="message" id="kitsMsg" aria-live="polite"></p>
+       <div class="beer-list" id="kitList"></div>
+      </section>
+      <section class="panel">
+       <div class="panel-head"><div><p class="eyebrow">Estoque complementar</p><h3>Copos, brindes e embalagens</h3><p class="muted">Cadastre cada componente não cervejeiro uma vez e reutilize em vários kits.</p></div></div>
+       <form id="inventoryForm" class="form-grid two">
+        <label>Nome<input id="inventoryName" required maxlength="120" placeholder="Ex.: Copo oficial 400 ml"/></label>
+        <label>Categoria<select id="inventoryCategory"><option value="glassware">Copo</option><option value="gift">Brinde</option><option value="packaging">Embalagem</option><option value="other">Outro</option></select></label>
+        <label>Quantidade em estoque<input id="inventoryStock" type="number" min="0" step="1" value="0" required/></label>
+        <label>Custo unitário (R$)<input id="inventoryCost" type="number" min="0" step="0.01" value="0" required/></label>
+        <button class="secondary" type="submit">Adicionar componente ao estoque</button>
+       </form>
+       <div class="beer-list" id="inventoryList"></div>
+      </section>
+     </div>
      <div class="view" hidden="" id="ordersView">
       <section class="panel">
        <div class="panel-head">
@@ -290,7 +251,7 @@
         </button>
        </div>
        <p class="muted">
-        Compras iniciadas pelo checkout aparecem aqui. O Stripe confirma o pagamento e o status atualiza automaticamente nesta tela em até 15 segundos.
+        Compras iniciadas pelo checkout aparecem aqui. O pagamento é confirmado automaticamente pelo webhook do Stripe.
        </p>
        <div class="orders-list" id="ordersList">
        </div>
@@ -322,7 +283,7 @@
       <section class="panel">
        <div class="panel-head"><div><p class="eyebrow">Festas e Eventos</p><h3>Monte seu evento</h3></div></div>
        <p class="muted">Edite os itens que podem estar inclusos na estrutura de chopp e escolha até 20 fotos para apresentar o serviço. As mudanças aparecem na página pública depois de salvar.</p>
-       <div class="party-admin-block"><div class="panel-head"><div><h3>Calculadora automática de chopp</h3><p class="muted">Defina os parâmetros de referência. O cálculo aparece enquanto o cliente preenche o formulário e segue na mensagem do WhatsApp.</p></div></div><div class="party-calculator-settings"><label>Consumo moderado (L por pessoa por hora)<input id="calcRateModerado" type="number" min="0.01" max="3" step="0.01" value="0.25" required></label><label>Consumo médio (L por pessoa por hora)<input id="calcRateMedio" type="number" min="0.01" max="3" step="0.01" value="0.375" required></label><label>Consumo alto (L por pessoa por hora)<input id="calcRateAlto" type="number" min="0.01" max="3" step="0.01" value="0.5" required></label><label>Redução se houver outras bebidas (%)<input id="calcOtherDrinks" type="number" min="0" max="80" step="1" value="20" required></label><label>Margem de variação da estimativa (%)<input id="calcRange" type="number" min="0" max="50" step="1" value="10" required></label><label>Volume do copo (ml)<input id="calcCup" type="number" min="100" max="1000" step="25" value="300" required></label></div><p class="muted">Valores iniciais: 0,25 / 0,375 / 0,5 L por pessoa por hora, redução de 20%, variação de 10% e copo de 300 ml. Ajuste conforme a experiência do Diegão.</p></div>
+       <div class="party-admin-block"><div class="panel-head"><div><h3>Estimativa aproximada de consumo de chopp</h3><p class="muted">Defina os parâmetros de referência. O cálculo aparece enquanto o cliente preenche o formulário e segue na mensagem do WhatsApp.</p></div></div><div class="party-calculator-settings"><label>Consumo moderado (L por pessoa por hora)<input id="calcRateModerado" type="number" min="0.01" max="3" step="0.01" value="0.25" required></label><label>Consumo médio (L por pessoa por hora)<input id="calcRateMedio" type="number" min="0.01" max="3" step="0.01" value="0.375" required></label><label>Consumo alto (L por pessoa por hora)<input id="calcRateAlto" type="number" min="0.01" max="3" step="0.01" value="0.5" required></label><label>Redução se houver outras bebidas (%)<input id="calcOtherDrinks" type="number" min="0" max="80" step="1" value="20" required></label><label>Margem de variação da estimativa (%)<input id="calcRange" type="number" min="0" max="50" step="1" value="10" required></label><label>Volume do copo (ml)<input id="calcCup" type="number" min="100" max="1000" step="25" value="300" required></label></div><p class="muted">Valores iniciais: 0,25 / 0,375 / 0,5 L por pessoa por hora, redução de 20%, variação de 10% e copo de 300 ml. Ajuste conforme a experiência do Diegão.</p></div>
        <div class="party-admin-block"><div class="panel-head"><div><h3>O que pode estar incluso</h3><p class="muted">Adicione, edite ou remova os informativos. Cadastre apenas itens oferecidos pelo Diegão.</p></div><button class="secondary" id="addPartyItem" type="button">+ Adicionar item</button></div><div class="party-items-editor" id="partyItemsEditor"></div></div>
        <div class="party-admin-block"><div class="panel-head"><div><h3>Fotos da estrutura</h3><p class="muted">Adicione até 20 imagens, de até 5 MB cada. Recomendamos pelo menos 10 fotos.</p></div></div><label class="party-upload">Selecionar fotos<input id="partyImagesInput" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><p class="muted" id="partyImagesCount">Nenhuma foto adicionada.</p><div class="party-gallery-editor" id="partyGalleryEditor"></div></div>
        <button class="primary" id="savePartyContent" type="button">Salvar informativos e calculadora</button><p class="message" id="partyContentMsg" aria-live="polite"></p>
@@ -720,8 +681,25 @@
     </p>
    </div>
   </dialog>
-  <script defer="" src="/admin/consignment.js?v=2"></script>
-  <script defer="" src="/admin/admin.js?v=24.1">
+  <dialog id="kitDialog">
+   <form class="editor" id="kitForm">
+    <div class="dialog-head"><div><p class="eyebrow">Catálogo</p><h2 id="kitEditorTitle">Novo kit</h2></div><button aria-label="Fechar" class="icon-btn" id="closeKitDialog" type="button">×</button></div>
+    <input id="kitId" type="hidden"/>
+    <div class="form-grid two">
+     <label>Nome do kit<input id="kitName" required maxlength="120" placeholder="Ex.: Kit Degustação do Diegão"/></label>
+     <label>Preço final (R$)<input id="kitPrice" type="number" min="0.01" step="0.01" required/></label>
+     <label class="full">Descrição<textarea id="kitDescription" maxlength="500" rows="3" placeholder="Conte o que torna este kit especial"></textarea></label>
+     <label class="full">Foto do kit<input id="kitImage" type="file" accept="image/jpeg,image/png,image/webp"/><img id="kitImagePreview" class="kit-image-preview" alt="Prévia da foto do kit" hidden/></label>
+     <label>Posição no catálogo<input id="kitSort" type="number" min="0" step="1" value="0"/></label>
+     <label class="check"><input id="kitActive" type="checkbox" checked/> Publicar no catálogo</label>
+    </div>
+    <div class="party-admin-block"><div class="panel-head"><div><h3>Componentes</h3><p class="muted">Comece com uma lata e um copo. Custos calculam a margem automaticamente.</p></div><button class="secondary" id="addKitComponent" type="button">+ Componente</button></div><div id="kitComponentsEditor" class="kit-components-editor"></div></div>
+    <div class="kit-financials" id="kitFinancials" aria-live="polite"></div>
+    <button class="primary" type="submit">Salvar kit</button><button class="secondary" id="deactivateKitBtn" type="button" hidden>Desativar kit</button>
+    <p class="message" id="kitEditorMsg" aria-live="polite"></p>
+   </form>
+  </dialog>
+  <script defer="" src="/admin/admin.js?v=24.0">
   </script>
  </body>
 </html>
