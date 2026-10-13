@@ -2261,6 +2261,20 @@ function formatBeerPrice(value){
   return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(number);
 }
 
+function isVitruvianaBeer(beer){
+  return normalizeCardText(beer?.detail?.brewery||beer?.card?.brand||'').includes('vitruviana');
+}
+
+function beerHasVitruvianaDiscount(beer){
+  return isVitruvianaBeer(beer)&&Number(beer?.price)>0;
+}
+
+function beerSalePrice(beer){
+  const price=Number(beer?.price);
+  if(!Number.isFinite(price)) return 0;
+  return price>0&&beerHasVitruvianaDiscount(beer)?Math.round(price*90)/100:price;
+}
+
 function stockInfo(status){
   const normalized=String(status||'in_stock').toLowerCase();
   if(normalized==='sold_out') return {label:'Esgotado',className:'sold-out'};
@@ -2357,6 +2371,11 @@ function renderBeerCatalog(){
       const art=createNode('div','beer-art');
       const stockBadge=createNode('span',`stock-badge ${stock.className}`,stock.label);
       art.append(stockBadge);
+      if(beerHasVitruvianaDiscount(beer)){
+        const discountBadge=createNode('span','discount-badge','10% OFF');
+        discountBadge.setAttribute('aria-label','10% de desconto nas cervejas Vitruviana');
+        art.append(discountBadge);
+      }
       const three=createNode('div','beer-3d');
       three.setAttribute('aria-hidden','true');
       const img=document.createElement('img');
@@ -2376,7 +2395,13 @@ function renderBeerCatalog(){
       const abvLabel=abv?`${abv[0]}%`:'não informado';
       style.append(createNode('span','beer-abv',`ABV ${abvLabel}`));
       const priceRow=createNode('div','beer-price-row');
-      priceRow.append(createNode('strong','beer-price',formatBeerPrice(beer.price)),createNode('span','beer-volume',beer.detail.volume||'Volume não divulgado'));
+      const priceDisplay=createNode('span','beer-sale-price');
+      if(beerHasVitruvianaDiscount(beer)){
+        priceDisplay.append(createNode('del','beer-original-price',formatBeerPrice(beer.price)),createNode('strong','beer-price',formatBeerPrice(beerSalePrice(beer))));
+      }else{
+        priceDisplay.append(createNode('strong','beer-price',formatBeerPrice(beer.price)));
+      }
+      priceRow.append(priceDisplay,createNode('span','beer-volume',beer.detail.volume||'Volume não divulgado'));
       const metricBox=createNode('div','card-metrics');
       metricBox.append(createMetricScale('Intensidade',beer.detail.intensity,'intensity'),createMetricScale('Amargor',beer.detail.bitterness,'bitterness'));
       const addCard=createNode('button','card-add add-to-order',stock.className==='sold-out'?'Esgotado':'Adicionar ao pedido');
@@ -2424,7 +2449,7 @@ function renderBeerCatalog(){
     [
       ['Estilo',d.style],
       ['Cervejaria',d.brewery],
-      ['Preço',formatBeerPrice(beer.price)],
+      ['Preço',beerHasVitruvianaDiscount(beer)?`${formatBeerPrice(beerSalePrice(beer))} (10% OFF; antes ${formatBeerPrice(beer.price)})`:formatBeerPrice(beer.price)],
       ['Volume',d.volume],
       ['Teor alcoólico',d.abv],
       ['IBU',d.ibu],
@@ -2724,7 +2749,7 @@ document.querySelectorAll('.beer-modal').forEach(modal=>{
 });
 
 let cart={};
-function findOrderItem(name){const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);if(beer)return{type:'beer',slug:beer.slug||beer.id,name,price:Number(beer.price)||0};const kit=(window.CERVEJANDO_KITS||[]).find(item=>item.name===name);if(kit)return{type:'kit',slug:kit.slug,name,price:Number(kit.price)||0};return null}
+function findOrderItem(name){const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);if(beer){const originalPrice=Number(beer.price)||0;const discountPercent=beerHasVitruvianaDiscount(beer)?10:0;return{type:'beer',slug:beer.slug||beer.id,name,price:beerSalePrice(beer),originalPrice,discountPercent};}const kit=(window.CERVEJANDO_KITS||[]).find(item=>item.name===name);if(kit){const price=Number(kit.price)||0;return{type:'kit',slug:kit.slug,name,price,originalPrice:price,discountPercent:0};}return null}
 const drawer=document.getElementById('cartDrawer');
 const backdrop=document.getElementById('cartBackdrop');
 const cartCount=document.getElementById('cartCount');
@@ -2741,7 +2766,7 @@ const checkoutSite=document.getElementById('checkoutSite');
 window.CervejandoCart={
   getItems:()=>Object.entries(cart).map(([name,quantity])=>{
     const item=findOrderItem(name);
-    return {type:item?.type||'beer',slug:item?.slug||'',name,quantity,unitPrice:item?.price||0};
+    return {type:item?.type||'beer',slug:item?.slug||'',name,quantity,unitPrice:item?.price||0,originalUnitPrice:item?.originalPrice??item?.price??0,discountPercent:item?.discountPercent||0};
   }).filter(item=>item.slug&&item.quantity>0),
   count:()=>cartTotal(),
   subtotal:()=>Object.entries(cart).reduce((sum,[name,qty])=>{
@@ -2773,6 +2798,17 @@ function renderCart(){
 
     const title=document.createElement('strong');
     title.textContent=name;
+    const item=findOrderItem(name);
+    const priceLine=document.createElement('small');
+    priceLine.className='cart-item-price';
+    if(item?.discountPercent){
+      priceLine.append(createNode('del','',formatBeerPrice(item.originalPrice)),document.createTextNode(' → '),createNode('strong','',formatBeerPrice(item.price)),document.createTextNode(' · 10% OFF'));
+    }else{
+      priceLine.textContent=formatBeerPrice(item?.price||0)+' / un.';
+    }
+    const copy=document.createElement('div');
+    copy.className='cart-item-copy';
+    copy.append(title,priceLine);
 
     const actions=document.createElement('div');
     actions.className='cart-item-actions';
@@ -2814,7 +2850,7 @@ function renderCart(){
     });
 
     actions.append(minus,quantity,plus,remove);
-    row.append(title,actions);
+    row.append(copy,actions);
     cartItems.appendChild(row);
   });
 }
@@ -2892,7 +2928,9 @@ checkoutWhats?.addEventListener('click',event=>{
   }
 
   let msg='Olá, Diegão! Montei meu pedido pelo site 🍺\n\n';
-  entries.forEach(([name,qty])=>{ msg+=`• ${qty}x ${name}\n`; });
+  entries.forEach(([name,qty])=>{const item=findOrderItem(name);msg+=`• ${qty}x ${name} — ${formatBeerPrice(item?.price||0)} cada`;if(item?.discountPercent)msg+=` (10% OFF; antes ${formatBeerPrice(item.originalPrice)})`;msg+='\n';});
+  const orderSubtotal=entries.reduce((sum,[name,qty])=>sum+(Number(findOrderItem(name)?.price)||0)*qty,0);
+  msg+=`\nSubtotal: ${formatBeerPrice(orderSubtotal)}\n`;
   msg+='\n'+(delivery?.checked
     ?'Também quero consultar a possibilidade de entrega.'
     :'Podemos combinar retirada ou entrega.');
@@ -3962,5 +4000,15 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 @media(max-width:560px){.premium-fridge .fridge-shelves{gap:12px 5px!important}}
 </style><script src="assets/fridge-sizing.js?v=1.0"></script><link rel="stylesheet" href="assets/site-typography.css?v=1.2"/><style>
 .kits-catalog{padding:clamp(34px,6vw,72px) 20px}.kits-catalog-heading{margin-bottom:24px}.kits-catalog-heading h2{font-size:clamp(2.2rem,5vw,3.6rem);margin:8px 0}.kits-catalog-heading h2 span{color:var(--gold,#9aca3c)}.kits-catalog-heading p{color:#999;max-width:620px}.kits-catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}.kit-card{overflow:hidden;border:1px solid rgba(154,202,60,.2);border-radius:14px;background:linear-gradient(145deg,#151819,#0c0e0f);display:flex;flex-direction:column}.kit-card>img{width:100%;height:230px;object-fit:cover;background:#111}.kit-card-info{padding:18px 18px 5px;flex:1}.kit-card-info h3{font-size:1.45rem;margin:7px 0}.kit-card-info p{color:#aaa;line-height:1.5;min-height:40px}.kit-stock{font-size:.75rem;color:#9aca3c}.kit-card-footer{padding:12px 18px 18px;display:grid;grid-template-columns:1fr;gap:12px}.kit-card-footer strong{font-size:1.45rem;color:#9aca3c}.kit-card-footer button{min-height:44px}.kit-card button:disabled{opacity:.5;cursor:not-allowed}body.theme-light .kit-card{background:#fdfdfd;border-color:rgba(58,58,58,.14)}body.theme-light .kit-card-info p{color:#555}
+</style><style id="vitruviana-promo-styles">
+.discount-badge{position:absolute;top:14px;right:14px;z-index:6;padding:7px 9px;border:1px solid rgba(154,202,60,.42);border-radius:3px;background:#9aca3c;color:#090909;font-family:"Barlow Condensed",sans-serif;font-size:.63rem;font-weight:800;letter-spacing:.1em}
+.beer-sale-price{display:grid;gap:1px;justify-items:start;min-width:0}
+.beer-original-price{display:block;color:#888;font-size:.62rem;line-height:1;text-decoration-thickness:1px}
+.beer-sale-price .beer-price{font-size:.86rem}
+.cart-item-copy{display:grid;gap:3px;min-width:0}
+.cart-item-price{display:flex;align-items:baseline;gap:4px;flex-wrap:wrap;color:#aaa;font-size:.66rem;line-height:1.2}
+.cart-item-price del{color:#888}
+.cart-item-price strong{color:#9aca3c;font-size:inherit}
+@media(max-width:560px){.discount-badge{top:8px;right:8px;padding:5px 6px;font-size:.54rem}.beer-original-price{font-size:.52rem}}
 </style></body>
 </html>

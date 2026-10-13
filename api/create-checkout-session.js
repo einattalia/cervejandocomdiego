@@ -17,7 +17,7 @@ module.exports=async function handler(req,res){
   const beerSlugs=[...new Set(normalized.filter(i=>i.type==='beer').map(i=>i.slug))];const kitSlugs=[...new Set(normalized.filter(i=>i.type==='kit').map(i=>i.slug))];
   const supabase=createClient(SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
   const [beerResult,kitResult]=await Promise.all([
-   beerSlugs.length?supabase.from('beers').select('id,slug,title,name,order_name,price,stock_status,stock_quantity,active').in('slug',beerSlugs):Promise.resolve({data:[],error:null}),
+   beerSlugs.length?supabase.from('beers').select('id,slug,title,name,order_name,brewery,price,stock_status,stock_quantity,active').in('slug',beerSlugs):Promise.resolve({data:[],error:null}),
    kitSlugs.length?supabase.from('kits').select('id,slug,name,description,price,image_url,active').in('slug',kitSlugs):Promise.resolve({data:[],error:null})
   ]);
   if(beerResult.error)throw beerResult.error;if(kitResult.error)throw kitResult.error;
@@ -38,7 +38,9 @@ module.exports=async function handler(req,res){
   for(const item of normalized){
    if(item.type==='beer'){
     const beer=beerMap.get(item.slug);if(!beer||beer.active===false||beer.stock_status==='sold_out')return json(res,409,{error:`${beer?.title||item.slug} está esgotada.`});
-    const price=Number(beer.price);if(!Number.isFinite(price)||price<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});
+    const originalPrice=Number(beer.price);if(!Number.isFinite(originalPrice)||originalPrice<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});
+    const hasVitruvianaDiscount=String(beer.brewery||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes('vitruviana');
+    const price=hasVitruvianaDiscount?Math.round(originalPrice*90)/100:originalPrice;
     if(beer.stock_quantity!==null&&beer.stock_quantity!==undefined)stockDemand.set(`beer:${beer.id}`,(stockDemand.get(`beer:${beer.id}`)||0)+item.quantity);
     const name=beer.order_name||beer.title||beer.name;subtotal+=price*item.quantity;lines.push({beer_id:beer.id,kit_id:null,item_type:'beer',components_snapshot:[],beer_slug:beer.slug,beer_name_snapshot:name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});
    }else{

@@ -1,9 +1,9 @@
 # Desconto Vitruviana — 10%
 
-- O catálogo identifica os rótulos quando o campo **Cervejaria** contém “Vitruviana”.
-- As latas recebem o selo **10% OFF** no catálogo e na geladeira do site.
-- O preço original aparece riscado e o valor promocional é calculado automaticamente.
-- Carrinho, resumo do checkout, Stripe e mensagem de pedido pelo WhatsApp usam ou informam o valor com desconto.
-- O preço cadastrado no admin permanece como preço original; não é necessário alterar os dados nem executar SQL.
+- A promoção se aplica quando o campo **Cervejaria** contém “Vitruviana”.
+- O selo **10% OFF** e o preço original riscado aparecem nos cards do catálogo; a geladeira não exibe o selo.
+- O preço promocional é aplicado no catálogo, carrinho, subtotal, checkout Stripe e pedido pelo WhatsApp.
+- O checkout recalcula o desconto no servidor a partir do cadastro da cerveja; o valor original do admin permanece intacto.
+- Kits não recebem o desconto automaticamente.
 
-Para que o desconto seja aplicado, mantenha “Vitruviana” no campo **Cervejaria** de cada rótulo participante.
+Para participar, mantenha “Vitruviana” no campo **Cervejaria** do rótulo.
