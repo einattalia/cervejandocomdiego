@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=31" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=33" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -85,6 +85,9 @@
       </button>
       <button class="nav" data-view="orders">
        Pedidos
+      </button>
+      <button class="nav" data-view="analytics">
+       Analytics
       </button>
       <button class="nav" data-view="events">
        Agenda Cervejeira
@@ -273,6 +276,34 @@
        <div class="orders-list" id="ordersList">
        </div>
       </section>
+     </div>
+     <div class="view" hidden="" id="analyticsView">
+      <section class="panel">
+       <div class="panel-head analytics-heading">
+        <div><p class="eyebrow">Desempenho do site</p><h3>Analytics</h3><p class="muted">Visitas, interesse pelos produtos e vendas confirmadas pela Stripe.</p></div>
+        <div class="analytics-filters">
+         <label>Período<select id="analyticsPreset"><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option><option value="today">Hoje</option><option value="custom">Personalizado</option></select></label>
+         <label>De<input id="analyticsStart" type="date"></label>
+         <label>Até<input id="analyticsEnd" type="date"></label>
+         <button class="secondary" id="analyticsApply" type="button">Atualizar</button>
+        </div>
+       </div>
+       <p class="message" id="analyticsMessage" aria-live="polite"></p>
+       <div class="analytics-stats">
+        <article><span>Visitas</span><strong id="analyticsVisits">—</strong></article>
+        <article><span>Visitantes únicos</span><strong id="analyticsVisitors">—</strong></article>
+        <article><span>Conversão</span><strong id="analyticsConversion">—</strong></article>
+        <article><span>Carrinhos abandonados</span><strong id="analyticsAbandoned">—</strong></article>
+        <article><span>Pedidos pagos</span><strong id="analyticsPaidOrders">—</strong></article>
+        <article><span>Vendas confirmadas</span><strong id="analyticsSales">—</strong></article>
+       </div>
+       <p class="analytics-note">Visitantes são identificados por um código aleatório no navegador. Os eventos não guardam IP nem dados de contato. Os pedidos pagos são confirmados pela Stripe.</p>
+      </section>
+      <div class="analytics-columns">
+       <section class="panel"><div class="panel-head"><div><p class="eyebrow">Movimento</p><h3>Visitas e vendas por dia</h3></div></div><div class="analytics-series" id="analyticsSeries"></div></section>
+       <section class="panel"><div class="panel-head"><div><p class="eyebrow">Aquisição</p><h3>Origem do tráfego</h3></div></div><div class="analytics-list" id="analyticsSources"></div></section>
+       <section class="panel"><div class="panel-head"><div><p class="eyebrow">Interesse</p><h3>Produtos mais vistos</h3></div></div><div class="analytics-list" id="analyticsProducts"></div></section>
+      </div>
      </div>
      <div class="view" hidden="" id="eventsView">
       <section class="panel">
@@ -718,7 +749,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-<script defer="" src="/admin/admin.js?v=24.0">
+  <script defer="" src="/admin/admin.js?v=24.1">
   </script>
  </body>
 </html>
