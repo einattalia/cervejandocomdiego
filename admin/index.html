@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=33" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=34" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -87,7 +87,7 @@
        Pedidos
       </button>
       <button class="nav" data-view="analytics">
-       Analytics
+       Estatísticas e relatórios
       </button>
       <button class="nav" data-view="events">
        Agenda Cervejeira
@@ -277,15 +277,16 @@
        </div>
       </section>
      </div>
-     <div class="view" hidden="" id="analyticsView">
+      <div class="view" hidden="" id="analyticsView">
       <section class="panel">
        <div class="panel-head analytics-heading">
-        <div><p class="eyebrow">Desempenho do site</p><h3>Analytics</h3><p class="muted">Visitas, interesse pelos produtos e vendas confirmadas pela Stripe.</p></div>
+        <div><p class="eyebrow">Desempenho do site</p><h3>Estatísticas e relatórios</h3><p class="muted">Acompanhe visitas, produtos, conversão e vendas confirmadas pela Stripe.</p></div>
         <div class="analytics-filters">
-         <label>Período<select id="analyticsPreset"><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option><option value="today">Hoje</option><option value="custom">Personalizado</option></select></label>
+         <label>Período<select id="analyticsPreset"><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option><option value="today">Hoje</option><option value="month_to_date">Este mês</option><option value="previous_month">Mês passado</option><option value="custom">Personalizado</option></select></label>
          <label>De<input id="analyticsStart" type="date"></label>
          <label>Até<input id="analyticsEnd" type="date"></label>
          <button class="secondary" id="analyticsApply" type="button">Atualizar</button>
+         <button class="primary" id="analyticsDownload" type="button" disabled>Baixar relatório CSV</button>
         </div>
        </div>
        <p class="message" id="analyticsMessage" aria-live="polite"></p>
@@ -298,6 +299,19 @@
         <article><span>Vendas confirmadas</span><strong id="analyticsSales">—</strong></article>
        </div>
        <p class="analytics-note">Visitantes são identificados por um código aleatório no navegador. Os eventos não guardam IP nem dados de contato. Os pedidos pagos são confirmados pela Stripe.</p>
+      </section>
+      <section class="panel analytics-monthly" id="analyticsMonthlyPanel" hidden>
+       <div class="panel-head"><div><p class="eyebrow">Resumo mensal</p><h3>Comparação e pontos para acompanhar</h3></div></div>
+       <div class="analytics-insights" id="analyticsMonthComparison"></div>
+       <h4>Pontos para acompanhar</h4>
+       <ul class="analytics-recommendations" id="analyticsRecommendations"></ul>
+       <p class="analytics-note">As sugestões são geradas a partir dos indicadores e servem como pontos de investigação, não como diagnóstico automático.</p>
+      </section>
+      <section class="panel analytics-monthly">
+       <div class="panel-head"><div><p class="eyebrow">Histórico</p><h3>Relatórios mensais</h3><p class="muted">Resumo automático do mês anterior, com comparação e pontos para acompanhar.</p></div></div>
+       <button class="secondary" id="analyticsGenerateMonthlyReport" type="button">Gerar relatório do último mês agora</button>
+       <p class="message" id="analyticsSavedReportsMessage" aria-live="polite">Carregando relatórios…</p>
+       <div class="analytics-list" id="analyticsSavedReportList"></div>
       </section>
       <div class="analytics-columns">
        <section class="panel"><div class="panel-head"><div><p class="eyebrow">Movimento</p><h3>Visitas e vendas por dia</h3></div></div><div class="analytics-series" id="analyticsSeries"></div></section>
@@ -749,7 +763,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-  <script defer="" src="/admin/admin.js?v=24.1">
+    <script defer="" src="/admin/admin.js?v=24.2">
   </script>
  </body>
 </html>
