@@ -1974,11 +1974,12 @@ document.addEventListener('DOMContentLoaded',function(){
 <a href="#dicas">Dicas do Diegão</a>
 <a href="#como-funciona">Como funciona</a>
 <a href="#festas-eventos">Festas e Eventos</a>
+<a href="#kitsCatalogSection">Kit’s</a>
 <a href="#sobre">Seleção do Diegão</a>
 </nav>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#festas-eventos">Festas e Eventos</a><a href="#sobre">Seleção do Diegão</a>
+  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#festas-eventos">Festas e Eventos</a><a href="#kitsCatalogSection">Kit’s</a><a href="#sobre">Seleção do Diegão</a>
   <div class="mobile-nav-tools">
     <a class="mobile-nav-instagram" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank" aria-label="Instagram do Cervejando com Diego">Instagram</a>
     
@@ -2071,7 +2072,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <div aria-live="polite" class="grid" id="beerCatalogGrid"></div>
 </div>
 </section>
-<section class="kits-catalog shell" id="kitsCatalogSection" hidden aria-labelledby="kitsCatalogTitle">
+<section class="kits-catalog shell" id="kitsCatalogSection" hidden aria-labelledby="kitsCatalogTitle" style="scroll-margin-top:100px">
  <div class="kits-catalog-heading"><div><span class="eyebrow">Presentes prontos</span><h2 id="kitsCatalogTitle">Kits do <span>Diegão</span></h2><p>Kits montados com cuidado, prontos para aproveitar ou presentear.</p></div></div>
  <div class="kits-catalog-grid" id="kitsCatalogGrid"></div>
 </section>
@@ -2494,7 +2495,36 @@ function renderKitCatalog(){
   const section=document.getElementById('kitsCatalogSection'),grid=document.getElementById('kitsCatalogGrid');if(!section||!grid)return;
   const kits=(window.CERVEJANDO_KITS||[]).filter(k=>k.active!==false).sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
   grid.replaceChildren();section.hidden=!kits.length;
-  kits.forEach(kit=>{const card=createNode('article','kit-card');const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=kit.name;const info=createNode('div','kit-card-info');info.append(createNode('span','eyebrow','Kit pronto'),createNode('h3','',kit.name),createNode('p','',kit.description||'Um kit especial montado pelo Diegão.'));const stock=kit.availableQuantity===null?'Disponível':Number(kit.availableQuantity)>0?`${kit.availableQuantity} disponível${kit.availableQuantity===1?'':'is'}`:'Esgotado';info.append(createNode('span','kit-stock',stock));const footer=createNode('div','kit-card-footer');footer.append(createNode('strong','',formatBeerPrice(kit.price)));const add=createNode('button','card-add add-to-order',Number(kit.availableQuantity)===0?'Esgotado':'Adicionar ao carrinho');add.type='button';add.dataset.beer=kit.name;add.dataset.kitSlug=kit.slug;add.disabled=Number(kit.availableQuantity)===0;footer.append(add);card.append(image,info,footer);grid.append(card)});
+  const volumeOf=kit=>String(kit.name+' '+(kit.description||'')).match(/\b(\d{2,4})\s?ml\b/i)?.[1]||'';
+  const groupKey=kit=>String(kit.name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\b\d{2,4}\s?ml\b/gi,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const groups=new Map();
+  kits.forEach(kit=>{const volume=volumeOf(kit),key=groupKey(kit);if(volume&&key){if(!groups.has(key))groups.set(key,[]);groups.get(key).push(kit)}});
+  const grouped=new Set();
+  const renderCard=(variants)=>{
+    const kit=variants[0],hasChoices=variants.length>1;
+    const soldOut=variant=>variant.availableQuantity!==null&&variant.availableQuantity!==undefined&&Number(variant.availableQuantity)<=0;
+    const card=createNode('article','kit-card');
+    const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=hasChoices?kit.name.replace(/\b\d{2,4}\s?ml\b/i,'').replace(/[\s·-]+$/,'').trim():kit.name;
+    const info=createNode('div','kit-card-info');
+    const title=hasChoices?kit.name.replace(/\b\d{2,4}\s?ml\b/i,'').replace(/[\s·-]+$/,'').trim():kit.name;
+    info.append(createNode('span','eyebrow','Kit pronto'),createNode('h3','',title),createNode('p','',hasChoices?(kit.description||'Uma lata e um copo para escolher.') .replace(/\b(um|uma)\s+copo\s+de\s+\d{2,4}\s?ml\b/i,'um copo no tamanho que você escolher'):kit.description||'Um kit especial montado pelo Diegão.'));
+    let selected=kit;
+    let stock=createNode('span','kit-stock','');
+    const setStock=variant=>{stock.textContent=variant.availableQuantity===null||variant.availableQuantity===undefined?'Disponível':Number(variant.availableQuantity)>0?`${variant.availableQuantity} disponível${variant.availableQuantity===1?'':'is'}`:'Esgotado'};
+    setStock(selected);info.append(stock);
+    if(hasChoices){
+      const label=createNode('label','kit-option-label','Escolha o tamanho do copo');
+      const select=document.createElement('select');select.className='kit-option-select';select.setAttribute('aria-label','Tamanho do copo do kit');
+      variants.forEach(variant=>{const option=document.createElement('option');option.value=variant.slug;option.textContent=`Copo ${volumeOf(variant)} ml`;select.append(option)});
+      label.append(select);info.append(label);
+    }
+    const footer=createNode('div','kit-card-footer'),priceLabel=createNode('strong','',formatBeerPrice(selected.price));
+    const add=createNode('button','card-add add-to-order',soldOut(selected)?'Esgotado':'Adicionar ao carrinho');add.type='button';add.dataset.beer=selected.name;add.dataset.kitSlug=selected.slug;add.disabled=soldOut(selected);
+    const update=variant=>{selected=variant;priceLabel.textContent=formatBeerPrice(variant.price);add.dataset.beer=variant.name;add.dataset.kitSlug=variant.slug;add.disabled=soldOut(variant);add.textContent=add.disabled?'Esgotado':'Adicionar ao carrinho';setStock(variant)};
+    footer.append(priceLabel,add);card.append(image,info,footer);grid.append(card);
+    const select=info.querySelector('.kit-option-select');if(select)select.addEventListener('change',()=>{const variant=variants.find(item=>item.slug===select.value);if(variant)update(variant)});
+  };
+  kits.forEach(kit=>{const key=groupKey(kit),variants=groups.get(key);if(variants?.length>1){if(!grouped.has(key)){grouped.add(key);renderCard(variants)}}else renderCard([kit])});
 }
 
 async function bootCervejandoSite(){
@@ -4000,6 +4030,7 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 @media(max-width:560px){.premium-fridge .fridge-shelves{gap:12px 5px!important}}
 </style><script src="assets/fridge-sizing.js?v=1.0"></script><link rel="stylesheet" href="assets/site-typography.css?v=1.2"/><style>
 .kits-catalog{padding:clamp(34px,6vw,72px) 20px}.kits-catalog-heading{margin-bottom:24px}.kits-catalog-heading h2{font-size:clamp(2.2rem,5vw,3.6rem);margin:8px 0}.kits-catalog-heading h2 span{color:var(--gold,#9aca3c)}.kits-catalog-heading p{color:#999;max-width:620px}.kits-catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}.kit-card{overflow:hidden;border:1px solid rgba(154,202,60,.2);border-radius:14px;background:linear-gradient(145deg,#151819,#0c0e0f);display:flex;flex-direction:column}.kit-card>img{width:100%;height:230px;object-fit:cover;background:#111}.kit-card-info{padding:18px 18px 5px;flex:1}.kit-card-info h3{font-size:1.45rem;margin:7px 0}.kit-card-info p{color:#aaa;line-height:1.5;min-height:40px}.kit-stock{font-size:.75rem;color:#9aca3c}.kit-card-footer{padding:12px 18px 18px;display:grid;grid-template-columns:1fr;gap:12px}.kit-card-footer strong{font-size:1.45rem;color:#9aca3c}.kit-card-footer button{min-height:44px}.kit-card button:disabled{opacity:.5;cursor:not-allowed}body.theme-light .kit-card{background:#fdfdfd;border-color:rgba(58,58,58,.14)}body.theme-light .kit-card-info p{color:#555}
+.kit-option-label{display:grid;gap:7px;margin-top:14px;color:#aaa;font-size:.86rem}.kit-option-select{width:100%;min-height:44px;padding:10px 12px;border:1px solid rgba(154,202,60,.35);border-radius:9px;background:#101212;color:var(--text,#fff);font:inherit}.kit-option-select:focus{outline:2px solid var(--gold,#9aca3c);outline-offset:2px}body.theme-light .kit-option-select{background:#fff;color:#222}
 </style><style id="vitruviana-promo-styles">
 .discount-badge{position:absolute;top:14px;right:14px;z-index:6;padding:7px 9px;border:1px solid rgba(154,202,60,.42);border-radius:3px;background:#9aca3c;color:#090909;font-family:"Barlow Condensed",sans-serif;font-size:.63rem;font-weight:800;letter-spacing:.1em}
 .beer-sale-price{display:grid;gap:1px;justify-items:start;min-width:0}
@@ -4012,3 +4043,4 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 @media(max-width:560px){.discount-badge{top:8px;right:8px;padding:5px 6px;font-size:.54rem}.beer-original-price{font-size:.52rem}}
 </style></body>
 </html>
+
