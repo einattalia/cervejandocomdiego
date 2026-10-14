@@ -91,7 +91,7 @@
         const kits=await supabaseFetch('/rest/v1/rpc/get_active_kits');
         window.CERVEJANDO_KITS=(Array.isArray(kits)?kits:[]).map(row=>({
           id:row.id,slug:row.slug,name:row.name,description:row.description||'',image:row.image_url||'',price:Number(row.price)||0,
-          availableQuantity:row.available_quantity===null?null:Number(row.available_quantity),sortOrder:Number(row.sort_order)||0,active:row.active!==false
+          cupQuantity:Number(row.cup_quantity)||0,cupSizesMl:Array.isArray(row.cup_sizes_ml)?row.cup_sizes_ml.map(Number).filter(Number.isFinite):[],availableQuantity:row.available_quantity===null?null:Number(row.available_quantity),sortOrder:Number(row.sort_order)||0,active:row.active!==false
         }));
       }catch(error){console.warn('Kits não disponíveis; execute supabase-v21-kits.sql para ativar a venda de kits.',error);window.CERVEJANDO_KITS=kitFallback}
       document.documentElement.dataset.catalogSource='supabase';

@@ -19,6 +19,8 @@ create table if not exists public.kits (
   name text not null,
   description text not null default '',
   image_url text,
+  cup_quantity integer not null default 0 check (cup_quantity >= 0 and cup_quantity <= 24),
+  cup_sizes_ml integer[] not null default '{}'::integer[],
   price numeric(10,2) not null check (price >= 0),
   active boolean not null default true,
   sort_order integer not null default 0,
@@ -39,6 +41,9 @@ create table if not exists public.kit_components (
   check ((component_type = 'beer' and beer_id is not null and inventory_item_id is null)
       or (component_type = 'inventory' and inventory_item_id is not null and beer_id is null))
 );
+
+alter table public.kits add column if not exists cup_quantity integer not null default 0 check (cup_quantity >= 0 and cup_quantity <= 24);
+alter table public.kits add column if not exists cup_sizes_ml integer[] not null default '{}'::integer[];
 
 alter table public.order_items add column if not exists item_type text not null default 'beer';
 alter table public.order_items add column if not exists kit_id uuid references public.kits(id) on delete set null;
@@ -69,7 +74,7 @@ create or replace function public.get_active_kits()
 returns setof jsonb language sql stable security definer set search_path = '' as $$
   select jsonb_build_object(
     'id', k.id, 'slug', k.slug, 'name', k.name, 'description', k.description,
-    'image_url', k.image_url, 'price', k.price, 'sort_order', k.sort_order,
+    'image_url', k.image_url, 'price', k.price, 'cup_quantity', k.cup_quantity, 'cup_sizes_ml', k.cup_sizes_ml, 'sort_order', k.sort_order,
     'active', k.active,
     'available_quantity', case when not exists(select 1 from public.kit_components c0 where c0.kit_id=k.id) then 0 else (
       select min(floor(s.available::numeric / c.required_quantity)::integer)
