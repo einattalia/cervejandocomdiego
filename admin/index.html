@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=35" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=36" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -244,11 +244,12 @@
        <div class="beer-list" id="kitList"></div>
       </section>
       <section class="panel">
-       <div class="panel-head"><div><p class="eyebrow">Estoque complementar</p><h3>Copos, brindes e embalagens</h3><p class="muted">Cadastre cada componente não cervejeiro uma vez e reutilize em vários kits.</p></div></div>
+       <div class="panel-head"><div><p class="eyebrow">Estoque complementar</p><h3>Copos, brindes e embalagens</h3><p class="muted">Cadastre cada componente não cervejeiro uma vez e reutilize em vários kits.</p><p class="muted inventory-help">Componente e categoria identificam o item; quantidade é o estoque disponível; volume é a capacidade em ml, usada principalmente para copos; custo é o valor pago por unidade.</p></div></div>
        <form id="inventoryForm" class="form-grid two">
         <label>Nome<input id="inventoryName" required maxlength="120" placeholder="Ex.: Copo oficial 400 ml"/></label>
         <label>Categoria<select id="inventoryCategory"><option value="glassware">Copo</option><option value="gift">Brinde</option><option value="packaging">Embalagem</option><option value="other">Outro</option></select></label>
         <label>Quantidade em estoque<input id="inventoryStock" type="number" min="0" step="1" value="0" required/></label>
+        <label>Volume (ml)<input id="inventoryVolumeMl" type="number" min="1" step="1" placeholder="Ex.: 300"/><small>Informe a capacidade do copo. Para outros componentes, deixe em branco.</small></label>
         <label>Custo unitário (R$)<input id="inventoryCost" type="number" min="0" step="0.01" value="0" required/></label>
         <button class="secondary" type="submit">Adicionar componente ao estoque</button>
        </form>
@@ -763,7 +764,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=24.3">
+    <script defer="" src="/admin/admin.js?v=24.4">
   </script>
  </body>
 </html>
