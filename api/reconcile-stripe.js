@@ -87,6 +87,7 @@ module.exports = async function handler(req, res) {
 
         const { error: stampError } = await supabase.from('orders').update({
           stripe_reconciled_at: new Date().toISOString(), stripe_reconciliation_error: null,
+          stripe_livemode: session.livemode === true,
         }).eq('id', order.id);
         if (stampError) throw stampError;
         if (changed) result.updated += 1;
