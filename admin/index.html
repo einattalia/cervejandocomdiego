@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=36" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=37" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -237,8 +237,8 @@
      <div class="view" hidden="" id="kitsView">
       <section class="panel">
        <div class="panel-head">
-        <div><p class="eyebrow">Catálogo</p><h3>Construtor de kits</h3><p class="muted">Monte kits fechados com cervejas, copos, brindes e embalagens. O cliente compra o kit pronto.</p></div>
-        <button class="primary" id="newKitBtn" type="button">+ Criar kit</button>
+        <div><p class="eyebrow">Catálogo</p><h3>Construtor de kits</h3><p class="muted">Monte o kit e configure tamanhos de copo e preços para o cliente escolher no site.</p></div>
+        <div class="kit-create-actions"><button class="primary" id="newKitBtn" type="button">+ Kit com opções de copo</button><button class="secondary" id="newSingleKitBtn" type="button">Kit simples</button></div>
        </div>
        <p class="message" id="kitsMsg" aria-live="polite"></p>
        <div class="beer-list" id="kitList"></div>
@@ -750,21 +750,22 @@
     <input id="kitId" type="hidden"/>
     <div class="form-grid two">
      <label>Nome do kit<input id="kitName" required maxlength="120" placeholder="Ex.: Kit Degustação do Diegão"/></label>
-     <label>Preço final (R$)<input id="kitPrice" type="number" min="0.01" step="0.01" required/></label>
+     <label id="kitSinglePriceField">Preço final (R$)<input id="kitPrice" type="number" min="0.01" step="0.01" required/></label>
      <label class="full">Descrição<textarea id="kitDescription" maxlength="500" rows="3" placeholder="Conte o que torna este kit especial"></textarea></label>
      <label class="full">Foto do kit<input id="kitImage" type="file" accept="image/jpeg,image/png,image/webp"/><img id="kitImagePreview" class="kit-image-preview" alt="Prévia da foto do kit" hidden/></label>
-     <label>Posição no catálogo<input id="kitSort" type="number" min="0" step="1" value="0"/></label>
-     <label class="check"><input id="kitActive" type="checkbox" checked/> Publicar no catálogo</label>
+     <label id="kitSingleSortField">Posição no catálogo<input id="kitSort" type="number" min="0" step="1" value="0"/></label>
+     <label class="check" id="kitSingleActiveField"><input id="kitActive" type="checkbox" checked/> Publicar no catálogo</label>
     </div>
-    <div class="party-admin-block"><div class="panel-head"><div><h3>Componentes</h3><p class="muted">Comece com uma lata e um copo. Custos calculam a margem automaticamente.</p></div><button class="secondary" id="addKitComponent" type="button">+ Componente</button></div><div id="kitComponentsEditor" class="kit-components-editor"></div></div>
+    <section class="party-admin-block" id="kitSingleComponents"><div class="panel-head"><div><h3>Componentes</h3><p class="muted">Comece com uma lata e um copo. Custos calculam a margem automaticamente.</p></div><button class="secondary" id="addKitComponent" type="button">+ Componente</button></div><div id="kitComponentsEditor" class="kit-components-editor"></div></section>
     <div class="kit-financials" id="kitFinancials" aria-live="polite"></div>
+    <section class="party-admin-block kit-variants-panel" id="kitVariantsPanel" hidden><div class="panel-head"><div><h3>Opções do kit</h3><p class="muted">Cada opção tem um copo, capacidade em ml, preço e componentes próprios. A foto fica igual para todas.</p></div><button class="secondary" id="addKitVariant" type="button">+ Tamanho de copo</button></div><div id="kitVariantsEditor" class="kit-variants-editor"></div></section>
     <button class="primary" type="submit">Salvar kit</button><button class="secondary" id="deactivateKitBtn" type="button" hidden>Desativar kit</button>
     <p class="message" id="kitEditorMsg" aria-live="polite"></p>
    </form>
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=24.4">
+    <script defer="" src="/admin/admin.js?v=24.5">
   </script>
  </body>
 </html>
