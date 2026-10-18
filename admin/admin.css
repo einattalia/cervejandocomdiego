@@ -1107,3 +1107,9 @@ dialog.consignment-dialog>form>.consignment-actions{position:sticky;bottom:-24px
 
 .kit-variant-type-field{max-width:320px;margin-top:12px}
 .kit-variant-type-field select{width:100%}
+
+
+/* Ações de kit lado a lado */
+.kit-row-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;white-space:nowrap}
+.kit-row-actions .edit-btn{white-space:nowrap}
+@media(max-width:520px){.kit-row-actions{gap:6px}.kit-row-actions .edit-btn{font-size:11px;padding:8px 7px!important}}
