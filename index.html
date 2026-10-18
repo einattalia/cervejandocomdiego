@@ -1953,6 +1953,13 @@ document.addEventListener('DOMContentLoaded',function(){
 <link rel="stylesheet" href="assets/party-events.css?v=20.9.5">
 <script src="assets/party-events.js?v=20.9.7" defer></script>
 <script src="assets/party-content.js?v=20.9.4" defer></script>
+
+<style>
+.beer-art{position:relative}
+.prelaunch-badge{position:absolute;z-index:4;top:12px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:7px 12px;border-radius:999px;background:#9aca3c;color:#090909;font-family:"Barlow Condensed",sans-serif;font-size:.78rem;font-weight:900;letter-spacing:.07em;box-shadow:0 4px 16px rgba(0,0,0,.38)}
+.prelaunch-cart-message{margin:12px 0;padding:13px 14px;border:1px solid rgba(154,202,60,.5);border-radius:10px;background:rgba(154,202,60,.09);color:#e8f4d2;font-size:.86rem;line-height:1.5}
+.prelaunch-cart-message[hidden]{display:none}
+</style>
 </head>
 <body class="theme-light">
 <section id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageQuestion">
@@ -2208,6 +2215,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <button aria-label="Fechar pedido" id="cartClose" type="button">×</button>
 </div>
 <div class="cart-items" id="cartItems"></div>
+<p class="prelaunch-cart-message" id="prelaunchCartMessage" aria-live="polite" hidden></p>
 <div class="cart-empty" id="cartEmpty">Seu pedido ainda está vazio.</div>
 <label class="delivery-check"><input id="deliveryCheck" type="checkbox"/> Quero receber por entrega</label>
 <div class="cart-summary"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
@@ -2245,7 +2253,7 @@ document.addEventListener('DOMContentLoaded',function(){
     <button class="checkout-pay" id="checkoutPay" type="submit" disabled>Ir para pagamento seguro</button>
   </form>
 </dialog>
-<script src="data/cervejas.js?v=23.0"></script><script src="data/supabase.js?v=24.0"></script><script src="data/events.js?v=20.5.3"></script><script>
+<script src="data/cervejas.js?v=23.0"></script><script src="data/supabase.js?v=24.1"></script><script src="data/events.js?v=20.5.3"></script><script>
 /* ===== CATÁLOGO DATA-DRIVEN v17.1 ===== */
 function createNode(tag,className,text){
   const node=document.createElement(tag);
@@ -2374,6 +2382,10 @@ function renderBeerCatalog(){
       const art=createNode('div','beer-art');
       const stockBadge=createNode('span',`stock-badge ${stock.className}`,stock.label);
       art.append(stockBadge);
+      if(beer.isPreLaunch){
+        const prelaunchBadge=createNode('span','prelaunch-badge','PRÉ-LANÇAMENTO');
+        art.append(prelaunchBadge);
+      }
       if(beerHasVitruvianaDiscount(beer)){
         const discountBadge=createNode('span','discount-badge','10% OFF');
         discountBadge.setAttribute('aria-label','10% de desconto nas cervejas Vitruviana');
@@ -2781,12 +2793,13 @@ document.querySelectorAll('.beer-modal').forEach(modal=>{
 });
 
 let cart={};
-function findOrderItem(name){const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);if(beer){const originalPrice=Number(beer.price)||0;const discountPercent=beerHasVitruvianaDiscount(beer)?10:0;return{type:'beer',slug:beer.slug||beer.id,name,price:beerSalePrice(beer),originalPrice,discountPercent};}const kit=(window.CERVEJANDO_KITS||[]).find(item=>item.name===name);if(kit){const price=Number(kit.price)||0;return{type:'kit',slug:kit.slug,name,price,originalPrice:price,discountPercent:0};}return null}
+function findOrderItem(name){const beer=(window.CERVEJANDO_BEERS||[]).find(item=>(item.detail?.orderName||item.detail?.title)===name);if(beer){const originalPrice=Number(beer.price)||0;const discountPercent=beerHasVitruvianaDiscount(beer)?10:0;return{type:'beer',slug:beer.slug||beer.id,name,price:beerSalePrice(beer),originalPrice,discountPercent,isPreLaunch:beer.isPreLaunch===true,pickupDate:beer.pickupDate||null};}const kit=(window.CERVEJANDO_KITS||[]).find(item=>item.name===name);if(kit){const price=Number(kit.price)||0;return{type:'kit',slug:kit.slug,name,price,originalPrice:price,discountPercent:0};}return null}
 const drawer=document.getElementById('cartDrawer');
 const backdrop=document.getElementById('cartBackdrop');
 const cartCount=document.getElementById('cartCount');
 const cartItems=document.getElementById('cartItems');
 const cartEmpty=document.getElementById('cartEmpty');
+const prelaunchCartMessage=document.getElementById('prelaunchCartMessage');
 const cartSubtotal=document.getElementById('cartSubtotal');
 const delivery=document.getElementById('deliveryCheck');
 const cartCloseButton=document.getElementById('cartClose');
@@ -2816,6 +2829,18 @@ function renderCart(){
 
   cartItems.replaceChildren();
   const entries=Object.entries(cart);
+  const prelaunchEntry=entries.map(([name])=>({name,item:findOrderItem(name)})).find(entry=>entry.item?.isPreLaunch);
+  if(prelaunchCartMessage){
+    if(prelaunchEntry){
+      const parts=String(prelaunchEntry.item.pickupDate||'2026-10-23').slice(0,10).split('-');
+      const pickupLabel=parts.length===3?parts.reverse().join('.'):'23.10.2026';
+      prelaunchCartMessage.textContent=`Você selecionou um produto de pré-venda. Após finalizar a compra combine com o Diegão o melhor dia para a retirada a partir da data ${pickupLabel}`;
+      prelaunchCartMessage.hidden=false;
+    }else{
+      prelaunchCartMessage.hidden=true;
+      prelaunchCartMessage.textContent='';
+    }
+  }
   cartEmpty.style.display=entries.length?'none':'block';
   const subtotal=entries.reduce((sum,[name,qty])=>{
     const item=findOrderItem(name);
