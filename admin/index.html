@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=37" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=38" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -237,18 +237,19 @@
      <div class="view" hidden="" id="kitsView">
       <section class="panel">
        <div class="panel-head">
-        <div><p class="eyebrow">Catálogo</p><h3>Construtor de kits</h3><p class="muted">Monte kits fechados com cervejas, copos, brindes e embalagens. O cliente compra o kit pronto.</p></div>
-        <button class="primary" id="newKitBtn" type="button">+ Criar kit</button>
+        <div><p class="eyebrow">Catálogo</p><h3>Construtor de kits</h3><p class="muted">Monte o kit e configure tamanhos de copo e preços para o cliente escolher no site.</p></div>
+        <div class="kit-create-actions"><button class="primary" id="newKitBtn" type="button">+ Kit com opções de copo</button><button class="secondary" id="newSingleKitBtn" type="button">Kit simples</button></div>
        </div>
        <p class="message" id="kitsMsg" aria-live="polite"></p>
        <div class="beer-list" id="kitList"></div>
       </section>
       <section class="panel">
-       <div class="panel-head"><div><p class="eyebrow">Estoque complementar</p><h3>Copos, brindes e embalagens</h3><p class="muted">Cadastre cada componente não cervejeiro uma vez e reutilize em vários kits.</p></div></div>
+       <div class="panel-head"><div><p class="eyebrow">Estoque complementar</p><h3>Copos, brindes e embalagens</h3><p class="muted">Cadastre cada componente não cervejeiro uma vez e reutilize em vários kits.</p><p class="muted inventory-help">Componente e categoria identificam o item; quantidade é o estoque disponível; volume é a capacidade em ml, usada principalmente para copos; custo é o valor pago por unidade.</p></div></div>
        <form id="inventoryForm" class="form-grid two">
         <label>Nome<input id="inventoryName" required maxlength="120" placeholder="Ex.: Copo oficial 400 ml"/></label>
         <label>Categoria<select id="inventoryCategory"><option value="glassware">Copo</option><option value="gift">Brinde</option><option value="packaging">Embalagem</option><option value="other">Outro</option></select></label>
         <label>Quantidade em estoque<input id="inventoryStock" type="number" min="0" step="1" value="0" required/></label>
+        <label>Volume (ml)<input id="inventoryVolumeMl" type="number" min="1" step="1" placeholder="Ex.: 300"/><small>Informe a capacidade do copo. Para outros componentes, deixe em branco.</small></label>
         <label>Custo unitário (R$)<input id="inventoryCost" type="number" min="0" step="0.01" value="0" required/></label>
         <button class="secondary" type="submit">Adicionar componente ao estoque</button>
        </form>
@@ -509,8 +510,17 @@
       <input id="fFeatured" type="checkbox" aria-describedby="fridgeHelp"/>
       Mostrar na geladeira
      </label>
+     <label class="check prelaunch-toggle">
+      <input id="fPreLaunch" type="checkbox" aria-controls="prelaunchDateField"/>
+      Pré-lançamento
+     </label>
     </div>
     <p id="fridgeHelp" class="muted">Marque até 8 rótulos ativos. A geladeira mostra 4 por prateleira, seguindo o campo Posição no catálogo.</p>
+    <label id="prelaunchDateField" class="prelaunch-date-field" hidden>
+     Data de retirada
+     <input id="fPickupDate" type="date"/>
+     <small>Esta data será informada ao cliente quando ele adicionar a cerveja ao carrinho.</small>
+    </label>
     <label hidden>
      Perfil
      <input id="fProfile"/>
@@ -749,31 +759,17 @@
     <input id="kitId" type="hidden"/>
     <div class="form-grid two">
      <label>Nome do kit<input id="kitName" required maxlength="120" placeholder="Ex.: Kit Degustação do Diegão"/></label>
-     <label>Preço final (R$)<input id="kitPrice" type="number" min="0.01" step="0.01" required/></label>
+     <label id="kitSinglePriceField">Preço final (R$)<input id="kitPrice" type="number" min="0.01" step="0.01" required/></label>
      <label class="full">Descrição<textarea id="kitDescription" maxlength="500" rows="3" placeholder="Conte o que torna este kit especial"></textarea></label>
-     <label class="full">Foto do kit<input id="kitImage" type="file" accept="image/jpeg,image/png,image/webp"/><img id="kitImagePreview" class="kit-image-preview" alt="Prévia da foto do kit" hidden/><small>Esta mesma foto aparece em todos os tamanhos disponíveis.</small></label>
-     <label>Copos por kit<input id="kitCupQuantity" type="number" min="0" max="24" step="1" value="0"/><small>Informe 0 se o kit não incluir copos.</small></label>
-     <label>Tamanhos disponíveis (ml)<input id="kitCupSizes" maxlength="100" placeholder="Ex.: 300, 400, 500"/><small>Separe os volumes por vírgula. O cliente escolherá um tamanho.</small></label>
-     <label>Posição no catálogo<input id="kitSort" type="number" min="0" step="1" value="0"/></label>
-     <label class="check"><input id="kitActive" type="checkbox" checked/> Publicar no catálogo</label>
+     <label class="full">Foto do kit<input id="kitImage" type="file" accept="image/jpeg,image/png,image/webp"/><img id="kitImagePreview" class="kit-image-preview" alt="Prévia da foto do kit" hidden/></label>
+     <label id="kitSingleSortField">Posição no catálogo<input id="kitSort" type="number" min="0" step="1" value="0"/></label>
+     <label class="check" id="kitSingleActiveField"><input id="kitActive" type="checkbox" checked/> Publicar no catálogo</label>
     </div>
-    <div class="party-admin-block"><div class="panel-head"><div><h3>Componentes</h3><p class="muted">Comece com uma lata e um copo. Custos calculam a margem automaticamente.</p></div><button class="secondary" id="addKitComponent" type="button">+ Componente</button></div><div id="kitComponentsEditor" class="kit-components-editor"></div></div>
+    <section class="party-admin-block" id="kitSingleComponents"><div class="panel-head"><div><h3>Componentes</h3><p class="muted">Comece com uma lata e um copo. Custos calculam a margem automaticamente.</p></div><button class="secondary" id="addKitComponent" type="button">+ Componente</button></div><div id="kitComponentsEditor" class="kit-components-editor"></div></section>
     <div class="kit-financials" id="kitFinancials" aria-live="polite"></div>
-    <button class="primary" type="submit">Salvar kit</button><button class="secondary" id="deactivateKitBtn" type="button" hidden>Desativar kit</button><button class="secondary danger-text" id="deleteKitBtn" type="button" hidden>Excluir kit</button>
+    <section class="party-admin-block kit-variants-panel" id="kitVariantsPanel" hidden><div class="panel-head"><div><h3>Opções do kit</h3><p class="muted">Cada opção tem um copo, capacidade em ml, preço e componentes próprios. A foto fica igual para todas.</p></div><button class="secondary" id="addKitVariant" type="button">+ Tamanho de copo</button></div><div id="kitVariantsEditor" class="kit-variants-editor"></div></section>
+    <button class="primary" type="submit">Salvar kit</button><button class="secondary" id="deactivateKitBtn" type="button" hidden>Desativar kit</button>
     <p class="message" id="kitEditorMsg" aria-live="polite"></p>
-   </form>
-  </dialog>
-  <dialog id="inventoryEditDialog">
-   <form class="editor" id="inventoryEditForm">
-    <div class="dialog-head"><div><p class="eyebrow">Estoque complementar</p><h2>Editar componente</h2></div><button aria-label="Fechar" class="icon-btn" id="closeInventoryDialog" type="button">×</button></div>
-    <input id="inventoryEditId" type="hidden"/>
-    <div class="form-grid two">
-     <label>Nome<input id="inventoryEditName" required maxlength="120"/></label>
-     <label>Categoria<select id="inventoryEditCategory"><option value="glassware">Copo</option><option value="gift">Brinde</option><option value="packaging">Embalagem</option><option value="other">Outro</option></select></label>
-     <label>Custo unitário (R$)<input id="inventoryEditCost" type="number" min="0" step="0.01" required/></label>
-    </div>
-    <button class="primary" type="submit">Salvar alterações</button>
-    <p class="message" id="inventoryEditMsg" aria-live="polite"></p>
    </form>
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">

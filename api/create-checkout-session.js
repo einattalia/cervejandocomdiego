@@ -12,13 +12,13 @@ module.exports=async function handler(req,res){
   if(!customer.name||!customer.email||!customer.phone||!items.length)return json(res,400,{error:'Preencha seus dados e adicione ao menos um produto.'});
   if(items.length>30)return json(res,400,{error:'Pedido acima do limite de itens.'});
   if(delivery.type==='delivery'){const a=delivery.address||{};if(!a.cep||!a.city||!a.street||!a.number||!a.district)return json(res,400,{error:'Preencha CEP, cidade, endereço, número e bairro para entrega.'});}
-  const normalized=items.map(i=>({type:i.type==='kit'?'kit':'beer',slug:String(i.slug||'').trim(),quantity:Math.max(1,Math.min(24,Number(i.quantity)||1)),cupSizeMl:i.cupSizeMl===null||i.cupSizeMl===undefined||i.cupSizeMl===''?null:(Number.isInteger(Number(i.cupSizeMl))?Number(i.cupSizeMl):NaN)})).filter(i=>i.slug);
+  const normalized=items.map(i=>({type:i.type==='kit'?'kit':'beer',slug:String(i.slug||'').trim(),quantity:Math.max(1,Math.min(24,Number(i.quantity)||1))})).filter(i=>i.slug);
   if(!normalized.length)return json(res,400,{error:'Adicione ao menos um produto válido.'});
   const beerSlugs=[...new Set(normalized.filter(i=>i.type==='beer').map(i=>i.slug))];const kitSlugs=[...new Set(normalized.filter(i=>i.type==='kit').map(i=>i.slug))];
   const supabase=createClient(SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
   const [beerResult,kitResult]=await Promise.all([
-   beerSlugs.length?supabase.from('beers').select('id,slug,title,name,order_name,price,stock_status,stock_quantity,active').in('slug',beerSlugs):Promise.resolve({data:[],error:null}),
-   kitSlugs.length?supabase.from('kits').select('id,slug,name,description,price,image_url,active,cup_quantity,cup_sizes_ml').in('slug',kitSlugs):Promise.resolve({data:[],error:null})
+   beerSlugs.length?supabase.from('beers').select('id,slug,title,name,order_name,brewery,price,stock_status,stock_quantity,active').in('slug',beerSlugs):Promise.resolve({data:[],error:null}),
+   kitSlugs.length?supabase.from('kits').select('id,slug,name,description,price,image_url,active').in('slug',kitSlugs):Promise.resolve({data:[],error:null})
   ]);
   if(beerResult.error)throw beerResult.error;if(kitResult.error)throw kitResult.error;
   if((beerResult.data||[]).length!==beerSlugs.length||(kitResult.data||[]).length!==kitSlugs.length)return json(res,409,{error:'Um dos produtos não está mais disponível.'});
@@ -38,16 +38,18 @@ module.exports=async function handler(req,res){
   for(const item of normalized){
    if(item.type==='beer'){
     const beer=beerMap.get(item.slug);if(!beer||beer.active===false||beer.stock_status==='sold_out')return json(res,409,{error:`${beer?.title||item.slug} está esgotada.`});
-    const price=Number(beer.price);if(!Number.isFinite(price)||price<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});
+    const originalPrice=Number(beer.price);if(!Number.isFinite(originalPrice)||originalPrice<=0)return json(res,409,{error:`${beer.title||beer.name} está sem preço para venda online.`});
+    const hasVitruvianaDiscount=String(beer.brewery||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes('vitruviana');
+    const price=hasVitruvianaDiscount?Math.round(originalPrice*90)/100:originalPrice;
     if(beer.stock_quantity!==null&&beer.stock_quantity!==undefined)stockDemand.set(`beer:${beer.id}`,(stockDemand.get(`beer:${beer.id}`)||0)+item.quantity);
     const name=beer.order_name||beer.title||beer.name;subtotal+=price*item.quantity;lines.push({beer_id:beer.id,kit_id:null,item_type:'beer',components_snapshot:[],beer_slug:beer.slug,beer_name_snapshot:name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});
    }else{
-    const kit=kitMap.get(item.slug);if(!kit||kit.active===false)return json(res,409,{error:`${kit?.name||item.slug} não está disponível.`});const cupSizes=Array.isArray(kit.cup_sizes_ml)?kit.cup_sizes_ml.map(Number):[];if(cupSizes.length&&(!Number.isInteger(item.cupSizeMl)||!cupSizes.includes(item.cupSizeMl)))return json(res,409,{error:`Escolha um tamanho de copo disponível para ${kit.name}.`});if(!cupSizes.length&&item.cupSizeMl!==null)return json(res,409,{error:`O tamanho do copo de ${kit.name} não está disponível.`});
+    const kit=kitMap.get(item.slug);if(!kit||kit.active===false)return json(res,409,{error:`${kit?.name||item.slug} não está disponível.`});
     const recipe=componentByKit.get(kit.id)||[];if(!recipe.length)return json(res,409,{error:`${kit.name} está sem componentes configurados.`});
     const price=Number(kit.price);if(!Number.isFinite(price)||price<=0)return json(res,409,{error:`${kit.name} está sem preço para venda online.`});
     const snapshot=[];
     for(const c of recipe){const amount=Number(c.quantity);if(!Number.isInteger(amount)||amount<1)return json(res,409,{error:`A composição de ${kit.name} precisa ser revisada.`});const beerId=c.component_type==='beer'?c.beer_id:null,inventoryId=c.component_type==='inventory'?c.inventory_item_id:null;const source=beerId?componentBeers.get(beerId):inventory.get(inventoryId);if(!source||source.active===false||(beerId&&source.stock_status==='sold_out'))return json(res,409,{error:`Um componente de ${kit.name} não está disponível.`});const available=source.stock_quantity;if(available!==null&&available!==undefined)stockDemand.set(`${beerId?'beer':'inventory'}:${source.id}`,(stockDemand.get(`${beerId?'beer':'inventory'}:${source.id}`)||0)+amount*item.quantity);snapshot.push({beer_id:beerId,inventory_item_id:inventoryId,quantity:amount,name:c.component_name_snapshot||source.title||source.name});}
-    if(item.cupSizeMl!==null)snapshot.push({selection:'cup_size',cup_size_ml:item.cupSizeMl,cup_quantity:Number(kit.cup_quantity)||0});subtotal+=price*item.quantity;lines.push({beer_id:null,kit_id:kit.id,item_type:'kit',components_snapshot:snapshot,beer_slug:kit.slug,beer_name_snapshot:item.cupSizeMl!==null?`${kit.name} — ${item.cupSizeMl} ml`:kit.name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});
+    subtotal+=price*item.quantity;lines.push({beer_id:null,kit_id:kit.id,item_type:'kit',components_snapshot:snapshot,beer_slug:kit.slug,beer_name_snapshot:kit.name,unit_price:price,quantity:item.quantity,line_total:Number((price*item.quantity).toFixed(2))});
    }
   }
   for(const [key,demand] of stockDemand){const [type,id]=key.split(':');const source=type==='beer'?componentBeers.get(id):inventory.get(id);const available=Number(source?.stock_quantity);if(!source||!Number.isFinite(available)||available<demand)return json(res,409,{error:`Estoque insuficiente de ${source?.title||source?.name||'um componente do pedido'}.`});}

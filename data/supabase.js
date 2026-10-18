@@ -18,6 +18,8 @@
       slug:row.slug,
       active:row.active!==false,
       featured:row.featured===true,
+      isPreLaunch:row.is_pre_launch===true,
+      pickupDate:row.pickup_date||'',
       sortOrder:Number(row.sort_order)||0,
       tags:tags||[],
       price:row.price===null||row.price===undefined?null:Number(row.price),
@@ -72,7 +74,7 @@
     const kitFallback=Array.isArray(window.CERVEJANDO_KITS)?window.CERVEJANDO_KITS:[];
     try{
       const [rows,tagRows]=await Promise.all([
-        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,sort_order,order_name,price,stock_status,media_urls&active=eq.true&order=sort_order.asc'),
+        supabaseFetch('/rest/v1/beers?select=id,slug,brand,name,title,subtitle,style,brewery,volume,abv,ibu,hops,description,intensity,bitterness,profile,recommendation,image_url,image_alt,signal,active,featured,is_pre_launch,pickup_date,sort_order,order_name,price,stock_status,media_urls&active=eq.true&order=sort_order.asc'),
         supabaseFetch('/rest/v1/beer_tags?select=beer_id,tag')
       ]);
 
@@ -91,7 +93,7 @@
         const kits=await supabaseFetch('/rest/v1/rpc/get_active_kits');
         window.CERVEJANDO_KITS=(Array.isArray(kits)?kits:[]).map(row=>({
           id:row.id,slug:row.slug,name:row.name,description:row.description||'',image:row.image_url||'',price:Number(row.price)||0,
-          cupQuantity:Number(row.cup_quantity)||0,cupSizesMl:Array.isArray(row.cup_sizes_ml)?row.cup_sizes_ml.map(Number).filter(Number.isFinite):[],availableQuantity:row.available_quantity===null?null:Number(row.available_quantity),sortOrder:Number(row.sort_order)||0,active:row.active!==false
+          availableQuantity:row.available_quantity===null?null:Number(row.available_quantity),sortOrder:Number(row.sort_order)||0,active:row.active!==false
         }));
       }catch(error){console.warn('Kits não disponíveis; execute supabase-v21-kits.sql para ativar a venda de kits.',error);window.CERVEJANDO_KITS=kitFallback}
       document.documentElement.dataset.catalogSource='supabase';
