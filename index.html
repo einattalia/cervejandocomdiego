@@ -2516,8 +2516,9 @@ function renderKitCatalog(){
   kits.forEach(kit=>{const key=groupKey(kit);if(key){if(!groups.has(key))groups.set(key,[]);groups.get(key).push(kit)}});
   const grouped=new Set();
   const renderCard=(variants)=>{
-    const kit=variants[0],quantityOptions=quantityOf(kit)>0,hasChoices=variants.length>1;
+    const quantityOptions=quantityOf(variants[0])>0;
     variants.sort((a,b)=>quantityOptions?quantityOf(a)-quantityOf(b):Number(volumeOf(a))-Number(volumeOf(b)));
+    const kit=variants[0],hasChoices=variants.length>1;
     const soldOut=variant=>variant.availableQuantity!==null&&variant.availableQuantity!==undefined&&Number(variant.availableQuantity)<=0;
     const card=createNode('article','kit-card');
     const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=baseTitle(kit);
