@@ -2508,27 +2508,31 @@ function renderKitCatalog(){
   const section=document.getElementById('kitsCatalogSection'),grid=document.getElementById('kitsCatalogGrid');if(!section||!grid)return;
   const kits=(window.CERVEJANDO_KITS||[]).filter(k=>k.active!==false).sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
   grid.replaceChildren();section.hidden=!kits.length;
-  const volumeOf=kit=>String(kit.name+' '+(kit.description||'')).match(/\b(\d{2,4})\s?ml\b/i)?.[1]||'';
-  const groupKey=kit=>String(kit.name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\b\d{2,4}\s?ml\b/gi,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const volumeOf=kit=>String(kit.name||'').match(/\b(\d{2,4})\s?ml\b/i)?.[1]||'';
+  const quantityOf=kit=>Number(String(kit.name||'').match(/\b(\d+)\s+latas?\b/i)?.[1]||0);
+  const baseTitle=kit=>String(kit.name||'').replace(/\b\d{2,4}\s?ml\b/gi,'').replace(/\b\d+\s+latas?\b/gi,'').replace(/[\s·-]+$/,'').trim();
+  const groupKey=kit=>{const quantity=quantityOf(kit),volume=volumeOf(kit),base=baseTitle(kit).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();return quantity?'quantity:'+base:volume?'cup:'+base:''};
   const groups=new Map();
-  kits.forEach(kit=>{const volume=volumeOf(kit),key=groupKey(kit);if(volume&&key){if(!groups.has(key))groups.set(key,[]);groups.get(key).push(kit)}});
+  kits.forEach(kit=>{const key=groupKey(kit);if(key){if(!groups.has(key))groups.set(key,[]);groups.get(key).push(kit)}});
   const grouped=new Set();
   const renderCard=(variants)=>{
-    const kit=variants[0],hasChoices=variants.length>1;
+    const kit=variants[0],quantityOptions=quantityOf(kit)>0,hasChoices=variants.length>1;
+    variants.sort((a,b)=>quantityOptions?quantityOf(a)-quantityOf(b):Number(volumeOf(a))-Number(volumeOf(b)));
     const soldOut=variant=>variant.availableQuantity!==null&&variant.availableQuantity!==undefined&&Number(variant.availableQuantity)<=0;
     const card=createNode('article','kit-card');
-    const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=hasChoices?kit.name.replace(/\b\d{2,4}\s?ml\b/i,'').replace(/[\s·-]+$/,'').trim():kit.name;
+    const image=document.createElement('img');image.src=kit.image||'/assets/favicon.png';image.alt=baseTitle(kit);
     const info=createNode('div','kit-card-info');
-    const title=hasChoices?kit.name.replace(/\b\d{2,4}\s?ml\b/i,'').replace(/[\s·-]+$/,'').trim():kit.name;
-    info.append(createNode('span','eyebrow','Kit pronto'),createNode('h3','',title),createNode('p','',hasChoices?(kit.description||'Uma lata e um copo para escolher.') .replace(/\b(um|uma)\s+copo\s+de\s+\d{2,4}\s?ml\b/i,'um copo no tamanho que você escolher'):kit.description||'Um kit especial montado pelo Diegão.'));
+    const title=baseTitle(kit);
+    const description=quantityOptions?[kit.description||'Kit especial montado pelo Diegão.','Todas as opções acompanham 1 copo.'].filter(Boolean).join(' '):hasChoices?(kit.description||'Uma lata e um copo para escolher.').replace(/\b(um|uma)\s+copo\s+de\s+\d{2,4}\s?ml\b/i,'um copo no tamanho que você escolher'):kit.description||'Um kit especial montado pelo Diegão.';
+    info.append(createNode('span','eyebrow','Kit pronto'),createNode('h3','',title),createNode('p','',description));
     let selected=kit;
     let stock=createNode('span','kit-stock','');
     const setStock=variant=>{stock.textContent=variant.availableQuantity===null||variant.availableQuantity===undefined?'Disponível':Number(variant.availableQuantity)>0?`${variant.availableQuantity} disponível${variant.availableQuantity===1?'':'is'}`:'Esgotado'};
     setStock(selected);info.append(stock);
     if(hasChoices){
-      const label=createNode('label','kit-option-label','Escolha o tamanho do copo');
-      const select=document.createElement('select');select.className='kit-option-select';select.setAttribute('aria-label','Tamanho do copo do kit');
-      variants.forEach(variant=>{const option=document.createElement('option');option.value=variant.slug;option.textContent=`Copo ${volumeOf(variant)} ml`;select.append(option)});
+      const label=createNode('label','kit-option-label',quantityOptions?'Escolha a quantidade de cervejas':'Escolha o tamanho do copo');
+      const select=document.createElement('select');select.className='kit-option-select';select.setAttribute('aria-label',quantityOptions?'Quantidade de cervejas do kit':'Tamanho do copo do kit');
+      variants.forEach(variant=>{const option=document.createElement('option');option.value=variant.slug;option.textContent=quantityOptions?`${quantityOf(variant)} lata${quantityOf(variant)===1?'':'s'} + 1 copo`:`Copo ${volumeOf(variant)} ml`;select.append(option)});
       label.append(select);info.append(label);
     }
     const footer=createNode('div','kit-card-footer'),priceLabel=createNode('strong','',formatBeerPrice(selected.price));
@@ -2537,7 +2541,7 @@ function renderKitCatalog(){
     footer.append(priceLabel,add);card.append(image,info,footer);grid.append(card);
     const select=info.querySelector('.kit-option-select');if(select)select.addEventListener('change',()=>{const variant=variants.find(item=>item.slug===select.value);if(variant)update(variant)});
   };
-  kits.forEach(kit=>{const key=groupKey(kit),variants=groups.get(key);if(variants?.length>1){if(!grouped.has(key)){grouped.add(key);renderCard(variants)}}else renderCard([kit])});
+  kits.forEach(kit=>{const key=groupKey(kit),variants=groups.get(key);if(variants?.length>1){if(!grouped.has(key)){grouped.add(key);renderCard([...variants])}}else renderCard([kit])});
 }
 
 async function bootCervejandoSite(){
