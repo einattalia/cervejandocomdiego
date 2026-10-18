@@ -2380,12 +2380,13 @@ function renderBeerCatalog(){
       if(stock.className==='sold-out') card.classList.add('is-sold-out');
 
       const art=createNode('div','beer-art');
+      let prelaunchBadge=null;
+      if(beer.isPreLaunch){
+        card.classList.add('is-pre-launch');
+        prelaunchBadge=createNode('span','prelaunch-badge','PRÉ-LANÇAMENTO');
+      }
       const stockBadge=createNode('span',`stock-badge ${stock.className}`,stock.label);
       art.append(stockBadge);
-      if(beer.isPreLaunch){
-        const prelaunchBadge=createNode('span','prelaunch-badge','PRÉ-LANÇAMENTO');
-        art.append(prelaunchBadge);
-      }
       if(beerHasVitruvianaDiscount(beer)){
         const discountBadge=createNode('span','discount-badge','10% OFF');
         discountBadge.setAttribute('aria-label','10% de desconto nas cervejas Vitruviana');
@@ -2425,7 +2426,9 @@ function renderBeerCatalog(){
       addCard.disabled=stock.className==='sold-out';
       addCard.setAttribute('aria-label',stock.className==='sold-out'?`${beer.detail.title} está esgotada`:`Adicionar ${beer.detail.title} ao pedido`);
       meta.append(identity,style,priceRow,addCard);
-      card.append(art,meta);
+      card.append(art);
+      if(prelaunchBadge) card.append(prelaunchBadge);
+      card.append(meta);
       grid.append(card);
     }
 
@@ -4071,6 +4074,16 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 .cart-item-price del{color:#888}
 .cart-item-price strong{color:#9aca3c;font-size:inherit}
 @media(max-width:560px){.discount-badge{top:8px;right:8px;padding:5px 6px;font-size:.54rem}.beer-original-price{font-size:.52rem}}
-</style></body>
+</style>
+<style id="prelaunch-badge-below-can">
+.prelaunch-badge{position:static;top:auto;left:auto;transform:none;display:inline-flex;align-self:center;width:max-content;max-width:calc(100% - 24px);margin:10px auto 0;white-space:nowrap}
+@media(max-width:620px){
+  #beerCatalogGrid .beer-card.is-pre-launch{height:735px!important;min-height:735px!important;max-height:735px!important}
+}
+@media(max-width:390px){
+  #beerCatalogGrid .beer-card.is-pre-launch{height:715px!important;min-height:715px!important;max-height:715px!important}
+}
+</style>
+</body>
 </html>
 
