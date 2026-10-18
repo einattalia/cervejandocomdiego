@@ -1,6 +1,7 @@
-PACOTE DE ATUALIZACAO - PRE-LANCAMENTO
+PACOTE DE ATUALIZACAO - PRE-LANCAMENTO (CORRIGIDO)
 
 Este ZIP contem o codigo completo do site, preservando os caminhos de pastas.
 Copie o conteudo para a raiz do projeto/site.
 
+A opcao Pre-lancamento aparece no inicio do formulario de cerveja.
 Antes de usar o campo no admin, execute supabase-v23-pre-lancamento.sql uma vez no SQL Editor do Supabase.

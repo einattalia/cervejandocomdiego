@@ -394,6 +394,17 @@
      </button>
     </div>
     <input id="beerId" type="hidden"/>
+    <section class="prelaunch-admin-panel" aria-label="Configuração de pré-lançamento">
+     <label class="check prelaunch-toggle">
+      <input id="fPreLaunch" type="checkbox" aria-controls="prelaunchDateField"/>
+      Pré-lançamento
+     </label>
+     <label id="prelaunchDateField" class="prelaunch-date-field" hidden>
+      Data de retirada
+      <input id="fPickupDate" type="date"/>
+      <small>Esta data será informada ao cliente quando ele adicionar a cerveja ao carrinho.</small>
+     </label>
+    </section>
     <div class="form-grid two">
      <label hidden>
       Marca
@@ -510,17 +521,8 @@
       <input id="fFeatured" type="checkbox" aria-describedby="fridgeHelp"/>
       Mostrar na geladeira
      </label>
-     <label class="check prelaunch-toggle">
-      <input id="fPreLaunch" type="checkbox" aria-controls="prelaunchDateField"/>
-      Pré-lançamento
-     </label>
     </div>
     <p id="fridgeHelp" class="muted">Marque até 8 rótulos ativos. A geladeira mostra 4 por prateleira, seguindo o campo Posição no catálogo.</p>
-    <label id="prelaunchDateField" class="prelaunch-date-field" hidden>
-     Data de retirada
-     <input id="fPickupDate" type="date"/>
-     <small>Esta data será informada ao cliente quando ele adicionar a cerveja ao carrinho.</small>
-    </label>
     <label hidden>
      Perfil
      <input id="fProfile"/>
