@@ -1074,7 +1074,7 @@ legend {
 .inventory-field input,.inventory-field select{min-height:44px}
 .inventory-help{max-width:880px;margin-top:8px}
 .inventory-row .inventory-delete{color:#f28a82}
-.prelaunch-admin-panel{display:grid;gap:10px;margin:16px 0;padding:14px;border:1px solid rgba(228,139,36,.48);border-radius:10px;background:rgba(168,76,19,.13)}
+.prelaunch-admin-panel{position:sticky;top:0;z-index:8;display:grid;gap:10px;margin:0 0 16px;padding:14px;border:1px solid rgba(228,139,36,.65);border-radius:10px;background:#24170f;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 .prelaunch-toggle{font-weight:800}
 .prelaunch-date-field{display:grid;gap:8px;padding-top:8px;border-top:1px solid rgba(228,139,36,.25)}
 .prelaunch-date-field input{max-width:260px}
