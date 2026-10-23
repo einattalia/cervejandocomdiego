@@ -275,6 +275,7 @@
         O pagamento é confirmado pelo webhook da Stripe. A lista atualiza automaticamente e confere pagamentos pendentes enquanto esta tela estiver aberta.
        </p>
        <p class="message" id="ordersSyncStatus" role="status" aria-live="polite"></p>
+       <div class="orders-filter"><label for="paymentFilter">Filtrar pagamentos<select id="paymentFilter" aria-label="Filtrar pedidos por status do pagamento"><option value="all">Todos</option><option value="paid">Pagos</option><option value="pending">Pendentes</option><option value="failed">Falharam</option><option value="refunded">Estornados</option></select></label></div>
        <div class="orders-list" id="ordersList">
        </div>
       </section>
@@ -775,7 +776,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=24.11-payments">
+    <script defer="" src="/admin/admin.js?v=24.12-payment-filter">
   </script>
  </body>
 </html>

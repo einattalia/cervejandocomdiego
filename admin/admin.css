@@ -715,7 +715,18 @@ legend {
 /* v19 — pedidos, faturamento e estoque */ .stats {
   grid-template-columns:repeat(6,minmax(0,1fr))
 }
- .orders-list {
+ .orders-filter {
+  display:flex;
+  justify-content:flex-end;
+  margin-top:14px
+}
+.orders-filter label {
+  width:min(320px,100%)
+}
+.orders-filter select {
+  padding:10px 12px
+}
+.orders-list {
   display:grid;
   gap:8px;
   margin-top:18px
@@ -734,6 +745,18 @@ legend {
 .order-card:hover {
   border-color:rgba(154,202,60,.42);
   background:#131313
+}
+.order-card.order-cancelled {
+  border-color:rgba(220,76,76,.72);
+  background:#211010
+}
+.order-card.order-cancelled:hover {
+  border-color:#ef6666;
+  background:#2a1212
+}
+.order-card.order-cancelled>.badge:last-child {
+  background:rgba(220,76,76,.16);
+  color:#ff9a9a
 }
 .order-card>div {
   display:grid;
