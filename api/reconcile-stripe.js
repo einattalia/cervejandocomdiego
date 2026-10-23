@@ -29,7 +29,8 @@ module.exports = async function handler(req, res) {
   try {
     const stripe = new Stripe(STRIPE_SECRET_KEY);
     const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    const recheckBefore = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+    // Recheck pending sessions quickly if Stripe payment completes after a prior check or webhook delivery fails.
+    const recheckBefore = new Date(Date.now() - 60 * 1000).toISOString();
     const { data: orders, error: ordersError } = await supabase.from('orders')
       .select('id,order_code,stripe_checkout_session_id,payment_status,amount_refunded,created_at')
       .not('stripe_checkout_session_id', 'is', null)

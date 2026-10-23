@@ -268,12 +268,13 @@
          </h3>
         </div>
         <button class="secondary" id="refreshOrders">
-         Atualizar pedidos
+         Conferir pagamentos agora
         </button>
        </div>
        <p class="muted">
-        Compras iniciadas pelo checkout aparecem aqui. O pagamento é confirmado automaticamente pelo webhook do Stripe.
+        O pagamento é confirmado pelo webhook da Stripe. A lista atualiza automaticamente e confere pagamentos pendentes enquanto esta tela estiver aberta.
        </p>
+       <p class="message" id="ordersSyncStatus" role="status" aria-live="polite"></p>
        <div class="orders-list" id="ordersList">
        </div>
       </section>
@@ -774,7 +775,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=24.10">
+    <script defer="" src="/admin/admin.js?v=24.11-payments">
   </script>
  </body>
 </html>
