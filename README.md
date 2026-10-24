@@ -680,3 +680,12 @@ CERVEJANDO COM DIEGO — Landing Page final
 - Ícone branco no topo e favicon branco.
 
 Abra index.html no navegador. Para publicar, envie index.html + pasta assets mantendo a estrutura.
+
+
+## Vendas diretas no Admin (v21.1)
+
+A seção **Vendas diretas** registra vendas feitas presencialmente, pelo WhatsApp, em eventos ou em entregas combinadas. Ela mantém um histórico separado dos pedidos do checkout e da Stripe.
+
+Antes de usar a seção, execute `supabase-v21.1-vendas-diretas.sql` no SQL Editor do projeto Supabase. Depois publique os arquivos do site.
+
+O formulário permite registrar data, canal, cliente, forma e status do pagamento, observações, cervejas, quantidades e preços praticados. O banco calcula os totais e baixa o estoque em uma transação; quantidades insuficientes impedem o registro. Vendas pendentes podem ser marcadas como pagas. Ao cancelar uma venda, o estoque é restaurado e o registro continua no histórico.

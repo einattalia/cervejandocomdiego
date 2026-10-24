@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=40" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=41" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -85,6 +85,9 @@
       </button>
       <button class="nav" data-view="orders">
        Pedidos
+      </button>
+      <button class="nav" data-view="directSales">
+       Vendas diretas
       </button>
       <button class="nav" data-view="analytics">
        Estatísticas e relatórios
@@ -280,6 +283,38 @@
        </div>
       </section>
      </div>
+<div class="view" hidden="" id="directSalesView">
+      <section class="stats direct-sales-stats">
+       <article><span>Vendas registradas</span><strong id="directSalesCount">0</strong></article>
+       <article><span>Recebido</span><strong id="directSalesPaid">R$ 0,00</strong></article>
+       <article><span>A receber</span><strong id="directSalesPending">R$ 0,00</strong></article>
+      </section>
+      <section class="panel">
+       <div class="panel-head"><div><p class="eyebrow">Fora do checkout</p><h3>Registrar venda direta</h3></div></div>
+       <p class="muted">Registre vendas pelo WhatsApp, em eventos ou pessoalmente. Ao salvar, as quantidades são baixadas do estoque do site.</p>
+       <form id="directSaleForm" class="direct-sale-form">
+        <div class="form-grid two">
+         <label>Data e hora<input id="directSaleDate" type="datetime-local" required/></label>
+         <label>Canal<select id="directSaleChannel"><option value="in_person">Presencial</option><option value="whatsapp">WhatsApp</option><option value="event">Evento</option><option value="delivery">Entrega direta</option><option value="other">Outro</option></select></label>
+         <label>Cliente (opcional)<input id="directSaleCustomer" maxlength="120" placeholder="Nome do cliente"/></label>
+         <label>Pagamento<select id="directSalePaymentMethod"><option value="pix">Pix</option><option value="cash">Dinheiro</option><option value="card">Cartão</option><option value="transfer">Transferência</option><option value="other">Outro</option></select></label>
+         <label>Status do pagamento<select id="directSalePaymentStatus"><option value="paid">Pago</option><option value="pending">Pendente</option></select></label>
+         <label class="full">Observações (opcional)<textarea id="directSaleNotes" rows="2" maxlength="500" placeholder="Ex.: venda no evento, combinado de pagamento…"></textarea></label>
+        </div>
+        <div class="direct-sale-items-head"><h4>Cervejas vendidas</h4><button class="secondary" id="addDirectSaleItem" type="button">+ Adicionar cerveja</button></div>
+        <div id="directSaleItems" class="direct-sale-items"></div>
+        <div class="direct-sale-total">Total da venda <strong id="directSaleTotal">R$ 0,00</strong></div>
+        <button class="primary" id="saveDirectSale" type="submit">Registrar venda e baixar estoque</button>
+        <p class="message" id="directSaleMsg" aria-live="polite"></p>
+       </form>
+      </section>
+      <section class="panel">
+       <div class="panel-head"><div><p class="eyebrow">Histórico</p><h3>Vendas diretas registradas</h3></div><div class="direct-sales-tools"><select id="directSalesFilter" aria-label="Filtrar vendas"><option value="all">Todas</option><option value="paid">Pagas</option><option value="pending">Pendentes</option><option value="cancelled">Canceladas</option></select><button class="secondary" id="refreshDirectSales" type="button">Atualizar</button></div></div>
+       <div id="directSalesList" class="orders-list"></div>
+       <p class="message" id="directSalesMsg" aria-live="polite"></p>
+      </section>
+     </div>
+
       <div class="view" hidden="" id="analyticsView">
       <section class="panel">
        <div class="panel-head analytics-heading">
@@ -776,7 +811,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=24.12-payment-filter">
+    <script defer="" src="/admin/admin.js?v=25.0-direct-sales">
   </script>
  </body>
 </html>
