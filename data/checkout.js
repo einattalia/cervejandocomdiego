@@ -3,12 +3,12 @@
   const $=s=>document.querySelector(s);
   const dialog=$('#checkoutDialog'),form=$('#checkoutForm'),close=$('#checkoutClose'),msg=$('#checkoutMessage'),pay=$('#checkoutPay'),age=$('#ageConfirmed');
   const fmt=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v)||0);
-  function syncSummary(){const api=window.CervejandoCart;const items=api?.getItems?.()||[];$('#checkoutItemsCount').textContent=String(items.reduce((n,i)=>n+i.quantity,0));$('#checkoutSubtotal').textContent=fmt(api?.subtotal?.()||0);}
+  function syncSummary(){const api=window.CervejandoCart;const items=api?.getItems?.()||[];const subtotal=api?.subtotal?.()||0;const type=form?.querySelector('input[name="deliveryType"]:checked')?.value;const fee=type==='delivery'?10:0;$('#checkoutItemsCount').textContent=String(items.reduce((n,i)=>n+i.quantity,0));$('#checkoutSubtotal').textContent=fmt(subtotal);$('#checkoutDeliveryFee').textContent=fmt(fee);$('#checkoutTotal').textContent=fmt(subtotal+fee);}
   function syncPayState(){if(pay)pay.disabled=!(age?.checked);}
   function setDelivery(type){const delivery=type==='delivery';$('#addressFields').hidden=!delivery;['#customerCep','#customerCity','#customerAddress','#customerNumber','#customerDistrict'].forEach(id=>{const el=$(id);if(el)el.required=delivery;});}
-  window.addEventListener('cervejando:open-checkout',()=>{syncSummary();const wantsDelivery=$('#deliveryCheck')?.checked;const radio=form?.querySelector(`input[name="deliveryType"][value="${wantsDelivery?'delivery':'pickup'}"]`);if(radio)radio.checked=true;setDelivery(wantsDelivery?'delivery':'pickup');if(age)age.checked=false;syncPayState();msg.textContent='';msg.className='checkout-message';if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');});
+  window.addEventListener('cervejando:open-checkout',()=>{const wantsDelivery=$('input[name="cartDeliveryType"]:checked')?.value==='delivery';const radio=form?.querySelector(`input[name="deliveryType"][value="${wantsDelivery?'delivery':'pickup'}"]`);if(radio)radio.checked=true;setDelivery(wantsDelivery?'delivery':'pickup');syncSummary();if(age)age.checked=false;syncPayState();msg.textContent='';msg.className='checkout-message';if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');});
   close?.addEventListener('click',()=>dialog.close());dialog?.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
-  form?.querySelectorAll('input[name="deliveryType"]').forEach(r=>r.addEventListener('change',()=>setDelivery(r.value)));
+  form?.querySelectorAll('input[name="deliveryType"]').forEach(r=>r.addEventListener('change',()=>{setDelivery(r.value);syncSummary();}));
   age?.addEventListener('change',syncPayState);
   form?.addEventListener('submit',async e=>{
     e.preventDefault();const items=window.CervejandoCart?.getItems?.()||[];

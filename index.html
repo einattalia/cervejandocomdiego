@@ -259,7 +259,10 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:#aaa}
 .cart-item-actions{display:flex;align-items:center;gap:7px}
 .cart-item-actions button{width:29px;height:29px;border-radius:8px;border:1px solid var(--line);background:#080909;color:#fff;cursor:pointer}
 .cart-empty{color:#989d98;padding:28px 8px;display:none}
-.delivery-check{display:flex;gap:10px;align-items:center;padding:16px 0;border-top:1px solid var(--line);color:#ddd;font-size:.86rem}
+.delivery-check{display:grid;gap:10px;margin:0;padding:16px 0;border:0;border-top:1px solid var(--line);color:#ddd;font-size:.86rem}
+.delivery-check legend{padding:14px 0 0;color:#aaa;font-size:.76rem;font-weight:700}
+.delivery-check label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.delivery-check input{accent-color:#9aca3c}
 .cart-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:10px}
 .cart-actions button{border-radius:11px;padding:13px 10px;font-weight:700;cursor:pointer}
 .continue-btn{border:1px solid var(--line);background:transparent;color:#fff}
@@ -2218,9 +2221,17 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
 <div class="cart-items" id="cartItems"></div>
 <p class="prelaunch-cart-message" id="prelaunchCartMessage" aria-live="polite" hidden></p>
 <div class="cart-empty" id="cartEmpty">Seu pedido ainda está vazio.</div>
-<label class="delivery-check"><input id="deliveryCheck" type="checkbox"/> Quero receber por entrega</label>
-<div class="cart-summary"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
-<p class="cart-note">A taxa de entrega, quando aplicável, será informada antes do pagamento.</p>
+<fieldset class="delivery-check" id="deliveryChoice">
+  <legend>Como você quer receber?</legend>
+  <label><input type="radio" name="cartDeliveryType" value="pickup" checked/> Retirada</label>
+  <label><input type="radio" name="cartDeliveryType" value="delivery"/> Entrega <strong>(+ R$ 10,00)</strong></label>
+</fieldset>
+<div class="cart-summary-lines">
+  <div><span>Subtotal dos produtos</span><strong id="cartSubtotal">R$ 0,00</strong></div>
+  <div><span>Entrega</span><strong id="cartDeliveryFee">R$ 0,00</strong></div>
+  <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+</div>
+<p class="cart-note">A entrega acrescenta R$ 10,00 ao pedido. Na retirada, não há taxa.</p>
 <div class="cart-actions">
 <button class="continue-btn" id="continueShopping" type="button">Continuar comprando</button>
 <button class="checkout-btn" id="checkoutSite" type="button">Finalizar compra</button>
@@ -2247,7 +2258,7 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
       </div>
       <label class="checkout-full">Observações<textarea id="customerNotes" name="notes" rows="3" maxlength="500" placeholder="Alguma informação importante sobre o pedido?"></textarea></label>
     </div>
-    <div class="checkout-order-summary"><div><span>Itens</span><strong id="checkoutItemsCount">0</strong></div><div><span>Subtotal</span><strong id="checkoutSubtotal">R$ 0,00</strong></div></div>
+    <div class="checkout-order-summary"><div><span>Itens</span><strong id="checkoutItemsCount">0</strong></div><div><span>Subtotal</span><strong id="checkoutSubtotal">R$ 0,00</strong></div><div><span>Entrega</span><strong id="checkoutDeliveryFee">R$ 0,00</strong></div><div><span>Total</span><strong id="checkoutTotal">R$ 0,00</strong></div></div>
     <p class="checkout-payment-note">Pagamento disponível conforme os métodos configurados no Stripe. Cartão já pode ser habilitado; Pix pode ser ativado pela conta Stripe quando disponível.</p>
     <label class="age-confirmation" for="ageConfirmed"><input id="ageConfirmed" name="ageConfirmed" type="checkbox" required/><span><strong>Declaro ter 18 anos ou mais</strong> e estar ciente de que a venda de bebidas alcoólicas para menores de idade é proibida.</span></label>
     <div class="checkout-message" id="checkoutMessage" aria-live="polite"></div>
@@ -2805,7 +2816,8 @@ const cartItems=document.getElementById('cartItems');
 const cartEmpty=document.getElementById('cartEmpty');
 const prelaunchCartMessage=document.getElementById('prelaunchCartMessage');
 const cartSubtotal=document.getElementById('cartSubtotal');
-const delivery=document.getElementById('deliveryCheck');
+const deliveryChoices=document.querySelectorAll('input[name="cartDeliveryType"]');
+const cartDeliveryType=()=>document.querySelector('input[name="cartDeliveryType"]:checked')?.value||'pickup';
 const cartCloseButton=document.getElementById('cartClose');
 const cartTrigger=document.getElementById('cartTrigger');
 const continueShopping=document.getElementById('continueShopping');
@@ -2852,6 +2864,12 @@ function renderCart(){
     return sum+(Number.isFinite(price)?price*qty:0);
   },0);
   if(cartSubtotal) cartSubtotal.textContent=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(subtotal);
+  const deliveryFee=cartDeliveryType()==='delivery'?10:0;
+  const formatMoney=value=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(value);
+  const cartDeliveryFee=document.getElementById('cartDeliveryFee');
+  const cartTotalValue=document.getElementById('cartTotal');
+  if(cartDeliveryFee) cartDeliveryFee.textContent=formatMoney(deliveryFee);
+  if(cartTotalValue) cartTotalValue.textContent=formatMoney(subtotal+deliveryFee);
 
   entries.forEach(([name,qty])=>{
     const row=document.createElement('div');
@@ -2965,6 +2983,7 @@ continueShopping?.addEventListener('click',event=>{
 });
 
 backdrop?.addEventListener('click',closeCart);
+deliveryChoices.forEach(choice=>choice.addEventListener('change',renderCart));
 
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape' && drawer?.classList.contains('open')) closeCart();
@@ -2992,9 +3011,9 @@ checkoutWhats?.addEventListener('click',event=>{
   entries.forEach(([name,qty])=>{const item=findOrderItem(name);msg+=`• ${qty}x ${name} — ${formatBeerPrice(item?.price||0)} cada`;if(item?.discountPercent)msg+=` (10% OFF; antes ${formatBeerPrice(item.originalPrice)})`;msg+='\n';});
   const orderSubtotal=entries.reduce((sum,[name,qty])=>sum+(Number(findOrderItem(name)?.price)||0)*qty,0);
   msg+=`\nSubtotal: ${formatBeerPrice(orderSubtotal)}\n`;
-  msg+='\n'+(delivery?.checked
-    ?'Também quero consultar a possibilidade de entrega.'
-    :'Podemos combinar retirada ou entrega.');
+  msg+='\n'+(cartDeliveryType()==='delivery'
+    ?'Quero receber por entrega (taxa de R$ 10,00).'
+    :'Vou retirar o pedido.');
   msg+='\n\nPode me confirmar disponibilidade e valores?';
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
 });
@@ -3228,7 +3247,7 @@ bootCervejandoSite();
   dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
 })();
 </script>
-<script src="data/checkout.js?v=24.1"></script><script src="data/analytics.js?v=1.0.0"></script>
+<script src="data/checkout.js?v=24.2"></script><script src="data/analytics.js?v=1.0.0"></script>
 <style>@keyframes fall{to{transform:translateY(900px) rotate(360deg)}}
 /* ===== CATÁLOGO EXPANDIDO v17.1 ===== */
 .feature-icon svg,.circle-btn svg{width:20px;height:20px;display:block}
@@ -3643,8 +3662,12 @@ footer{background:#070707;border-color:rgba(154,202,60,.10);font-size:.72rem;col
 }
 
 /* ===== CHECKOUT + PEDIDOS v19 ===== */
-.cart-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0 5px;border-top:1px solid var(--line)}
-.cart-summary span{color:#8b8b8b;font-size:.76rem}.cart-summary strong{font-family:"Barlow Condensed",sans-serif!important;font-size:1.45rem;color:#9aca3c}
+.cart-summary-lines{display:grid;gap:8px;padding:14px 0;border-top:1px solid var(--line)}
+.cart-summary-lines>div{display:flex;align-items:center;justify-content:space-between;gap:16px;color:#8b8b8b;font-size:.76rem}
+.cart-summary-lines strong{font-family:"Barlow Condensed",sans-serif!important;font-size:1rem;color:#d8d8d8}
+.cart-summary-lines .cart-total{padding-top:8px;border-top:1px solid var(--line);color:#ddd;font-weight:700}
+.cart-summary-lines .cart-total strong{font-size:1.45rem;color:#9aca3c}
+.delivery-check strong{color:#9aca3c;font-size:.82rem}
 .cart-note{margin:3px 0 12px;color:#6b6b6b;font-size:.68rem;line-height:1.45}
 .cart-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:9px!important}.cart-actions .checkout-btn{grid-column:1/-1;background:#9aca3c!important;color:#090909!important;min-height:48px!important}.whatsapp-secondary{border:1px solid rgba(37,211,102,.3);background:transparent;color:#8ed8a7}.cart-actions .continue-btn,.cart-actions .whatsapp-secondary{min-height:43px}
 .checkout-dialog{width:min(760px,calc(100% - 28px));max-height:92dvh;padding:0;border:1px solid rgba(154,202,60,.25);border-radius:7px;background:#0c0c0c;color:#d8d8d8}.checkout-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(7px)}
