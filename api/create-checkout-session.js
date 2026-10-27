@@ -4,7 +4,7 @@ function json(res,status,body){res.status(status).setHeader('Content-Type','appl
 function orderCode(){const d=new Date();return `CD${String(d.getUTCFullYear()).slice(-2)}${String(d.getUTCMonth()+1).padStart(2,'0')}${String(d.getUTCDate()).padStart(2,'0')}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;}
 module.exports=async function handler(req,res){
  if(req.method!=='POST')return json(res,405,{error:'Método não permitido.'});
- const {STRIPE_SECRET_KEY,SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,DELIVERY_FEE_CENTS='0'}=process.env;
+ const {STRIPE_SECRET_KEY,SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY}=process.env;
  if(!STRIPE_SECRET_KEY||!SUPABASE_URL||!SUPABASE_SERVICE_ROLE_KEY)return json(res,503,{error:'Pagamento ainda não foi configurado no servidor.'});
  try{
   const body=typeof req.body==='string'?JSON.parse(req.body):req.body||{};const items=Array.isArray(body.items)?body.items:[];const customer=body.customer||{};const delivery=body.delivery||{};
@@ -53,7 +53,7 @@ module.exports=async function handler(req,res){
    }
   }
   for(const [key,demand] of stockDemand){const [type,id]=key.split(':');const source=type==='beer'?componentBeers.get(id):inventory.get(id);const available=Number(source?.stock_quantity);if(!source||!Number.isFinite(available)||available<demand)return json(res,409,{error:`Estoque insuficiente de ${source?.title||source?.name||'um componente do pedido'}.`});}
-  subtotal=Number(subtotal.toFixed(2));const deliveryFee=delivery.type==='delivery'?Math.max(0,Number.parseInt(DELIVERY_FEE_CENTS,10)||0)/100:0;const total=Number((subtotal+deliveryFee).toFixed(2));const code=orderCode();
+  subtotal=Number(subtotal.toFixed(2));const deliveryFee=delivery.type==='delivery'?10:0;const total=Number((subtotal+deliveryFee).toFixed(2));const code=orderCode();
   const analytics=body.analytics||{};const analyticsVisitor=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(analytics.visitor_id||'')?analytics.visitor_id:null;const analyticsSession=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(analytics.session_id||'')?analytics.session_id:null;const gaClientId=/^(?:[0-9]+\.[0-9]+|GA[0-9.]+\.[0-9.]+)$/.test(analytics.ga_client_id||'')?String(analytics.ga_client_id).slice(0,120):null;const gaSessionId=/^[0-9]{1,24}$/.test(String(analytics.ga_session_id||''))?String(analytics.ga_session_id):null;
   const {data:order,error:orderError}=await supabase.from('orders').insert({order_code:code,customer_name:String(customer.name).slice(0,120),customer_email:String(customer.email).slice(0,160),customer_phone:String(customer.phone).slice(0,30),delivery_type:delivery.type==='delivery'?'delivery':'pickup',delivery_address:delivery.type==='delivery'?delivery.address:null,notes:String(body.notes||'').slice(0,500),subtotal,delivery_fee:deliveryFee,total,status:'awaiting_payment',payment_status:'pending',age_verified:true,age_verified_at:new Date().toISOString(),analytics_visitor_id:analyticsVisitor,analytics_session_id:analyticsSession,ga_client_id:gaClientId,ga_session_id:gaSessionId}).select('id,order_code').single();if(orderError)throw orderError;
   const {error:itemError}=await supabase.from('order_items').insert(lines.map(l=>({...l,order_id:order.id})));if(itemError)throw itemError;
