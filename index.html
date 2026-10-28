@@ -1987,12 +1987,13 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
 <a href="#dicas">Dicas do Diegão</a>
 <a href="#como-funciona">Como funciona</a>
 <a href="#festas-eventos">Festas e Eventos</a>
+ <a href="#eventos">Agenda Cervejeira</a>
 <a href="#kitsCatalogSection">Kit’s</a>
 <a href="#sobre">Seleção do Diegão</a>
 </nav>
 <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#dicas">Dicas do Diegão</a><a href="#como-funciona">Como funciona</a><a href="#festas-eventos">Festas e Eventos</a><a href="#kitsCatalogSection">Kit’s</a><a href="#sobre">Seleção do Diegão</a>
+  <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#eventos">Agenda Cervejeira</a><a href="#monte-seu-evento">Monte seu evento</a><a href="#kitsCatalogSection">Kit’s</a><a href="#sobre">Seleção do Diegão</a>
   <div class="mobile-nav-tools">
     <a class="mobile-nav-instagram" href="https://www.instagram.com/cervejandocomdiego/" rel="noopener noreferrer" target="_blank" aria-label="Instagram do Cervejando com Diego">Instagram</a>
     
@@ -4120,6 +4121,15 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 @media(max-width:390px){
   #beerCatalogGrid .beer-card{height:716px!important;min-height:716px!important;max-height:716px!important}
   #beerCatalogGrid .beer-art{flex-basis:260px!important;height:260px!important;min-height:260px!important;max-height:260px!important}
+}
+</style>
+
+<style id="mobile-navigation-cleanup">
+@media(max-width:900px){
+  header .mobile-menu-toggle{border:0!important;background:transparent!important;border-radius:10px!important;box-shadow:none!important}
+  header .mobile-menu-toggle span{width:22px!important;height:2px!important}
+  header .mobile-nav{max-height:min(72vh,480px)!important;overflow-y:auto!important;overscroll-behavior:contain!important;backdrop-filter:blur(16px)!important}
+  header .mobile-nav>a{font-size:.95rem!important;line-height:1.2!important;padding:14px 16px!important}
 }
 </style>
 </body>
