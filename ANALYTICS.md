@@ -25,6 +25,6 @@ O navegador envia `page_view`, `view_item`, `add_to_cart` e `begin_checkout` ao 
 
 ## Relatórios
 
-O painel permite exportar um CSV do intervalo selecionado, com resumo, série diária, origens de tráfego e produtos mais vistos. Os filtros **Este mês** e **Mês passado** também geram uma comparação com o período mensal anterior e pontos para acompanhar.
+O painel gera um relatório diagramado para impressão ou para salvar como PDF, com a logo do Diegão, período analisado, visitas, vendas confirmadas, pedidos pagos, visitantes únicos e origens das visitas. Também inclui série diária, produtos mais vistos e, nos filtros **Este mês** e **Mês passado**, comparação com o período mensal anterior e pontos para acompanhar. Na janela de impressão, escolha **Salvar como PDF** para baixar o arquivo.
 
-No primeiro dia de cada mês, o Vercel Cron salva um relatório do mês anterior, comparado ao mês precedente. Os últimos 12 relatórios ficam disponíveis no admin para baixar em CSV. O agendamento roda às 09:00 UTC (aproximadamente 06:00 no horário de Brasília); a Vercel pode executá-lo em qualquer momento dentro dessa hora.
+No primeiro dia de cada mês, o Vercel Cron salva um relatório do mês anterior, comparado ao mês precedente. Os últimos 12 relatórios ficam disponíveis no admin para gerar PDF. O botão para gerar o relatório do último mês também abre a impressão do PDF assim que o resumo é salvo. O agendamento roda às 09:00 UTC (aproximadamente 06:00 no horário de Brasília); a Vercel pode executá-lo em qualquer momento dentro dessa hora.
