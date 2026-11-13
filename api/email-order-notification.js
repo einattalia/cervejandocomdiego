@@ -35,8 +35,9 @@ async function sendOrderConfirmation(order, items) {
     `Total: ${formatMoney(order.total)}`,
     '',
     'Obrigado por comprar com a Cervejando com Diego!',
+    'Qualquer dúvida entre em contato comigo pelo WhatsApp: (16) 997927-7171',
   ].join('\n');
-  const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#222"><h2>Pedido confirmado</h2><p>Olá, ${escapeHtml(order.customer_name || 'cliente')}!</p><p>O pagamento do seu pedido <strong>${escapeHtml(order.order_code)}</strong> foi confirmado.</p><h3>Resumo do pedido</h3>${htmlItems}<p>Subtotal: ${formatMoney(order.subtotal)}<br>Entrega: ${formatMoney(order.delivery_fee)}<br><strong>Total: ${formatMoney(order.total)}</strong></p><p>Obrigado por comprar com a Cervejando com Diego!</p></div>`;
+  const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#222"><div style="text-align:center;margin-bottom:24px"><img src="https://www.cervejandocomdiego.com.br/assets/logo-diego-copo-contorno.png?v=1" alt="Cervejando com Diego" style="max-width:240px;width:100%;height:auto" /></div><h2>Pedido confirmado</h2><p>Olá, ${escapeHtml(order.customer_name || 'cliente')}!</p><p>O pagamento do seu pedido <strong>${escapeHtml(order.order_code)}</strong> foi confirmado.</p><h3>Resumo do pedido</h3>${htmlItems}<p>Subtotal: ${formatMoney(order.subtotal)}<br>Entrega: ${formatMoney(order.delivery_fee)}<br><strong>Total: ${formatMoney(order.total)}</strong></p><p>Obrigado por comprar com a Cervejando com Diego!</p><p>Qualquer dúvida entre em contato comigo pelo WhatsApp: <strong>(16) 997927-7171</strong></p></div>`;
   return sendZohoMail({
     to: order.customer_email,
     subject: `Pedido ${order.order_code} confirmado — Cervejando com Diego`,
