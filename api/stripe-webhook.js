@@ -102,9 +102,13 @@ module.exports = async function handler(req, res) {
     res.statusCode = 200;
     res.end('ok');
   } catch (error) {
-    console.error(error);
+    console.error('Stripe webhook failed:', {
+      name: error?.name || 'Error',
+      type: error?.type || null,
+      code: error?.code || null
+    });
     res.statusCode = 400;
-    res.end(`Webhook Error: ${error.message}`);
+    res.end('Webhook processing failed');
   }
 };
 
