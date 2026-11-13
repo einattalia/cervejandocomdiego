@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
-const { sendOrderConfirmation } = require('./whatsapp-order-notification');
+const { sendOrderConfirmation } = require('./email-order-notification');
 
 async function rawBody(req) {
   const chunks = [];
@@ -71,37 +71,37 @@ module.exports = async function handler(req, res) {
         const { error: modeError } = await supabase.from('orders').update({ stripe_livemode: session.livemode === true }).eq('id', orderId);
         if (modeError) throw modeError;
         const { data: order, error: orderError } = await supabase.from('orders')
-          .select('id,order_code,total,delivery_fee,customer_name,customer_phone,whatsapp_order_updates_opt_in,whatsapp_order_notification_status,whatsapp_order_notification_attempted_at,whatsapp_order_notification_sent_at,analytics_visitor_id,analytics_session_id,ga_client_id,ga_session_id')
+          .select('id,order_code,total,subtotal,delivery_fee,customer_name,customer_email,email_order_notification_status,email_order_notification_attempted_at,email_order_notification_sent_at,analytics_visitor_id,analytics_session_id,ga_client_id,ga_session_id')
           .eq('id', orderId).maybeSingle();
         if (orderError) throw orderError;
-        if (order?.whatsapp_order_updates_opt_in && !order.whatsapp_order_notification_sent_at) {
-          const staleSending = order.whatsapp_order_notification_status === 'sending'
-            && order.whatsapp_order_notification_attempted_at
-            && Date.now() - new Date(order.whatsapp_order_notification_attempted_at).getTime() > 10 * 60 * 1000;
-          if (['pending', 'failed'].includes(order.whatsapp_order_notification_status) || staleSending) {
+        if (order && !order.email_order_notification_sent_at) {
+          const staleSending = order.email_order_notification_status === 'sending'
+            && order.email_order_notification_attempted_at
+            && Date.now() - new Date(order.email_order_notification_attempted_at).getTime() > 10 * 60 * 1000;
+          if (['pending', 'failed'].includes(order.email_order_notification_status) || staleSending) {
             const attemptedAt = new Date().toISOString();
             const { data: claimed, error: claimError } = await supabase.from('orders')
-              .update({ whatsapp_order_notification_status: 'sending', whatsapp_order_notification_attempted_at: attemptedAt, whatsapp_order_notification_error: null })
+              .update({ email_order_notification_status: 'sending', email_order_notification_attempted_at: attemptedAt, email_order_notification_error: null })
               .eq('id', order.id)
-              .eq('whatsapp_order_notification_status', order.whatsapp_order_notification_status)
+              .eq('email_order_notification_status', order.email_order_notification_status)
               .select('id').maybeSingle();
             if (claimError) throw claimError;
             if (claimed) {
               try {
                 const { data: items, error: itemsError } = await supabase.from('order_items')
-                  .select('item_type,beer_name_snapshot,quantity,components_snapshot').eq('order_id', order.id);
+                  .select('item_type,beer_name_snapshot,quantity,line_total,components_snapshot').eq('order_id', order.id);
                 if (itemsError) throw itemsError;
                 await sendOrderConfirmation(order, items || []);
                 const { error: sentError } = await supabase.from('orders').update({
-                  whatsapp_order_notification_status: 'sent',
-                  whatsapp_order_notification_sent_at: new Date().toISOString(),
-                  whatsapp_order_notification_error: null
+                  email_order_notification_status: 'sent',
+                  email_order_notification_sent_at: new Date().toISOString(),
+                  email_order_notification_error: null
                 }).eq('id', order.id);
                 if (sentError) throw sentError;
               } catch (notificationError) {
                 await supabase.from('orders').update({
-                  whatsapp_order_notification_status: 'failed',
-                  whatsapp_order_notification_error: String(notificationError?.message || 'WhatsApp notification failed').slice(0, 240)
+                  email_order_notification_status: 'failed',
+                  email_order_notification_error: String(notificationError?.message || 'Email notification failed').slice(0, 240)
                 }).eq('id', order.id);
                 throw notificationError;
               }
