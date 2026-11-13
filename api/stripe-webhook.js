@@ -1,5 +1,6 @@
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
+const { sendOrderConfirmation } = require('./email-order-notification');
 
 async function rawBody(req) {
   const chunks = [];
