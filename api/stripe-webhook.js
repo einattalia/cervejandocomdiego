@@ -70,9 +70,47 @@ module.exports = async function handler(req, res) {
         const { error: modeError } = await supabase.from('orders').update({ stripe_livemode: session.livemode === true }).eq('id', orderId);
         if (modeError) throw modeError;
         const { data: order, error: orderError } = await supabase.from('orders')
-          .select('id,order_code,total,delivery_fee,analytics_visitor_id,analytics_session_id,ga_client_id,ga_session_id')
+          .select('id,order_code,total,subtotal,delivery_fee,customer_name,customer_email,email_order_notification_status,email_order_notification_attempted_at,email_order_notification_sent_at,analytics_visitor_id,analytics_session_id,ga_client_id,ga_session_id')
           .eq('id', orderId).maybeSingle();
         if (orderError) throw orderError;
+        if (order && !order.email_order_notification_sent_at) {
+          const staleSending = order.email_order_notification_status === 'sending'
+            && order.email_order_notification_attempted_at
+            && Date.now() - new Date(order.email_order_notification_attempted_at).getTime() > 10 * 60 * 1000;
+          if (['pending', 'failed'].includes(order.email_order_notification_status) || staleSending) {
+            const { data: claimed, error: claimError } = await supabase.from('orders')
+              .update({
+                email_order_notification_status: 'sending',
+                email_order_notification_attempted_at: new Date().toISOString(),
+                email_order_notification_error: null
+              })
+              .eq('id', order.id)
+              .eq('email_order_notification_status', order.email_order_notification_status)
+              .select('id').maybeSingle();
+            if (claimError) throw claimError;
+            if (claimed) {
+              try {
+                const { data: items, error: itemsError } = await supabase.from('order_items')
+                  .select('item_type,beer_name_snapshot,quantity,line_total,components_snapshot')
+                  .eq('order_id', order.id);
+                if (itemsError) throw itemsError;
+                await sendOrderConfirmation(order, items || []);
+                const { error: sentError } = await supabase.from('orders').update({
+                  email_order_notification_status: 'sent',
+                  email_order_notification_sent_at: new Date().toISOString(),
+                  email_order_notification_error: null
+                }).eq('id', order.id);
+                if (sentError) throw sentError;
+              } catch (notificationError) {
+                await supabase.from('orders').update({
+                  email_order_notification_status: 'failed',
+                  email_order_notification_error: String(notificationError?.message || 'Email notification failed').slice(0, 240)
+                }).eq('id', order.id);
+                throw notificationError;
+              }
+            }
+          }
+        }
         if (order?.analytics_visitor_id && order?.analytics_session_id) {
           const { error: analyticsError } = await supabase.from('analytics_events').insert({
             event_id: order.id, event_name: 'purchase', visitor_id: order.analytics_visitor_id,
