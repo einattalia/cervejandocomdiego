@@ -1,5 +1,6 @@
 const Stripe=require('stripe');
 const {createClient}=require('@supabase/supabase-js');
+const crypto=require('crypto');
 function json(res,status,body){res.status(status).setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify(body));}
 function orderCode(){const d=new Date();return `CD${String(d.getUTCFullYear()).slice(-2)}${String(d.getUTCMonth()+1).padStart(2,'0')}${String(d.getUTCDate()).padStart(2,'0')}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;}
 module.exports=async function handler(req,res){
@@ -16,6 +17,11 @@ module.exports=async function handler(req,res){
   if(!normalized.length)return json(res,400,{error:'Adicione ao menos um produto válido.'});
   const beerSlugs=[...new Set(normalized.filter(i=>i.type==='beer').map(i=>i.slug))];const kitSlugs=[...new Set(normalized.filter(i=>i.type==='kit').map(i=>i.slug))];
   const supabase=createClient(SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});
+  const clientIp=String(req.headers['x-forwarded-for']||req.headers['x-real-ip']||req.socket?.remoteAddress||'unknown').split(',')[0].trim();
+  const bucketKey=crypto.createHmac('sha256',SUPABASE_SERVICE_ROLE_KEY).update(clientIp).digest('hex');
+  const {data:checkoutAllowed,error:rateLimitError}=await supabase.rpc('consume_checkout_rate_limit',{p_bucket_key:bucketKey,p_max_attempts:12,p_window_seconds:300});
+  if(rateLimitError)throw rateLimitError;
+  if(checkoutAllowed!==true){res.setHeader('Retry-After','300');return json(res,429,{error:'Muitas tentativas de compra. Aguarde alguns minutos e tente novamente.'});}
   const [beerResult,kitResult]=await Promise.all([
    beerSlugs.length?supabase.from('beers').select('id,slug,title,name,order_name,brewery,price,stock_status,stock_quantity,active').in('slug',beerSlugs):Promise.resolve({data:[],error:null}),
    kitSlugs.length?supabase.from('kits').select('id,slug,name,description,price,image_url,active').in('slug',kitSlugs):Promise.resolve({data:[],error:null})
