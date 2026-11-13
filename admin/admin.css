@@ -1081,6 +1081,24 @@ legend {
 .field-help{display:block;margin-top:.38rem;font-size:.78rem;line-height:1.3;color:var(--muted,#8b8b8b);font-weight:500}
 .calculated-value{display:block;min-height:2.8rem;padding:.72rem .8rem;border:1px solid var(--line,#333);border-radius:.55rem;background:var(--card,#202020);color:var(--gold,#9aca3c);font-size:1rem;font-weight:700}
 
+#beerForm .form-grid.two > label:not(.check) {
+  align-content:start;
+  min-width:0;
+}
+#beerForm .form-grid.two > label > :is(input:not([type=checkbox]), select, output),
+#beerForm #fPickupDate {
+  width:100%;
+  min-width:0;
+  height:42px;
+}
+#beerForm .calculated-value {
+  min-height:0;
+  display:flex;
+  align-items:center;
+  padding-block:0;
+}
+
+
 .brandmark,.side-brand img{width:180px;height:auto;max-width:100%;border-radius:6px;object-fit:contain;background:#fff;padding:5px}.side-brand{flex-wrap:wrap}
 .brandmark,.side-brand img{background:transparent;padding:0;border-radius:0;mix-blend-mode:screen}
 .brandmark,.side-brand img{mix-blend-mode:normal}
