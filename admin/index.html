@@ -9,7 +9,7 @@
    Admin | Cervejando com Diego
   </title>
   <link href="/assets/favicon.png?v=22" rel="icon"/>
-  <link href="/admin/admin.css?v=42" rel="stylesheet"/>
+  <link href="/admin/admin.css?v=43-monthly-sales" rel="stylesheet"/>
  <style>[hidden],#beerDialog #beerForm label[hidden],#beerDialog #beerForm fieldset[hidden]{display:none!important} :root{--gold:#9aca3c;--bg:#0b0b0b;--panel:#151515;--card:#202020;--text:#fff;--muted:#bdbdbd;--line:#333} input[type=checkbox]{accent-color:#9aca3c}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"/>
 </head>
@@ -352,6 +352,20 @@
        <p class="message" id="analyticsSavedReportsMessage" aria-live="polite">Carregando relatórios…</p>
        <div class="analytics-list" id="analyticsSavedReportList"></div>
       </section>
+       <section class="panel analytics-monthly" id="beerSalesReportPanel">
+        <div class="panel-head"><div><p class="eyebrow">Preferências de compra</p><h3>Vendas por cerveja e estilo</h3><p class="muted">Compare as cervejas mais vendidas no mês, incluindo as unidades que saíram em kits.</p></div></div>
+        <div class="sales-report-filters">
+         <label for="beerSalesMonth">Mês<input id="beerSalesMonth" type="month"/></label>
+         <button class="secondary" id="beerSalesApply" type="button">Atualizar</button>
+         <button class="primary" id="beerSalesDownload" type="button" disabled>Gerar PDF</button>
+        </div>
+        <p class="message" id="beerSalesMessage" aria-live="polite"></p>
+        <div class="sales-report-stats" id="beerSalesStats"></div>
+        <div class="sales-report-table-wrap" id="styleSalesTable"></div>
+        <div class="sales-report-table-wrap" id="beerSalesTable"></div>
+        <div class="sales-report-table-wrap" id="kitSalesTable"></div>
+        <p class="analytics-note">O total inclui pedidos pagos com taxa de entrega e vendas diretas pagas. O valor de kits é mostrado separadamente, sem rateio entre cervejas; as unidades em kits contam na preferência por cerveja e estilo. O estilo segue o cadastro atual do catálogo.</p>
+       </section>
       <div class="analytics-columns">
        <section class="panel"><div class="panel-head"><div><p class="eyebrow">Movimento</p><h3>Visitas e vendas por dia</h3></div></div><div class="analytics-series" id="analyticsSeries"></div></section>
        <section class="panel"><div class="panel-head"><div><p class="eyebrow">Aquisição</p><h3>Origem do tráfego</h3></div></div><div class="analytics-list" id="analyticsSources"></div></section>
@@ -750,7 +764,8 @@
        Detalhes do pedido
       </h2>
      </div>
-     <button aria-label="Fechar" class="icon-btn" id="closeOrderDialog" type="button">
+      <button class="secondary order-print-button" id="printOrderReport" type="button">Imprimir pedido</button>
+      <button aria-label="Fechar" class="icon-btn" id="closeOrderDialog" type="button">
       ×
      </button>
     </div>
@@ -812,7 +827,7 @@
   </dialog>
     <script defer="" src="/admin/consignment.js?v=2">
   </script>
-    <script defer="" src="/admin/admin.js?v=25.2-analytics-logo-load">
+     <script defer="" src="/admin/admin.js?v=25.3-monthly-sales-and-order-photos">
   </script>
  </body>
 </html>
