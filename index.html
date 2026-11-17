@@ -2027,9 +2027,8 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
 <div class="hero-copy">
 <span class="eyebrow">Cervejando com Diego • Seleção autoral</span>
 <div class="hero-message-v20512">
-  <p class="hero-familiar">Agora vem <span>beber diferente.</span></p>
   <h1 class="hero-different">Cervejas artesanais <em>em São Carlos</em></h1>
-  <p class="hero-signature" aria-label="Eu seleciono. Você escolhe. A gente bebe melhor."><span class="signature-step step-1">Eu seleciono.</span> <span class="signature-step step-2">Você escolhe.</span> <span class="signature-step step-3">A gente <b>bebe</b> melhor.</span></p>
+  <p class="hero-signature" aria-label="Eu seleciono. Você escolhe. A gente bebe melhor e diferente."><span class="signature-step step-1">Eu seleciono.</span> <span class="signature-step step-2">Você escolhe.</span> <span class="signature-step step-3">A gente <b>bebe</b> melhor e diferente.</span></p>
 </div>
 <p class="hero-intro">Cervejas artesanais e importadas selecionadas pelo Diegão para você descobrir novos estilos, sabores e histórias. Escolha seu próximo rótulo e beba menos, beba melhor.</p>
 <div class="feature-list">
@@ -2137,7 +2136,7 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
 <section class="how-section" id="como-funciona">
 <div class="shell">
 <h2>Como <span>funciona</span></h2>
-<p class="how-lead">Compre cervejas artesanais pelo site e escolha entre entrega em São Carlos e retirada. Se tiver dúvidas sobre o prazo ou o local de retirada, fale com o Diegão pelo WhatsApp.</p>
+<p class="how-lead">Peça suas cervejas artesanais pelo site, com entrega em São Carlos ou retirada.</p>
 <div class="how-steps">
 <article><b>01</b><strong>Escolha seus rótulos</strong><p>Confira o nome, o estilo, a cervejaria e o ABV diretamente no catálogo.</p></article>
 <article><b>02</b><strong>Escolha entrega ou retirada</strong><p>Adicione seus rótulos ao carrinho e escolha como receber o pedido. A entrega custa R$ 10,00 e a retirada é gratuita.</p></article>
@@ -2148,7 +2147,7 @@ body.theme-light .prelaunch-cart-message{color:#202a15!important;background:#edf
 
 <section class="events-section" id="festas-eventos" aria-labelledby="festasTitle">
 <div class="shell">
-<div class="events-heading"><div><span class="eyebrow">Festas e Eventos</span><h2 id="festasTitle">Todo encontro merece <span>um brinde.</span></h2></div><p>Monte seu evento ou confira onde encontrar o Diegão.</p></div>
+<div class="events-heading"><div><span class="eyebrow">Festas e Eventos</span><h2 id="festasTitle">Todo encontro merece <span>um brinde.</span></h2></div></div>
 <nav class="party-links" aria-label="Festas e Eventos"><a href="#monte-seu-evento">Monte seu evento</a><a href="#eventos">Agenda Cervejeira</a></nav>
 <div id="monte-seu-evento" class="party-panel">
 <h3>Monte seu evento</h3><p>Vai reunir a galera? Conte o que você está planejando e peça um orçamento para a estrutura de chopp. Serviço sem equipe para servir.</p>
@@ -4149,6 +4148,63 @@ body.theme-light .checkout-dialog{background:#fdfdfd!important;color:#2c2c2c!imp
 }
 </style>
 
+<style id="home-layout">
+#festas-eventos .events-heading,
+#eventos .events-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.how-section .how-lead {
+  max-width: none;
+}
+@media (min-width: 861px) {
+  #inicio {
+    --hero-inset: clamp(52px, 5vw, 80px);
+    min-height: auto;
+    align-items: stretch;
+  }
+  #inicio .hero-copy {
+    padding-block: var(--hero-inset);
+  }
+  #inicio .hero-different {
+    font-size: clamp(3.4rem, 5.2vw, 5rem) !important;
+  }
+  #inicio .hero-different em {
+    display: block;
+  }
+  #inicio .hero-signature,
+  #inicio .hero-signature .signature-step {
+    font-size: clamp(1rem, 1.35vw, 1.25rem) !important;
+  }
+  #inicio .feature b {
+    font-size: clamp(1.05rem, 1.32vw, 1.25rem) !important;
+  }
+  #inicio .feature span {
+    font-size: .83rem !important;
+  }
+  #inicio .hero-visual {
+    min-height: 0;
+  }
+  #inicio .premium-fridge {
+    position: absolute;
+    inset-block: var(--hero-inset);
+    right: clamp(34px, 5vw, 90px);
+    width: min(390px, 80%);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  #inicio .fridge-top,
+  #inicio .fridge-base {
+    flex-shrink: 0;
+  }
+  #inicio .fridge-door {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+  }
+}
+</style>
 <style id="mobile-navigation-cleanup">
 @media(max-width:900px){
   header #desktopNav{display:none!important;visibility:hidden!important;pointer-events:none!important}
